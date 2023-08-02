@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
+import 'package:stock_management/home.dart';
 import 'create_store.dart';
 import 'package:stock_management/dashboard.dart';
 
@@ -257,7 +258,7 @@ class _AuthState extends State<Auth> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DashBoard()),
+                  MaterialPageRoute(builder: (context) => Home()),
                 );
               },
               style: ElevatedButton.styleFrom(

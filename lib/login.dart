@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 import 'package:stock_management/dashboard.dart';
+import 'package:stock_management/home.dart';
 import 'package:stock_management/signin.dart';
 import 'package:stock_management/widgets/two_column.dart';
 
@@ -108,7 +109,7 @@ class _LogInState extends State<LogIn> {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => DashBoard()));
+                      MaterialPageRoute(builder: (context) => Home()));
                 },
                 style: ElevatedButton.styleFrom(
                   //<-- SEE HERE

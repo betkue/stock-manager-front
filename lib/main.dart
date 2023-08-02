@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_management/auth.dart';
 import 'package:stock_management/constant.dart';
+import 'package:stock_management/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,10 +20,8 @@ class _MyAppState extends State<MyApp> {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Connection page',
-      home: Scaffold(
-        backgroundColor: backgroundColor,
-        body: Auth(),
-      ),
+      home: Scaffold(backgroundColor: backgroundColor, body: Home() //Auth(),
+          ),
     );
   }
 }

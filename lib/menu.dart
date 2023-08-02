@@ -6,10 +6,12 @@ class Menu extends StatefulWidget {
   final Widget? child;
   final Color? color;
   final EdgeInsetsGeometry? padding;
+  final Function select;
 
   const Menu(
       {super.key,
       required this.scaffoldKey,
+      required this.select,
       this.child,
       this.color,
       this.padding});
@@ -113,6 +115,7 @@ class _MenuState extends State<Menu> {
                       onTap: () {
                         setState(() {
                           selected = i;
+                          widget.select(i);
                         });
                         widget.scaffoldKey.currentState!.closeDrawer();
                       },
