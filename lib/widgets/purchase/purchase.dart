@@ -53,33 +53,35 @@ Widget purchase(String imagePath, String productName, String price, int state,
           maxLines: 2,
           textAlign: TextAlign.center,
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Text(
-                price.toString(),
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                style: TextStyle(
+        Padding(
+          padding: const EdgeInsets.only(bottom: 22),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  price.toString(),
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: state == 1 ? black : orange),
+                  ),
+                ),
               ),
-            ),
-            Icon(Icons.edit_outlined, color: state == 1 ? orange : black),
-            SizedBox(width: 10),
-          ],
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width / 8,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            // color: state == 1 ? orange : gray
+              Expanded(
+                child: Text(
+                  price.toString(),
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: state == 1 ? black : orange),
+                ),
+              ),
+              SizedBox(width: 10),
+            ],
           ),
         ),
-        const SizedBox(height: 5),
       ],
     ),
   );

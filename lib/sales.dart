@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
-import 'package:stock_management/widgets/products/products_block.dart';
+import 'package:stock_management/widgets/purchase/purchase_block.dart';
 
 class SalesPage extends StatefulWidget {
   const SalesPage({super.key});
@@ -72,7 +72,7 @@ class _SalesPageState extends State<SalesPage> {
                               vertical: 10), // Set the button's padding
                         ),
                         child: const Text(
-                          "New Purchase",
+                          "New Sales",
                           style: TextStyle(
                               fontSize: 16,
                               color: black,
@@ -103,7 +103,7 @@ class _SalesPageState extends State<SalesPage> {
                                   vertical: 10), // Set the button's padding
                             ),
                             child: Text(
-                              "All Purchase",
+                              "All Sales",
                               style: TextStyle(
                                   fontSize: 16,
                                   color: index == 0 ? white : black,
@@ -145,7 +145,7 @@ class _SalesPageState extends State<SalesPage> {
                                   vertical: 10), // Set the button's padding
                             ),
                             child: Text(
-                              "Valid",
+                              "Incomplete",
                               style: TextStyle(
                                   fontSize: 16,
                                   color: index == 2 ? white : black,
@@ -166,7 +166,7 @@ class _SalesPageState extends State<SalesPage> {
                                   vertical: 10), // Set the button's padding
                             ),
                             child: Text(
-                              "Incomplete",
+                              "Complete",
                               style: TextStyle(
                                   fontSize: 16,
                                   color: index == 3 ? white : black,
@@ -187,11 +187,13 @@ class _SalesPageState extends State<SalesPage> {
 
   Widget determineWidget() {
     if (index == 0) {
-      return const Allproduct();
+      return const AllPurchase();
     } else if (index == 1) {
-      return const Availableproduct();
+      return const PendingPurchase();
+    } else if (index == 2) {
+      return const IncompletePurchase();
     } else {
-      return const Unavailableproduct();
+      return const CompletePurchase();
     }
   }
 }
