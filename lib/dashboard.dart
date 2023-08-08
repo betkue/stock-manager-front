@@ -1,42 +1,20 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/menu.dart';
 import 'package:stock_management/constant.dart';
-import 'package:stock_management/widgets/profile.dart';
-
 import 'package:d_chart/d_chart.dart';
 
 class DashBoard extends StatelessWidget {
-  DashBoard({super.key});
-
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  const DashBoard({super.key});
 
   @override
   Widget build(BuildContext context) {
     double radius = 15;
     return Scaffold(
         backgroundColor: gray,
-        // key: _scaffoldKey,
-        // drawer: !Responsive.isDesktop(context)
-        //     ? SizedBox(width: 250, child: Menu(scaffoldKey: _scaffoldKey))
-        //     : null,
-        // endDrawer: Responsive.isMobile(context)
-        //     ? SizedBox(
-        //         width: MediaQuery.of(context).size.width * 0.8,
-        //         child: const Profile())
-        //     : null,
         body: SafeArea(
           child: Row(
             children: [
-              // if (Responsive.isDesktop(context))
-              //   Expanded(
-              //     flex: 2,
-              //     child: SizedBox(
-              //         height: MediaQuery.of(context).size.height,
-              //         child: Menu(scaffoldKey: _scaffoldKey)),
-              //   ),
-              // if (!Responsive.isMobile(context))
               Expanded(
                 flex: 8,
                 child: Scaffold(
@@ -88,6 +66,8 @@ class DashBoard extends StatelessWidget {
                       children: [
                         Row(
                           children: [
+                            // container 2
+
                             Expanded(
                               child: Container(
                                 height: 200,
@@ -120,6 +100,7 @@ class DashBoard extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 20),
+                            // container 3
                             Expanded(
                               child: Container(
                                 height: 200,

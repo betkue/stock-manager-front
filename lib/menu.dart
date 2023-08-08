@@ -34,7 +34,7 @@ class _MenuState extends State<Menu> {
     MenuModel(icon: Icons.account_box, title: "Account"),
   ];
 
-  int selected = 0;
+  // int selected = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _MenuState extends State<Menu> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: selected == 0 ? logo : logo,
+              color: home_index == 0 ? logo : logo,
             ),
             child: Center(
               child: Image.asset(
@@ -62,10 +62,10 @@ class _MenuState extends State<Menu> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
+          Expanded(
             child: SingleChildScrollView(
                 child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
                   height: Responsive.isMobile(context) ? 8 : 10,
@@ -75,7 +75,7 @@ class _MenuState extends State<Menu> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(MediaQuery.of(context).size.height),
                       ),
-                      color: widget.color ?? orange,
+                      // color: widget.color ?? orange,
                     ),
                     child: Image.asset(
                       "assets/images/avatar.png",
@@ -107,39 +107,44 @@ class _MenuState extends State<Menu> {
                     width: MediaQuery.of(context).size.width / 12,
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     decoration: const BoxDecoration(
+                      // color: orange,
                       borderRadius: BorderRadius.all(
                         Radius.circular(6.0),
                       ),
                     ),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          selected = i;
-                          widget.select(i);
-                        });
-                        widget.scaffoldKey.currentState!.closeDrawer();
-                      },
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 13, vertical: 7),
-                            child: Icon(
-                              menu[i].icon,
-                              color: selected == i ? orange : white,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            home_index = i;
+                            widget.select(i);
+                          });
+                          widget.scaffoldKey.currentState!.closeDrawer();
+                        },
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 13, vertical: 7),
+                              child: Icon(
+                                menu[i].icon,
+                                color: home_index == i ? orange : white,
+                              ),
+                              // color: selected == i ? orange : white,
                             ),
-                            // color: selected == i ? orange : white,
-                          ),
-                          Text(
-                            menu[i].title,
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: selected == i ? orange : white,
-                                fontWeight: selected == i
-                                    ? FontWeight.w600
-                                    : FontWeight.normal),
-                          )
-                        ],
+                            Text(
+                              menu[i].title,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: home_index == i ? orange : white,
+                                  overflow: TextOverflow.ellipsis,
+                                  fontWeight: home_index == i
+                                      ? FontWeight.w600
+                                      : FontWeight.normal),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

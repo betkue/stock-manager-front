@@ -3,6 +3,8 @@ import 'package:stock_management/constant.dart';
 import 'package:stock_management/dashboard.dart';
 import 'package:stock_management/menu.dart';
 import 'package:stock_management/widgets/profile.dart';
+import 'package:stock_management/product.dart';
+import 'package:stock_management/customer.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,9 +15,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Widget> contian = [
-    DashBoard(),
-    Container(),
-    Container(),
+    const DashBoard(),
+    const ProductPage(),
+    const CustomerPage(),
     Container(),
     Container(),
     Container(),
@@ -23,11 +25,11 @@ class _HomeState extends State<Home> {
     Container(),
   ];
 
-  int selected = 0;
+  // int selected = 1;
 
   select(int index) {
     setState(() {
-      selected = index;
+      home_index = index;
     });
   }
 
@@ -38,7 +40,12 @@ class _HomeState extends State<Home> {
         backgroundColor: gray,
         key: _scaffoldKey,
         drawer: !Responsive.isDesktop(context)
-            ? SizedBox(width: 250, child: Menu(scaffoldKey: _scaffoldKey,select: select,))
+            ? SizedBox(
+                width: 250,
+                child: Menu(
+                  scaffoldKey: _scaffoldKey,
+                  select: select,
+                ))
             : null,
         endDrawer: Responsive.isMobile(context)
             ? SizedBox(
@@ -53,12 +60,15 @@ class _HomeState extends State<Home> {
                   flex: 2,
                   child: SizedBox(
                       height: MediaQuery.of(context).size.height,
-                      child: Menu(scaffoldKey: _scaffoldKey,select: select,)),
+                      child: Menu(
+                        scaffoldKey: _scaffoldKey,
+                        select: select,
+                      )),
                 ),
               if (!Responsive.isMobile(context))
                 Expanded(
                   flex: 8,
-                  child: contian[selected],
+                  child: contian[home_index],
                 ),
             ],
           ),
