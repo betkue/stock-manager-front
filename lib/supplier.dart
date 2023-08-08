@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 
-class CustomerPage extends StatelessWidget {
-  const CustomerPage({super.key});
+class SupplierPage extends StatelessWidget {
+  const SupplierPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CustomerPage extends StatelessWidget {
                     InkWell(
                       child: Icon(
                         Icons.help,
-                        color: Colors.black,
+                        color: black,
                       ),
                     ),
                     SizedBox(
@@ -60,10 +60,10 @@ class CustomerPage extends StatelessWidget {
                               vertical: 10), // Set the button's padding
                         ),
                         child: const Text(
-                          "Add Customer",
+                          "Add Supplier",
                           style: TextStyle(
                               fontSize: 16,
-                              color: Colors.black,
+                              color: black,
                               fontWeight: FontWeight.w400),
                         ),
                       ),
@@ -74,21 +74,21 @@ class CustomerPage extends StatelessWidget {
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     return Container(
-                      color: Colors.white,
+                      color: white,
                       child: Container(
                         // Add any styling properties for the item container here
                         margin: const EdgeInsets.all(8.0),
                         padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: white,
                           // borderRadius: BorderRadius.circular(8.0),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
+                              color: gray,
                               spreadRadius: 2,
                               blurRadius: 5,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
                             ),
                           ],
                         ),

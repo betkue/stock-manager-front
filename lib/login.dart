@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
-import 'package:stock_management/dashboard.dart';
 import 'package:stock_management/home.dart';
 import 'package:stock_management/signin.dart';
 import 'package:stock_management/widgets/two_column.dart';

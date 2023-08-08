@@ -5,6 +5,9 @@ import 'package:stock_management/menu.dart';
 import 'package:stock_management/widgets/profile.dart';
 import 'package:stock_management/product.dart';
 import 'package:stock_management/customer.dart';
+import 'package:stock_management/supplier.dart';
+import 'package:stock_management/purchase.dart';
+import 'package:stock_management/sales.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -18,10 +21,10 @@ class _HomeState extends State<Home> {
     const DashBoard(),
     const ProductPage(),
     const CustomerPage(),
-    Container(),
-    Container(),
-    Container(),
-    Container(),
+    const SupplierPage(),
+    const PurchasePage(),
+    // Container(),
+    const SalesPage(),
     Container(),
   ];
 

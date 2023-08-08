@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 import 'package:stock_management/widgets/products/products_block.dart';
 
-class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+class SalesPage extends StatefulWidget {
+  const SalesPage({super.key});
 
   @override
-  State<ProductPage> createState() => _ProductPageState();
+  State<SalesPage> createState() => _SalesPageState();
 }
 
-class _ProductPageState extends State<ProductPage> {
+class _SalesPageState extends State<SalesPage> {
   int index = 0;
   changeState(int i) {
     setState(() {
@@ -35,7 +35,7 @@ class _ProductPageState extends State<ProductPage> {
                     InkWell(
                       child: Icon(
                         Icons.help,
-                        color: Colors.black,
+                        color: black,
                       ),
                     ),
                     SizedBox(
@@ -72,10 +72,10 @@ class _ProductPageState extends State<ProductPage> {
                               vertical: 10), // Set the button's padding
                         ),
                         child: const Text(
-                          "Add product",
+                          "New Purchase",
                           style: TextStyle(
                               fontSize: 16,
-                              color: Colors.black,
+                              color: black,
                               fontWeight: FontWeight.w400),
                         ),
                       ),
@@ -103,7 +103,7 @@ class _ProductPageState extends State<ProductPage> {
                                   vertical: 10), // Set the button's padding
                             ),
                             child: Text(
-                              "All Products",
+                              "All Purchase",
                               style: TextStyle(
                                   fontSize: 16,
                                   color: index == 0 ? white : black,
@@ -124,7 +124,7 @@ class _ProductPageState extends State<ProductPage> {
                                   vertical: 10), // Set the button's padding
                             ),
                             child: Text(
-                              "Available",
+                              "Pending",
                               style: TextStyle(
                                   fontSize: 16,
                                   color: index == 1 ? white : black,
@@ -145,10 +145,31 @@ class _ProductPageState extends State<ProductPage> {
                                   vertical: 10), // Set the button's padding
                             ),
                             child: Text(
-                              "Unavailable",
+                              "Valid",
                               style: TextStyle(
                                   fontSize: 16,
                                   color: index == 2 ? white : black,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          const SizedBox(width: 80),
+                          ElevatedButton(
+                            onPressed: () {
+                              changeState(3);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: index == 3 ? orange : white,
+                              shadowColor: orange,
+                              surfaceTintColor: orange,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 10), // Set the button's padding
+                            ),
+                            child: Text(
+                              "Incomplete",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: index == 3 ? white : black,
                                   fontWeight: FontWeight.w400),
                             ),
                           ),
@@ -174,4 +195,3 @@ class _ProductPageState extends State<ProductPage> {
     }
   }
 }
-

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 import 'package:stock_management/home.dart';
 import 'create_store.dart';
-import 'package:stock_management/dashboard.dart';
 
 class Auth extends StatefulWidget {
   const Auth({super.key});
