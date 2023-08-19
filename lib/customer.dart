@@ -101,7 +101,7 @@ class CustomerPage extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   // borderRadius: BorderRadius.circular(
                   //   // MediaQuery.of(context).size.height,
                   // ),

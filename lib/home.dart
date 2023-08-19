@@ -8,6 +8,7 @@ import 'package:stock_management/customer.dart';
 import 'package:stock_management/supplier.dart';
 import 'package:stock_management/purchase.dart';
 import 'package:stock_management/sales.dart';
+import 'package:stock_management/account.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -25,7 +26,7 @@ class _HomeState extends State<Home> {
     const PurchasePage(),
     // Container(),
     const SalesPage(),
-    Container(),
+    AccountPage(),
   ];
 
   // int selected = 1;

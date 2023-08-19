@@ -17,6 +17,7 @@ class DashBoard extends StatelessWidget {
             children: [
               Expanded(
                 flex: 8,
+           
                 child: Scaffold(
                   appBar: AppBar(
                     backgroundColor: white,
@@ -45,7 +46,7 @@ class DashBoard extends StatelessWidget {
                         Text(
                           'This Month',
                           style: TextStyle(
-                            fontFamily: "Inter",
+                            fontFamily: "IBMPlexSans",
                             fontSize: 15,
                             fontWeight: FontWeight.w400,
                             color: black,
@@ -118,7 +119,7 @@ class DashBoard extends StatelessWidget {
                                     Text(
                                       "Inventory Summary",
                                       style: const TextStyle(
-                                        fontFamily: "Inter",
+                                        fontFamily: "IBMPlexSans",
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
                                         color: Color(0xff000000),
