@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 
@@ -56,7 +58,7 @@ class _MenuState extends State<Menu> {
             ),
             child: Center(
               child: Image.asset(
-                "images/Logo.png",
+                "assets/images/Logo.png",
                 height: 80,
                 fit: BoxFit.cover,
               ),
@@ -94,20 +96,20 @@ class _MenuState extends State<Menu> {
                 ),
                 Text(
                   "michelle@gmail.com ",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Theme.of(context).primaryColor,
-                  ),
+                  style: TextStyle(fontSize: 12, color: white),
                 ),
                 SizedBox(
                   height: Responsive.isMobile(context) ? 20 : 40,
                 ),
                 for (var i = 0; i < menu.length; i++)
                   Container(
-                    width: MediaQuery.of(context).size.width / 12,
+                    // color: home_index == i ? orange : backgroundColor,
+                    width: home_index == i
+                        ? MediaQuery.of(context).size.width / 10
+                        : MediaQuery.of(context).size.width / 10,
                     margin: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: const BoxDecoration(
-                      // color: orange,
+                    decoration: BoxDecoration(
+                      color: home_index == i ? orange : backgroundColor,
                       borderRadius: BorderRadius.all(
                         Radius.circular(6.0),
                       ),
@@ -127,17 +129,18 @@ class _MenuState extends State<Menu> {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 13, vertical: 7),
-                              child: Icon(
-                                menu[i].icon,
-                                color: home_index == i ? orange : white,
-                              ),
+                              child: Icon(menu[i].icon,
+                                  color:
+                                      white // home_index == i ? orange : white,
+                                  ),
                               // color: selected == i ? orange : white,
                             ),
                             Text(
                               menu[i].title,
                               style: TextStyle(
                                   fontSize: 16,
-                                  color: home_index == i ? orange : white,
+                                  color:
+                                      white, //home_index == i ? orange : white,
                                   overflow: TextOverflow.ellipsis,
                                   fontWeight: home_index == i
                                       ? FontWeight.w600

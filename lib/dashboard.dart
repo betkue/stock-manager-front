@@ -17,7 +17,6 @@ class DashBoard extends StatelessWidget {
             children: [
               Expanded(
                 flex: 8,
-           
                 child: Scaffold(
                   appBar: AppBar(
                     backgroundColor: white,
@@ -310,7 +309,7 @@ class DashBoard extends StatelessWidget {
                                                     width: 170,
                                                     // content of the first section
                                                     child: topSellingItems(
-                                                      "images/shoes1.png",
+                                                      "assets/images/shoes1.png",
                                                       "Women's Air Jordan 1\n Low SE Utility",
                                                       14,
                                                     ),
@@ -323,7 +322,7 @@ class DashBoard extends StatelessWidget {
                                                     width: 170,
                                                     // content of the second section
                                                     child: topSellingItems(
-                                                      "images/shoes2.png",
+                                                      "assets/images/shoes2.png",
                                                       "Women's Air Jordan 1\n Low SE Utility",
                                                       14,
                                                     ),
@@ -336,7 +335,7 @@ class DashBoard extends StatelessWidget {
                                                     width: 170,
                                                     // content of the first section
                                                     child: topSellingItems(
-                                                      "images/shoes3.png",
+                                                      "assets/images/shoes3.png",
                                                       "Women's Air Jordan 1\n Low SE Utility",
                                                       14,
                                                     ),
@@ -415,8 +414,8 @@ class DashBoard extends StatelessWidget {
                                           )),
                                       Column(
                                         children: [
-                                          SizedBox(
-                                            width: 780,
+                                          Expanded(
+                                            // width: 780,
                                             child: Row(
                                               children: [
                                                 Container(
@@ -542,297 +541,314 @@ class DashBoard extends StatelessWidget {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                          Container(
-                                            width: 780,
-                                            height: 126,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: gray, width: 0.5),
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  "Sale Activity",
-                                                  style:
-                                                      TextStyle(fontSize: 15),
-                                                ),
-                                                SizedBox(
-                                                  height: 8,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Center(
-                                                      child: Container(
-                                                          width: 160,
-                                                          height: 90,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                color: gray,
-                                                                width: 0.5),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5.0),
-                                                          ),
-                                                          child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: const [
-                                                                Text(
-                                                                  "20",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color:
-                                                                        orange,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 10,
-                                                                ),
-                                                                Text(
-                                                                  "sets",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black87,
+                                          Expanded(
+                                            child: Container(
+                                              // width: 780,
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 10),
+                                              height: 126,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: gray, width: 0.5),
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                    "Sale Activity",
+                                                    style:
+                                                        TextStyle(fontSize: 15),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Center(
+                                                        child: Container(
+                                                            width: 160,
+                                                            height: 90,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                      color:
+                                                                          gray,
+                                                                      width:
+                                                                          0.5),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0),
+                                                            ),
+                                                            child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: const [
+                                                                  Text(
+                                                                    "20",
+                                                                    style:
+                                                                        TextStyle(
                                                                       fontSize:
-                                                                          10),
-                                                                ),
-                                                                Text(
-                                                                  "Suppliers",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color:
-                                                                        black,
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      color:
+                                                                          orange,
+                                                                    ),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
                                                                   ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                              ])),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    Center(
-                                                      child: Container(
-                                                          width: 160,
-                                                          height: 90,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                color: gray,
-                                                                width: 0.5),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5.0),
-                                                          ),
-                                                          child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: const [
-                                                                Text(
-                                                                  "20",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color:
-                                                                        orange,
+                                                                  SizedBox(
+                                                                    height: 10,
                                                                   ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 10,
-                                                                ),
-                                                                Text(
-                                                                  "sets",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black87,
+                                                                  Text(
+                                                                    "sets",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black87,
+                                                                        fontSize:
+                                                                            10),
+                                                                  ),
+                                                                  Text(
+                                                                    "Suppliers",
+                                                                    style:
+                                                                        TextStyle(
                                                                       fontSize:
-                                                                          10),
-                                                                ),
-                                                                Text(
-                                                                  "Suppliers",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color:
-                                                                        black,
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      color:
+                                                                          black,
+                                                                    ),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
                                                                   ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                              ])),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    Center(
-                                                      child: Container(
-                                                          width: 160,
-                                                          height: 90,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                color: gray,
-                                                                width: 0.5),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5.0),
-                                                          ),
-                                                          child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: const [
-                                                                Text(
-                                                                  "20",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color:
-                                                                        orange,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 10,
-                                                                ),
-                                                                Text(
-                                                                  "sets",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black87,
+                                                                ])),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 20,
+                                                      ),
+                                                      Center(
+                                                        child: Container(
+                                                            width: 160,
+                                                            height: 90,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                      color:
+                                                                          gray,
+                                                                      width:
+                                                                          0.5),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0),
+                                                            ),
+                                                            child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: const [
+                                                                  Text(
+                                                                    "20",
+                                                                    style:
+                                                                        TextStyle(
                                                                       fontSize:
-                                                                          10),
-                                                                ),
-                                                                Text(
-                                                                  "Suppliers",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color:
-                                                                        black,
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      color:
+                                                                          orange,
+                                                                    ),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
                                                                   ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                              ])),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    Center(
-                                                      child: Container(
-                                                          width: 160,
-                                                          height: 90,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                color: gray,
-                                                                width: 0.5),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5.0),
-                                                          ),
-                                                          child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: const [
-                                                                Text(
-                                                                  "20",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color:
-                                                                        orange,
+                                                                  SizedBox(
+                                                                    height: 10,
                                                                   ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 10,
-                                                                ),
-                                                                Text(
-                                                                  "sets",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black87,
+                                                                  Text(
+                                                                    "sets",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black87,
+                                                                        fontSize:
+                                                                            10),
+                                                                  ),
+                                                                  Text(
+                                                                    "Suppliers",
+                                                                    style:
+                                                                        TextStyle(
                                                                       fontSize:
-                                                                          10),
-                                                                ),
-                                                                Text(
-                                                                  "Suppliers",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color:
-                                                                        black,
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      color:
+                                                                          black,
+                                                                    ),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
                                                                   ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                              ])),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                                                ])),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 20,
+                                                      ),
+                                                      Center(
+                                                        child: Container(
+                                                            width: 160,
+                                                            height: 90,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                      color:
+                                                                          gray,
+                                                                      width:
+                                                                          0.5),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0),
+                                                            ),
+                                                            child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: const [
+                                                                  Text(
+                                                                    "20",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      color:
+                                                                          orange,
+                                                                    ),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  Text(
+                                                                    "sets",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black87,
+                                                                        fontSize:
+                                                                            10),
+                                                                  ),
+                                                                  Text(
+                                                                    "Suppliers",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      color:
+                                                                          black,
+                                                                    ),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                  ),
+                                                                ])),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 20,
+                                                      ),
+                                                      Center(
+                                                        child: Container(
+                                                            width: 160,
+                                                            height: 90,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                      color:
+                                                                          gray,
+                                                                      width:
+                                                                          0.5),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0),
+                                                            ),
+                                                            child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: const [
+                                                                  Text(
+                                                                    "20",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      color:
+                                                                          orange,
+                                                                    ),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  Text(
+                                                                    "sets",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black87,
+                                                                        fontSize:
+                                                                            10),
+                                                                  ),
+                                                                  Text(
+                                                                    "Suppliers",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      color:
+                                                                          black,
+                                                                    ),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                  ),
+                                                                ])),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],

@@ -18,7 +18,7 @@ Widget products(String imagePath, String productName, String price, int state,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Image.asset(
-          height: 200,
+          height: 160,
           width: double.infinity,
           imagePath,
           fit: BoxFit.cover,
@@ -48,7 +48,7 @@ Widget products(String imagePath, String productName, String price, int state,
         ),
         Container(
           width: MediaQuery.of(context).size.width / 8,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             // color: state == 1 ? orange : gray
@@ -68,4 +68,3 @@ Widget products(String imagePath, String productName, String price, int state,
     ),
   );
 }
-

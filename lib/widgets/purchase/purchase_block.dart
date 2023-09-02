@@ -19,8 +19,12 @@ class _AllPurchaseState extends State<AllPurchase> {
       crossAxisCount: 4,
       children: <Widget>[
         for (var i = 0; i < 10; i++)
-          purchase("images/LaMater.png", "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA", i ~/ 2 == 0 ? 1 : 0, context),
+          purchase(
+              "assets/images/LaMater.png",
+              "Women's Air Jordan 1 Low SE Utility",
+              "1000 XFA",
+              i ~/ 2 == 0 ? 1 : 0,
+              context),
       ],
     );
   }
@@ -44,8 +48,8 @@ class _PendingStatePurchase extends State<PendingPurchase> {
       crossAxisCount: 4,
       children: <Widget>[
         for (var i = 0; i < 10; i++)
-          purchase("images/LaMater.png", "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA", 0, context),
+          purchase("assets/images/LaMater.png",
+              "Women's Air Jordan 1 Low SE Utility", "1000 XFA", 0, context),
       ],
     );
   }
@@ -69,8 +73,8 @@ class _CompletePurchaseState extends State<CompletePurchase> {
       crossAxisCount: 4,
       children: <Widget>[
         for (var i = 0; i < 10; i++)
-          purchase("images/LaMater.png", "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA", 2, context),
+          purchase("assets/images/LaMater.png",
+              "Women's Air Jordan 1 Low SE Utility", "1000 XFA", 2, context),
       ],
     );
   }
@@ -94,8 +98,8 @@ class _IncompletePurchaseState extends State<IncompletePurchase> {
       crossAxisCount: 4,
       children: <Widget>[
         for (var i = 0; i < 10; i++)
-          purchase("images/LaMater.png", "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA", 1, context),
+          purchase("assets/images/LaMater.png",
+              "Women's Air Jordan 1 Low SE Utility", "1000 XFA", 1, context),
       ],
     );
   }
