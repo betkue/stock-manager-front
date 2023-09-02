@@ -71,7 +71,7 @@ class SupplierPage extends StatelessWidget {
                   ),
                 ),
                 body: ListView.builder(
-                  itemCount: 10,
+                  itemCount: suppliers.length,
                   itemBuilder: (context, index) {
                     return Container(
                       color: white,
@@ -95,34 +95,42 @@ class SupplierPage extends StatelessWidget {
                         child: Row(
                           children: [
                             Container(
+                              height: 100,
+                              width: 100,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      MediaQuery.of(context).size.height),
-                                ),
-                                // color: gray,
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        suppliers[index]['image'])),
+                                color: orange,
+                                borderRadius: BorderRadius.circular(
+                                    MediaQuery.of(context).size.height),
+                                // color: widget.color ?? orange,
                               ),
-                              child: Image.asset(
-                                "assets/images/avatar.png",
-                                fit: BoxFit.cover,
-                              ),
+                              // child: Image.network(
+                              //  ,
+                              //   // fit: BoxFit.cover,
+                              // )
                             ),
-                            const SizedBox(
-                              width: 30,
-                            ),
-                            Expanded(child: Text("Customer $index")),
-                            Expanded(child: Text("Ref $index")),
-                            Expanded(child: Text("Num_Products $index")),
-                            Expanded(child: Text("Location $index")),
+                            const SizedBox(width: 30),
+                            Expanded(child: Text(suppliers[index]['name'])),
+                            Expanded(
+                                child: Text(
+                                    "${suppliers[index]['reference']} $index")),
+                            Expanded(
+                                child: Text(
+                                    "Quantity : ${suppliers[index]['product_quantity']}")),
+                            Expanded(
+                                child: Text(
+                                    "Location : ${suppliers[index]['location']}")),
                             Expanded(
                               child: IconButton(
                                 onPressed: () {},
                                 icon: const Icon(
                                   Icons.edit_outlined,
-                                  color: orange,
+                                  color: Colors.orange,
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),

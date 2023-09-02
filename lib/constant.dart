@@ -34,7 +34,7 @@ Map<String, dynamic> company = {
 Map<String, dynamic> user = {
   "name": "Michelle",
   "email": "betkuetjh@gmail.com",
-  "image":"https://picsum.photos/250?image=9",
+  "image": "https://picsum.photos/250?image=9",
   "rule": "Admin"
 };
 Map<String, dynamic> dashboard = {
@@ -91,5 +91,39 @@ List<Map<String, dynamic>> productsUnavalaible = [
     "name": "Image test stock manager",
     "available": false,
     "price": 1000,
+  }
+];
+
+List<Map<String, dynamic>> customers = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "product_quantity": 1000,
+    "location": "Pk 19"
+  },
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "product_quantity": 1000,
+    "location": "Pk 19"
+  }
+];
+
+List<Map<String, dynamic>> suppliers = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "product_quantity": 1000,
+    "location": "Pk 19"
+  },
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "product_quantity": 1000,
+    "location": "Pk 19"
   }
 ];

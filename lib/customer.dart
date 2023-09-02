@@ -71,9 +71,9 @@ class CustomerPage extends StatelessWidget {
                     ),
                   ),
                   body: ListView.builder(
-                    itemCount: 10,
+                    itemCount: customers.length,
                     itemBuilder: (context, index) {
-                      return buildItemContainer(index);
+                      return buildItemContainer(index, context);
                     },
                   ))),
         ],
@@ -81,7 +81,7 @@ class CustomerPage extends StatelessWidget {
     );
   }
 
-  Widget buildItemContainer(int index) {
+  Widget buildItemContainer(int index, BuildContext context) {
     return Container(
       color: Colors.white,
       child: Container(
@@ -101,21 +101,28 @@ class CustomerPage extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              decoration: const BoxDecoration(
-                  // borderRadius: BorderRadius.circular(
-                  //   // MediaQuery.of(context).size.height,
-                  // ),
-                  ),
-              child: Image.asset(
-                "assets/images/avatar.png",
-                fit: BoxFit.cover,
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(customers[index]['image'])),
+                color: orange,
+                borderRadius:
+                    BorderRadius.circular(MediaQuery.of(context).size.height),
+                // color: widget.color ?? orange,
               ),
+              // child: Image.network(
+              //  ,
+              //   // fit: BoxFit.cover,
+              // )
             ),
             const SizedBox(width: 30),
-            Expanded(child: Text("Customer $index")),
-            Expanded(child: Text("Ref $index")),
-            Expanded(child: Text("Num_Products $index")),
-            Expanded(child: Text("Location $index")),
+            Expanded(child: Text(customers[index]['name'])),
+            Expanded(child: Text("${customers[index]['reference']} $index")),
+            Expanded(
+                child:
+                    Text("Quantity : ${customers[index]['product_quantity']}")),
+            Expanded(child: Text("Location : ${customers[index]['location']}")),
             Expanded(
               child: IconButton(
                 onPressed: () {},

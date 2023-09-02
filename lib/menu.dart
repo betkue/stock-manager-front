@@ -73,18 +73,20 @@ class _MenuState extends State<Menu> {
                   height: Responsive.isMobile(context) ? 8 : 10,
                 ),
                 Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      color: orange,
-                      borderRadius: BorderRadius.circular(
-                          MediaQuery.of(context).size.height),
-                      // color: widget.color ?? orange,
-                    ),
-                    child: Image.network(
-                      user['image'],
-                      // fit: BoxFit.cover,
-                    )),
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: NetworkImage(user['image'])),
+                    color: orange,
+                    borderRadius: BorderRadius.circular(
+                        MediaQuery.of(context).size.height),
+                    // color: widget.color ?? orange,
+                  ),
+                  // child: Image.network(
+                  //  ,
+                  //   // fit: BoxFit.cover,
+                  // )
+                ),
                 const SizedBox(
                   height: 15,
                 ),
