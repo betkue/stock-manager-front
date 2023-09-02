@@ -9,6 +9,7 @@ const Color white = Color.fromARGB(255, 255, 255, 255);
 const Color gray = Color(0xFFD9D9D9);
 const Color logo = Color(0xFF066565);
 const Color dark = Color(0xFF3a3737);
+const Color red = Colors.red;
 int home_index = 0;
 
 InputDecoration inputDecoration(String hintText) => InputDecoration(
@@ -23,3 +24,35 @@ InputDecoration inputDecoration(String hintText) => InputDecoration(
       borderRadius: BorderRadius.circular(5),
     ),
     fillColor: white);
+
+Map<String, dynamic> company = {
+  "currency": {
+    "symbol":"FCFA",
+    "is_double":false
+  },
+  "customers": 60,
+  "suppliers": 20
+};
+Map<String, dynamic> dashboard = {
+  "time": DateTime.now(),
+  "count_of_all_product": 20000,
+  "product_out_of_stock": 20,
+  "product_overstocked": 2,
+  "quantity_in_hand": 400,
+  "quantity_to_be_received": 50,
+  "quantity_to_be_delivered": 40,
+  "purchases": {
+    "quantity_ordered": 2000,
+    "price_ordered": 45000,
+    "amount_paid": 200,
+    "price": 30000
+  },
+  "sales": {
+    "quantity_sold": 2000,
+    "price_sold": 45000,
+    "amount_paid": 200,
+    "price": 30000
+  },
+  "winning_percentage": -90,
+  "benefit": -1000000,
+};

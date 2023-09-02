@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stock_management/constant.dart';
 import 'package:stock_management/widgets/products/product.dart';
 
 class Allproduct extends StatefulWidget {
@@ -22,7 +23,7 @@ class _AllproductState extends State<Allproduct> {
           products(
               "assets/images/shoes4.png",
               "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA",
+              "1000 ${company['currency']['symbol']}",
               i ~/ 2 == 0 ? 1 : 0,
               context),
       ],
@@ -48,8 +49,12 @@ class _AvailableproductState extends State<Availableproduct> {
       crossAxisCount: 4,
       children: <Widget>[
         for (var i = 0; i < 10; i++)
-          products("assets/images/shoes4.png",
-              "Women's Air Jordan 1 Low SE Utility", "1000 XFA", 1, context),
+          products(
+              "assets/images/shoes4.png",
+              "Women's Air Jordan 1 Low SE Utility",
+              "1000 ${company['currency']['symbol']}",
+              1,
+              context),
       ],
     );
   }
@@ -73,8 +78,12 @@ class _UnavailableproductState extends State<Unavailableproduct> {
       crossAxisCount: 4,
       children: <Widget>[
         for (var i = 0; i < 10; i++)
-          products("assets/images/shoes4.png",
-              "Women's Air Jordan 1 Low SE Utility", "1000 XFA", 0, context),
+          products(
+              "assets/images/shoes4.png",
+              "Women's Air Jordan 1 Low SE Utility",
+              "1000 ${company['currency']['symbol']}",
+              0,
+              context),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stock_management/constant.dart';
 import 'package:stock_management/widgets/purchase/purchase.dart';
 
 class AllPurchase extends StatefulWidget {
@@ -22,7 +23,7 @@ class _AllPurchaseState extends State<AllPurchase> {
           purchase(
               "assets/images/LaMater.png",
               "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA",
+              "1000 ${company['currency']['symbol']}",
               i ~/ 2 == 0 ? 1 : 0,
               context),
       ],
@@ -48,8 +49,12 @@ class _PendingStatePurchase extends State<PendingPurchase> {
       crossAxisCount: 4,
       children: <Widget>[
         for (var i = 0; i < 10; i++)
-          purchase("assets/images/LaMater.png",
-              "Women's Air Jordan 1 Low SE Utility", "1000 XFA", 0, context),
+          purchase(
+              "assets/images/LaMater.png",
+              "Women's Air Jordan 1 Low SE Utility",
+              "1000 ${company['currency']['symbol']}",
+              0,
+              context),
       ],
     );
   }
@@ -73,8 +78,12 @@ class _CompletePurchaseState extends State<CompletePurchase> {
       crossAxisCount: 4,
       children: <Widget>[
         for (var i = 0; i < 10; i++)
-          purchase("assets/images/LaMater.png",
-              "Women's Air Jordan 1 Low SE Utility", "1000 XFA", 2, context),
+          purchase(
+              "assets/images/LaMater.png",
+              "Women's Air Jordan 1 Low SE Utility",
+              "1000 ${company['currency']['symbol']}",
+              2,
+              context),
       ],
     );
   }
@@ -98,8 +107,12 @@ class _IncompletePurchaseState extends State<IncompletePurchase> {
       crossAxisCount: 4,
       children: <Widget>[
         for (var i = 0; i < 10; i++)
-          purchase("assets/images/LaMater.png",
-              "Women's Air Jordan 1 Low SE Utility", "1000 XFA", 1, context),
+          purchase(
+              "assets/images/LaMater.png",
+              "Women's Air Jordan 1 Low SE Utility",
+              "1000 ${company['currency']['symbol']}",
+              1,
+              context),
       ],
     );
   }
