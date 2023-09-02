@@ -17,7 +17,7 @@ Widget products(String imagePath, String productName, String price, int state,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Image.asset(
+        Image.network(
           height: 160,
           width: double.infinity,
           imagePath,

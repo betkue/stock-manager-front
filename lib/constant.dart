@@ -26,12 +26,16 @@ InputDecoration inputDecoration(String hintText) => InputDecoration(
     fillColor: white);
 
 Map<String, dynamic> company = {
-  "currency": {
-    "symbol":"FCFA",
-    "is_double":false
-  },
+  "currency": {"symbol": "FCFA", "is_double": false},
   "customers": 60,
   "suppliers": 20
+};
+
+Map<String, dynamic> user = {
+  "name": "Michelle",
+  "email": "betkuetjh@gmail.com",
+  "image":"https://picsum.photos/250?image=9",
+  "rule": "Admin"
 };
 Map<String, dynamic> dashboard = {
   "time": DateTime.now(),
@@ -56,3 +60,36 @@ Map<String, dynamic> dashboard = {
   "winning_percentage": -90,
   "benefit": -1000000,
 };
+
+List<Map<String, dynamic>> productsAll = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "available": true,
+    "price": 1000,
+  },
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "available": false,
+    "price": 1000,
+  }
+];
+
+List<Map<String, dynamic>> productsAvailable = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "available": true,
+    "price": 1000,
+  }
+];
+
+List<Map<String, dynamic>> productsUnavalaible = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "available": false,
+    "price": 1000,
+  }
+];

@@ -73,21 +73,23 @@ class _MenuState extends State<Menu> {
                   height: Responsive.isMobile(context) ? 8 : 10,
                 ),
                 Container(
+                    height: 100,
+                    width: 100,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(MediaQuery.of(context).size.height),
-                      ),
+                      color: orange,
+                      borderRadius: BorderRadius.circular(
+                          MediaQuery.of(context).size.height),
                       // color: widget.color ?? orange,
                     ),
-                    child: Image.asset(
-                      "assets/images/avatar.png",
-                      fit: BoxFit.cover,
+                    child: Image.network(
+                      user['image'],
+                      // fit: BoxFit.cover,
                     )),
                 const SizedBox(
                   height: 15,
                 ),
-                const Text(
-                  "Michelle",
+                Text(
+                  user['name'],
                   style: TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w600, color: white),
                 ),
@@ -95,7 +97,7 @@ class _MenuState extends State<Menu> {
                   height: 2,
                 ),
                 Text(
-                  "michelle@gmail.com ",
+                  user['email'],
                   style: TextStyle(fontSize: 12, color: white),
                 ),
                 SizedBox(

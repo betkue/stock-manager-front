@@ -19,12 +19,12 @@ class _AllproductState extends State<Allproduct> {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < productsAll.length; i++)
           products(
-              "assets/images/shoes4.png",
-              "Women's Air Jordan 1 Low SE Utility",
-              "1000 ${company['currency']['symbol']}",
-              i ~/ 2 == 0 ? 1 : 0,
+              productsAll[i]['image'],
+              productsAll[i]['name'],
+              "${productsAll[i]['price']} ${company['currency']['symbol']}",
+              productsAll[i]['available'] ? 1 : 0,
               context),
       ],
     );
@@ -48,12 +48,12 @@ class _AvailableproductState extends State<Availableproduct> {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < productsAvailable.length; i++)
           products(
-              "assets/images/shoes4.png",
-              "Women's Air Jordan 1 Low SE Utility",
-              "1000 ${company['currency']['symbol']}",
-              1,
+              productsAvailable[i]['image'],
+              productsAvailable[i]['name'],
+              "${productsAvailable[i]['price']} ${company['currency']['symbol']}",
+              productsAvailable[i]['available'] ? 1 : 0,
               context),
       ],
     );
@@ -77,12 +77,12 @@ class _UnavailableproductState extends State<Unavailableproduct> {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < productsUnavalaible.length; i++)
           products(
-              "assets/images/shoes4.png",
-              "Women's Air Jordan 1 Low SE Utility",
-              "1000 ${company['currency']['symbol']}",
-              0,
+              productsUnavalaible[i]['image'],
+              productsUnavalaible[i]['name'],
+              "${productsUnavalaible[i]['price']} ${company['currency']['symbol']}",
+              productsUnavalaible[i]['available'] ? 1 : 0,
               context),
       ],
     );
