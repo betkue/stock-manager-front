@@ -127,3 +127,107 @@ List<Map<String, dynamic>> suppliers = [
     "location": "Pk 19"
   }
 ];
+
+List<Map<String, dynamic>> purchasesAll = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "price": 1000,
+    "shipping_state": 0,
+    "paiement_state": 0
+  },
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "price": 1000,
+    "shipping_state": 2,
+    "paiement_state": 0
+  },
+];
+
+List<Map<String, dynamic>> purchasesPending = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "price": 1000,
+    "shipping_state": 0,
+    "paiement_state": 1
+  },
+];
+
+List<Map<String, dynamic>> purchasesIncomplete = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "price": 1000,
+    "shipping_state": 1,
+    "paiement_state": 2
+  },
+];
+
+List<Map<String, dynamic>> purchasesComplete = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "price": 1000,
+    "shipping_state": 2,
+    "paiement_state": 0
+  },
+];
+
+List<Map<String, dynamic>> salesAll = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "price": 1000,
+    "shipping_state": 0,
+    "paiement_state": 0
+  },
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "price": 1000,
+    "shipping_state": 2,
+    "paiement_state": 0
+  },
+];
+
+List<Map<String, dynamic>> salesPending = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "price": 1000,
+    "shipping_state": 0,
+    "paiement_state": 1
+  },
+];
+
+List<Map<String, dynamic>> salesIncomplete = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "price": 1000,
+    "shipping_state": 1,
+    "paiement_state": 2
+  },
+];
+
+List<Map<String, dynamic>> salesComplete = [
+  {
+    "image": "https://picsum.photos/250?image=9",
+    "name": "Image test stock manager",
+    "reference": "#poijkj454664",
+    "price": 1000,
+    "shipping_state": 2,
+    "paiement_state": 0
+  },
+];

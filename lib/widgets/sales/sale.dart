@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 
-Widget purchase(String imagePath, String productName, String price, int state,
+Widget sales(String imagePath, String productName, String price, int state,
     int paiement_state, BuildContext context) {
   return Container(
     // color: gray,

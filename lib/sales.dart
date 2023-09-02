@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
-import 'package:stock_management/widgets/purchase/purchase_block.dart';
+import 'package:stock_management/widgets/sales/sales_block.dart';
 
 class SalesPage extends StatefulWidget {
   const SalesPage({super.key});
@@ -187,13 +187,13 @@ class _SalesPageState extends State<SalesPage> {
 
   Widget determineWidget() {
     if (index == 0) {
-      return const AllPurchase();
+      return const AllSales();
     } else if (index == 1) {
-      return const PendingPurchase();
+      return const PendingSales();
     } else if (index == 2) {
-      return const IncompletePurchase();
+      return const IncompleteSales();
     } else {
-      return const CompletePurchase();
+      return const CompleteSales();
     }
   }
 }

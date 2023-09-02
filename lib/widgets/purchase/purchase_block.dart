@@ -19,12 +19,13 @@ class _AllPurchaseState extends State<AllPurchase> {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < purchasesAll.length; i++)
           purchase(
-              "assets/images/LaMater.png",
-              "Women's Air Jordan 1 Low SE Utility",
-              "1000 ${company['currency']['symbol']}",
-              i ~/ 2 == 0 ? 1 : 0,
+              purchasesAll[i]['image'],
+              purchasesAll[i]['name'],
+              "${purchasesAll[i]['price']} ${company['currency']['symbol']}",
+              purchasesAll[i]['shipping_state'],
+              purchasesAll[i]['paiement_state'],
               context),
       ],
     );
@@ -48,12 +49,13 @@ class _PendingStatePurchase extends State<PendingPurchase> {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < purchasesPending.length; i++)
           purchase(
-              "assets/images/LaMater.png",
-              "Women's Air Jordan 1 Low SE Utility",
-              "1000 ${company['currency']['symbol']}",
-              0,
+              purchasesPending[i]['image'],
+              purchasesPending[i]['name'],
+              "${purchasesPending[i]['price']} ${company['currency']['symbol']}",
+              purchasesPending[i]['shipping_state'],
+              purchasesPending[i]['paiement_state'],
               context),
       ],
     );
@@ -77,12 +79,13 @@ class _CompletePurchaseState extends State<CompletePurchase> {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < purchasesComplete.length; i++)
           purchase(
-              "assets/images/LaMater.png",
-              "Women's Air Jordan 1 Low SE Utility",
-              "1000 ${company['currency']['symbol']}",
-              2,
+              purchasesComplete[i]['image'],
+              purchasesComplete[i]['name'],
+              "${purchasesComplete[i]['price']} ${company['currency']['symbol']}",
+              purchasesComplete[i]['shipping_state'],
+              purchasesComplete[i]['paiement_state'],
               context),
       ],
     );
@@ -106,12 +109,13 @@ class _IncompletePurchaseState extends State<IncompletePurchase> {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < purchasesIncomplete.length; i++)
           purchase(
-              "assets/images/LaMater.png",
-              "Women's Air Jordan 1 Low SE Utility",
-              "1000 ${company['currency']['symbol']}",
-              1,
+              purchasesIncomplete[i]['image'],
+              purchasesIncomplete[i]['name'],
+              "${purchasesIncomplete[i]['price']} ${company['currency']['symbol']}",
+              purchasesIncomplete[i]['shipping_state'],
+              purchasesIncomplete[i]['paiement_state'],
               context),
       ],
     );

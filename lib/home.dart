@@ -3,10 +3,10 @@ import 'package:stock_management/constant.dart';
 import 'package:stock_management/dashboard.dart';
 import 'package:stock_management/menu.dart';
 import 'package:stock_management/widgets/profile.dart';
-import 'package:stock_management/product.dart';
-import 'package:stock_management/customer.dart';
-import 'package:stock_management/supplier.dart';
-import 'package:stock_management/purchase.dart';
+import 'package:stock_management/products.dart';
+import 'package:stock_management/customers.dart';
+import 'package:stock_management/suppliers.dart';
+import 'package:stock_management/purchases.dart';
 import 'package:stock_management/sales.dart';
 import 'package:stock_management/account.dart';
 
