@@ -35,8 +35,49 @@ Map<String, dynamic> user = {
   "name": "Michelle",
   "email": "betkuetjh@gmail.com",
   "image": "https://picsum.photos/250?image=9",
-  "rule": "Admin"
+  "rule": "Admin",
+  "phone": "+237655203146"
 };
+List<Map<String, dynamic>> users = [
+  {
+    "name": "Michelle",
+    "email": "betkuetjh@gmail.com",
+    "image": "https://picsum.photos/250?image=9",
+    "rule": "Admin",
+    "phone": "+237655203146",
+    "active":true
+  },
+  {
+    "name": "Michelle",
+    "email": "betkuetjh@gmail.com",
+    "image": "https://picsum.photos/250?image=9",
+    "rule": "Admin",
+    "phone": "+237655203146",
+    "active":false
+  },
+  {
+    "name": "Michelle",
+    "email": "betkuetjh@gmail.com",
+    "image": "https://picsum.photos/250?image=9",
+    "rule": "Admin",
+    "phone": "+237655203146",
+    "active":true
+  },
+  {
+    "name": "Michelle",
+    "email": "betkuetjh@gmail.com",
+    "image": "https://picsum.photos/250?image=9",
+    "rule": "Admin",
+    "phone": "+237655203146",
+    "active":false
+  }
+];
+dynamic user_name;
+dynamic user_email;
+dynamic user_image;
+dynamic user_rule;
+dynamic user_phone;
+dynamic user_password;
 Map<String, dynamic> dashboard = {
   "time": DateTime.now(),
   "count_of_all_product": 20000,

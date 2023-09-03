@@ -8,7 +8,7 @@ import 'package:stock_management/customers.dart';
 import 'package:stock_management/suppliers.dart';
 import 'package:stock_management/purchases.dart';
 import 'package:stock_management/sales.dart';
-import 'package:stock_management/account.dart';
+import 'package:stock_management/profile.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
