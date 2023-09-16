@@ -46,6 +46,7 @@ class _CustomerPageState extends State<CustomerPage> {
                             height: 40,
                             width: 50,
                             child: TextField(
+                              controller: searchCustomersController,
                               decoration: InputDecoration(
                                 hintText: "Search",
                                 prefixIcon: Icon(Icons.search),
@@ -53,7 +54,7 @@ class _CustomerPageState extends State<CustomerPage> {
                               ),
                               onChanged: (value) {
                                 setState(() {
-                                  searchCustomersController.text = value;
+                                  // searchCustomersController.text = value;
                                 });
                               },
                             ),

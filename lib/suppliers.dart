@@ -46,6 +46,7 @@ class _SupplierPageState extends State<SupplierPage> {
                           height: 40,
                           width: 50,
                           child: TextField(
+                            controller: searchSuppliersController,
                             decoration: InputDecoration(
                               hintText: "Search",
                               prefixIcon: Icon(Icons.search),
@@ -53,7 +54,7 @@ class _SupplierPageState extends State<SupplierPage> {
                             ),
                             onChanged: (value) {
                               setState(() {
-                                searchSuppliersController.text = value;
+                                // searchSuppliersController.text = value;
                               });
                             },
                           ),

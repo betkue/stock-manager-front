@@ -5,6 +5,10 @@ import 'package:stock_management/constant.dart';
 
 Widget purchase(String imagePath, String productName, String price, int state,
     int paiement_state, BuildContext context) {
+  if (searchPurchasesController.text.isNotEmpty &&
+      !productName.contains(searchPurchasesController.text)) {
+    return Container();
+  }
   return Container(
     // color: gray,
     decoration: BoxDecoration(color: white, boxShadow: [

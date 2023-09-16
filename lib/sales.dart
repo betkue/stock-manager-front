@@ -52,6 +52,7 @@ class _SalesPageState extends State<SalesPage> {
                           height: 40,
                           width: 50,
                           child: TextField(
+                            controller: searchSalesController,
                             decoration: InputDecoration(
                               hintText: "Search",
                               prefixIcon: Icon(Icons.search),
@@ -59,7 +60,7 @@ class _SalesPageState extends State<SalesPage> {
                             ),
                             onChanged: (value) {
                               setState(() {
-                                searchSalesController.text = value;
+                                // searchSalesController.text = value;
                               });
                             },
                           ),
@@ -194,13 +195,13 @@ class _SalesPageState extends State<SalesPage> {
 
   Widget determineWidget() {
     if (index == 0) {
-      return const AllSales();
+      return AllSales();
     } else if (index == 1) {
-      return const PendingSales();
+      return PendingSales();
     } else if (index == 2) {
-      return const IncompleteSales();
+      return IncompleteSales();
     } else {
-      return const CompleteSales();
+      return CompleteSales();
     }
   }
 }

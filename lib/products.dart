@@ -20,6 +20,7 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: gray,
@@ -52,7 +53,7 @@ class _ProductPageState extends State<ProductPage> {
                           height: 40,
                           width: 50,
                           child: TextField(
-                            // controller: searchProductsController,
+                            controller: searchProductsController,
                             decoration: InputDecoration(
                               hintText: "Search",
                               prefixIcon: Icon(Icons.search),
@@ -60,7 +61,7 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             onChanged: (value) {
                               setState(() {
-                                searchProductsController.text = value;
+                                // searchProductsController.text = value;
                               });
                             },
                           ),

@@ -47,11 +47,12 @@ class _PurchasePageState extends State<PurchasePage> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Expanded(
+                      Expanded(
                         child: SizedBox(
                           height: 40,
                           width: 50,
                           child: TextField(
+                            controller: searchPurchasesController,
                             decoration: InputDecoration(
                               hintText: "Search",
                               prefixIcon: Icon(Icons.search),
@@ -59,7 +60,7 @@ class _PurchasePageState extends State<PurchasePage> {
                             ),
                             onChanged: (value) {
                               setState(() {
-                                searchPurchasesController.text = value;
+                                // searchPurchasesController.text = value;
                               });
                             },
                           ),
@@ -194,13 +195,13 @@ class _PurchasePageState extends State<PurchasePage> {
 
   Widget determineWidget() {
     if (index == 0) {
-      return const AllPurchase();
+      return AllPurchase();
     } else if (index == 1) {
-      return const PendingPurchase();
+      return PendingPurchase();
     } else if (index == 2) {
-      return const IncompletePurchase();
+      return IncompletePurchase();
     } else {
-      return const CompletePurchase();
+      return CompletePurchase();
     }
   }
 }
