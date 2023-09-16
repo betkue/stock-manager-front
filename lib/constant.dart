@@ -272,3 +272,10 @@ List<Map<String, dynamic>> salesComplete = [
     "paiement_state": 0
   },
 ];
+
+
+TextEditingController searchProductsController = TextEditingController();
+TextEditingController searchPurchasesController = TextEditingController();
+TextEditingController searchSalesController = TextEditingController();
+TextEditingController searchSuppliersController = TextEditingController();
+TextEditingController searchCustomersController = TextEditingController();

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 import 'package:stock_management/widgets/sales/sales_block.dart';
@@ -45,7 +47,7 @@ class _SalesPageState extends State<SalesPage> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: SizedBox(
                           height: 40,
                           width: 50,
@@ -55,6 +57,11 @@ class _SalesPageState extends State<SalesPage> {
                               prefixIcon: Icon(Icons.search),
                               border: OutlineInputBorder(),
                             ),
+                            onChanged: (value) {
+                              setState(() {
+                                searchSalesController.text = value;
+                              });
+                            },
                           ),
                         ),
                       ),

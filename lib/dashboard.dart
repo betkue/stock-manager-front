@@ -161,24 +161,29 @@ class DashBoard extends StatelessWidget {
                       child: Column(
                         children: [
                           Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                orderInfo(
-                                    "Purchase Order",
-                                    dashboard['purchases']['quantity_ordered'],
-                                    dashboard['purchases']['price_ordered'],
-                                    dashboard['purchases']['amount_paid'],
-                                    dashboard['purchases']['price'],
-                                    "Ordered"),
-                                orderInfo(
-                                    "Sales Order",
-                                    dashboard['sales']['quantity_sold'],
-                                    dashboard['sales']['price_sold'],
-                                    dashboard['sales']['amount_paid'],
-                                    dashboard['sales']['price'],
-                                    "Sold"),
-                              ],
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  orderInfo(
+                                      "Purchase Order",
+                                      dashboard['purchases']
+                                          ['quantity_ordered'],
+                                      dashboard['purchases']['price_ordered'],
+                                      dashboard['purchases']['amount_paid'],
+                                      dashboard['purchases']['price'],
+                                      "Ordered"),
+                                  orderInfo(
+                                      "Sales Order",
+                                      dashboard['sales']['quantity_sold'],
+                                      dashboard['sales']['price_sold'],
+                                      dashboard['sales']['amount_paid'],
+                                      dashboard['sales']['price'],
+                                      "Sold"),
+                                ],
+                              ),
                             ),
                           ),
                           Expanded(

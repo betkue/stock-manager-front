@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 import 'package:stock_management/widgets/products/products_block.dart';
@@ -45,16 +47,22 @@ class _ProductPageState extends State<ProductPage> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: SizedBox(
                           height: 40,
                           width: 50,
                           child: TextField(
+                            // controller: searchProductsController,
                             decoration: InputDecoration(
                               hintText: "Search",
                               prefixIcon: Icon(Icons.search),
                               border: OutlineInputBorder(),
                             ),
+                            onChanged: (value) {
+                              setState(() {
+                                searchProductsController.text = value;
+                              });
+                            },
                           ),
                         ),
                       ),
@@ -71,8 +79,8 @@ class _ProductPageState extends State<ProductPage> {
                               horizontal: 20,
                               vertical: 10), // Set the button's padding
                         ),
-                        child: const Text(
-                          "Add product",
+                        child: Text(
+                          "Add product" + searchProductsController.text,
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.black,
@@ -174,4 +182,3 @@ class _ProductPageState extends State<ProductPage> {
     }
   }
 }
-

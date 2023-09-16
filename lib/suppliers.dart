@@ -1,9 +1,16 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 
-class SupplierPage extends StatelessWidget {
+class SupplierPage extends StatefulWidget {
   const SupplierPage({super.key});
 
+  @override
+  State<SupplierPage> createState() => _SupplierPageState();
+}
+
+class _SupplierPageState extends State<SupplierPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +40,7 @@ class SupplierPage extends StatelessWidget {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Expanded(
+                       Expanded(
                         child: SizedBox(
                           height: 40,
                           width: 50,
@@ -43,6 +50,11 @@ class SupplierPage extends StatelessWidget {
                               prefixIcon: Icon(Icons.search),
                               border: OutlineInputBorder(),
                             ),
+                            onChanged: (value) {
+                              setState(() {
+                                searchSuppliersController.text = value;
+                              });
+                            },
                           ),
                         ),
                       ),

@@ -1,10 +1,19 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 
 Widget products(String imagePath, String productName, String price, int state,
     BuildContext context) {
+  // log(searchProductsController.text);
+  // if (searchProductsController.text.isNotEmpty &&
+  //     !productName.contains(searchProductsController.text)) {
+  //   return Container();
+  // } else {
+  //   }
+
   return Container(
     // color: gray,
     decoration: BoxDecoration(color: white, boxShadow: [

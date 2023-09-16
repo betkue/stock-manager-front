@@ -1,9 +1,16 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 
-class CustomerPage extends StatelessWidget {
+class CustomerPage extends StatefulWidget {
   const CustomerPage({super.key});
 
+  @override
+  State<CustomerPage> createState() => _CustomerPageState();
+}
+
+class _CustomerPageState extends State<CustomerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +40,7 @@ class CustomerPage extends StatelessWidget {
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Expanded(
+                         Expanded(
                           child: SizedBox(
                             height: 40,
                             width: 50,
@@ -43,6 +50,11 @@ class CustomerPage extends StatelessWidget {
                                 prefixIcon: Icon(Icons.search),
                                 border: OutlineInputBorder(),
                               ),
+                              onChanged: (value) {
+                              setState(() {
+                                searchCustomersController.text = value;
+                              });
+                            },
                             ),
                           ),
                         ),
