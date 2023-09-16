@@ -1,13 +1,16 @@
-// ignore_for_file: must_be_immutable, prefer_const_constructors, prefer_interpolation_to_compose_strings
+// ignore_for_file: must_be_immutable, prefer_const_constructors, prefer_interpolation_to_compose_strings, sized_box_for_whitespace
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:stock_management/constant.dart';
 import 'package:stock_management/load_page.dart';
 import 'package:stock_management/widgets/circular_button.dart';
 import 'package:stock_management/widgets/account/account.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class DetailProduct extends StatefulWidget {
   String? id;
@@ -27,9 +30,78 @@ class _DetailProductState extends State<DetailProduct> {
   TextEditingController locationController = TextEditingController();
   TextEditingController searchController = TextEditingController();
   TextEditingController searchListController = TextEditingController();
+  ImagePicker picker = ImagePicker();
   bool load = true;
   bool showList = false;
   bool loadList = false;
+  bool _pickImage = false;
+  String _permission = '';
+  dynamic imageFile;
+  //gallery permission
+  getGalleryPermission() async {
+    var status = await Permission.photos.status;
+    if (status != PermissionStatus.granted) {
+      status = await Permission.photos.request();
+    }
+    return status;
+  }
+
+//camera permission
+  getCameraPermission() async {
+    var status = await Permission.camera.status;
+    if (status != PermissionStatus.granted) {
+      status = await Permission.camera.request();
+    }
+    return status;
+  }
+
+//pick image from gallery
+  pickImageFromGallery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageFile = pickedFile?.path;
+      _pickImage = false;
+    });
+    // var permission;
+    // if (Platform.isMacOS) {
+    //   permission = PermissionStatus.granted;
+    // } else {
+    //   permission = await getCameraPermission();
+    // }
+    // if (permission == PermissionStatus.granted) {
+    //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    //   setState(() {
+    //     imageFile = pickedFile?.path;
+    //     _pickImage = false;
+    //   });
+    // } else {
+    //   setState(() {
+    //     _permission = 'noPhotos';
+    //   });
+    // }
+  }
+
+//pick image from camera
+  pickImageFromCamera() async {
+    var permission;
+    if (Platform.isMacOS) {
+      permission = PermissionStatus.granted;
+    } else {
+      permission = await getCameraPermission();
+    }
+    if (permission == PermissionStatus.granted) {
+      final pickedFile = await picker.pickImage(source: ImageSource.camera);
+      setState(() {
+        imageFile = pickedFile?.path;
+        _pickImage = false;
+      });
+    } else {
+      setState(() {
+        _permission = 'noCamera';
+      });
+    }
+  }
+
   List<Map<String, dynamic>> listSeach = [
     {"id": 12, "name": "Patrick", "price": 2000},
     {"id": 12, "name": "Patrick", "price": 2000},
@@ -115,56 +187,92 @@ class _DetailProductState extends State<DetailProduct> {
                                 child: ListView(
                                   // mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Center(
-                                      child: Container(
-                                        margin: EdgeInsets.symmetric(
-                                            vertical: media.height / 40),
-                                        width: media.width / 5,
-                                        height: media.width / 5,
-                                        child: DottedBorder(
-                                          borderType: BorderType.RRect,
-                                          color: black,
-                                          borderPadding: EdgeInsets.all(6),
-                                          dashPattern: [8, 8],
-                                          radius: Radius.circular(12),
-                                          padding: EdgeInsets.all(6),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(12)),
-                                            child: SizedBox(
-                                              height: media.width / 5,
-                                              width: media.width / 5,
-
-                                              child: Center(
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          pickImageFromGallery();
+                                        });
+                                      },
+                                      child: Center(
+                                        child: (imageFile == null)
+                                            ? Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical:
+                                                        media.height / 40),
+                                                width: media.width / 5,
+                                                height: media.width / 5,
                                                 child: DottedBorder(
                                                   borderType: BorderType.RRect,
+                                                  color: black,
+                                                  borderPadding:
+                                                      EdgeInsets.all(6),
+                                                  dashPattern: [8, 8],
                                                   radius: Radius.circular(12),
                                                   padding: EdgeInsets.all(6),
-                                                  dashPattern: [8, 8],
-                                                  color: gray,
                                                   child: ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
                                                                 12)),
                                                     child: SizedBox(
-                                                      height: media.width / 8,
-                                                      width: media.width / 8,
+                                                      height: media.width / 5,
+                                                      width: media.width / 5,
+
                                                       child: Center(
-                                                        child: Icon(
-                                                          Icons.add,
-                                                          color: orange,
+                                                        child: DottedBorder(
+                                                          borderType:
+                                                              BorderType.RRect,
+                                                          radius:
+                                                              Radius.circular(
+                                                                  12),
+                                                          padding:
+                                                              EdgeInsets.all(6),
+                                                          dashPattern: [8, 8],
+                                                          color: gray,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            12)),
+                                                            child: SizedBox(
+                                                              height:
+                                                                  media.width /
+                                                                      8,
+                                                              width:
+                                                                  media.width /
+                                                                      8,
+                                                              child: Center(
+                                                                child: Icon(
+                                                                  Icons.add,
+                                                                  color: orange,
+                                                                ),
+                                                              ),
+                                                              // color: Colors.amber,
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
                                                       // color: Colors.amber,
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              // color: Colors.amber,
-                                            ),
-                                          ),
-                                        ),
+                                              )
+                                            : Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical:
+                                                        media.height / 40),
+                                                width: media.width / 5,
+                                                height: media.width / 5,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                12)),
+                                                    image: DecorationImage(
+                                                        image: FileImage(
+                                                            File(imageFile)),
+                                                        fit: BoxFit.cover))),
                                       ),
                                     ),
                                     Container(
@@ -454,6 +562,7 @@ class _DetailProductState extends State<DetailProduct> {
                       ],
                     ),
                   ),
+
                   showList
                       ? Container(
                           width: width,
@@ -556,7 +665,136 @@ class _DetailProductState extends State<DetailProduct> {
                             ],
                           ),
                         )
-                      : Container()
+                      : Container(),
+
+                  //pick image bar
+                  // (_pickImage == true)
+                  //     ? Positioned(
+                  //         bottom: 0,
+                  //         child: InkWell(
+                  //           onTap: () {
+                  //             setState(() {
+                  //               _pickImage = false;
+                  //             });
+                  //           },
+                  //           child: Container(
+                  //             height: media.height * 1,
+                  //             width: media.width * 1,
+                  //             color: Colors.transparent.withOpacity(0.6),
+                  //             child: Column(
+                  //               mainAxisAlignment: MainAxisAlignment.end,
+                  //               children: [
+                  //                 Container(
+                  //                   // padding: EdgeInsets.all(media.width * 0.05),
+                  //                   width: media.width / 2,
+                  //                   decoration: BoxDecoration(
+                  //                       borderRadius: const BorderRadius.only(
+                  //                           topLeft: Radius.circular(25),
+                  //                           topRight: Radius.circular(25)),
+                  //                       border: Border.all(
+                  //                         color: orange,
+                  //                         width: 1.2,
+                  //                       ),
+                  //                       color: white),
+                  //                   child: Column(
+                  //                     children: [
+                  //                       Container(
+                  //                         height: media.width * 0.02,
+                  //                         width: media.width * 0.15,
+                  //                         decoration: BoxDecoration(
+                  //                           borderRadius: BorderRadius.circular(
+                  //                               media.width * 0.01),
+                  //                           color: Colors.grey,
+                  //                         ),
+                  //                       ),
+                  //                       SizedBox(
+                  //                         height: media.width * 0.05,
+                  //                       ),
+                  //                       Row(
+                  //                         mainAxisAlignment:
+                  //                             MainAxisAlignment.spaceEvenly,
+                  //                         children: [
+                  //                           Column(
+                  //                             children: [
+                  //                               InkWell(
+                  //                                 onTap: () {
+                  //                                   pickImageFromCamera();
+                  //                                 },
+                  //                                 child: Container(
+                  //                                     height:
+                  //                                         media.width * 0.171,
+                  //                                     width:
+                  //                                         media.width * 0.171,
+                  //                                     decoration: BoxDecoration(
+                  //                                         border: Border.all(
+                  //                                             color: orange,
+                  //                                             width: 1.2),
+                  //                                         borderRadius:
+                  //                                             BorderRadius
+                  //                                                 .circular(
+                  //                                                     12)),
+                  //                                     child: Icon(
+                  //                                       Icons
+                  //                                           .camera_alt_outlined,
+                  //                                       size:
+                  //                                           media.width * 0.064,
+                  //                                     )),
+                  //                               ),
+                  //                               SizedBox(
+                  //                                 height: media.width * 0.01,
+                  //                               ),
+                  //                               Text(
+                  //                                 "Camera",
+                  //                                 style:
+                  //                                     TextStyle(color: black),
+                  //                               )
+                  //                             ],
+                  //                           ),
+                  //                           Column(
+                  //                             children: [
+                  //                               InkWell(
+                  //                                 onTap: () {
+                  //                                   pickImageFromGallery();
+                  //                                 },
+                  //                                 child: Container(
+                  //                                     height:
+                  //                                         media.width * 0.171,
+                  //                                     width:
+                  //                                         media.width * 0.171,
+                  //                                     decoration: BoxDecoration(
+                  //                                         border: Border.all(
+                  //                                             color: orange,
+                  //                                             width: 1.2),
+                  //                                         borderRadius:
+                  //                                             BorderRadius
+                  //                                                 .circular(
+                  //                                                     12)),
+                  //                                     child: Icon(
+                  //                                       Icons.image_outlined,
+                  //                                       size:
+                  //                                           media.width * 0.064,
+                  //                                     )),
+                  //                               ),
+                  //                               SizedBox(
+                  //                                 height: media.width * 0.01,
+                  //                               ),
+                  //                               Text(
+                  //                                 "Gallery",
+                  //                                 style:
+                  //                                     TextStyle(color: black),
+                  //                               )
+                  //                             ],
+                  //                           ),
+                  //                         ],
+                  //                       ),
+                  //                     ],
+                  //                   ),
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ))
+                  //     : Container(),
                 ],
               ),
             ));
