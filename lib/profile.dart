@@ -79,8 +79,8 @@ class _AccountPageState extends State<AccountPage> {
                             children: [
                               for (var i = 0; i < users.length; i++)
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 34, top: 34),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
