@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
+import 'package:stock_management/load_page.dart';
 import 'package:stock_management/widgets/supplier/supplier.dart';
 
 class SupplierPage extends StatefulWidget {
@@ -12,9 +15,23 @@ class SupplierPage extends StatefulWidget {
 }
 
 class _SupplierPageState extends State<SupplierPage> {
+
+  bool load = true;
+      @override
+  void initState() {
+    Timer(
+        Duration(seconds: 5),
+        () => setState(() {
+              load = false;
+            }));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+    return load
+        ? LoadPage()
+        : Scaffold(
       backgroundColor: gray,
       body: SafeArea(
           child: Row(
