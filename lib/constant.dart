@@ -2,12 +2,13 @@
 
 import 'package:flutter/material.dart';
 
-const Color backgroundColor = Color(0xFF007272);
+const Color backgroundColor =
+    Color.fromARGB(255, 50, 50, 50); //Color(0xFF007272);
 const Color black = Color.fromARGB(255, 5, 5, 5);
 const Color orange = Color(0xFFF68C49);
 const Color white = Color.fromARGB(255, 255, 255, 255);
-const Color gray = Color(0xFFD9D9D9);
-const Color logo = Color(0xFF066565);
+const Color gray = Color.fromARGB(255, 185, 185, 185); // Color(0xFFD9D9D9);
+// const Color logo = Color(0xFF066565);
 const Color dark = Color(0xFF3a3737);
 const Color red = Colors.red;
 int home_index = 0;
@@ -23,7 +24,7 @@ InputDecoration inputDecoration(String hintText) => InputDecoration(
       borderSide: const BorderSide(color: white, width: 2.0),
       borderRadius: BorderRadius.circular(5),
     ),
-    fillColor: white);
+    fillColor: gray);
 
 Map<String, dynamic> company = {
   "currency": {"symbol": "FCFA", "is_double": false},
@@ -79,7 +80,7 @@ dynamic user_rule;
 dynamic user_phone;
 dynamic user_password;
 
-  String? id_product;
+String? id_product;
 Map<String, dynamic> dashboard = {
   "time": DateTime.now(),
   "count_of_all_product": 20000,

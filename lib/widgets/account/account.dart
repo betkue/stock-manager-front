@@ -9,7 +9,7 @@ Padding label(String label) => Padding(
         label,
         style: TextStyle(
           fontSize: 20,
-          color: Color(0xFFFFFFFF),
+          color: gray,
         ),
       ),
     );
@@ -23,11 +23,11 @@ Container inputContain(
         bool enable) =>
     Container(
       width: width / 4.5,
-      height: 37,
+      // height: 37,
       margin: EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        // color: backgroundColor,
+        color: gray,
       ),
       child: Center(
         child: TextFormField(
@@ -40,7 +40,7 @@ Container inputContain(
           obscureText: obscure,
           readOnly: enable,
           // maxLength: 30,
-          decoration: inputDecoration(hintText),
+          decoration: inputDecoration(hintText,),
           validator: (value) {
             if (value!.isEmpty && !obscure) {
               return 'Please enter the $hintText.';

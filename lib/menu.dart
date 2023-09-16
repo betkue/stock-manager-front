@@ -54,7 +54,7 @@ class _MenuState extends State<Menu> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: home_index == 0 ? logo : logo,
+              color: home_index == 0 ? backgroundColor : backgroundColor,
             ),
             child: Center(
               child: Image.asset(

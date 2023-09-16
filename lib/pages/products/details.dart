@@ -81,7 +81,7 @@ class _DetailProductState extends State<DetailProduct> {
     return load
         ? LoadPage()
         : Scaffold(
-            backgroundColor: gray,
+            // backgroundColor: gray,
             appBar: AppBar(
               backgroundColor: white,
               elevation: 0,
@@ -99,54 +99,66 @@ class _DetailProductState extends State<DetailProduct> {
                 style: TextStyle(color: black),
               ),
             ),
-            body: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: Center(
-                        child: ListView(
-                          // mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: media.height / 40),
-                                width: media.width / 5,
-                                height: media.width / 5,
-                                child: DottedBorder(
-                                  borderType: BorderType.RRect,
-                                  color: white,
-                                  borderPadding: EdgeInsets.all(6),
-                                  dashPattern: [8, 8],
-                                  radius: Radius.circular(12),
-                                  padding: EdgeInsets.all(6),
-                                  child: ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12)),
-                                    child: SizedBox(
-                                      height: media.width / 5,
-                                      width: media.width / 5,
-
-                                      child: Center(
+            body: SafeArea(
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: Center(
+                                child: ListView(
+                                  // mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: media.height / 40),
+                                        width: media.width / 5,
+                                        height: media.width / 5,
                                         child: DottedBorder(
                                           borderType: BorderType.RRect,
+                                          color: black,
+                                          borderPadding: EdgeInsets.all(6),
+                                          dashPattern: [8, 8],
                                           radius: Radius.circular(12),
                                           padding: EdgeInsets.all(6),
-                                          dashPattern: [8, 8],
-                                          color: white,
                                           child: ClipRRect(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(12)),
                                             child: SizedBox(
-                                              height: media.width / 8,
-                                              width: media.width / 8,
+                                              height: media.width / 5,
+                                              width: media.width / 5,
+
                                               child: Center(
-                                                child: Icon(
-                                                  Icons.add,
-                                                  color: white,
+                                                child: DottedBorder(
+                                                  borderType: BorderType.RRect,
+                                                  radius: Radius.circular(12),
+                                                  padding: EdgeInsets.all(6),
+                                                  dashPattern: [8, 8],
+                                                  color: gray,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                12)),
+                                                    child: SizedBox(
+                                                      height: media.width / 8,
+                                                      width: media.width / 8,
+                                                      child: Center(
+                                                        child: Icon(
+                                                          Icons.add,
+                                                          color: orange,
+                                                        ),
+                                                      ),
+                                                      // color: Colors.amber,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                               // color: Colors.amber,
@@ -154,365 +166,399 @@ class _DetailProductState extends State<DetailProduct> {
                                           ),
                                         ),
                                       ),
-                                      // color: Colors.amber,
                                     ),
-                                  ),
+                                    Container(
+                                      width: media.width,
+                                      child: Text(
+                                        "Description",
+                                        textAlign: TextAlign.left,
+                                        textScaleFactor: 1.4,
+                                        style: TextStyle(
+                                          color: gray,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: media.height / 40,
+                                          horizontal: 10),
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          color: gray.withOpacity(0.5)),
+                                      width: media.width / 3,
+                                      height: media.width / 4,
+                                      child: TextField(
+                                        maxLines: null, // Set this
+                                        expands: true, // and this
+                                        keyboardType: TextInputType.multiline,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              ),
-                            ),
-                            Container(
-                              width: media.width,
-                              child: Text(
-                                "Description",
-                                textAlign: TextAlign.left,
-                                textScaleFactor: 1.4,
-                                style: TextStyle(
-                                  color: white,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  vertical: media.height / 40, horizontal: 10),
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(color: white),
-                              width: media.width / 3,
-                              height: media.width / 4,
-                              child: TextField(
-                                maxLines: null, // Set this
-                                expands: true, // and this
-                                keyboardType: TextInputType.multiline,
-                              ),
-                            )
-                          ],
-                        ),
-                      )),
-                      Expanded(
-                          child: Center(
-                        child: ListView(
-                          children: [
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Form(
-                              key: _formKey,
-                              child: Padding(
-                                padding: const EdgeInsets.all(4),
-                                child: Center(
-                                  child: SizedBox(
-                                    width: width / 4,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        label('Product name'),
-                                        inputContain(
-                                            width,
-                                            'Enter the product name',
-                                            nameController, (String value) {
-                                          setState(() {
-                                            nameController.text = value;
-                                            user_name = nameController.text;
-                                          });
-                                        }, false, false),
-                                        const SizedBox(height: 20),
-                                        label('Reference'),
-                                        inputContain(
-                                            width,
-                                            'Enter the product reference',
-                                            refController, (String value) {
-                                          setState(() {
-                                            refController.text = value;
-                                            user_email = refController.text;
-                                          });
-                                        }, false, false),
-                                        const SizedBox(height: 20),
-                                        label(' Quantity'),
-                                        inputContain(
-                                            width,
-                                            ' Enter the product quantity',
-                                            quantityController, (String value) {
-                                          quantityController.text = value;
-                                          user_password =
-                                              quantityController.text;
-                                        }, false, false),
-                                        const SizedBox(height: 20),
-                                        label(' Unit price'),
-                                        inputContain(
-                                            width,
-                                            ' Enter the unit price',
-                                            priceController, (String value) {
-                                          setState(() {
-                                            priceController.text = value;
-                                            user_phone = priceController.text;
-                                          });
-                                        }, false, false),
-                                        const SizedBox(height: 20),
-                                        label(' Location'),
-                                        inputContain(
-                                            width,
-                                            ' Enter the product location',
-                                            locationController, (String value) {
-                                          setState(() {
-                                            locationController.text = value;
-                                            user_rule = locationController.text;
-                                          });
-                                        }, false, false),
-                                        const SizedBox(height: 20),
-                                        Row(
-                                          children: [
-                                            label(
-                                                ' Supplers (${listSeach.length})'),
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  showList = true;
-                                                });
+                              )),
+                              Expanded(
+                                  child: Center(
+                                child: ListView(
+                                  children: [
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Form(
+                                      key: _formKey,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(4),
+                                        child: Center(
+                                          child: SizedBox(
+                                            width: width / 4,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                label('Product name'),
+                                                inputContain(
+                                                    width,
+                                                    'Enter the product name',
+                                                    nameController,
+                                                    (String value) {
+                                                  setState(() {
+                                                    nameController.text = value;
+                                                    user_name =
+                                                        nameController.text;
+                                                  });
+                                                }, false, false),
+                                                const SizedBox(height: 20),
+                                                label('Reference'),
+                                                inputContain(
+                                                    width,
+                                                    'Enter the product reference',
+                                                    refController,
+                                                    (String value) {
+                                                  setState(() {
+                                                    refController.text = value;
+                                                    user_email =
+                                                        refController.text;
+                                                  });
+                                                }, false, false),
+                                                const SizedBox(height: 20),
+                                                label(' Quantity'),
+                                                inputContain(
+                                                    width,
+                                                    ' Enter the product quantity',
+                                                    quantityController,
+                                                    (String value) {
+                                                  quantityController.text =
+                                                      value;
+                                                  user_password =
+                                                      quantityController.text;
+                                                }, false, false),
+                                                const SizedBox(height: 20),
+                                                label(' Unit price'),
+                                                inputContain(
+                                                    width,
+                                                    ' Enter the unit price',
+                                                    priceController,
+                                                    (String value) {
+                                                  setState(() {
+                                                    priceController.text =
+                                                        value;
+                                                    user_phone =
+                                                        priceController.text;
+                                                  });
+                                                }, false, false),
+                                                const SizedBox(height: 20),
+                                                label(' Location'),
+                                                inputContain(
+                                                    width,
+                                                    ' Enter the product location',
+                                                    locationController,
+                                                    (String value) {
+                                                  setState(() {
+                                                    locationController.text =
+                                                        value;
+                                                    user_rule =
+                                                        locationController.text;
+                                                  });
+                                                }, false, false),
+                                                const SizedBox(height: 20),
+                                                Row(
+                                                  children: [
+                                                    label(
+                                                        ' Supplers (${listSeach.length})'),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          showList = true;
+                                                        });
 
-                                                Timer(
-                                                    Duration(seconds: 5),
-                                                    () => setState(() {
-                                                          loadList = false;
-                                                        }));
-                                              },
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 5,
-                                                    horizontal: 20),
-                                                margin:
-                                                    EdgeInsets.only(left: 10),
-                                                decoration: BoxDecoration(
-                                                    color: orange,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10))),
-                                                child: Text(
-                                                  "ADD",
-                                                  style: TextStyle(
-                                                      color: white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                        Timer(
+                                                            Duration(
+                                                                seconds: 5),
+                                                            () => setState(() {
+                                                                  loadList =
+                                                                      false;
+                                                                }));
+                                                      },
+                                                      child: Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 20),
+                                                        margin: EdgeInsets.only(
+                                                            left: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: orange,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10))),
+                                                        child: Text(
+                                                          "ADD",
+                                                          style: TextStyle(
+                                                              color: white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
+                                                Container(
+                                                  margin:
+                                                      EdgeInsets.only(top: 10),
+                                                  width: width,
+                                                  child: TextField(
+                                                    controller:
+                                                        searchController,
+                                                    decoration: InputDecoration(
+                                                      hintText: "Search",
+                                                      prefixIcon:
+                                                          Icon(Icons.search),
+                                                      border:
+                                                          OutlineInputBorder(),
+                                                    ),
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // searchProductsController.text = value;
+                                                      });
+                                                    },
+                                                  ),
+                                                ),
+                                                Container(
+                                                  margin:
+                                                      EdgeInsets.only(top: 10),
+                                                  width: width,
+                                                  height: width / 10,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: white,
+                                                          width: 0.5)),
+                                                  child: ListView.builder(
+                                                      itemCount:
+                                                          listSeach.length,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        if (searchController
+                                                                .text
+                                                                .isNotEmpty &&
+                                                            !listSeach[index]
+                                                                    ['name']
+                                                                .toLowerCase()
+                                                                .contains(
+                                                                    searchController
+                                                                        .text
+                                                                        .toLowerCase())) {
+                                                          return Container();
+                                                        } else {
+                                                          return ListTile(
+                                                              leading: InkWell(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    listSeach
+                                                                        .removeAt(
+                                                                            index);
+                                                                  });
+                                                                },
+                                                                child: Icon(
+                                                                  Icons.remove,
+                                                                  color: orange,
+                                                                ),
+                                                              ),
+                                                              trailing: Text(
+                                                                '${listSeach[index]['price']} ' +
+                                                                    company['currency']
+                                                                        [
+                                                                        'symbol'],
+                                                                style: TextStyle(
+                                                                    color:
+                                                                        backgroundColor,
+                                                                    fontSize:
+                                                                        15),
+                                                              ),
+                                                              title: Text(
+                                                                  listSeach[
+                                                                          index]
+                                                                      [
+                                                                      'name']));
+                                                        }
+                                                      }),
+                                                ),
+                                                const SizedBox(height: 20),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: SizedBox(
+                            width: width / 3,
+                            height: 47,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  // Form is valid, process the data here.
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content:
+                                          Text('Form submitted successfully!'),
+                                    ),
+                                  );
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             const TestPage()));
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                //<-- SEE HERE
+                                backgroundColor: orange,
+                              ),
+                              child: Text(
+                                widget.id != null ? 'Modify' : "Add",
+                                style: TextStyle(fontSize: 24, color: white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  showList
+                      ? Container(
+                          width: width,
+                          height: height,
+                          color: black.withOpacity(0.6),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                  right: 30,
+                                  top: 10,
+                                  child: CirularButton(
+                                    onClick: () {
+                                      setState(() {
+                                        showList = false;
+                                      });
+                                    },
+                                  )),
+                              Center(
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  width: width / 2,
+                                  height: width / 2,
+                                  color: white,
+                                  child: loadList
+                                      ? LoadPage()
+                                      : Column(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(top: 10),
+                                              width: width,
+                                              child: TextField(
+                                                controller:
+                                                    searchListController,
+                                                decoration: InputDecoration(
+                                                  hintText: "Search",
+                                                  prefixIcon:
+                                                      Icon(Icons.search),
+                                                  border: OutlineInputBorder(),
+                                                ),
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    // searchProductsController.text = value;
+                                                  });
+                                                },
                                               ),
+                                            ),
+                                            Expanded(
+                                              child: ListView.builder(
+                                                  itemCount: listLoad.length,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    if ((searchListController
+                                                                .text
+                                                                .isNotEmpty &&
+                                                            !listLoad[index]
+                                                                    ['name']
+                                                                .toLowerCase()
+                                                                .contains(
+                                                                    searchListController
+                                                                        .text
+                                                                        .toLowerCase())) ||
+                                                        detrmineContainId(
+                                                            listLoad[index]
+                                                                ['id'])) {
+                                                      return Container();
+                                                    } else {
+                                                      return ListTile(
+                                                          leading: InkWell(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                listSeach.add(
+                                                                    listLoad[
+                                                                        index]);
+                                                              });
+                                                            },
+                                                            child: Icon(
+                                                                Icons.add,
+                                                                color: orange),
+                                                          ),
+                                                          trailing: Text(
+                                                            '${listLoad[index]['price']} ' +
+                                                                company['currency']
+                                                                    ['symbol'],
+                                                            style: TextStyle(
+                                                                color:
+                                                                    backgroundColor,
+                                                                fontSize: 15),
+                                                          ),
+                                                          title: Text(
+                                                              listLoad[index]
+                                                                  ['name']));
+                                                    }
+                                                  }),
                                             )
                                           ],
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 10),
-                                          width: width,
-                                          child: TextField(
-                                            controller: searchController,
-                                            decoration: InputDecoration(
-                                              hintText: "Search",
-                                              prefixIcon: Icon(Icons.search),
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            onChanged: (value) {
-                                              setState(() {
-                                                // searchProductsController.text = value;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 10),
-                                          width: width,
-                                          height: width / 10,
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: white, width: 0.5)),
-                                          child: ListView.builder(
-                                              itemCount: listSeach.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                if (searchController
-                                                        .text.isNotEmpty &&
-                                                    !listSeach[index]['name']
-                                                        .toLowerCase()
-                                                        .contains(searchController
-                                                            .text
-                                                            .toLowerCase())) {
-                                                  return Container();
-                                                } else {
-                                                  return ListTile(
-                                                      leading: InkWell(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            listSeach.removeAt(
-                                                                index);
-                                                          });
-                                                        },
-                                                        child:
-                                                            Icon(Icons.remove),
-                                                      ),
-                                                      trailing: Text(
-                                                        '${listSeach[index]['price']} ' +
-                                                            company['currency']
-                                                                ['symbol'],
-                                                        style: TextStyle(
-                                                            color: Colors.green,
-                                                            fontSize: 15),
-                                                      ),
-                                                      title: Text(
-                                                          listSeach[index]
-                                                              ['name']));
-                                                }
-                                              }),
-                                        ),
-                                        const SizedBox(height: 20),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 4),
-                                          child: SizedBox(
-                                            width: width / 4.5,
-                                            height: 47,
-                                            child: ElevatedButton(
-                                              onPressed: () {
-                                                if (_formKey.currentState!
-                                                    .validate()) {
-                                                  // Form is valid, process the data here.
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    const SnackBar(
-                                                      content: Text(
-                                                          'Form submitted successfully!'),
-                                                    ),
-                                                  );
-                                                  // Navigator.push(
-                                                  //     context,
-                                                  //     MaterialPageRoute(
-                                                  //         builder: (context) =>
-                                                  //             const TestPage()));
-                                                }
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                //<-- SEE HERE
-                                                backgroundColor: orange,
-                                              ),
-                                              child: Text(
-                                                widget.id != null
-                                                    ? 'Modify'
-                                                    : "Add",
-                                                style: TextStyle(
-                                                    fontSize: 24, color: white),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )),
-                    ],
-                  ),
-                ),
-                showList
-                    ? Container(
-                        width: width,
-                        height: height,
-                        color: black.withOpacity(0.6),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                                right: 30,
-                                top: 10,
-                                child: CirularButton(
-                                  onClick: () {
-                                    setState(() {
-                                      showList = false;
-                                    });
-                                  },
-                                )),
-                            Center(
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                width: width / 2,
-                                height: width / 2,
-                                color: white,
-                                child: loadList
-                                    ? LoadPage()
-                                    : Column(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(top: 10),
-                                            width: width,
-                                            child: TextField(
-                                              controller: searchListController,
-                                              decoration: InputDecoration(
-                                                hintText: "Search",
-                                                prefixIcon: Icon(Icons.search),
-                                                border: OutlineInputBorder(),
-                                              ),
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  // searchProductsController.text = value;
-                                                });
-                                              },
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: ListView.builder(
-                                                itemCount: listLoad.length,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  if ((searchListController.text
-                                                              .isNotEmpty &&
-                                                          !listLoad[index]
-                                                                  ['name']
-                                                              .toLowerCase()
-                                                              .contains(
-                                                                  searchListController
-                                                                      .text
-                                                                      .toLowerCase())) ||
-                                                      detrmineContainId(
-                                                          listLoad[index]
-                                                              ['id'])) {
-                                                    return Container();
-                                                  } else {
-                                                    return ListTile(
-                                                        leading: InkWell(
-                                                          onTap: () {
-                                                            setState(() {
-                                                              listSeach.add(
-                                                                  listLoad[
-                                                                      index]);
-                                                            });
-                                                          },
-                                                          child:
-                                                              Icon(Icons.add),
-                                                        ),
-                                                        trailing: Text(
-                                                          '${listLoad[index]['price']} ' +
-                                                              company['currency']
-                                                                  ['symbol'],
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.green,
-                                                              fontSize: 15),
-                                                        ),
-                                                        title: Text(
-                                                            listLoad[index]
-                                                                ['name']));
-                                                  }
-                                                }),
-                                          )
-                                        ],
-                                      ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : Container()
-              ],
+                            ],
+                          ),
+                        )
+                      : Container()
+                ],
+              ),
             ));
   }
 }

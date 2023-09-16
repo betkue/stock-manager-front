@@ -45,7 +45,7 @@ class _AccountPageState extends State<AccountPage> {
     return load
         ? LoadPage()
         : Scaffold(
-            backgroundColor: gray,
+            // backgroundColor: gray,
             body: SafeArea(
                 child: Row(
               children: [
