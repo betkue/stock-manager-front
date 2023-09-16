@@ -46,7 +46,14 @@ class _ProductPageState extends State<ProductPage> {
                 Expanded(
                     flex: 8,
                     child: details
-                        ? DetailProduct()
+                        ? DetailProduct(
+                            id: id_product,
+                            back: () {
+                              setState(() {
+                                details = false;
+                              });
+                            },
+                          )
                         : Scaffold(
                             appBar: AppBar(
                               backgroundColor: white,
@@ -89,7 +96,10 @@ class _ProductPageState extends State<ProductPage> {
                                   const SizedBox(width: 18),
                                   ElevatedButton(
                                     onPressed: () {
-                                      // Handle button press for "Add product"
+                                      setState(() {
+                                        id_product = null;
+                                        details = true;
+                                      });
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: white,

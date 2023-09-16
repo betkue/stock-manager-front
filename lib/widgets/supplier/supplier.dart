@@ -4,7 +4,7 @@ import 'package:stock_management/constant.dart';
 Widget supplier(String id, String name, String quantity, String location,
     String image, String ref,BuildContext context) {
   if (searchSuppliersController.text.isNotEmpty &&
-      !name.contains(searchSuppliersController.text)) {
+      !name.toLowerCase().contains(searchSuppliersController.text.toLowerCase())) {
     return Container();
   }
   return Container(

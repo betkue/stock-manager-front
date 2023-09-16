@@ -8,7 +8,7 @@ import 'package:stock_management/constant.dart';
 Widget products(String imagePath, String productName, String price, int state,
     BuildContext context, String id) {
   if (searchProductsController.text.isNotEmpty &&
-      !productName.contains(searchProductsController.text)) {
+      !productName.toLowerCase().contains(searchProductsController.text.toLowerCase())) {
     return Container();
   }
 

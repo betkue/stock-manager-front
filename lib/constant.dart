@@ -45,7 +45,7 @@ List<Map<String, dynamic>> users = [
     "image": "https://picsum.photos/250?image=9",
     "rule": "Admin",
     "phone": "+237655203146",
-    "active":true
+    "active": true
   },
   {
     "name": "Michelle",
@@ -53,7 +53,7 @@ List<Map<String, dynamic>> users = [
     "image": "https://picsum.photos/250?image=9",
     "rule": "Admin",
     "phone": "+237655203146",
-    "active":false
+    "active": false
   },
   {
     "name": "Michelle",
@@ -61,7 +61,7 @@ List<Map<String, dynamic>> users = [
     "image": "https://picsum.photos/250?image=9",
     "rule": "Admin",
     "phone": "+237655203146",
-    "active":true
+    "active": true
   },
   {
     "name": "Michelle",
@@ -69,7 +69,7 @@ List<Map<String, dynamic>> users = [
     "image": "https://picsum.photos/250?image=9",
     "rule": "Admin",
     "phone": "+237655203146",
-    "active":false
+    "active": false
   }
 ];
 dynamic user_name;
@@ -78,6 +78,8 @@ dynamic user_image;
 dynamic user_rule;
 dynamic user_phone;
 dynamic user_password;
+
+  String? id_product;
 Map<String, dynamic> dashboard = {
   "time": DateTime.now(),
   "count_of_all_product": 20000,
@@ -273,6 +275,7 @@ List<Map<String, dynamic>> salesComplete = [
   },
 ];
 
+Map<String, dynamic> product = {};
 
 TextEditingController searchProductsController = TextEditingController();
 TextEditingController searchPurchasesController = TextEditingController();

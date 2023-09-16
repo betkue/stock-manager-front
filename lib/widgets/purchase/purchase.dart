@@ -6,7 +6,7 @@ import 'package:stock_management/constant.dart';
 Widget purchase(String imagePath, String productName, String price, int state,
     int paiement_state, BuildContext context) {
   if (searchPurchasesController.text.isNotEmpty &&
-      !productName.contains(searchPurchasesController.text)) {
+      !productName.toLowerCase().contains(searchPurchasesController.text.toLowerCase())) {
     return Container();
   }
   return Container(

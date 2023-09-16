@@ -14,32 +14,39 @@ Padding label(String label) => Padding(
       ),
     );
 
-Container inputContain(double width, String hintText,
-        TextEditingController controller, dynamic onchange, bool obscure,bool enable) =>
+Container inputContain(
+        double width,
+        String hintText,
+        TextEditingController controller,
+        dynamic onchange,
+        bool obscure,
+        bool enable) =>
     Container(
       width: width / 4.5,
-      // height: 37,
+      height: 37,
       margin: EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         // color: backgroundColor,
       ),
-      child: TextFormField(
-        maxLines: 1,
-        cursorColor: black,
-        controller: controller,
-        onChanged: (value) {
-          onchange(value);
-        },
-        obscureText: obscure,
-        readOnly: enable ,
-        // maxLength: 30,
-        decoration: inputDecoration(hintText),
-        validator: (value) {
-          if (value!.isEmpty && !obscure) {
-            return 'Please enter the $hintText.';
-          }
-          return null;
-        },
+      child: Center(
+        child: TextFormField(
+          maxLines: 1,
+          cursorColor: black,
+          controller: controller,
+          onChanged: (value) {
+            onchange(value);
+          },
+          obscureText: obscure,
+          readOnly: enable,
+          // maxLength: 30,
+          decoration: inputDecoration(hintText),
+          validator: (value) {
+            if (value!.isEmpty && !obscure) {
+              return 'Please enter the $hintText.';
+            }
+            return null;
+          },
+        ),
       ),
     );
