@@ -58,4 +58,5 @@ Widget customer(String id, String name, String quantity, String location,
       ),
     ),
   );
+
 }

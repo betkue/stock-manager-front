@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
+import 'package:stock_management/widgets/supplier/supplier.dart';
 
 class SupplierPage extends StatefulWidget {
   const SupplierPage({super.key});
@@ -40,7 +41,7 @@ class _SupplierPageState extends State<SupplierPage> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Expanded(
+                      Expanded(
                         child: SizedBox(
                           height: 40,
                           width: 50,
@@ -85,68 +86,14 @@ class _SupplierPageState extends State<SupplierPage> {
                 body: ListView.builder(
                   itemCount: suppliers.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      color: white,
-                      child: Container(
-                        // Add any styling properties for the item container here
-                        margin: const EdgeInsets.all(8.0),
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: const BoxDecoration(
-                          color: white,
-                          // borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: gray,
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        suppliers[index]['image'])),
-                                color: orange,
-                                borderRadius: BorderRadius.circular(
-                                    MediaQuery.of(context).size.height),
-                                // color: widget.color ?? orange,
-                              ),
-                              // child: Image.network(
-                              //  ,
-                              //   // fit: BoxFit.cover,
-                              // )
-                            ),
-                            const SizedBox(width: 30),
-                            Expanded(child: Text(suppliers[index]['name'])),
-                            Expanded(
-                                child: Text(
-                                    "${suppliers[index]['reference']} $index")),
-                            Expanded(
-                                child: Text(
-                                    "Quantity : ${suppliers[index]['product_quantity']}")),
-                            Expanded(
-                                child: Text(
-                                    "Location : ${suppliers[index]['location']}")),
-                            Expanded(
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.edit_outlined,
-                                  color: Colors.orange,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
+                    return supplier(
+                        customers[index]['id'].toString(),
+                        customers[index]['name'],
+                        customers[index]['product_quantity'].toString(),
+                        customers[index]['location'],
+                        customers[index]['image'],
+                        customers[index]['reference'],
+                        context);
                   },
                 ),
               )),
