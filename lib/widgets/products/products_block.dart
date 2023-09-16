@@ -25,7 +25,8 @@ class _AllproductState extends State<Allproduct> {
               productsAll[i]['name'],
               "${productsAll[i]['price']} ${company['currency']['symbol']}",
               productsAll[i]['available'] ? 1 : 0,
-              context),
+              context,
+              productsAll[i]['id'].toString()),
       ],
     );
   }
@@ -54,7 +55,8 @@ class _AvailableproductState extends State<Availableproduct> {
               productsAvailable[i]['name'],
               "${productsAvailable[i]['price']} ${company['currency']['symbol']}",
               productsAvailable[i]['available'] ? 1 : 0,
-              context),
+              context,
+              productsAvailable[i]['id'].toString()),
       ],
     );
   }
@@ -83,7 +85,8 @@ class _UnavailableproductState extends State<Unavailableproduct> {
               productsUnavalaible[i]['name'],
               "${productsUnavalaible[i]['price']} ${company['currency']['symbol']}",
               productsUnavalaible[i]['available'] ? 1 : 0,
-              context),
+              context,
+              productsUnavalaible[i]['image'].toString()),
       ],
     );
   }

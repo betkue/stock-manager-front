@@ -6,13 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 
 Widget products(String imagePath, String productName, String price, int state,
-    BuildContext context) {
-  // log(searchProductsController.text);
-  // if (searchProductsController.text.isNotEmpty &&
-  //     !productName.contains(searchProductsController.text)) {
-  //   return Container();
-  // } else {
-  //   }
+    BuildContext context, String id) {
+  if (searchProductsController.text.isNotEmpty &&
+      !productName.contains(searchProductsController.text)) {
+    return Container();
+  }
 
   return Container(
     // color: gray,

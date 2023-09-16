@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
+import 'package:stock_management/widgets/customer/customer.dart';
 
 class CustomerPage extends StatefulWidget {
   const CustomerPage({super.key});
@@ -40,7 +41,7 @@ class _CustomerPageState extends State<CustomerPage> {
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                         Expanded(
+                        Expanded(
                           child: SizedBox(
                             height: 40,
                             width: 50,
@@ -51,10 +52,10 @@ class _CustomerPageState extends State<CustomerPage> {
                                 border: OutlineInputBorder(),
                               ),
                               onChanged: (value) {
-                              setState(() {
-                                searchCustomersController.text = value;
-                              });
-                            },
+                                setState(() {
+                                  searchCustomersController.text = value;
+                                });
+                              },
                             ),
                           ),
                         ),
@@ -85,7 +86,14 @@ class _CustomerPageState extends State<CustomerPage> {
                   body: ListView.builder(
                     itemCount: customers.length,
                     itemBuilder: (context, index) {
-                      return buildItemContainer(index, context);
+                      return customer(
+                          customers[index]['id'].toString(),
+                          customers[index]['name'],
+                          customers[index]['product_quantity'].toString(),
+                          customers[index]['location'],
+                          customers[index]['image'],
+                          customers[index]['reference'],
+                          context);
                     },
                   ))),
         ],

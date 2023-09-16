@@ -80,7 +80,7 @@ class _ProductPageState extends State<ProductPage> {
                               vertical: 10), // Set the button's padding
                         ),
                         child: Text(
-                          "Add product" + searchProductsController.text,
+                          "Add product",
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.black,
@@ -174,11 +174,11 @@ class _ProductPageState extends State<ProductPage> {
 
   Widget determineWidget() {
     if (index == 0) {
-      return const Allproduct();
+      return Allproduct();
     } else if (index == 1) {
-      return const Availableproduct();
+      return Availableproduct();
     } else {
-      return const Unavailableproduct();
+      return Unavailableproduct();
     }
   }
 }

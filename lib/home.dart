@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 import 'package:stock_management/dashboard.dart';
@@ -19,13 +21,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Widget> contian = [
-    const DashBoard(),
-    const ProductPage(),
-    const CustomerPage(),
-    const SupplierPage(),
-    const PurchasePage(),
+    DashBoard(),
+    ProductPage(),
+    CustomerPage(),
+    SupplierPage(),
+    PurchasePage(),
     // Container(),
-    const SalesPage(),
+    SalesPage(),
     AccountPage(),
   ];
 
