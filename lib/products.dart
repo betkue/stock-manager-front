@@ -18,7 +18,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   int index = 0;
   bool load = true;
-  bool details = false;
+  bool details = true;
   changeState(int i) {
     setState(() {
       index = i;
