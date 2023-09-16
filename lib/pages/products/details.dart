@@ -6,6 +6,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 import 'package:stock_management/load_page.dart';
+import 'package:stock_management/widgets/circular_button.dart';
 import 'package:stock_management/widgets/account/account.dart';
 
 class DetailProduct extends StatefulWidget {
@@ -328,10 +329,11 @@ class _DetailProductState extends State<DetailProduct> {
                                                       int index) {
                                                 if (searchController
                                                         .text.isNotEmpty &&
-                                                    !listSeach[index]['name'].toLowerCase()
-                                                        .contains(
-                                                            searchController
-                                                                .text.toLowerCase())) {
+                                                    !listSeach[index]['name']
+                                                        .toLowerCase()
+                                                        .contains(searchController
+                                                            .text
+                                                            .toLowerCase())) {
                                                   return Container();
                                                 } else {
                                                   return ListTile(
@@ -412,89 +414,101 @@ class _DetailProductState extends State<DetailProduct> {
                   ),
                 ),
                 showList
-                    ? InkWell(
-                        onTap: () {
-                          setState(() {
-                            showList = false;
-                          });
-                        },
-                        child: Container(
-                          width: width,
-                          height: height,
-                          color: black.withOpacity(0.6),
-                          child: Center(
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              width: width / 2,
-                              height: width / 2,
-                              color: white,
-                              child: loadList
-                                  ? LoadPage()
-                                  : Column(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(top: 10),
-                                          width: width,
-                                          child: TextField(
-                                            controller: searchListController,
-                                            decoration: InputDecoration(
-                                              hintText: "Search",
-                                              prefixIcon: Icon(Icons.search),
-                                              border: OutlineInputBorder(),
+                    ? Container(
+                        width: width,
+                        height: height,
+                        color: black.withOpacity(0.6),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                                right: 30,
+                                top: 10,
+                                child: CirularButton(
+                                  onClick: () {
+                                    setState(() {
+                                      showList = false;
+                                    });
+                                  },
+                                )),
+                            Center(
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                width: width / 2,
+                                height: width / 2,
+                                color: white,
+                                child: loadList
+                                    ? LoadPage()
+                                    : Column(
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(top: 10),
+                                            width: width,
+                                            child: TextField(
+                                              controller: searchListController,
+                                              decoration: InputDecoration(
+                                                hintText: "Search",
+                                                prefixIcon: Icon(Icons.search),
+                                                border: OutlineInputBorder(),
+                                              ),
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  // searchProductsController.text = value;
+                                                });
+                                              },
                                             ),
-                                            onChanged: (value) {
-                                              setState(() {
-                                                // searchProductsController.text = value;
-                                              });
-                                            },
                                           ),
-                                        ),
-                                        Expanded(
-                                          child: ListView.builder(
-                                              itemCount: listLoad.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                if ((searchListController
-                                                            .text.isNotEmpty &&
-                                                        !listLoad[index]['name'].toLowerCase()
-                                                            .contains(
-                                                                searchListController
-                                                                    .text.toLowerCase())) ||
-                                                    detrmineContainId(
-                                                        listLoad[index]
-                                                            ['id'])) {
-                                                  return Container();
-                                                } else {
-                                                  return ListTile(
-                                                      leading: InkWell(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            listSeach.add(
-                                                                listLoad[
-                                                                    index]);
-                                                          });
-                                                        },
-                                                        child: Icon(Icons.add),
-                                                      ),
-                                                      trailing: Text(
-                                                        '${listLoad[index]['price']} ' +
-                                                            company['currency']
-                                                                ['symbol'],
-                                                        style: TextStyle(
-                                                            color: Colors.green,
-                                                            fontSize: 15),
-                                                      ),
-                                                      title: Text(
+                                          Expanded(
+                                            child: ListView.builder(
+                                                itemCount: listLoad.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  if ((searchListController.text
+                                                              .isNotEmpty &&
+                                                          !listLoad[index]
+                                                                  ['name']
+                                                              .toLowerCase()
+                                                              .contains(
+                                                                  searchListController
+                                                                      .text
+                                                                      .toLowerCase())) ||
+                                                      detrmineContainId(
                                                           listLoad[index]
-                                                              ['name']));
-                                                }
-                                              }),
-                                        )
-                                      ],
-                                    ),
+                                                              ['id'])) {
+                                                    return Container();
+                                                  } else {
+                                                    return ListTile(
+                                                        leading: InkWell(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              listSeach.add(
+                                                                  listLoad[
+                                                                      index]);
+                                                            });
+                                                          },
+                                                          child:
+                                                              Icon(Icons.add),
+                                                        ),
+                                                        trailing: Text(
+                                                          '${listLoad[index]['price']} ' +
+                                                              company['currency']
+                                                                  ['symbol'],
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.green,
+                                                              fontSize: 15),
+                                                        ),
+                                                        title: Text(
+                                                            listLoad[index]
+                                                                ['name']));
+                                                  }
+                                                }),
+                                          )
+                                        ],
+                                      ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       )
                     : Container()
