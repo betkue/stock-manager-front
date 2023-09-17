@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:stock_manager/constant.dart';
 import 'package:stock_manager/load_page.dart';
+import 'package:stock_manager/pages/purshases/details.dart';
 import 'package:stock_manager/widgets/purchase/purchase_block.dart';
 
 class PurchasePage extends StatefulWidget {
@@ -16,6 +17,8 @@ class PurchasePage extends StatefulWidget {
 
 class _PurchasePageState extends State<PurchasePage> {
   int index = 0;
+
+  bool details = false;
   changeState(int i) {
     setState(() {
       index = i;
@@ -47,7 +50,17 @@ class _PurchasePageState extends State<PurchasePage> {
               child: Row(children: [
                 Expanded(
                     flex: 8,
-                    child: Scaffold(
+                    child:details
+                        ? DetailPurshase(
+                            id: id_purshase,
+                            setParent: setStatePage,
+                            back: () {
+                              setState(() {
+                                details = false;
+                              });
+                            },
+                          )
+                        :  Scaffold(
                       appBar: AppBar(
                         backgroundColor: white,
                         toolbarHeight: 80,
@@ -89,7 +102,10 @@ class _PurchasePageState extends State<PurchasePage> {
                             const SizedBox(width: 18),
                             ElevatedButton(
                               onPressed: () {
-                                // Handle button press for "Add product"
+                                 setState(() {
+                                        id_purshase = null;
+                                        details = true;
+                                      });
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: white,
