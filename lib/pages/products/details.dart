@@ -59,7 +59,11 @@ class _DetailProductState extends State<DetailProduct> {
   pickImageFromGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     setState(() {
-      imageFile = pickedFile?.path;
+      if (pickedFile != null) {
+        imageFile = pickedFile.path;
+        _pickImage = false;
+      }
+
       _pickImage = false;
     });
     // var permission;
@@ -187,94 +191,111 @@ class _DetailProductState extends State<DetailProduct> {
                                 child: ListView(
                                   // mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    InkWell(
+                                    Center(
+                                        child: InkWell(
                                       onTap: () {
                                         setState(() {
                                           pickImageFromGallery();
                                         });
                                       },
-                                      child: Center(
-                                        child: (imageFile == null)
-                                            ? Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical:
-                                                        media.height / 40),
-                                                width: media.width / 5,
-                                                height: media.width / 5,
-                                                child: DottedBorder(
-                                                  borderType: BorderType.RRect,
-                                                  color: black,
-                                                  borderPadding:
-                                                      EdgeInsets.all(6),
-                                                  dashPattern: [8, 8],
-                                                  radius: Radius.circular(12),
-                                                  padding: EdgeInsets.all(6),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                12)),
-                                                    child: SizedBox(
-                                                      height: media.width / 5,
-                                                      width: media.width / 5,
-
-                                                      child: Center(
-                                                        child: DottedBorder(
-                                                          borderType:
-                                                              BorderType.RRect,
-                                                          radius:
+                                      child: (product['image'] != null &&
+                                              imageFile == null)
+                                          ? Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: media.height / 40),
+                                              width: media.width / 5,
+                                              height: media.width / 5,
+                                              decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(12)),
+                                                  image: DecorationImage(
+                                                      image: NetworkImage(
+                                                        product['image'],
+                                                      ),
+                                                      fit: BoxFit.cover)))
+                                          : (imageFile == null)
+                                              ? Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical:
+                                                          media.height / 40),
+                                                  width: media.width / 5,
+                                                  height: media.width / 5,
+                                                  child: DottedBorder(
+                                                    borderType:
+                                                        BorderType.RRect,
+                                                    color: black,
+                                                    borderPadding:
+                                                        EdgeInsets.all(6),
+                                                    dashPattern: [8, 8],
+                                                    radius: Radius.circular(12),
+                                                    padding: EdgeInsets.all(6),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.all(
                                                               Radius.circular(
-                                                                  12),
-                                                          padding:
-                                                              EdgeInsets.all(6),
-                                                          dashPattern: [8, 8],
-                                                          color: gray,
-                                                          child: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            12)),
-                                                            child: SizedBox(
-                                                              height:
-                                                                  media.width /
-                                                                      8,
-                                                              width:
-                                                                  media.width /
-                                                                      8,
-                                                              child: Center(
-                                                                child: Icon(
-                                                                  Icons.add,
-                                                                  color: orange,
+                                                                  12)),
+                                                      child: SizedBox(
+                                                        height: media.width / 5,
+                                                        width: media.width / 5,
+
+                                                        child: Center(
+                                                          child: DottedBorder(
+                                                            borderType:
+                                                                BorderType
+                                                                    .RRect,
+                                                            radius:
+                                                                Radius.circular(
+                                                                    12),
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    6),
+                                                            dashPattern: [8, 8],
+                                                            color: gray,
+                                                            child: ClipRRect(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          12)),
+                                                              child: SizedBox(
+                                                                height: media
+                                                                        .width /
+                                                                    8,
+                                                                width: media
+                                                                        .width /
+                                                                    8,
+                                                                child: Center(
+                                                                  child: Icon(
+                                                                    Icons.add,
+                                                                    color:
+                                                                        orange,
+                                                                  ),
                                                                 ),
+                                                                // color: Colors.amber,
                                                               ),
-                                                              // color: Colors.amber,
                                                             ),
                                                           ),
                                                         ),
+                                                        // color: Colors.amber,
                                                       ),
-                                                      // color: Colors.amber,
                                                     ),
                                                   ),
-                                                ),
-                                              )
-                                            : Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical:
-                                                        media.height / 40),
-                                                width: media.width / 5,
-                                                height: media.width / 5,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                12)),
-                                                    image: DecorationImage(
-                                                        image: FileImage(
-                                                            File(imageFile)),
-                                                        fit: BoxFit.cover))),
-                                      ),
-                                    ),
+                                                )
+                                              : Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical:
+                                                          media.height / 40),
+                                                  width: media.width / 5,
+                                                  height: media.width / 5,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  12)),
+                                                      image: DecorationImage(
+                                                          image: FileImage(
+                                                              File(imageFile)),
+                                                          fit: BoxFit.cover))),
+                                    )),
                                     Container(
                                       width: media.width,
                                       child: Text(
