@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 import 'package:stock_management/load_page.dart';
+import 'package:stock_management/pages/suppliers/details.dart';
 import 'package:stock_management/widgets/supplier/supplier.dart';
 
 class SupplierPage extends StatefulWidget {
@@ -15,9 +16,9 @@ class SupplierPage extends StatefulWidget {
 }
 
 class _SupplierPageState extends State<SupplierPage> {
-
+  bool details = true;
   bool load = true;
-      @override
+  @override
   void initState() {
     Timer(
         Duration(seconds: 5),
@@ -26,97 +27,111 @@ class _SupplierPageState extends State<SupplierPage> {
             }));
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-
     return load
         ? LoadPage()
         : Scaffold(
-      backgroundColor: gray,
-      body: SafeArea(
-          child: Row(
-        children: [
-          Expanded(
-              flex: 8,
-              child: Scaffold(
-                appBar: AppBar(
-                  backgroundColor: white,
-                  toolbarHeight: 80,
-                  elevation: 0,
-                  automaticallyImplyLeading: false,
-                  actions: const [
-                    InkWell(
-                      child: Icon(
-                        Icons.help,
-                        color: black,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    )
-                  ],
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: 40,
-                          width: 50,
-                          child: TextField(
-                            controller: searchSuppliersController,
-                            decoration: InputDecoration(
-                              hintText: "Search",
-                              prefixIcon: Icon(Icons.search),
-                              border: OutlineInputBorder(),
-                            ),
-                            onChanged: (value) {
+            backgroundColor: gray,
+            body: SafeArea(
+                child: Row(
+              children: [
+                Expanded(
+                    flex: 8,
+                    child: details
+                        ? DetailSupplier(
+                            id: id_supplier,
+                            back: () {
                               setState(() {
-                                // searchSuppliersController.text = value;
+                                details = false;
                               });
                             },
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 18),
-                      ElevatedButton(
-                        onPressed: () {
-                          // Handle button press for "Add product"
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: white,
-                          shadowColor: orange,
-                          surfaceTintColor: orange,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 10), // Set the button's padding
-                        ),
-                        child: const Text(
-                          "Add Supplier",
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: black,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                body: ListView.builder(
-                  itemCount: suppliers.length,
-                  itemBuilder: (context, index) {
-                    return supplier(
-                        customers[index]['id'].toString(),
-                        customers[index]['name'],
-                        customers[index]['product_quantity'].toString(),
-                        customers[index]['location'],
-                        customers[index]['image'],
-                        customers[index]['reference'],
-                        context);
-                  },
-                ),
-              )),
-        ],
-      )),
-    );
+                          )
+                        : Scaffold(
+                            appBar: AppBar(
+                              backgroundColor: white,
+                              toolbarHeight: 80,
+                              elevation: 0,
+                              automaticallyImplyLeading: false,
+                              actions: const [
+                                InkWell(
+                                  child: Icon(
+                                    Icons.help,
+                                    color: black,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                )
+                              ],
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 40,
+                                      width: 50,
+                                      child: TextField(
+                                        controller: searchSuppliersController,
+                                        decoration: InputDecoration(
+                                          hintText: "Search",
+                                          prefixIcon: Icon(Icons.search),
+                                          border: OutlineInputBorder(),
+                                        ),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            // searchSuppliersController.text = value;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 18),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        id_supplier = null;
+                                        details = true;
+                                      });
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: white,
+                                      shadowColor: orange,
+                                      surfaceTintColor: orange,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20,
+                                          vertical:
+                                              10), // Set the button's padding
+                                    ),
+                                    child: const Text(
+                                      "Add Supplier",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: black,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            body: ListView.builder(
+                              itemCount: suppliers.length,
+                              itemBuilder: (context, index) {
+                                return supplier(
+                                    customers[index]['id'].toString(),
+                                    customers[index]['name'],
+                                    customers[index]['product_quantity']
+                                        .toString(),
+                                    customers[index]['location'],
+                                    customers[index]['image'],
+                                    customers[index]['reference'],
+                                    context);
+                              },
+                            ),
+                          )),
+              ],
+            )),
+          );
   }
 }

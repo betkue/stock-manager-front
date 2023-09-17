@@ -82,6 +82,7 @@ dynamic user_password;
 
 String? id_product;
 String? id_customer;
+String? id_supplier;
 Map<String, dynamic> dashboard = {
   "time": DateTime.now(),
   "count_of_all_product": 20000,
@@ -279,6 +280,7 @@ List<Map<String, dynamic>> salesComplete = [
 
 Map<String, dynamic> product_single = {};
 Map<String, dynamic> customer_single = {};
+Map<String, dynamic> supplier_single = {};
 
 TextEditingController searchProductsController = TextEditingController();
 TextEditingController searchPurchasesController = TextEditingController();

@@ -12,16 +12,16 @@ import 'package:stock_management/widgets/circular_button.dart';
 import 'package:stock_management/widgets/account/account.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class DetailCustomer extends StatefulWidget {
+class DetailSupplier extends StatefulWidget {
   String? id;
   Function back;
-  DetailCustomer({super.key, this.id, required this.back});
+  DetailSupplier({super.key, this.id, required this.back});
 
   @override
-  State<DetailCustomer> createState() => _DetailCustomerState();
+  State<DetailSupplier> createState() => _DetailSupplierState();
 }
 
-class _DetailCustomerState extends State<DetailCustomer> {
+class _DetailSupplierState extends State<DetailSupplier> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController refController = TextEditingController();
@@ -169,7 +169,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
                 ),
               ),
               title: Text(
-                widget.id != null ? customer_single['name'] : "New Customer",
+                widget.id != null ? supplier_single['name'] : "New Supplier",
                 style: TextStyle(color: black),
               ),
             ),
@@ -196,7 +196,8 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                           pickImageFromGallery();
                                         });
                                       },
-                                      child: (customer_single['image'] != null &&
+                                      child: (supplier_single['image'] !=
+                                                  null &&
                                               imageFile == null)
                                           ? Container(
                                               margin: EdgeInsets.symmetric(
@@ -204,11 +205,13 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                               width: media.width / 5,
                                               height: media.width / 5,
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(12)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(12)),
                                                   image: DecorationImage(
                                                       image: NetworkImage(
-                                                        customer_single['image'],
+                                                        supplier_single[
+                                                            'image'],
                                                       ),
                                                       fit: BoxFit.cover)))
                                           : (imageFile == null)
@@ -285,10 +288,8 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                                   width: media.width / 5,
                                                   height: media.width / 5,
                                                   decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  12)),
+                                                      borderRadius: BorderRadius.all(
+                                                          Radius.circular(12)),
                                                       image: DecorationImage(
                                                           image: FileImage(
                                                               File(imageFile)),

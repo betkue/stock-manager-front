@@ -92,7 +92,7 @@ class _CustomerPageState extends State<CustomerPage> {
                                   ElevatedButton(
                                     onPressed: () {
                                       setState(() {
-                                        id_product = null;
+                                        id_customer = null;
                                         details = true;
                                       });
                                     },
