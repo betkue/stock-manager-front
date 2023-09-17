@@ -240,13 +240,33 @@ class _PurchasePageState extends State<PurchasePage> {
 
   Widget determineWidget() {
     if (index == 0) {
-      return AllPurchase();
+      return AllPurchase(
+         setParent: () {
+          details = true;
+          setStatePage();
+        },
+      );
     } else if (index == 1) {
-      return PendingPurchase();
+      return PendingPurchase(
+         setParent: () {
+          details = true;
+          setStatePage();
+        },
+      );
     } else if (index == 2) {
-      return IncompletePurchase();
+      return IncompletePurchase(
+         setParent: () {
+          details = true;
+          setStatePage();
+        },
+      );
     } else {
-      return CompletePurchase();
+      return CompletePurchase(
+         setParent: () {
+          details = true;
+          setStatePage();
+        },
+      );
     }
   }
 }

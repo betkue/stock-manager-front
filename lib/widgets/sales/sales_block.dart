@@ -3,7 +3,8 @@ import 'package:stock_manager/constant.dart';
 import 'package:stock_manager/widgets/sales/sale.dart';
 
 class AllSales extends StatefulWidget {
-  const AllSales({super.key});
+  Function setParent;
+  AllSales({super.key, required this.setParent});
 
   @override
   State<AllSales> createState() => _AllSalesState();
@@ -26,14 +27,17 @@ class _AllSalesState extends State<AllSales> {
               "${salesAll[i]['price']} ${company['currency']['symbol']}",
               salesAll[i]['shipping_state'],
               salesAll[i]['paiement_state'],
-              context),
+              context,
+              salesAll[i]['id'].toString(),
+              widget.setParent),
       ],
     );
   }
 }
 
 class PendingSales extends StatefulWidget {
-  const PendingSales({super.key});
+  Function setParent;
+  PendingSales({super.key, required this.setParent});
 
   @override
   State<PendingSales> createState() => _PendingStateSales();
@@ -54,16 +58,19 @@ class _PendingStateSales extends State<PendingSales> {
               salesPending[i]['image'],
               salesPending[i]['name'],
               "${salesPending[i]['price']} ${company['currency']['symbol']}",
-              salesAll[i]['shipping_state'],
+              salesPending[i]['shipping_state'],
               salesPending[i]['paiement_state'],
-              context),
+              context,
+              salesPending[i]['id'].toString(),
+              widget.setParent),
       ],
     );
   }
 }
 
 class CompleteSales extends StatefulWidget {
-  const CompleteSales({super.key});
+  Function setParent;
+  CompleteSales({super.key, required this.setParent});
 
   @override
   State<CompleteSales> createState() => _CompleteSalesState();
@@ -86,14 +93,17 @@ class _CompleteSalesState extends State<CompleteSales> {
               "${salesComplete[i]['price']} ${company['currency']['symbol']}",
               salesComplete[i]['shipping_state'],
               salesComplete[i]['paiement_state'],
-              context),
+              context,
+              salesComplete[i]['id'].toString(),
+              widget.setParent),
       ],
     );
   }
 }
 
 class IncompleteSales extends StatefulWidget {
-  const IncompleteSales({super.key});
+  Function setParent;
+  IncompleteSales({super.key, required this.setParent});
 
   @override
   State<IncompleteSales> createState() => _IncompleteSalesState();
@@ -116,7 +126,9 @@ class _IncompleteSalesState extends State<IncompleteSales> {
               "${salesIncomplete[i]['price']} ${company['currency']['symbol']}",
               salesIncomplete[i]['shipping_state'],
               salesIncomplete[i]['paiement_state'],
-              context),
+              context,
+              salesIncomplete[i]['id'].toString(),
+              widget.setParent),
       ],
     );
   }

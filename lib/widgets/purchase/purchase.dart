@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_manager/constant.dart';
 
 Widget purchase(String imagePath, String productName, String price, int state,
-    int paiement_state, BuildContext context) {
+    int paiement_state, BuildContext context,String id, Function setParent) {
   if (searchPurchasesController.text.isNotEmpty &&
       !productName
           .toLowerCase()
@@ -73,7 +73,12 @@ Widget purchase(String imagePath, String productName, String price, int state,
               ),
             ),
             Expanded(
-              child: Icon(Icons.edit_document),
+              child: InkWell(
+                onTap: () {
+                  id_purshase = id;
+                setParent();
+                },
+                child: Icon(Icons.edit_document)),
             ),
             // SizedBox(width: 10),
           ],

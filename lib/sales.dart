@@ -241,13 +241,33 @@ class _SalesPageState extends State<SalesPage> {
 
   Widget determineWidget() {
     if (index == 0) {
-      return AllSales();
+      return AllSales(
+        setParent: () {
+          details = true;
+          setStatePage();
+        },
+      );
     } else if (index == 1) {
-      return PendingSales();
+      return PendingSales(
+        setParent: () {
+          details = true;
+          setStatePage();
+        },
+      );
     } else if (index == 2) {
-      return IncompleteSales();
+      return IncompleteSales(
+        setParent: () {
+          details = true;
+          setStatePage();
+        },
+      );
     } else {
-      return CompleteSales();
+      return CompleteSales(
+        setParent: () {
+          details = true;
+          setStatePage();
+        },
+      );
     }
   }
 }
