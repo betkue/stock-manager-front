@@ -40,7 +40,9 @@ Container inputContain(
           obscureText: obscure,
           readOnly: enable,
           // maxLength: 30,
-          decoration: inputDecoration(hintText,),
+          decoration: inputDecoration(
+            "Enter $hintText",
+          ),
           validator: (value) {
             if (value!.isEmpty && !obscure) {
               return 'Please enter the $hintText.';

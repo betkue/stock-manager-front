@@ -12,21 +12,19 @@ import 'package:stock_management/widgets/circular_button.dart';
 import 'package:stock_management/widgets/account/account.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class DetailProduct extends StatefulWidget {
+class DetailCustomer extends StatefulWidget {
   String? id;
   Function back;
-  DetailProduct({super.key, this.id, required this.back});
+  DetailCustomer({super.key, this.id, required this.back});
 
   @override
-  State<DetailProduct> createState() => _DetailProductState();
+  State<DetailCustomer> createState() => _DetailCustomerState();
 }
 
-class _DetailProductState extends State<DetailProduct> {
+class _DetailCustomerState extends State<DetailCustomer> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController refController = TextEditingController();
-  TextEditingController quantityController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController searchController = TextEditingController();
   TextEditingController searchListController = TextEditingController();
@@ -171,7 +169,7 @@ class _DetailProductState extends State<DetailProduct> {
                 ),
               ),
               title: Text(
-                widget.id != null ? product_single['name'] : "New PRODUCT",
+                widget.id != null ? customer_single['name'] : "New Customer",
                 style: TextStyle(color: black),
               ),
             ),
@@ -346,7 +344,7 @@ class _DetailProductState extends State<DetailProduct> {
                                                 label('Product name'),
                                                 inputContain(
                                                     width,
-                                                    'product name',
+                                                    'Enter the product name',
                                                     nameController,
                                                     (String value) {
                                                   setState(() {
@@ -359,7 +357,7 @@ class _DetailProductState extends State<DetailProduct> {
                                                 label('Reference'),
                                                 inputContain(
                                                     width,
-                                                    'product reference',
+                                                    'Enter the product reference',
                                                     refController,
                                                     (String value) {
                                                   setState(() {
@@ -369,36 +367,10 @@ class _DetailProductState extends State<DetailProduct> {
                                                   });
                                                 }, false, false),
                                                 const SizedBox(height: 20),
-                                                label(' Quantity'),
-                                                inputContain(
-                                                    width,
-                                                    'product quantity',
-                                                    quantityController,
-                                                    (String value) {
-                                                  quantityController.text =
-                                                      value;
-                                                  user_password =
-                                                      quantityController.text;
-                                                }, false, false),
-                                                const SizedBox(height: 20),
-                                                label(' Unit price'),
-                                                inputContain(
-                                                    width,
-                                                    'unit price',
-                                                    priceController,
-                                                    (String value) {
-                                                  setState(() {
-                                                    priceController.text =
-                                                        value;
-                                                    user_phone =
-                                                        priceController.text;
-                                                  });
-                                                }, false, false),
-                                                const SizedBox(height: 20),
                                                 label(' Location'),
                                                 inputContain(
                                                     width,
-                                                    'product location',
+                                                    ' Enter the product location',
                                                     locationController,
                                                     (String value) {
                                                   setState(() {
@@ -412,7 +384,7 @@ class _DetailProductState extends State<DetailProduct> {
                                                 Row(
                                                   children: [
                                                     label(
-                                                        ' Supplers (${listSeach.length})'),
+                                                        ' Products (${listSeach.length})'),
                                                     InkWell(
                                                       onTap: () {
                                                         setState(() {
@@ -478,7 +450,7 @@ class _DetailProductState extends State<DetailProduct> {
                                                   margin:
                                                       EdgeInsets.only(top: 10),
                                                   width: width,
-                                                  height: width / 10,
+                                                  height: width / 5,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color: white,
