@@ -229,7 +229,7 @@ List<Map<String, dynamic>> purchasesComplete = [
   },
 ];
 
-List<Map<String, dynamic>> salesPendingsalesAll = [
+List<Map<String, dynamic>> salesAll = [
   {
     "image": "https://picsum.photos/250?image=9",
     "name": "Image test stock manager",
