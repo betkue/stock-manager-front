@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 
 Widget customer(String id, String name, String quantity, String location,
-    String image, String ref, BuildContext context) {
+    String image, String ref, BuildContext context, Function setParent) {
   if (searchCustomersController.text.isNotEmpty &&
-      !name.toLowerCase().contains(searchCustomersController.text.toLowerCase())) {
+      !name
+          .toLowerCase()
+          .contains(searchCustomersController.text.toLowerCase())) {
     return Container();
   }
   return Container(
@@ -47,7 +49,10 @@ Widget customer(String id, String name, String quantity, String location,
           Expanded(child: Text("Location : $location")),
           Expanded(
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                id_customer = id;
+                setParent();
+              },
               icon: const Icon(
                 Icons.edit_outlined,
                 color: Colors.orange,
@@ -58,5 +63,4 @@ Widget customer(String id, String name, String quantity, String location,
       ),
     ),
   );
-
 }

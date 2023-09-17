@@ -15,7 +15,10 @@ import 'package:permission_handler/permission_handler.dart';
 class DetailSupplier extends StatefulWidget {
   String? id;
   Function back;
-  DetailSupplier({super.key, this.id, required this.back});
+
+  Function setParent;
+  DetailSupplier(
+      {super.key, this.id, required this.back, required this.setParent});
 
   @override
   State<DetailSupplier> createState() => _DetailSupplierState();
@@ -169,7 +172,9 @@ class _DetailSupplierState extends State<DetailSupplier> {
                 ),
               ),
               title: Text(
-                widget.id != null ? supplier_single['name'] : "New Supplier",
+                widget.id != null
+                    ? supplier_single['name'] ?? ""
+                    : "New Supplier",
                 style: TextStyle(color: black),
               ),
             ),

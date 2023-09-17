@@ -18,11 +18,15 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   int index = 0;
   bool load = true;
-  bool details = true;
+  bool details = false;
   changeState(int i) {
     setState(() {
       index = i;
     });
+  }
+
+  setStatePage() {
+    setState(() {});
   }
 
   @override
@@ -48,6 +52,7 @@ class _ProductPageState extends State<ProductPage> {
                     child: details
                         ? DetailProduct(
                             id: id_product,
+                            setParent: setStatePage,
                             back: () {
                               setState(() {
                                 details = false;
@@ -212,11 +217,26 @@ class _ProductPageState extends State<ProductPage> {
 
   Widget determineWidget() {
     if (index == 0) {
-      return Allproduct();
+      return Allproduct(
+        setParent: () {
+          details = true;
+          setStatePage();
+        },
+      );
     } else if (index == 1) {
-      return Availableproduct();
+      return Availableproduct(
+        setParent: () {
+          details = true;
+          setStatePage();
+        },
+      );
     } else {
-      return Unavailableproduct();
+      return Unavailableproduct(
+        setParent: () {
+          details = true;
+          setStatePage();
+        },
+      );
     }
   }
 }

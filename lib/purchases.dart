@@ -21,6 +21,9 @@ class _PurchasePageState extends State<PurchasePage> {
       index = i;
     });
   }
+    setStatePage() {
+    setState(() {});
+  }
   bool load = true;
       @override
   void initState() {

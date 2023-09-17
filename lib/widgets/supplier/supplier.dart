@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 
 Widget supplier(String id, String name, String quantity, String location,
-    String image, String ref,BuildContext context) {
+    String image, String ref, BuildContext context, Function setParent) {
   if (searchSuppliersController.text.isNotEmpty &&
-      !name.toLowerCase().contains(searchSuppliersController.text.toLowerCase())) {
+      !name
+          .toLowerCase()
+          .contains(searchSuppliersController.text.toLowerCase())) {
     return Container();
   }
   return Container(
@@ -47,7 +49,10 @@ Widget supplier(String id, String name, String quantity, String location,
           Expanded(child: Text("Location : $location")),
           Expanded(
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                id_supplier = id;
+                setParent();
+              },
               icon: const Icon(
                 Icons.edit_outlined,
                 color: Colors.orange,

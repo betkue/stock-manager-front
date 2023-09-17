@@ -16,8 +16,12 @@ class SupplierPage extends StatefulWidget {
 }
 
 class _SupplierPageState extends State<SupplierPage> {
-  bool details = true;
+  bool details = false;
   bool load = true;
+  setStatePage() {
+    setState(() {});
+  }
+
   @override
   void initState() {
     Timer(
@@ -42,6 +46,7 @@ class _SupplierPageState extends State<SupplierPage> {
                     child: details
                         ? DetailSupplier(
                             id: id_supplier,
+                            setParent: setStatePage,
                             back: () {
                               setState(() {
                                 details = false;
@@ -119,14 +124,19 @@ class _SupplierPageState extends State<SupplierPage> {
                               itemCount: suppliers.length,
                               itemBuilder: (context, index) {
                                 return supplier(
-                                    customers[index]['id'].toString(),
-                                    customers[index]['name'],
-                                    customers[index]['product_quantity']
-                                        .toString(),
-                                    customers[index]['location'],
-                                    customers[index]['image'],
-                                    customers[index]['reference'],
-                                    context);
+                                  customers[index]['id'].toString(),
+                                  customers[index]['name'],
+                                  customers[index]['product_quantity']
+                                      .toString(),
+                                  customers[index]['location'],
+                                  customers[index]['image'],
+                                  customers[index]['reference'],
+                                  context,
+                                  () {
+                                    details = true;
+                                    setStatePage();
+                                  },
+                                );
                               },
                             ),
                           )),

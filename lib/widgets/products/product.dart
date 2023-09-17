@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:stock_management/constant.dart';
 
 Widget products(String imagePath, String productName, String price, int state,
-    BuildContext context, String id) {
+    BuildContext context, String id, Function setParent) {
   if (searchProductsController.text.isNotEmpty &&
-      !productName.toLowerCase().contains(searchProductsController.text.toLowerCase())) {
+      !productName
+          .toLowerCase()
+          .contains(searchProductsController.text.toLowerCase())) {
     return Container();
   }
 
@@ -49,7 +51,14 @@ Widget products(String imagePath, String productName, String price, int state,
                     color: state == 1 ? black : orange),
               ),
             ),
-            Icon(Icons.edit_outlined, color: state == 1 ? orange : black),
+            InkWell(
+              onTap: () {
+                id_product = id;
+                setParent();
+              },
+              child:
+                  Icon(Icons.edit_outlined, color: state == 1 ? orange : black),
+            ),
             SizedBox(width: 10),
           ],
         ),

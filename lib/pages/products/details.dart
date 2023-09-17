@@ -15,7 +15,8 @@ import 'package:permission_handler/permission_handler.dart';
 class DetailProduct extends StatefulWidget {
   String? id;
   Function back;
-  DetailProduct({super.key, this.id, required this.back});
+  Function setParent;
+  DetailProduct({super.key, this.id, required this.back, required this.setParent});
 
   @override
   State<DetailProduct> createState() => _DetailProductState();
@@ -171,7 +172,7 @@ class _DetailProductState extends State<DetailProduct> {
                 ),
               ),
               title: Text(
-                widget.id != null ? product_single['name'] : "New PRODUCT",
+                widget.id != null ? product_single['name']??"": "New PRODUCT",
                 style: TextStyle(color: black),
               ),
             ),
