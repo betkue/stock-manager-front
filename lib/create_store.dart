@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/widgets/input_form.dart';
+import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/widgets/input_form.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'info_page.dart';
 
@@ -62,7 +62,7 @@ class CreateStore extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                          // Store logo
+                            // Store logo
                             const Padding(
                               padding: EdgeInsets.symmetric(vertical: 4),
                               child: Text(
@@ -148,7 +148,7 @@ class CreateStore extends StatelessWidget {
                                 ),
                               ),
                             ),*/
-                            // description 
+                            // description
                             const SizedBox(height: 100),
                             const Padding(
                               padding: EdgeInsets.symmetric(vertical: 4),

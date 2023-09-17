@@ -3,9 +3,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
+import 'package:stock_manager/constant.dart';
 import 'package:d_chart/d_chart.dart';
-import 'package:stock_management/load_page.dart';
+import 'package:stock_manager/load_page.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});

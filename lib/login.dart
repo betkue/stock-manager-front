@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/home.dart';
-import 'package:stock_management/signin.dart';
-import 'package:stock_management/widgets/two_column.dart';
+import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/home.dart';
+import 'package:stock_manager/signin.dart';
+import 'package:stock_manager/widgets/two_column.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -107,8 +107,8 @@ class _LogInState extends State<LogIn> {
               height: 47,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Home()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
                 },
                 style: ElevatedButton.styleFrom(
                   //<-- SEE HERE

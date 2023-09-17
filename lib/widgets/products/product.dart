@@ -3,7 +3,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
+import 'package:stock_manager/constant.dart';
 
 Widget products(String imagePath, String productName, String price, int state,
     BuildContext context, String id, Function setParent) {

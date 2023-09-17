@@ -3,10 +3,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/load_page.dart';
-import 'package:stock_management/pages/suppliers/details.dart';
-import 'package:stock_management/widgets/supplier/supplier.dart';
+import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/load_page.dart';
+import 'package:stock_manager/pages/suppliers/details.dart';
+import 'package:stock_manager/widgets/supplier/supplier.dart';
 
 class SupplierPage extends StatefulWidget {
   const SupplierPage({super.key});

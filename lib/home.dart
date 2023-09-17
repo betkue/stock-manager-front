@@ -1,16 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/dashboard.dart';
-import 'package:stock_management/menu.dart';
-import 'package:stock_management/widgets/profile.dart';
-import 'package:stock_management/products.dart';
-import 'package:stock_management/customers.dart';
-import 'package:stock_management/suppliers.dart';
-import 'package:stock_management/purchases.dart';
-import 'package:stock_management/sales.dart';
-import 'package:stock_management/profile.dart';
+import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/dashboard.dart';
+import 'package:stock_manager/menu.dart';
+import 'package:stock_manager/widgets/profile.dart';
+import 'package:stock_manager/products.dart';
+import 'package:stock_manager/customers.dart';
+import 'package:stock_manager/suppliers.dart';
+import 'package:stock_manager/purchases.dart';
+import 'package:stock_manager/sales.dart';
+import 'package:stock_manager/profile.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

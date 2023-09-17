@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/widgets/purchase/purchase.dart';
+import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/widgets/purchase/purchase.dart';
 
 class AllPurchase extends StatefulWidget {
   const AllPurchase({super.key});

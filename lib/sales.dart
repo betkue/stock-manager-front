@@ -3,9 +3,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/load_page.dart';
-import 'package:stock_management/widgets/sales/sales_block.dart';
+import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/load_page.dart';
+import 'package:stock_manager/widgets/sales/sales_block.dart';
 
 class SalesPage extends StatefulWidget {
   const SalesPage({super.key});

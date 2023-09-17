@@ -3,8 +3,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/home.dart';
+import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/home.dart';
 import 'package:window_size/window_size.dart';
 
 void main() {

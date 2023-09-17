@@ -6,10 +6,10 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/load_page.dart';
-import 'package:stock_management/widgets/circular_button.dart';
-import 'package:stock_management/widgets/account/account.dart';
+import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/load_page.dart';
+import 'package:stock_manager/widgets/circular_button.dart';
+import 'package:stock_manager/widgets/account/account.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class DetailSupplier extends StatefulWidget {

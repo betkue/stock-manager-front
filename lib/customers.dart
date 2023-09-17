@@ -3,10 +3,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/load_page.dart';
-import 'package:stock_management/pages/customers/details.dart';
-import 'package:stock_management/widgets/customer/customer.dart';
+import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/load_page.dart';
+import 'package:stock_manager/pages/customers/details.dart';
+import 'package:stock_manager/widgets/customer/customer.dart';
 
 class CustomerPage extends StatefulWidget {
   const CustomerPage({super.key});

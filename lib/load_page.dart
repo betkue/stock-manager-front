@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
+import 'package:stock_manager/constant.dart';
 
 class LoadPage extends StatelessWidget {
   const LoadPage({super.key});

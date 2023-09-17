@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
+import 'package:stock_manager/constant.dart';
 
 Widget customer(String id, String name, String quantity, String location,
     String image, String ref, BuildContext context, Function setParent) {

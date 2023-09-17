@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
+import 'package:stock_manager/constant.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -12,7 +12,6 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: const Column(),
       drawer: Drawer(
         backgroundColor: backgroundColor,

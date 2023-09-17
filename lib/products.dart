@@ -3,10 +3,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/load_page.dart';
-import 'package:stock_management/pages/products/details.dart';
-import 'package:stock_management/widgets/products/products_block.dart';
+import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/load_page.dart';
+import 'package:stock_manager/pages/products/details.dart';
+import 'package:stock_manager/widgets/products/products_block.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
+import 'package:stock_manager/constant.dart';
 
 class InfoPage extends StatelessWidget {
   const InfoPage({super.key});

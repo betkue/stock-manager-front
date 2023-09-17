@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/widgets/products/product.dart';
+import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/widgets/products/product.dart';
 
 class Allproduct extends StatefulWidget {
   Function setParent;
