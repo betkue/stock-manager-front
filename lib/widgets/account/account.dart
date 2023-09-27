@@ -20,7 +20,8 @@ Container inputContain(
         TextEditingController controller,
         dynamic onchange,
         bool obscure,
-        bool enable) =>
+        bool enable,
+        {TextInputType textInputType = TextInputType.text}) =>
     Container(
       width: width / 4.5,
       // height: 37,
@@ -34,6 +35,7 @@ Container inputContain(
           maxLines: 1,
           cursorColor: black,
           controller: controller,
+          keyboardType: textInputType,
           onChanged: (value) {
             onchange(value);
           },

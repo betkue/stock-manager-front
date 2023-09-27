@@ -284,8 +284,8 @@ List<Map<String, dynamic>> salesComplete = [
 Map<String, dynamic> product_single = {
   "name": "Product Name",
   "refernce": "Product Name",
-  "quantity": "Product Name",
-  "price": "Product Name",
+  "quantity": "56",
+  "price": "1344",
   "location": "Product Name",
   "description":"Description"
 };

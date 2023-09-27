@@ -394,7 +394,9 @@ class _DetailProductState extends State<DetailProduct> {
                                                       value;
                                                   user_password =
                                                       quantityController.text;
-                                                }, false, false),
+                                                }, false, false,
+                                                    textInputType:
+                                                        TextInputType.number),
                                                 const SizedBox(height: 20),
                                                 label(' Unit price'),
                                                 inputContain(
@@ -408,7 +410,9 @@ class _DetailProductState extends State<DetailProduct> {
                                                     user_phone =
                                                         priceController.text;
                                                   });
-                                                }, false, false),
+                                                }, false, false,
+                                                    textInputType:
+                                                        TextInputType.number),
                                                 const SizedBox(height: 20),
                                                 label(' Location'),
                                                 inputContain(
