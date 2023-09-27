@@ -287,10 +287,20 @@ Map<String, dynamic> product_single = {
   "quantity": "56",
   "price": "1344",
   "location": "Product Name",
-  "description":"Description"
+  "description": "Description"
 };
-Map<String, dynamic> customer_single = {};
-Map<String, dynamic> supplier_single = {};
+Map<String, dynamic> customer_single = {
+  "name": "Product Name",
+  "refernce": "Product Name",
+  "location": "Product Name",
+  "description": "Description"
+};
+Map<String, dynamic> supplier_single = {
+  "name": "Product Name",
+  "refernce": "Product Name",
+  "location": "Product Name",
+  "description": "Description"
+};
 Map<String, dynamic> salle_single = {};
 Map<String, dynamic> purshase_single = {};
 

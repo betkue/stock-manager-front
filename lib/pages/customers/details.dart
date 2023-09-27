@@ -28,6 +28,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
   TextEditingController nameController = TextEditingController();
   TextEditingController refController = TextEditingController();
   TextEditingController locationController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   TextEditingController searchController = TextEditingController();
   TextEditingController searchListController = TextEditingController();
   ImagePicker picker = ImagePicker();
@@ -106,27 +107,9 @@ class _DetailCustomerState extends State<DetailCustomer> {
     }
   }
 
-  List<Map<String, dynamic>> listSeach = [
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-  ];
+  List<Map<String, dynamic>> listSeach = [];
 
-  List<Map<String, dynamic>> listLoad = [
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 125, "name": "Patrick", "price": 2000},
-    {"id": 123, "name": "Patrick", "price": 2000},
-    {"id": 126, "name": "Patrick", "price": 2000},
-    {"id": 128, "name": "Patrick", "price": 2000},
-  ];
+  List<Map<String, dynamic>> listLoad = [];
 
   detrmineContainId(int id) {
     for (var i = 0; i < listSeach.length; i++) {
@@ -140,6 +123,20 @@ class _DetailCustomerState extends State<DetailCustomer> {
 
   @override
   void initState() {
+    nameController.text = customer_single['name'] ?? "";
+    refController.text = customer_single['refernce'] ?? "";
+    locationController.text = customer_single['location'] ?? "";
+    descriptionController.text = customer_single['description'] ?? "";
+    listSeach = [
+      {"id": 12, "name": "Patrick", "price": 2000},
+      {"id": 12, "name": "Patrick", "price": 2000},
+      {"id": 12, "name": "Patrick", "price": 2000},
+      {"id": 12, "name": "Patrick", "price": 2000},
+      {"id": 12, "name": "Patrick", "price": 2000},
+      {"id": 12, "name": "Patrick", "price": 2000},
+      {"id": 12, "name": "Patrick", "price": 2000},
+      {"id": 12, "name": "Patrick", "price": 2000},
+    ];
     Timer(
         Duration(seconds: 5),
         () => setState(() {
@@ -321,6 +318,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                       height: media.width / 4,
                                       child: TextField(
                                         maxLines: null, // Set this
+                                        controller: descriptionController,
                                         expands: true, // and this
                                         keyboardType: TextInputType.multiline,
                                       ),
@@ -346,10 +344,10 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                label('Product name'),
+                                                label('customer name'),
                                                 inputContain(
                                                     width,
-                                                    'Enter the product name',
+                                                    ' the customer name',
                                                     nameController,
                                                     (String value) {
                                                   setState(() {
@@ -362,7 +360,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                                 label('Reference'),
                                                 inputContain(
                                                     width,
-                                                    'Enter the product reference',
+                                                    ' the customer reference',
                                                     refController,
                                                     (String value) {
                                                   setState(() {
@@ -375,7 +373,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                                 label(' Location'),
                                                 inputContain(
                                                     width,
-                                                    ' Enter the product location',
+                                                    '  the customer location',
                                                     locationController,
                                                     (String value) {
                                                   setState(() {
@@ -389,7 +387,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                                 Row(
                                                   children: [
                                                     label(
-                                                        ' Products (${listSeach.length})'),
+                                                        ' products (${listSeach.length})'),
                                                     InkWell(
                                                       onTap: () {
                                                         setState(() {
@@ -446,7 +444,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                                     ),
                                                     onChanged: (value) {
                                                       setState(() {
-                                                        // searchProductsController.text = value;
+                                                        // searchcustomersController.text = value;
                                                       });
                                                     },
                                                   ),
@@ -602,7 +600,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                                 ),
                                                 onChanged: (value) {
                                                   setState(() {
-                                                    // searchProductsController.text = value;
+                                                    // searchcustomersController.text = value;
                                                   });
                                                 },
                                               ),

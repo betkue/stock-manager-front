@@ -112,14 +112,7 @@ class _DetailProductState extends State<DetailProduct> {
   List<Map<String, dynamic>> listSeach = [];
 
   List<Map<String, dynamic>> listLoad = [
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 125, "name": "Patrick", "price": 2000},
-    {"id": 123, "name": "Patrick", "price": 2000},
-    {"id": 126, "name": "Patrick", "price": 2000},
-    {"id": 128, "name": "Patrick", "price": 2000},
+    // {"id": 128, "name": "Patrick", "price": 2000},
   ];
 
   detrmineContainId(int id) {
