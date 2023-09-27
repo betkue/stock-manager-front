@@ -281,7 +281,14 @@ List<Map<String, dynamic>> salesComplete = [
   },
 ];
 
-Map<String, dynamic> product_single = {};
+Map<String, dynamic> product_single = {
+  "name": "Product Name",
+  "refernce": "Product Name",
+  "quantity": "Product Name",
+  "price": "Product Name",
+  "location": "Product Name",
+  "description":"Description"
+};
 Map<String, dynamic> customer_single = {};
 Map<String, dynamic> supplier_single = {};
 Map<String, dynamic> salle_single = {};

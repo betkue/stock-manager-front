@@ -31,6 +31,7 @@ class _DetailProductState extends State<DetailProduct> {
   TextEditingController priceController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController searchController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   TextEditingController searchListController = TextEditingController();
   ImagePicker picker = ImagePicker();
   bool load = true;
@@ -108,16 +109,7 @@ class _DetailProductState extends State<DetailProduct> {
     }
   }
 
-  List<Map<String, dynamic>> listSeach = [
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-    {"id": 12, "name": "Patrick", "price": 2000},
-  ];
+  List<Map<String, dynamic>> listSeach = [];
 
   List<Map<String, dynamic>> listLoad = [
     {"id": 12, "name": "Patrick", "price": 2000},
@@ -142,6 +134,24 @@ class _DetailProductState extends State<DetailProduct> {
 
   @override
   void initState() {
+    if (widget.id != null) {
+      nameController.text = product_single['name'] ?? "";
+      refController.text = product_single['refernce'] ?? "";
+      quantityController.text = product_single['quantity'] ?? "";
+      priceController.text = product_single['price'] ?? "";
+      locationController.text = product_single['location'] ?? "";
+      descriptionController.text = product_single['description'] ?? "";
+      listSeach = [
+        {"id": 12, "name": "Patrick", "price": 2000},
+        {"id": 12, "name": "Patrick", "price": 2000},
+        {"id": 12, "name": "Patrick", "price": 2000},
+        {"id": 12, "name": "Patrick", "price": 2000},
+        {"id": 12, "name": "Patrick", "price": 2000},
+        {"id": 12, "name": "Patrick", "price": 2000},
+        {"id": 12, "name": "Patrick", "price": 2000},
+        {"id": 12, "name": "Patrick", "price": 2000},
+      ];
+    }
     Timer(
         Duration(seconds: 5),
         () => setState(() {
@@ -323,6 +333,7 @@ class _DetailProductState extends State<DetailProduct> {
                                       child: TextField(
                                         maxLines: null, // Set this
                                         expands: true, // and this
+                                        controller: descriptionController,
                                         keyboardType: TextInputType.multiline,
                                       ),
                                     )
