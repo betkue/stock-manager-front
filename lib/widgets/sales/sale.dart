@@ -87,9 +87,9 @@ Widget sales(String imagePath, String productName, String price, int state,
           children: [
             Text("Paiement State : "),
             Text(
-              state == 0
+              paiement_state == 0
                   ? "Pending"
-                  : state == 1
+                  : paiement_state == 1
                       ? "Incomplete"
                       : "Complete",
               textAlign: TextAlign.center,
