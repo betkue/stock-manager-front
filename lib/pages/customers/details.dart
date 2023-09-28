@@ -124,7 +124,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
   @override
   void initState() {
     nameController.text = customer_single['name'] ?? "";
-    refController.text = customer_single['refernce'] ?? "";
+    refController.text = customer_single['reference'] ?? "";
     locationController.text = customer_single['location'] ?? "";
     descriptionController.text = customer_single['description'] ?? "";
     listSeach = [

@@ -110,8 +110,7 @@ class _DetailSupplierState extends State<DetailSupplier> {
 
   List<Map<String, dynamic>> listSeach = [];
 
-  List<Map<String, dynamic>> listLoad = [
-    ];
+  List<Map<String, dynamic>> listLoad = [];
 
   detrmineContainId(int id) {
     for (var i = 0; i < listSeach.length; i++) {
@@ -126,7 +125,7 @@ class _DetailSupplierState extends State<DetailSupplier> {
   @override
   void initState() {
     nameController.text = supplier_single['name'] ?? "";
-    refController.text = supplier_single['refernce'] ?? "";
+    refController.text = supplier_single['reference'] ?? "";
     locationController.text = supplier_single['location'] ?? "";
     descriptionController.text = supplier_single['description'] ?? "";
     listSeach = [

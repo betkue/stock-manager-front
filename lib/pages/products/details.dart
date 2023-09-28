@@ -129,7 +129,7 @@ class _DetailProductState extends State<DetailProduct> {
   void initState() {
     if (widget.id != null) {
       nameController.text = product_single['name'] ?? "";
-      refController.text = product_single['refernce'] ?? "";
+      refController.text = product_single['reference'] ?? "";
       quantityController.text = product_single['quantity'] ?? "";
       priceController.text = product_single['price'] ?? "";
       locationController.text = product_single['location'] ?? "";

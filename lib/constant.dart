@@ -283,26 +283,83 @@ List<Map<String, dynamic>> salesComplete = [
 
 Map<String, dynamic> product_single = {
   "name": "Product Name",
-  "refernce": "Product Name",
+  "reference": "Product Name",
   "quantity": "56",
   "price": "1344",
   "location": "Product Name",
-  "description": "Description"
+  "description": "Description",
+  "image": "https://picsum.photos/250?image=9",
 };
 Map<String, dynamic> customer_single = {
   "name": "Product Name",
-  "refernce": "Product Name",
+  "reference": "Product Name",
   "location": "Product Name",
-  "description": "Description"
+  "description": "Description",
+  "image": "https://picsum.photos/250?image=9",
 };
 Map<String, dynamic> supplier_single = {
+  "reference": "Product Name",
   "name": "Product Name",
-  "refernce": "Product Name",
+  "reference": "Product Name",
   "location": "Product Name",
-  "description": "Description"
+  "description": "Description",
+  "image": "https://picsum.photos/250?image=9",
+};
+Map<String, dynamic> purshase_single = {
+  "reference": "Product Name",
+  "supplier": {
+    "name": "Product Name",
+    "reference": "Product Name",
+    "location": "Product Name",
+    "description": "Description",
+    "image": "https://picsum.photos/250?image=9",
+  },
+  "products": [
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "price": 1344,
+    },
+  ]
 };
 Map<String, dynamic> salle_single = {};
-Map<String, dynamic> purshase_single = {};
 
 TextEditingController searchProductsController = TextEditingController();
 TextEditingController searchPurchasesController = TextEditingController();
