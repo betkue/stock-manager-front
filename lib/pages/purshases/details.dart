@@ -23,6 +23,7 @@ class DetailPurshase extends StatefulWidget {
 class _DetailPurshaseState extends State<DetailPurshase> {
   final _formKey = GlobalKey<FormState>();
   bool load = true;
+  bool showAction = true;
   dynamic imageFile;
   ImagePicker picker = ImagePicker();
   bool _pickImage = false;
@@ -93,6 +94,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
 
     return load
         ? LoadPage()
+        
         : Scaffold(
             // backgroundColor: gray,
             appBar: AppBar(
@@ -369,7 +371,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                 backgroundColor: orange,
                               ),
                               child: Text(
-                                widget.id != null ? 'Modify' : "Add",
+                                widget.id != null ? 'Print' : "Create",
                                 style: TextStyle(fontSize: 24, color: white),
                               ),
                             ),
@@ -427,89 +429,92 @@ class _DetailPurshaseState extends State<DetailPurshase> {
   }
 
   Widget genrateMovement(Map<String, dynamic> movement, dynamic media) {
-    return Container(
-      margin: EdgeInsets.only(bottom: media.width * 0.012),
-      // width: media.width * 0.9,
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        border: Border.all(color: backgroundColor, width: 1.2),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: SingleChildScrollView(
-        child: Row(
-          children: [
-            Container(
-              height: media.width * 0.03,
-              width: media.width * 0.03,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: (movement['return']) ? red : backgroundColor),
-              alignment: Alignment.center,
-              child: (movement['return'])
-                  ? Icon(
-                      Icons.reset_tv_rounded,
-                      color: white,
-                    )
-                  : Icon(
-                      Icons.delivery_dining_sharp,
-                      color: white,
-                    ),
-              // Text(
-              //   (movement['return']) ? '-' : '+',
-              //   textScaleFactor: 1.3,
-              //   style: TextStyle(color: white),
-              // ),
-            ),
-            SizedBox(
-              width: media.width * 0.0125,
-            ),
-            Text(
-              "${movement['products'].length} Products",
-              style: TextStyle(
-                // fontSize: media.width * 0.6,
-                color: black,
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        margin: EdgeInsets.only(bottom: media.width * 0.012),
+        // width: media.width * 0.9,
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          border: Border.all(color: backgroundColor, width: 1.2),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: SingleChildScrollView(
+          child: Row(
+            children: [
+              Container(
+                height: media.width * 0.03,
+                width: media.width * 0.03,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: (movement['return']) ? red : backgroundColor),
+                alignment: Alignment.center,
+                child: (movement['return'])
+                    ? Icon(
+                        Icons.reset_tv_rounded,
+                        color: white,
+                      )
+                    : Icon(
+                        Icons.delivery_dining_sharp,
+                        color: white,
+                      ),
+                // Text(
+                //   (movement['return']) ? '-' : '+',
+                //   textScaleFactor: 1.3,
+                //   style: TextStyle(color: white),
+                // ),
               ),
-            ),
-            SizedBox(
-              width: media.width * 0.0125,
-            ),
-            Column(
-              children: [
-                Text(
-                  " By ${movement['user']['name']}",
-                  style: TextStyle(
-                      // fontSize: media.width * 0.8,
+              SizedBox(
+                width: media.width * 0.0125,
+              ),
+              Text(
+                "${movement['products'].length} Products",
+                style: TextStyle(
+                  // fontSize: media.width * 0.6,
+                  color: black,
+                ),
+              ),
+              SizedBox(
+                width: media.width * 0.0125,
+              ),
+              Column(
+                children: [
+                  Text(
+                    " By ${movement['user']['name']}",
+                    style: TextStyle(
+                        // fontSize: media.width * 0.8,
+                        color: dark,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    height: media.width * 0.01,
+                  ),
+                  Text(
+                    convertDate(movement['created_at']),
+                    style: TextStyle(
+                      // fontSize: media.width * 0.3,
+                      color: gray,
+                    ),
+                  )
+                ],
+              ),
+              Expanded(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "${company['currency']['symbol']}" +
+                        ' ' +
+                        movement['total'].toString(),
+                    style: TextStyle(
+                      // fontSize: media.width * 0.6,
                       color: dark,
-                      fontWeight: FontWeight.w600),
-                ),
-                SizedBox(
-                  height: media.width * 0.01,
-                ),
-                Text(
-                  convertDate(movement['created_at']),
-                  style: TextStyle(
-                    // fontSize: media.width * 0.3,
-                    color: gray,
-                  ),
-                )
-              ],
-            ),
-            Expanded(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  "${company['currency']['symbol']}" +
-                      ' ' +
-                      movement['total'].toString(),
-                  style: TextStyle(
-                    // fontSize: media.width * 0.6,
-                    color: dark,
-                  ),
-                )
-              ],
-            ))
-          ],
+                    ),
+                  )
+                ],
+              ))
+            ],
+          ),
         ),
       ),
     );
