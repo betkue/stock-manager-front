@@ -146,7 +146,7 @@ class _DetailProductState extends State<DetailProduct> {
       ];
     }
     Timer(
-        Duration(seconds: 5),
+        Duration(seconds: timedalay),
         () => setState(() {
               load = false;
             }));

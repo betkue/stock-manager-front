@@ -12,7 +12,7 @@ const Color gray = Color.fromARGB(255, 185, 185, 185); // Color(0xFFD9D9D9);
 const Color dark = Color(0xFF3a3737);
 const Color red = Colors.red;
 int home_index = 0;
-
+int timedalay = 1;
 InputDecoration inputDecoration(String hintText) => InputDecoration(
     filled: true,
     border: OutlineInputBorder(

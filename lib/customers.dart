@@ -26,7 +26,7 @@ class _CustomerPageState extends State<CustomerPage> {
   @override
   void initState() {
     Timer(
-        Duration(seconds: 5),
+        Duration(seconds: timedalay),
         () => setState(() {
               load = false;
             }));

@@ -12,7 +12,6 @@ import 'package:stock_manager/widgets/circular_button.dart';
 import 'package:stock_manager/widgets/account/account.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 class DetailSalle extends StatefulWidget {
   String? id;
   Function back;
@@ -142,7 +141,7 @@ class _DetailSalleState extends State<DetailSalle> {
   @override
   void initState() {
     Timer(
-        Duration(seconds: 5),
+        Duration(seconds: timedalay),
         () => setState(() {
               load = false;
             }));

@@ -25,7 +25,7 @@ class _SupplierPageState extends State<SupplierPage> {
   @override
   void initState() {
     Timer(
-        Duration(seconds: 5),
+        Duration(seconds: timedalay),
         () => setState(() {
               load = false;
             }));

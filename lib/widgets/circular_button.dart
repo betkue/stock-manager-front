@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stock_manager/constant.dart';
 
 class CirularButton extends StatelessWidget {
   final Widget icon;
@@ -8,6 +9,7 @@ class CirularButton extends StatelessWidget {
       this.icon = const Icon(
         Icons.close,
         size: 22,
+        color: white,
       ),
       required this.onClick});
 
@@ -21,7 +23,7 @@ class CirularButton extends StatelessWidget {
       ),
       clipBehavior: Clip.hardEdge,
       child: Material(
-        color: Colors.black,
+        color: black,
         child: InkWell(
           onTap: onClick,
           child: icon,

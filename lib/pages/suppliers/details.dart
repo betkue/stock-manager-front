@@ -139,7 +139,7 @@ class _DetailSupplierState extends State<DetailSupplier> {
       {"id": 12, "name": "Patrick", "price": 2000},
     ];
     Timer(
-        Duration(seconds: 5),
+        Duration(seconds: timedalay),
         () => setState(() {
               load = false;
             }));

@@ -32,7 +32,7 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     Timer(
-        Duration(seconds: 5),
+        Duration(seconds: timedalay),
         () => setState(() {
               load = false;
             }));
