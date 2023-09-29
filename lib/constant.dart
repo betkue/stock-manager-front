@@ -296,6 +296,40 @@ Map<String, dynamic> customer_single = {
   "location": "Product Name",
   "description": "Description",
   "image": "https://picsum.photos/250?image=9",
+  "products": [
+    {
+      "name": "Prome",
+      "reference": "Pt Name",
+      "quantity": 56,
+      "delivered": 30,
+      "image": "https://picsum.photos/250?image=9",
+      "price": 1344,
+    },
+    {
+      "name": "Product Na",
+      "reference": "Pr Name",
+      "quantity": 56,
+      "delivered": 30,
+      "image": "https://picsum.photos/250?image=9",
+      "price": 1344,
+    },
+    {
+      "name": "Pr Name",
+      "reference": "Pme",
+      "quantity": 56,
+      "delivered": 30,
+      "price": 1344,
+      "image": "https://picsum.photos/250?image=9",
+    },
+    {
+      "name": "ct Name",
+      "reference": "Produe",
+      "quantity": 56,
+      "delivered": 30,
+      "image": "https://picsum.photos/250?image=9",
+      "price": 1344,
+    },
+  ]
 };
 Map<String, dynamic> supplier_single = {
   "reference": "Product Name",
@@ -303,6 +337,40 @@ Map<String, dynamic> supplier_single = {
   "location": "Product Name",
   "description": "Description",
   "image": "https://picsum.photos/250?image=9",
+  "products": [
+    {
+      "name": "Prome",
+      "reference": "Pt Name",
+      "quantity": 56,
+      "delivered": 30,
+      "image": "https://picsum.photos/250?image=9",
+      "price": 1344,
+    },
+    {
+      "name": "Product Na",
+      "reference": "Pr Name",
+      "quantity": 56,
+      "delivered": 30,
+      "image": "https://picsum.photos/250?image=9",
+      "price": 1344,
+    },
+    {
+      "name": "Pr Name",
+      "reference": "Pme",
+      "quantity": 56,
+      "delivered": 30,
+      "price": 1344,
+      "image": "https://picsum.photos/250?image=9",
+    },
+    {
+      "name": "ct Name",
+      "reference": "Produe",
+      "quantity": 56,
+      "delivered": 30,
+      "image": "https://picsum.photos/250?image=9",
+      "price": 1344,
+    },
+  ]
 };
 Map<String, dynamic> purshase_single = {
   "reference": "Product Name",

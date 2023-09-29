@@ -24,11 +24,14 @@ class DetailPurshase extends StatefulWidget {
 class _DetailPurshaseState extends State<DetailPurshase> {
   final _formKey = GlobalKey<FormState>();
   bool load = true;
+  bool showSelectAction = false;
   bool showAction = false;
   dynamic imageFile;
   ImagePicker picker = ImagePicker();
   bool _pickImage = false;
   String _permission = '';
+  bool is_return = false;
+  TextEditingController searchProductController = TextEditingController();
   //gallery permission
   getGalleryPermission() async {
     var status = await Permission.photos.status;
@@ -283,24 +286,62 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                       height: 16,
                                     ),
                                     Text(
-                                      "Movements",
+                                      widget.id != null
+                                          ? "Movements"
+                                          : "Products",
                                       textScaleFactor: 1.5,
                                     ),
                                     SizedBox(
                                       height: media.width * 0.02,
                                     ),
+                                    widget.id != null
+                                        ? Container()
+                                        : Container(
+                                            margin: EdgeInsets.only(
+                                              bottom: media.width * 0.02,
+                                            ),
+                                            width: width,
+                                            child: TextField(
+                                              controller:
+                                                  searchProductController,
+                                              decoration: InputDecoration(
+                                                hintText: "Search",
+                                                prefixIcon: Icon(Icons.search),
+                                                border: OutlineInputBorder(),
+                                              ),
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  // searchProductsController.text = value;
+                                                });
+                                              },
+                                            ),
+                                          ),
                                     Expanded(
-                                        child: ListView.builder(
-                                            itemCount:
-                                                purshase_single['movements']
-                                                    .length,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return genrateMovement(
-                                                  purshase_single['movements']
-                                                      [index],
-                                                  media);
-                                            })),
+                                        child: widget.id != null
+                                            ? ListView.builder(
+                                                itemCount:
+                                                    purshase_single['movements']
+                                                        .length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return genrateMovement(
+                                                      purshase_single[
+                                                          'movements'][index],
+                                                      media);
+                                                })
+                                            : ListView.builder(
+                                                itemCount:
+                                                    supplier_single['products']
+                                                        .length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return genrateProduct(
+                                                      supplier_single[
+                                                          'products'][index],
+                                                      media);
+                                                })),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 4),
@@ -309,29 +350,18 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                         height: 47,
                                         child: ElevatedButton(
                                           onPressed: () {
-                                            if (_formKey.currentState!
-                                                .validate()) {
-                                              // Form is valid, process the data here.
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                const SnackBar(
-                                                  content: Text(
-                                                      'Form submitted successfully!'),
-                                                ),
-                                              );
-                                              // Navigator.push(
-                                              //     context,
-                                              //     MaterialPageRoute(
-                                              //         builder: (context) =>
-                                              //             const TestPage()));
-                                            }
+                                            setState(() {
+                                              showSelectAction = true;
+                                            });
                                           },
                                           style: ElevatedButton.styleFrom(
                                             //<-- SEE HERE
                                             backgroundColor: orange,
                                           ),
                                           child: Text(
-                                            "Add Movment",
+                                            widget.id != null
+                                                ? "Add Movment"
+                                                : "Add Product",
                                             style: TextStyle(
                                                 fontSize: 24, color: white),
                                           ),
@@ -380,7 +410,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                       ],
                     ),
                   ),
-                  showAction
+                  showSelectAction
                       ? Container(
                           width: width,
                           height: height,
@@ -393,7 +423,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                   child: CirularButton(
                                     onClick: () {
                                       setState(() {
-                                        showAction = false;
+                                        showSelectAction = false;
                                       });
                                     },
                                   )),
@@ -410,14 +440,22 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       InkWell(
-                                        onTap: () {},
-                                        child:
-                                            action(" Add return ", red, media),
-                                      ),
-                                      InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          is_return = false;
+                                          showAction = true;
+                                        },
                                         child: action(" Add delivery ",
                                             backgroundColor, media),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            is_return = true;
+                                            showAction = true;
+                                          });
+                                        },
+                                        child:
+                                            action(" Add return ", red, media),
                                       ),
                                     ],
                                   ),
@@ -487,6 +525,58 @@ class _DetailPurshaseState extends State<DetailPurshase> {
       title,
       style: TextStyle(
           fontWeight: FontWeight.w400, overflow: TextOverflow.ellipsis),
+    );
+  }
+
+  Widget genrateProduct(Map<String, dynamic> product, dynamic media) {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        margin: EdgeInsets.only(bottom: media.width * 0.012),
+        // width: media.width * 0.9,
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          border: Border.all(color: backgroundColor, width: 1.2),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: SingleChildScrollView(
+            child: Row(children: [
+          Container(
+            height: media.width * 0.03,
+            width: media.width * 0.03,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                image: DecorationImage(image: NetworkImage(product['image'])),
+                color: backgroundColor),
+          ),
+          SizedBox(
+            width: media.width * 0.0125,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${product['name']}",
+                style: TextStyle(
+                    // fontSize: media.width * 0.8,
+                    color: dark,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: media.width * 0.01,
+              ),
+              Text(
+                "${product['reference']}",
+                style: TextStyle(
+                  // fontSize: media.width * 0.3,
+                  color: gray,
+                ),
+              )
+            ],
+          ),
+        ])),
+      ),
     );
   }
 
