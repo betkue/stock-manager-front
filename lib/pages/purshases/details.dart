@@ -61,6 +61,36 @@ class _DetailPurshaseState extends State<DetailPurshase> {
     return false;
   }
 
+  calculateTotalQuantity() {
+    List<Map<String, dynamic>> products =
+        widget.id != null ? purshase_single['products'] : listProducts;
+    dynamic qte = 0;
+    for (var i = 0; i < products.length; i++) {
+      if (widget.id != null) {
+        qte += products[i]['quantity'];
+      } else {
+        qte += double.parse(products[i]['quantity'].text);
+      }
+    }
+    return "$qte";
+  }
+
+  calculateTotalPrice() {
+    List<Map<String, dynamic>> products =
+        widget.id != null ? purshase_single['products'] : listProducts;
+    dynamic qte = 0;
+
+    for (var i = 0; i < products.length; i++) {
+      if (widget.id != null) {
+        qte += (products[i]['quantity'] * products[i]['price']);
+      } else {
+        qte += (double.parse(products[i]['quantity'].text) *
+            double.parse(products[i]['price'].text));
+      }
+    }
+    return "$qte";
+  }
+
 //camera permission
   getCameraPermission() async {
     var status = await Permission.camera.status;
@@ -317,6 +347,11 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                             ),
                                                             onChanged: (value) {
                                                               setState(() {
+                                                                value.isEmpty
+                                                                    ? product[
+                                                                            'price']
+                                                                        .text = "0"
+                                                                    : null;
                                                                 // searchProductsController.text = value;
                                                               });
                                                             },
@@ -342,7 +377,11 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                             ),
                                                             onChanged: (value) {
                                                               setState(() {
-                                                                // searchProductsController.text = value;
+                                                                value.isEmpty
+                                                                    ? product[
+                                                                            'quantity']
+                                                                        .text = "0"
+                                                                    : null;
                                                               });
                                                             },
                                                           )
@@ -358,19 +397,19 @@ class _DetailPurshaseState extends State<DetailPurshase> {
 
                                                           ,
                                                           containTable(
-                                                              "${double.parse("${product['quantity'].text}") * double.parse("${product['price'].text}")}"),
+                                                              "${double.parse("${product['quantity'].text ?? "0"}") * double.parse("${product['price'].text ?? "0"}")}"),
                                                           containTable(
                                                               "action"));
                                                     })),
 
                                         generateRowTable(
-                                            titleTable("Product"),
-                                            titleTable("reference"),
+                                            titleTable("Total"),
+                                            titleTable(""),
+                                            titleTable(""),
                                             titleTable(
-                                                "price ${company['currency']['symbol']}"),
-                                            titleTable("quantity"),
+                                                "${calculateTotalQuantity()}"),
                                             titleTable(
-                                                "total ${company['currency']['symbol']}"),
+                                                "${calculateTotalPrice()}"),
                                             titleTable("action")),
                                       ],
                                     ),
