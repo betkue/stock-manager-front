@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:stock_manager/constant.dart';
 import 'package:stock_manager/functions/function.dart';
 import 'package:stock_manager/load_page.dart';
+import 'package:stock_manager/widgets/circular_button.dart';
 
 class DetailPurshase extends StatefulWidget {
   String? id;
@@ -23,7 +24,7 @@ class DetailPurshase extends StatefulWidget {
 class _DetailPurshaseState extends State<DetailPurshase> {
   final _formKey = GlobalKey<FormState>();
   bool load = true;
-  bool showAction = true;
+  bool showAction = false;
   dynamic imageFile;
   ImagePicker picker = ImagePicker();
   bool _pickImage = false;
@@ -94,7 +95,6 @@ class _DetailPurshaseState extends State<DetailPurshase> {
 
     return load
         ? LoadPage()
-        
         : Scaffold(
             // backgroundColor: gray,
             appBar: AppBar(
@@ -380,9 +380,71 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                       ],
                     ),
                   ),
+                  showAction
+                      ? Container(
+                          width: width,
+                          height: height,
+                          color: black.withOpacity(0.6),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                  right: 30,
+                                  top: 10,
+                                  child: CirularButton(
+                                    onClick: () {
+                                      setState(() {
+                                        showAction = false;
+                                      });
+                                    },
+                                  )),
+                              Center(
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  width: width / 4,
+                                  height: width / 4,
+                                  decoration: BoxDecoration(
+                                      color: white,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15))),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        child:
+                                            action(" Add return ", red, media),
+                                      ),
+                                      InkWell(
+                                        onTap: () {},
+                                        child: action(" Add delivery ",
+                                            backgroundColor, media),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ));
+  }
+
+  Widget action(String title, Color color, dynamic media) {
+    return Container(
+      width: media.width / 5,
+      padding: EdgeInsets.all(15),
+      margin: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+          color: color, borderRadius: BorderRadius.all(Radius.circular(15))),
+      child: Text(
+        title,
+        textAlign: TextAlign.center,
+        style: TextStyle(color: white, fontWeight: FontWeight.bold),
+      ),
+    );
   }
 
   generateRowTable(Widget product, Widget reference, Widget price,
