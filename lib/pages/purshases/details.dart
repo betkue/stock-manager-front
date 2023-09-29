@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/functions/function.dart';
 import 'package:stock_manager/load_page.dart';
 
 class DetailPurshase extends StatefulWidget {
@@ -268,9 +269,74 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                   )),
                               Expanded(
                                   child: Container(
-                                color: backgroundColor,
+                                padding: EdgeInsets.only(left: 10),
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        left: BorderSide(
+                                            color: backgroundColor,
+                                            style: BorderStyle.solid))),
                                 child: Column(
-                                  children: [],
+                                  children: [
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                    Text(
+                                      "Movements",
+                                      textScaleFactor: 1.5,
+                                    ),
+                                    SizedBox(
+                                      height: media.width * 0.02,
+                                    ),
+                                    Expanded(
+                                        child: ListView.builder(
+                                            itemCount:
+                                                purshase_single['movements']
+                                                    .length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return genrateMovement(
+                                                  purshase_single['movements']
+                                                      [index],
+                                                  media);
+                                            })),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4),
+                                      child: SizedBox(
+                                        width: width / 3,
+                                        height: 47,
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              // Form is valid, process the data here.
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                      'Form submitted successfully!'),
+                                                ),
+                                              );
+                                              // Navigator.push(
+                                              //     context,
+                                              //     MaterialPageRoute(
+                                              //         builder: (context) =>
+                                              //             const TestPage()));
+                                            }
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            //<-- SEE HERE
+                                            backgroundColor: orange,
+                                          ),
+                                          child: Text(
+                                            "Add Movment",
+                                            style: TextStyle(
+                                                fontSize: 24, color: white),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               )),
                             ],
@@ -337,7 +403,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
             celule(price),
             celule(quantity),
             celule(total),
-            celule(action),
+            // celule(action),
           ],
         ),
       ),
@@ -357,6 +423,95 @@ class _DetailPurshaseState extends State<DetailPurshase> {
       title,
       style: TextStyle(
           fontWeight: FontWeight.w400, overflow: TextOverflow.ellipsis),
+    );
+  }
+
+  Widget genrateMovement(Map<String, dynamic> movement, dynamic media) {
+    return Container(
+      margin: EdgeInsets.only(bottom: media.width * 0.012),
+      // width: media.width * 0.9,
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        border: Border.all(color: backgroundColor, width: 1.2),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: SingleChildScrollView(
+        child: Row(
+          children: [
+            Container(
+              height: media.width * 0.03,
+              width: media.width * 0.03,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: (movement['return']) ? red : backgroundColor),
+              alignment: Alignment.center,
+              child: (movement['return'])
+                  ? Icon(
+                      Icons.reset_tv_rounded,
+                      color: white,
+                    )
+                  : Icon(
+                      Icons.delivery_dining_sharp,
+                      color: white,
+                    ),
+              // Text(
+              //   (movement['return']) ? '-' : '+',
+              //   textScaleFactor: 1.3,
+              //   style: TextStyle(color: white),
+              // ),
+            ),
+            SizedBox(
+              width: media.width * 0.0125,
+            ),
+            Text(
+              "${movement['products'].length} Products",
+              style: TextStyle(
+                // fontSize: media.width * 0.6,
+                color: black,
+              ),
+            ),
+            SizedBox(
+              width: media.width * 0.0125,
+            ),
+            Column(
+              children: [
+                Text(
+                  " By ${movement['user']['name']}",
+                  style: TextStyle(
+                      // fontSize: media.width * 0.8,
+                      color: dark,
+                      fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: media.width * 0.01,
+                ),
+                Text(
+                  convertDate(movement['created_at']),
+                  style: TextStyle(
+                    // fontSize: media.width * 0.3,
+                    color: gray,
+                  ),
+                )
+              ],
+            ),
+            Expanded(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "${company['currency']['symbol']}" +
+                      ' ' +
+                      movement['total'].toString(),
+                  style: TextStyle(
+                    // fontSize: media.width * 0.6,
+                    color: dark,
+                  ),
+                )
+              ],
+            ))
+          ],
+        ),
+      ),
     );
   }
 }
