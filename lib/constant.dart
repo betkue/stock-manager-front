@@ -384,7 +384,7 @@ Map<String, dynamic> purshase_single = {
   "products": [
     {
       "name": "Product Name",
-      "reference": "Product Name",
+      "reference": "Pt Name",
       "quantity": 56,
       "delivered": 30,
       "price": 1344,
@@ -398,7 +398,7 @@ Map<String, dynamic> purshase_single = {
     },
     {
       "name": "Product Name",
-      "reference": "Product Name",
+      "reference": "Pr Name",
       "quantity": 56,
       "delivered": 30,
       "price": 1344,

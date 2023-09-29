@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:stock_manager/constant.dart';
 import 'package:stock_manager/functions/function.dart';
 import 'package:stock_manager/load_page.dart';
+import 'package:stock_manager/widgets/account/account.dart';
 import 'package:stock_manager/widgets/circular_button.dart';
 
 class DetailPurshase extends StatefulWidget {
@@ -26,11 +27,13 @@ class _DetailPurshaseState extends State<DetailPurshase> {
   bool load = true;
   bool showSelectAction = false;
   bool showAction = false;
+  bool showMovement = false;
   dynamic imageFile;
   ImagePicker picker = ImagePicker();
   bool _pickImage = false;
   String _permission = '';
   bool is_return = false;
+  List<Map<String, dynamic>> listProducts = [];
   TextEditingController searchProductController = TextEditingController();
   //gallery permission
   getGalleryPermission() async {
@@ -42,8 +45,15 @@ class _DetailPurshaseState extends State<DetailPurshase> {
   }
 
   detrmineContainRef(String ref) {
-    for (var i = 0; i < purshase_single['products'].length; i++) {
-      if (purshase_single['products'][i]['refeence'] == ref) {
+    for (var i = 0;
+        i <
+            (widget.id != null
+                ? purshase_single['products'].length
+                : listProducts.length);
+        i++) {
+      if ((widget.id != null ? purshase_single['products'] : listProducts)[i]
+              ['reference'] ==
+          ref) {
         return true;
       }
     }
@@ -257,28 +267,111 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                         //   ],
                                         // ),
                                         Expanded(
-                                            child: ListView.builder(
-                                                itemCount:
-                                                    purshase_single['products']
+                                            child: widget.id != null
+                                                ? ListView.builder(
+                                                    itemCount: purshase_single[
+                                                            'products']
                                                         .length,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  var product = purshase_single[
-                                                      'products'][index];
-                                                  return generateRowTable(
-                                                      containTable(
-                                                          product['name']),
-                                                      containTable(
-                                                          product['reference']),
-                                                      containTable(
-                                                          "${product['price']}"),
-                                                      containTable(
-                                                          "${product['quantity']}"),
-                                                      containTable(
-                                                          "${product['quantity'] * product['price']}  "),
-                                                      containTable("action"));
-                                                }))
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      var product =
+                                                          purshase_single[
+                                                                  'products']
+                                                              [index];
+                                                      return generateRowTable(
+                                                          containTable(
+                                                              product['name']),
+                                                          containTable(product[
+                                                              'reference']),
+                                                          containTable(
+                                                              "${product['price']}"),
+                                                          containTable(
+                                                              "${product['quantity']}"),
+                                                          containTable(
+                                                              "${product['quantity'] * product['price']}  "),
+                                                          containTable(
+                                                              "action"));
+                                                    })
+                                                : ListView.builder(
+                                                    itemCount:
+                                                        listProducts.length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      var product =
+                                                          listProducts[index];
+                                                      return generateRowTable(
+                                                          containTable(
+                                                              product['name']),
+                                                          containTable(product[
+                                                              'reference']),
+                                                          TextField(
+                                                            controller: product[
+                                                                'price'],
+                                                            decoration:
+                                                                InputDecoration(
+                                                              hintText: "price",
+                                                              border:
+                                                                  OutlineInputBorder(),
+                                                            ),
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // searchProductsController.text = value;
+                                                              });
+                                                            },
+                                                          )
+                                                          // inputContain(
+                                                          //     width,
+                                                          //     "price",
+                                                          //     product['price'],
+                                                          //     () {},
+                                                          //     false,
+                                                          //     false)
+
+                                                          ,
+                                                          TextField(
+                                                            controller: product[
+                                                                'quantity'],
+                                                            decoration:
+                                                                InputDecoration(
+                                                              hintText:
+                                                                  "quantity",
+                                                              border:
+                                                                  OutlineInputBorder(),
+                                                            ),
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                // searchProductsController.text = value;
+                                                              });
+                                                            },
+                                                          )
+
+                                                          // inputContain(
+                                                          //     width,
+                                                          //     "quantity",
+                                                          //     product[
+                                                          //         'quantity'],
+                                                          //     () {},
+                                                          //     false,
+                                                          //     false)
+
+                                                          ,
+                                                          containTable(
+                                                              "${double.parse("${product['quantity'].text}") * double.parse("${product['price'].text}")}"),
+                                                          containTable(
+                                                              "action"));
+                                                    })),
+
+                                        generateRowTable(
+                                            titleTable("Product"),
+                                            titleTable("reference"),
+                                            titleTable(
+                                                "price ${company['currency']['symbol']}"),
+                                            titleTable("quantity"),
+                                            titleTable(
+                                                "total ${company['currency']['symbol']}"),
+                                            titleTable("action")),
                                       ],
                                     ),
                                   )),
@@ -366,10 +459,14 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                               ['reference'])) {
                                                     return Container();
                                                   } else {
-                                                    return genrateProduct(
-                                                        supplier_single[
-                                                            'products'][index],
-                                                        media);
+                                                    return
+                                                        // Text(
+                                                        //     "${detrmineContainRef(supplier_single['products'][index]['reference'])}");
+                                                        genrateProduct(
+                                                            supplier_single[
+                                                                    'products']
+                                                                [index],
+                                                            media);
                                                   }
                                                 })),
                                     Padding(
@@ -519,8 +616,10 @@ class _DetailPurshaseState extends State<DetailPurshase> {
       Widget quantity, Widget total, Widget action) {
     Widget celule(Widget contain) => Expanded(
             child: Container(
+          height: 70,
           padding: EdgeInsets.all(14),
           decoration: BoxDecoration(
+              // color: red,
               border: Border.all(
             style: BorderStyle.solid,
           )),
@@ -560,13 +659,24 @@ class _DetailPurshaseState extends State<DetailPurshase> {
 
   Widget genrateProduct(Map<String, dynamic> product, dynamic media) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Map<String, dynamic> newProdut = {
+          "name": product['name'],
+          "reference": product['reference'],
+          "quantity": TextEditingController(text: "${product['quantity']}"),
+          "price": TextEditingController(text: "${product['price']}"),
+        };
+
+        setState(() {
+          listProducts.add(newProdut);
+        });
+      },
       child: Container(
         margin: EdgeInsets.only(bottom: media.width * 0.012),
         // width: media.width * 0.9,
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
-          border: Border.all(color: backgroundColor, width: 1.2),
+          border: Border.all(color: backgroundColor, width: 0.5),
           borderRadius: BorderRadius.circular(12),
         ),
         child: SingleChildScrollView(
@@ -605,6 +715,21 @@ class _DetailPurshaseState extends State<DetailPurshase> {
               )
             ],
           ),
+          Expanded(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                "${company['currency']['symbol']}" +
+                    ' ' +
+                    product['price'].toString(),
+                style: TextStyle(
+                  // fontSize: media.width * 0.6,
+                  color: dark,
+                ),
+              )
+            ],
+          ))
         ])),
       ),
     );
@@ -612,13 +737,17 @@ class _DetailPurshaseState extends State<DetailPurshase> {
 
   Widget genrateMovement(Map<String, dynamic> movement, dynamic media) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        setState(() {
+          showMovement = true;
+        });
+      },
       child: Container(
         margin: EdgeInsets.only(bottom: media.width * 0.012),
         // width: media.width * 0.9,
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
-          border: Border.all(color: backgroundColor, width: 1.2),
+          border: Border.all(color: backgroundColor, width: 0.5),
           borderRadius: BorderRadius.circular(12),
         ),
         child: SingleChildScrollView(
