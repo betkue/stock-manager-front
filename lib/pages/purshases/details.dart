@@ -41,6 +41,16 @@ class _DetailPurshaseState extends State<DetailPurshase> {
     return status;
   }
 
+  detrmineContainRef(String ref) {
+    for (var i = 0; i < purshase_single['products'].length; i++) {
+      if (purshase_single['products'][i]['refeence'] == ref) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
 //camera permission
   getCameraPermission() async {
     var status = await Permission.camera.status;
@@ -337,10 +347,30 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                 itemBuilder:
                                                     (BuildContext context,
                                                         int index) {
-                                                  return genrateProduct(
-                                                      supplier_single[
-                                                          'products'][index],
-                                                      media);
+                                                  if ((searchProductController
+                                                              .text
+                                                              .isNotEmpty &&
+                                                          !supplier_single[
+                                                                      'products']
+                                                                  [
+                                                                  index]['name']
+                                                              .toLowerCase()
+                                                              .contains(
+                                                                  searchProductController
+                                                                      .text
+                                                                      .toLowerCase())) ||
+                                                      detrmineContainRef(
+                                                          supplier_single[
+                                                                      'products']
+                                                                  [index]
+                                                              ['reference'])) {
+                                                    return Container();
+                                                  } else {
+                                                    return genrateProduct(
+                                                        supplier_single[
+                                                            'products'][index],
+                                                        media);
+                                                  }
                                                 })),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
