@@ -33,6 +33,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
   bool _pickImage = false;
   String _permission = '';
   bool is_return = false;
+  Map<String, dynamic> movementSelected = {};
   List<Map<String, dynamic>> listProducts = [];
   TextEditingController searchProductController = TextEditingController();
   //gallery permission
@@ -62,8 +63,11 @@ class _DetailPurshaseState extends State<DetailPurshase> {
   }
 
   calculateTotalQuantity() {
-    List<Map<String, dynamic>> products =
-        widget.id != null ? purshase_single['products'] : listProducts;
+    List<Map<String, dynamic>> products = showMovement
+        ? movementSelected['products']
+        : widget.id != null
+            ? purshase_single['products']
+            : listProducts;
     dynamic qte = 0;
     for (var i = 0; i < products.length; i++) {
       if (widget.id != null) {
@@ -299,14 +303,20 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                         Expanded(
                                             child: widget.id != null
                                                 ? ListView.builder(
-                                                    itemCount: purshase_single[
-                                                            'products']
-                                                        .length,
+                                                    itemCount: showMovement
+                                                        ? movementSelected[
+                                                                'products']
+                                                            .length
+                                                        : purshase_single[
+                                                                'products']
+                                                            .length,
                                                     itemBuilder:
                                                         (BuildContext context,
                                                             int index) {
-                                                      var product =
-                                                          purshase_single[
+                                                      var product = showMovement
+                                                          ? movementSelected[
+                                                              'products'][index]
+                                                          : purshase_single[
                                                                   'products']
                                                               [index];
                                                       return generateRowTable(
@@ -508,32 +518,59 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                             media);
                                                   }
                                                 })),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4),
-                                      child: SizedBox(
-                                        width: width / 3,
-                                        height: 47,
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              showSelectAction = true;
-                                            });
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            //<-- SEE HERE
-                                            backgroundColor: orange,
+                                    showMovement
+                                        ? Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 4),
+                                            child: SizedBox(
+                                              width: width / 3,
+                                              height: 47,
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    showMovement = false;
+                                                  });
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  //<-- SEE HERE
+                                                  backgroundColor: orange,
+                                                ),
+                                                child: Text(
+                                                  "Show purshase",
+                                                  style: TextStyle(
+                                                      fontSize: 24,
+                                                      color: white),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 4),
+                                            child: SizedBox(
+                                              width: width / 3,
+                                              height: 47,
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    showSelectAction = true;
+                                                  });
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  //<-- SEE HERE
+                                                  backgroundColor: orange,
+                                                ),
+                                                child: Text(
+                                                  widget.id != null
+                                                      ? "Add Movment"
+                                                      : "Add Product",
+                                                  style: TextStyle(
+                                                      fontSize: 24,
+                                                      color: white),
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                          child: Text(
-                                            widget.id != null
-                                                ? "Add Movment"
-                                                : "Add Product",
-                                            style: TextStyle(
-                                                fontSize: 24, color: white),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
                                   ],
                                 ),
                               )),
@@ -778,6 +815,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
     return InkWell(
       onTap: () {
         setState(() {
+          movementSelected = movement;
           showMovement = true;
         });
       },
