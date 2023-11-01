@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 
 class Menu extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -77,7 +79,7 @@ class _MenuState extends State<Menu> {
                   width: 100,
                   decoration: BoxDecoration(
                     image: DecorationImage(image: NetworkImage(user['image'])),
-                    color: orange,
+                    color: primaryColor,
                     borderRadius: BorderRadius.circular(
                         MediaQuery.of(context).size.height),
                     // color: widget.color ?? orange,
@@ -113,7 +115,7 @@ class _MenuState extends State<Menu> {
                         : MediaQuery.of(context).size.width / 10,
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     decoration: BoxDecoration(
-                      color: home_index == i ? orange : backgroundColor,
+                      color: home_index == i ? primaryColor : backgroundColor,
                       borderRadius: BorderRadius.all(
                         Radius.circular(6.0),
                       ),

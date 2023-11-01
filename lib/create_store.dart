@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/widgets/input_form.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'info_page.dart';
@@ -28,7 +29,7 @@ class CreateStore extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.shopping_cart,
-                      color: orange,
+                      color: primaryColor,
                       size: 50,
                     ),
                     Text(
@@ -216,7 +217,7 @@ class CreateStore extends StatelessWidget {
                                           child: Icon(
                                         Icons.add_circle_rounded,
                                         size: 30,
-                                        color: orange,
+                                        color: primaryColor,
                                       ))
                                     ],
                                   ),
@@ -230,7 +231,7 @@ class CreateStore extends StatelessWidget {
                                           child: Icon(
                                         Icons.add_circle_rounded,
                                         size: 30,
-                                        color: orange,
+                                        color: primaryColor,
                                       ))
                                     ],
                                   ),
@@ -300,7 +301,7 @@ class CreateStore extends StatelessWidget {
                                       ),
                                       Icon(
                                         Icons.add_circle_rounded,
-                                        color: orange,
+                                        color: primaryColor,
                                         size: 30,
                                       )
                                     ],
@@ -343,7 +344,7 @@ class CreateStore extends StatelessWidget {
                                       ),
                                       Icon(
                                         Icons.add_circle_rounded,
-                                        color: orange,
+                                        color: primaryColor,
                                         size: 30,
                                       )
                                     ],
@@ -572,7 +573,7 @@ class CreateStore extends StatelessWidget {
                                         },
                                         style: ElevatedButton.styleFrom(
                                           //<-- SEE HERE
-                                          backgroundColor: orange,
+                                          backgroundColor: primaryColor,
                                         ),
                                         child: const Text(
                                           'Submit',

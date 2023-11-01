@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/home.dart';
 import 'create_store.dart';
 
@@ -83,7 +84,7 @@ class _AuthState extends State<Auth> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      orange, // First color stop
+                      primaryColor, // First color stop
                       backgroundColor, // Second color stop
                     ],
                     stops: [0.492, 0.69], // Relative position of color stops
@@ -151,7 +152,7 @@ class _AuthState extends State<Auth> {
                 },
                 child: Text(
                   "LogIn",
-                  style: TextStyle(fontSize: 12, color: orange),
+                  style: TextStyle(fontSize: 12, color: primaryColor),
                 ),
               ),
             ],
@@ -243,7 +244,7 @@ class _AuthState extends State<Auth> {
                   },
                   child: Text(
                     "SingIn",
-                    style: TextStyle(fontSize: 12, color: orange),
+                    style: TextStyle(fontSize: 12, color: primaryColor),
                   ),
                 ),
               ],

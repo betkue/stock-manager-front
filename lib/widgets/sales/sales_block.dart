@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/widgets/sales/sale.dart';
 
 class AllSales extends StatefulWidget {

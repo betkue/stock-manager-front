@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/create_store.dart';
 import 'package:stock_manager/login.dart';
 import 'package:stock_manager/widgets/two_column.dart';
@@ -119,7 +120,7 @@ class _SigninState extends State<Signin> {
                   },
                   child: Text(
                     "LogIn",
-                    style: TextStyle(fontSize: 12, color: orange),
+                    style: TextStyle(fontSize: 12, color: primaryColor),
                   ),
                 ),
               ],

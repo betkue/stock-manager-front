@@ -3,7 +3,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/products/details.dart';
 import 'package:stock_manager/widgets/products/products_block.dart';
@@ -108,8 +110,8 @@ class _ProductPageState extends State<ProductPage> {
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: white,
-                                      shadowColor: orange,
-                                      surfaceTintColor: orange,
+                                      shadowColor: primaryColor,
+                                      surfaceTintColor: primaryColor,
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20,
                                           vertical:
@@ -141,9 +143,9 @@ class _ProductPageState extends State<ProductPage> {
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:
-                                              index == 0 ? orange : white,
-                                          shadowColor: orange,
-                                          surfaceTintColor: orange,
+                                              index == 0 ? primaryColor : white,
+                                          shadowColor: primaryColor,
+                                          surfaceTintColor: primaryColor,
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 20,
                                               vertical:
@@ -164,9 +166,9 @@ class _ProductPageState extends State<ProductPage> {
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:
-                                              index == 1 ? orange : white,
-                                          shadowColor: orange,
-                                          surfaceTintColor: orange,
+                                              index == 1 ? primaryColor : white,
+                                          shadowColor: primaryColor,
+                                          surfaceTintColor: primaryColor,
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 20,
                                               vertical:
@@ -187,9 +189,9 @@ class _ProductPageState extends State<ProductPage> {
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:
-                                              index == 2 ? orange : white,
-                                          shadowColor: orange,
-                                          surfaceTintColor: orange,
+                                              index == 2 ? primaryColor : white,
+                                          shadowColor: primaryColor,
+                                          surfaceTintColor: primaryColor,
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 20,
                                               vertical:

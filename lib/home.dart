@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/dashboard.dart';
 import 'package:stock_manager/menu.dart';
 import 'package:stock_manager/widgets/profile.dart';

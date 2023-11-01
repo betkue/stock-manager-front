@@ -3,7 +3,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/suppliers/details.dart';
 import 'package:stock_manager/widgets/supplier/supplier.dart';
@@ -102,8 +104,8 @@ class _SupplierPageState extends State<SupplierPage> {
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: white,
-                                      shadowColor: orange,
-                                      surfaceTintColor: orange,
+                                      shadowColor: primaryColor,
+                                      surfaceTintColor: primaryColor,
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20,
                                           vertical:

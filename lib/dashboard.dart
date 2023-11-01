@@ -3,8 +3,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
 import 'package:d_chart/d_chart.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/load_page.dart';
 
 class DashBoard extends StatefulWidget {
@@ -253,7 +255,7 @@ class _DashBoardState extends State<DashBoard> {
                                                             return dashboard[
                                                                         'winning_percentage'] >
                                                                     0
-                                                                ? orange
+                                                                ? primaryColor
                                                                 : red;
                                                           case 'inactve':
                                                             return gray;
@@ -273,7 +275,7 @@ class _DashBoardState extends State<DashBoard> {
                                                         child: Text(
                                                       '${dashboard['winning_percentage']} %',
                                                       style: TextStyle(
-                                                          color: orange),
+                                                          color: primaryColor),
                                                     )),
                                                   ],
                                                 ),
@@ -310,7 +312,7 @@ class _DashBoardState extends State<DashBoard> {
                                                 style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w400,
-                                                  color: orange,
+                                                  color: primaryColor,
                                                 ),
                                               ),
                                             ],
@@ -345,7 +347,7 @@ class _DashBoardState extends State<DashBoard> {
                                                             fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight.w400,
-                                                            color: orange,
+                                                            color: primaryColor,
                                                           ),
                                                           textAlign:
                                                               TextAlign.center,
@@ -403,7 +405,7 @@ class _DashBoardState extends State<DashBoard> {
                                                             fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight.w400,
-                                                            color: orange,
+                                                            color: primaryColor,
                                                           ),
                                                           textAlign:
                                                               TextAlign.center,
@@ -473,7 +475,8 @@ class _DashBoardState extends State<DashBoard> {
           children: [
             Text(
               number.toString(),
-              style: TextStyle(fontWeight: FontWeight.w400, color: orange),
+              style:
+                  TextStyle(fontWeight: FontWeight.w400, color: primaryColor),
               textAlign: TextAlign.center,
             ),
             Divider(
@@ -576,7 +579,7 @@ class _DashBoardState extends State<DashBoard> {
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
-                                color: orange,
+                                color: primaryColor,
                               ),
                               textAlign: TextAlign.center,
                             )
@@ -610,7 +613,7 @@ class _DashBoardState extends State<DashBoard> {
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
-                                color: orange,
+                                color: primaryColor,
                               ),
                               textAlign: TextAlign.center,
                             )
@@ -646,7 +649,7 @@ class _DashBoardState extends State<DashBoard> {
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
-                                color: orange,
+                                color: primaryColor,
                               ),
                               textAlign: TextAlign.center,
                             )
@@ -680,7 +683,7 @@ class _DashBoardState extends State<DashBoard> {
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
-                                color: orange,
+                                color: primaryColor,
                               ),
                               textAlign: TextAlign.center,
                             )

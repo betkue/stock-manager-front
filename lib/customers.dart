@@ -3,7 +3,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/customers/details.dart';
 import 'package:stock_manager/widgets/customer/customer.dart';
@@ -103,8 +105,8 @@ class _CustomerPageState extends State<CustomerPage> {
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: white,
-                                      shadowColor: orange,
-                                      surfaceTintColor: orange,
+                                      shadowColor: primaryColor,
+                                      surfaceTintColor: primaryColor,
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20,
                                           vertical:
@@ -170,7 +172,7 @@ class _CustomerPageState extends State<CustomerPage> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(customers[index]['image'])),
-                color: orange,
+                color: primaryColor,
                 borderRadius:
                     BorderRadius.circular(MediaQuery.of(context).size.height),
                 // color: widget.color ?? orange,

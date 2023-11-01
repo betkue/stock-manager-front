@@ -1,7 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/style.dart';
 
 class TwoColumnPage extends StatefulWidget {
   Widget block;
@@ -76,7 +77,7 @@ class _TwoColumnPageState extends State<TwoColumnPage> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      orange, // First color stop
+                      primaryColor, // First color stop
                       backgroundColor, // Second color stop
                     ],
                     stops: [0.492, 0.69], // Relative position of color stops

@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 
 Widget purchase(String imagePath, String productName, String price, int state,
     int paiement_state, BuildContext context, String id, Function setParent) {
@@ -35,7 +37,7 @@ Widget purchase(String imagePath, String productName, String price, int state,
               child: Container(
                 padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  color: orange,
+                  color: primaryColor,
                   // borderRadius: BorderRadius.circular(4.0),
                 ),
                 child: Text(
@@ -69,7 +71,7 @@ Widget purchase(String imagePath, String productName, String price, int state,
                 maxLines: 1,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: state == 1 ? black : orange),
+                    color: state == 1 ? black : primaryColor),
               ),
             ),
             Expanded(
@@ -95,7 +97,7 @@ Widget purchase(String imagePath, String productName, String price, int state,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
-                color: orange,
+                color: primaryColor,
               ),
             )
           ],

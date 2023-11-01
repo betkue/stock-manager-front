@@ -6,7 +6,9 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/widgets/circular_button.dart';
 import 'package:stock_manager/widgets/account/account.dart';
@@ -172,7 +174,7 @@ class _DetailProductState extends State<DetailProduct> {
                 },
                 child: Icon(
                   Icons.arrow_back,
-                  color: orange,
+                  color: primaryColor,
                 ),
               ),
               title: Text(
@@ -274,7 +276,7 @@ class _DetailProductState extends State<DetailProduct> {
                                                                   child: Icon(
                                                                     Icons.add,
                                                                     color:
-                                                                        orange,
+                                                                        primaryColor,
                                                                   ),
                                                                 ),
                                                                 // color: Colors.amber,
@@ -447,7 +449,7 @@ class _DetailProductState extends State<DetailProduct> {
                                                         margin: EdgeInsets.only(
                                                             left: 10),
                                                         decoration: BoxDecoration(
-                                                            color: orange,
+                                                            color: primaryColor,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .all(Radius
@@ -524,7 +526,8 @@ class _DetailProductState extends State<DetailProduct> {
                                                                 },
                                                                 child: Icon(
                                                                   Icons.remove,
-                                                                  color: orange,
+                                                                  color:
+                                                                      primaryColor,
                                                                 ),
                                                               ),
                                                               trailing: Text(
@@ -583,7 +586,7 @@ class _DetailProductState extends State<DetailProduct> {
                               },
                               style: ElevatedButton.styleFrom(
                                 //<-- SEE HERE
-                                backgroundColor: orange,
+                                backgroundColor: primaryColor,
                               ),
                               child: Text(
                                 widget.id != null ? 'Modify' : "Add",
@@ -674,7 +677,8 @@ class _DetailProductState extends State<DetailProduct> {
                                                             },
                                                             child: Icon(
                                                                 Icons.add,
-                                                                color: orange),
+                                                                color:
+                                                                    primaryColor),
                                                           ),
                                                           trailing: Text(
                                                             '${listLoad[index]['price']} ' +
@@ -725,7 +729,7 @@ class _DetailProductState extends State<DetailProduct> {
                   //                           topLeft: Radius.circular(25),
                   //                           topRight: Radius.circular(25)),
                   //                       border: Border.all(
-                  //                         color: orange,
+                  //                         color: primaryColor,
                   //                         width: 1.2,
                   //                       ),
                   //                       color: white),
@@ -760,7 +764,7 @@ class _DetailProductState extends State<DetailProduct> {
                   //                                         media.width * 0.171,
                   //                                     decoration: BoxDecoration(
                   //                                         border: Border.all(
-                  //                                             color: orange,
+                  //                                             color: primaryColor,
                   //                                             width: 1.2),
                   //                                         borderRadius:
                   //                                             BorderRadius
@@ -796,7 +800,7 @@ class _DetailProductState extends State<DetailProduct> {
                   //                                         media.width * 0.171,
                   //                                     decoration: BoxDecoration(
                   //                                         border: Border.all(
-                  //                                             color: orange,
+                  //                                             color: primaryColor,
                   //                                             width: 1.2),
                   //                                         borderRadius:
                   //                                             BorderRadius

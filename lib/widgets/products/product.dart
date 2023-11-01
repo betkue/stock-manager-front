@@ -3,7 +3,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 
 Widget products(String imagePath, String productName, String price, int state,
     BuildContext context, String id, Function setParent) {
@@ -48,7 +50,7 @@ Widget products(String imagePath, String productName, String price, int state,
                 maxLines: 1,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: state == 1 ? black : orange),
+                    color: state == 1 ? black : primaryColor),
               ),
             ),
             InkWell(
@@ -57,7 +59,7 @@ Widget products(String imagePath, String productName, String price, int state,
                 setParent();
               },
               child:
-                  Icon(Icons.edit_outlined, color: state == 1 ? orange : black),
+                  Icon(Icons.edit_outlined, color: state == 1 ? primaryColor : black),
             ),
             SizedBox(width: 10),
           ],
@@ -75,7 +77,7 @@ Widget products(String imagePath, String productName, String price, int state,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 color: state == 1
-                    ? orange
+                    ? primaryColor
                     : black), //color: state == 1 ? white : black),
           ),
         ),

@@ -5,7 +5,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/functions/function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/widgets/account/account.dart';
@@ -163,7 +165,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                 },
                 child: Icon(
                   Icons.arrow_back,
-                  color: orange,
+                  color: primaryColor,
                 ),
               ),
               title: Text(
@@ -221,7 +223,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                               BorderRadius.all(
                                                                   Radius.circular(
                                                                       100)),
-                                                          color: orange,
+                                                          color: primaryColor,
                                                           image:
                                                               DecorationImage(
                                                                   image:
@@ -262,7 +264,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                                   child: Icon(
                                                                     Icons.add,
                                                                     color:
-                                                                        orange,
+                                                                        primaryColor,
                                                                   ),
                                                                 ),
                                                                 // color: Colors.amber,
@@ -533,7 +535,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                 },
                                                 style: ElevatedButton.styleFrom(
                                                   //<-- SEE HERE
-                                                  backgroundColor: orange,
+                                                  backgroundColor: primaryColor,
                                                 ),
                                                 child: Text(
                                                   "Show purshase",
@@ -558,7 +560,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                 },
                                                 style: ElevatedButton.styleFrom(
                                                   //<-- SEE HERE
-                                                  backgroundColor: orange,
+                                                  backgroundColor: primaryColor,
                                                 ),
                                                 child: Text(
                                                   widget.id != null
@@ -601,7 +603,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                               },
                               style: ElevatedButton.styleFrom(
                                 //<-- SEE HERE
-                                backgroundColor: orange,
+                                backgroundColor: primaryColor,
                               ),
                               child: Text(
                                 widget.id != null ? 'Print' : "Create",

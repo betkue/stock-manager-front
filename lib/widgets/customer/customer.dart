@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 
 Widget customer(String id, String name, String quantity, String location,
     String image, String ref, BuildContext context, Function setParent) {
@@ -32,7 +34,7 @@ Widget customer(String id, String name, String quantity, String location,
             width: 100,
             decoration: BoxDecoration(
               image: DecorationImage(image: NetworkImage(image)),
-              color: orange,
+              color: primaryColor,
               borderRadius:
                   BorderRadius.circular(MediaQuery.of(context).size.height),
               // color: widget.color ?? orange,

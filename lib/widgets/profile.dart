@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/menu.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class Profile extends StatelessWidget {
           bottomLeft: Radius.circular(Responsive.isMobile(context) ? 10 : 30.0),
           topLeft: Radius.circular(Responsive.isMobile(context) ? 10 : 30.0),
         ),
-        color: orange,
+        color: primaryColor,
       ),
       child: SingleChildScrollView(
         child: Padding(

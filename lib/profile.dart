@@ -3,7 +3,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stock_manager/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/widgets/account/account.dart';
 import 'package:stock_manager/test.dart';
@@ -102,7 +104,7 @@ class _AccountPageState extends State<AccountPage> {
                                                 width: 50,
                                                 height: 50,
                                                 decoration: BoxDecoration(
-                                                    color: orange,
+                                                    color: primaryColor,
                                                     borderRadius:
                                                         BorderRadius.all(
                                                       Radius.circular(
@@ -175,7 +177,7 @@ class _AccountPageState extends State<AccountPage> {
                         //         bottom: 18,
                         //         right: 18,
                         //         child: FloatingActionButton(
-                        //           backgroundColor: orange,
+                        //           backgroundColor: primaryColor,
                         //           onPressed: () {
                         //             // Handle button press
                         //           },
@@ -301,7 +303,7 @@ class _AccountPageState extends State<AccountPage> {
                                             },
                                             style: ElevatedButton.styleFrom(
                                               //<-- SEE HERE
-                                              backgroundColor: orange,
+                                              backgroundColor: primaryColor,
                                             ),
                                             child: const Text(
                                               'Modify',
