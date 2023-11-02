@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/home.dart';
 import 'package:stock_manager/signin.dart';
@@ -15,9 +16,11 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     return TwoColumnPage(
+      loading: loading,
       block: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +50,10 @@ class _LogInState extends State<LogIn> {
               ],
             ),
             child: TextField(
+              controller: emailController,
+              cursorColor: black,
               decoration: InputDecoration(
+                labelStyle: TextStyle(color: black),
                 labelText: 'Email',
                 border: InputBorder.none,
                 prefixIcon: Icon(Icons.key),
@@ -71,7 +77,10 @@ class _LogInState extends State<LogIn> {
               ],
             ),
             child: TextField(
+              controller: passwordController,
+              cursorColor: black,
               decoration: InputDecoration(
+                labelStyle: TextStyle(color: black),
                 labelText: 'Password',
                 border: InputBorder.none,
                 prefixIcon: Icon(Icons.key),
@@ -101,24 +110,26 @@ class _LogInState extends State<LogIn> {
                   ),
                 ],
               )),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: SizedBox(
-              width: 250,
-              height: 47,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
-                },
-                style: ElevatedButton.styleFrom(
-                  //<-- SEE HERE
-                  backgroundColor: backgroundColor,
-                ),
-                child: Text('LogIn', style: TextStyle(fontSize: 24)),
-              ),
-            ),
-          ),
+          emailController.text.isNotEmpty && passwordController.text.isNotEmpty
+              ? Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: SizedBox(
+                    width: 250,
+                    height: 47,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Home()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        //<-- SEE HERE
+                        backgroundColor: backgroundColor,
+                      ),
+                      child: Text('LogIn', style: TextStyle(fontSize: 24)),
+                    ),
+                  ),
+                )
+              : Container(),
         ],
       ),
     );

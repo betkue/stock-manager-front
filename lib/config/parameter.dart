@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 dynamic pref;
-
-
+dynamic token;
+dynamic phcode;
+dynamic country_id;
+List countries = [];
 Map<String, dynamic> company = {
   "currency": {"symbol": "FCFA", "is_double": false},
   "customers": 60,
@@ -485,3 +487,9 @@ TextEditingController searchPurchasesController = TextEditingController();
 TextEditingController searchSalesController = TextEditingController();
 TextEditingController searchSuppliersController = TextEditingController();
 TextEditingController searchCustomersController = TextEditingController();
+
+TextEditingController nameController = TextEditingController();
+TextEditingController emailController = TextEditingController();
+TextEditingController passwordController = TextEditingController();
+TextEditingController confirmPasswordController = TextEditingController();
+TextEditingController phoneController = TextEditingController();

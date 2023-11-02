@@ -1,5 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:http/http.dart' as http;
 
 convertDate(
   DateTime tm,
@@ -96,87 +103,122 @@ convertDate(
 
   //return "";
 }
+
 internetTrue() {
   internet = true;
 }
-getDetailsOfDevice() async {
-  // var connectivityResult = await (Connectivity().checkConnectivity());
-  // if (connectivityResult == ConnectivityResult.none) {
-  //   internet = false;
-  // } else {
-  //   internet = true;
-  // }
-  // try {
-  //   pref = await SharedPreferences.getInstance();
 
-  // } catch (e) {
-  //   if (e is SocketException) {
-  //     internet = false;
-  //   }
-  // }
+getDetailsOfDevice() async {
+  var connectivityResult = await (Connectivity().checkConnectivity());
+  if (connectivityResult == ConnectivityResult.none) {
+    internet = false;
+  } else {
+    internet = true;
+  }
+  try {
+    pref = await SharedPreferences.getInstance();
+  } catch (e) {
+    if (e is SocketException) {
+      internet = false;
+    }
+  }
+}
+
+setToken(String token) {
+  // pref.setString('token', token);
+}
+
+getToken() {
+  var token = pref.getString('token');
+
+  return token;
 }
 
 getLocalData() async {
-  // dynamic result;
-  // var connectivityResult = await (Connectivity().checkConnectivity());
-  // if (connectivityResult == ConnectivityResult.none) {
-  //   internet = false;
-  // } else {
-  //   internet = true;
-  // }
-  // try {
-  //   if (pref.containsKey('userId')) {
-  //     var tokens = pref.getString('userId');
-  //     if (tokens != null && tokens != '') {
-  //       userID = tokens;
+  dynamic result;
+  var connectivityResult = await (Connectivity().checkConnectivity());
+  if (connectivityResult == ConnectivityResult.none) {
+    internet = false;
+  } else {
+    internet = true;
+  }
+  try {
+    if (pref.containsKey('token')) {
+      var tokens = getToken();
+      if (tokens != null && tokens != '') {
+        token = tokens;
 
-  //       var responce = await getUserDetails(userID);
-  //       if (responce == true) {
-  //         result = true;
-  //       } else if (responce == false) {
-  //         result = false;
-  //       }
-  //     } else {
-  //       result = false;
-  //     }
-  //   } else {
-  //     result = false;
-  //   }
-  // } catch (e) {
-  //   if (e is SocketException) {
-  //     result = 'no internet';
-  //     internet = false;
-  //   }
-  // }
+        var responce = await getUserDetails(token);
+        if (responce == true) {
+          result = true;
+        } else if (responce == false) {
+          result = false;
+        }
+      } else {
+        result = false;
+      }
+    } else {
+      result = false;
+    }
+  } catch (e) {
+    if (e is SocketException) {
+      result = 'no internet';
+      internet = false;
+    }
+  }
 
-  // if (pref.containsKey('name')) {
-  //   nameController.text = pref.getString('name') ?? "";
-  // } else {
-  //   var pref = await SharedPreferences.getInstance();
-  //   pref.setString("name", userDetails['name'] ?? "");
-  // }
-
-  // if (pref.containsKey('address')) {
-  //   addressController.text = pref.getString('address') ?? "";
-  // } else {
-  //   pref.setString("address", "");
-  // }
-
-  // if (pref.containsKey('phones')) {
-  //   List<String> phones = pref.getStringList("phones");
-  //   for (var element in phones) {
-  //     phoneControllers.add(TextEditingController(text: element));
-  //   }
-  //   // .text =;
-  // } else {
-  //   pref.setStringList("phones", [""]);
-  // }
-
-  // if (pref.containsKey('code')) {
-  //   codeController.text = pref.getString('code') ?? "";
-  // } else {
-  //   pref.setString("code", "");
-  // }
-
-  // return result;
+  return result;
 }
+
+getUserDetails(token) async {
+  dynamic result;
+  try {
+    var response = await http.get(
+      Uri.parse('${api}user'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${token}'
+      },
+    );
+    if (response.statusCode == 200) {
+      user = Map<String, dynamic>.from(jsonDecode(response.body)['user']);
+      result = true;
+    } else if (response.statusCode == 401) {
+      result = 'logout';
+    } else {
+      debugPrint(response.body);
+      result = false;
+    }
+  } catch (e) {
+    if (e is SocketException) {
+      internet = false;
+    }
+  }
+  return result;
+}
+
+getCountryCode() async {
+  dynamic result;
+  try {
+    final response = await http.post(Uri.parse('${api}country/list'));
+
+    if (response.statusCode == 200) {
+      countries = jsonDecode(response.body)['data'];
+      phcode =
+          (countries.where((element) => element['default'] == true).isNotEmpty)
+              ? countries.indexWhere((element) => element['default'] == true)
+              : 0;
+      result = 'success';
+    } else {
+      debugPrint(response.body);
+      result = 'error';
+    }
+  } catch (e) {
+    if (e is SocketException) {
+      internet = false;
+      result = 'no internet';
+    }
+  }
+  return result;
+}
+

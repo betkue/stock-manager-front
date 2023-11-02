@@ -19,10 +19,9 @@ const Color buttonText = Colors.white;
 const Color buttonColor = primaryColor;
 const Color loaderColor = primaryColor;
 
-
-
 InputDecoration inputDecoration(String hintText) => InputDecoration(
     filled: true,
+    labelStyle: TextStyle(color: black),
     border: OutlineInputBorder(
       borderSide: BorderSide.none,
       borderRadius: BorderRadius.circular((5)),
