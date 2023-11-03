@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
@@ -222,3 +223,13 @@ getCountryCode() async {
   return result;
 }
 
+showToast(String title, Color color) {
+  Fluttertoast.showToast(
+      msg: title,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: color,
+      textColor: Colors.white,
+      fontSize: 16.0);
+}

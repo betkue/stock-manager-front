@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/functions/function.dart';
 
 registerUser(String name, String email, String password, String phone,
@@ -47,9 +48,9 @@ registerUser(String name, String email, String password, String phone,
     // );
     var request = await response.send();
     var respon = await http.Response.fromStream(request);
+    var jsonVal = jsonDecode(respon.body);
     switch (respon.statusCode) {
       case 200:
-        var jsonVal = jsonDecode(respon.body);
         user = Map<String, dynamic>.from(jsonVal);
         token = jsonVal['access_token'];
 
@@ -57,13 +58,16 @@ registerUser(String name, String email, String password, String phone,
         result = true;
         break;
       case 401:
+        showToast(jsonVal['special'], red);
         result = "INput Error"; //jsonDecode(response.body)['message'];
         break;
       case 404:
+        showToast(jsonVal['special'], red);
         result = "Not Found";
         break;
       default:
         // debugPrint(response.body);
+        showToast("Server Error", red);
         result = "Server errr";
     }
   } catch (e) {
@@ -85,14 +89,12 @@ login(String email, String password) async {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: jsonEncode({
-        "email": email,
-        "password": password,
-      }),
+      body:
+          jsonEncode({"email": email, "password": password, "fromApi": "true"}),
     );
+    var jsonVal = jsonDecode(response.body);
     switch (response.statusCode) {
       case 200:
-        var jsonVal = jsonDecode(response.body);
         user = Map<String, dynamic>.from(jsonVal);
         token = jsonVal['access_token'];
         setToken(token);
@@ -100,12 +102,15 @@ login(String email, String password) async {
         break;
       case 401:
         result = "INput Error"; //jsonDecode(response.body)['message'];
+        showToast(jsonVal['special'], red);
         break;
       case 404:
         result = "Not Found";
+        showToast(jsonVal['special'], red);
         break;
       default:
         debugPrint(response.body);
+        showToast("Server Error", red);
         result = "Server errr";
     }
   } catch (e) {

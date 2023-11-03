@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.0.5
   connectivity_plus: ^5.0.1
   shared_preferences: ^2.2.2
+  fluttertoast: ^8.2.2
   fl_chart: ^0.63.0
   d_chart: ^2.3.0
   image_picker: ^1.0.4
