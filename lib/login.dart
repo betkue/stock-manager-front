@@ -6,6 +6,7 @@ import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/create_store.dart';
 import 'package:stock_manager/functions/auth_function.dart';
 import 'package:stock_manager/home.dart';
+import 'package:stock_manager/main.dart';
 import 'package:stock_manager/signin.dart';
 import 'package:stock_manager/widgets/two_column.dart';
 
@@ -142,7 +143,7 @@ class _LogInState extends State<LogIn> {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => CreateStore()),
+                                  builder: (context) => MyApp()),
                               (route) => false);
                         } else if (result == false) {
                           error = "echec";
