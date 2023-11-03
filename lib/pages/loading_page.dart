@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/style.dart';
+import 'package:stock_manager/create_store.dart';
 import 'package:stock_manager/functions/function.dart';
 import 'package:stock_manager/home.dart';
 import 'package:stock_manager/pages/loading.dart';
@@ -25,27 +26,49 @@ class _LoadingPageState extends State<LoadingPage> {
 
   initialiseApp() async {
     await getDetailsOfDevice();
-      if (internet == true) {
-        var val = await getLocalData();
+    if (internet == true) {
+      var val = await getLocalData();
 
-        //if user is login 
-        if (val == true) {
+      //if user is login
+      if (val == true) {
+        //if user have store
+        var haveStore = await true;
+        //if user have store
+        if (haveStore) {
+          var storeAvtive = await true;
+          //if user  store activated
+          if (storeAvtive) {
+            Future.delayed(const Duration(seconds: 2), () {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Home()));
+            });
+          } else {
+            //if user  store not activated
+            Future.delayed(const Duration(seconds: 2), () {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Home()));
+            });
+          }
+        } else {
+          //if user don't have store
           Future.delayed(const Duration(seconds: 2), () {
             Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const Home()));
+                MaterialPageRoute(builder: (context) => CreateStore()));
           });
         }
-        //if user is not login in this device
-        else{
-          Future.delayed(const Duration(seconds: 2), () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const Signin()));
-          });
-        } 
-      } else {
-        setState(() {});
       }
+      //if user is not login in this device
+      else {
+        Future.delayed(const Duration(seconds: 2), () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => const Signin()));
+        });
+      }
+    } else {
+      setState(() {});
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;

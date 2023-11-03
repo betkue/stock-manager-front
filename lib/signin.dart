@@ -29,11 +29,11 @@ class Signin extends StatefulWidget {
 class _SigninState extends State<Signin> {
   bool loading = true;
 
-  String _permission = '';
+
   dynamic imageFile;
   dynamic error;
 
-  bool _pickImage = false;
+
   ImagePicker picker = ImagePicker();
 
   getGalleryPermission() async {
@@ -50,10 +50,8 @@ class _SigninState extends State<Signin> {
     setState(() {
       if (pickedFile != null) {
         imageFile = pickedFile.path;
-        _pickImage = false;
       }
 
-      _pickImage = false;
     });
   }
 

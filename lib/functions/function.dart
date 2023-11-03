@@ -126,7 +126,7 @@ getDetailsOfDevice() async {
 }
 
 setToken(String token) {
-  // pref.setString('token', token);
+  pref.setString('token', token);
 }
 
 getToken() {

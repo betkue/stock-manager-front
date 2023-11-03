@@ -1,19 +1,51 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/widgets/input_form.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'info_page.dart';
 
-class CreateStore extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-
+class CreateStore extends StatefulWidget {
   CreateStore({super.key});
 
   @override
+  State<CreateStore> createState() => _CreateStoreState();
+}
+
+class _CreateStoreState extends State<CreateStore> {
+  final _formKey = GlobalKey<FormState>();
+  dynamic imageFile;
+  dynamic error;
+
+  ImagePicker picker = ImagePicker();
+
+  getGalleryPermission() async {
+    var status = await Permission.photos.status;
+    if (status != PermissionStatus.granted) {
+      status = await Permission.photos.request();
+    }
+    return status;
+  }
+
+  //pick image from gallery
+  pickImageFromGallery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      if (pickedFile != null) {
+        imageFile = pickedFile.path;
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    dynamic media = MediaQuery.of(context).size;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: backgroundColor,
@@ -61,7 +93,7 @@ class CreateStore extends StatelessWidget {
                   Expanded(
                     child: Center(
                       child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             // Store logo
                             const Padding(
@@ -74,46 +106,73 @@ class CreateStore extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(28),
-                              child: InkWell(
-                                onTap: () {
-                                  // Handle image input logic here
-                                },
-                                child: DottedBorder(
-                                  dashPattern: const [8, 4],
-                                  strokeWidth: 2,
-                                  color: Colors.white,
-                                  radius: Radius.circular(
-                                      20), // Add radius for rounded corners to the first DottedBorder
-                                  child: SizedBox(
-                                    height: 200,
-                                    width: 200,
-                                    child: ClipOval(
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  pickImageFromGallery();
+                                });
+                              },
+                              child: (imageFile == null)
+                                  ? Container(
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: media.height / 40),
+                                      width: media.width / 5,
+                                      height: media.width / 5,
                                       child: DottedBorder(
-                                        dashPattern: const [8, 4],
-                                        strokeWidth: 2,
-                                        color: Colors.white,
-                                        borderPadding: const EdgeInsets.all(8),
-                                        child: Center(
+                                        borderType: BorderType.RRect,
+                                        color: white,
+                                        borderPadding: EdgeInsets.all(6),
+                                        dashPattern: [8, 8],
+                                        radius: Radius.circular(12),
+                                        padding: EdgeInsets.all(6),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
                                           child: SizedBox(
-                                            height:
-                                                180, // Adjust the size of the icon container as needed
-                                            width:
-                                                180, // Adjust the size of the icon container as needed
-                                            child: Icon(
-                                              Icons.add,
-                                              color: Colors.white,
-                                              size:
-                                                  50, // Adjust the size of the icon as needed
+                                            height: media.width / 5,
+                                            width: media.width / 5,
+
+                                            child: Center(
+                                              child: DottedBorder(
+                                                borderType: BorderType.RRect,
+                                                radius: Radius.circular(12),
+                                                padding: EdgeInsets.all(6),
+                                                dashPattern: [8, 8],
+                                                color: white,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(12)),
+                                                  child: SizedBox(
+                                                    height: media.width / 10,
+                                                    width: media.width / 10,
+                                                    child: Center(
+                                                      child: Icon(
+                                                        Icons.add,
+                                                        color: white,
+                                                      ),
+                                                    ),
+                                                    // color: Colors.amber,
+                                                  ),
+                                                ),
+                                              ),
                                             ),
+                                            // color: Colors.amber,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                    )
+                                  : Container(
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: media.height / 40),
+                                      width: media.width / 10,
+                                      height: media.width / 10,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
+                                          image: DecorationImage(
+                                              image: FileImage(File(imageFile)),
+                                              fit: BoxFit.cover))),
                             ),
                             /*Container(
                               width: width / 6.5,
