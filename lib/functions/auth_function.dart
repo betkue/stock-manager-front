@@ -11,64 +11,47 @@ import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/functions/function.dart';
 
 registerUser(String name, String email, String password, String phone,
-    File imageFile) async {
+    dynamic imageFile) async {
   dynamic result;
   try {
-    // List<int> imageBytes = image.readAsBytesSync();
+    // List<int> imageBytes = imageFile.readAsBytesSync();
     // String base64Image = base64Encode(imageBytes);
-    var uri = Uri.parse('${api}auth/register');
 
-    var stream =
-        new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-    // get file length
-    var length = await imageFile.length();
-
-    // create multipart request
-    var request = new http.MultipartRequest("POST", uri);
-
-    // multipart that takes file
-    var multipartFile = new http.MultipartFile('image', stream, length,
-        filename: basename(imageFile.path));
-    // add file to multipart
-    request.files.add(multipartFile);
-    // Add the email field.
-    request.fields['email'] = email;
-
-    // Add the password field.
-    request.fields['password'] = password;
-
-    // Add the name field.
-    request.fields['name'] = name;
-
-    // Add the country_id field.
-    request.fields['country_id'] = '$country_id';
-
-    // Add the phone field.
-    request.fields['phone'] = phone;
-
-    // send
-    var response = await request.send();
-
+    final response =
+        http.MultipartRequest('POST', Uri.parse('${api}auth/register'));
+    response.headers.addAll({'Content-Type': 'application/json'});
+    if (imageFile != null) {
+      response.files.add(await http.MultipartFile.fromPath('image', imageFile));
+    }
+    response.fields.addAll({
+      "email": email,
+      "password": password,
+      "name": name,
+      "country_id": "$country_id",
+      "phone": phone,
+    });
     // var response = await http.post(
     //   Uri.parse('${api}auth/register'),
     //   headers: {
-    //     // 'Content-Type': 'application/json',
-    //     'Content-Type': 'multipart/form-data'
+    //     'Content-Type': 'application/json',
+    //     // 'Content-Type': 'multipart/form-data'
     //   },
-    //   body: {
+    //   body: jsonEncode({
     //     "email": email,
     //     "password": password,
     //     "name": name,
     //     "country_id": country_id,
     //     "phone": phone,
-    //     "image": imageFile
-    //   },
+    //     "image": base64Image
+    //   }),
     // );
-
-    switch (response.statusCode) {
+    var request = await response.send();
+    var respon = await http.Response.fromStream(request);
+    switch (respon.statusCode) {
       case 200:
-        // user = Map<String, dynamic>.from(jsonDecode(response.body)['user']);
-        // token = jsonDecode(response.body)['access_token'];
+        var jsonVal = jsonDecode(respon.body);
+        user = Map<String, dynamic>.from(jsonVal);
+        token = jsonVal['access_token'];
 
         setToken(token);
         result = true;
@@ -86,9 +69,10 @@ registerUser(String name, String email, String password, String phone,
   } catch (e) {
     result = "Server errr";
     if (e is SocketException) {
-      debugPrint(e.toString());
       internet = false;
     }
+
+    debugPrint(e.toString());
   }
   return result;
 }
@@ -108,8 +92,9 @@ login(String email, String password) async {
     );
     switch (response.statusCode) {
       case 200:
-        user = Map<String, dynamic>.from(jsonDecode(response.body)['user']);
-        token = jsonDecode(response.body)['access_token'];
+        var jsonVal = jsonDecode(response.body);
+        user = Map<String, dynamic>.from(jsonVal);
+        token = jsonVal['access_token'];
         setToken(token);
         result = true;
         break;

@@ -95,7 +95,7 @@ class _SigninState extends State<Signin> {
                   Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Text(
-                      error ?? 'Create your account',
+                      'Create your account',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 25,
@@ -642,7 +642,7 @@ class _SigninState extends State<Signin> {
                                     emailController.text,
                                     passwordController.text,
                                     phoneController.text,
-                                    File(imageFile));
+                                    imageFile);
 
                                 if (result == true) {
                                   Navigator.pushAndRemoveUntil(
