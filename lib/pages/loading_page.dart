@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/create_store.dart';
 import 'package:stock_manager/functions/function.dart';
 import 'package:stock_manager/functions/store_function.dart';
 import 'package:stock_manager/home.dart';
+import 'package:stock_manager/info_page.dart';
 import 'package:stock_manager/pages/loading.dart';
 import 'package:stock_manager/pages/no_internet.dart';
 import 'package:stock_manager/signin.dart';
@@ -37,7 +39,7 @@ class _LoadingPageState extends State<LoadingPage> {
         var haveStore = await getStore();
         //if user have store
         if (haveStore) {
-          var storeAvtive = await true;
+          var storeAvtive = company['is_active'];
           //if user  store activated
           if (storeAvtive) {
             if (internet) {
@@ -50,8 +52,8 @@ class _LoadingPageState extends State<LoadingPage> {
             //if user  store not activated
             if (internet) {
               Future.delayed(const Duration(seconds: 2), () {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => Home()));
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => InfoPage()));
               });
             }
           }

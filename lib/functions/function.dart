@@ -212,7 +212,7 @@ getCountryCode() async {
           (countries.where((element) => element['default'] == true).isNotEmpty)
               ? countries.indexWhere((element) => element['default'] == true)
               : 0;
-      country_id = currencies[phcode]['id'];
+      country_id = countries[phcode]['id'];
       result = 'success';
     } else {
       debugPrint(response.body);
@@ -235,6 +235,7 @@ getCurrencyCode() async {
     if (response.statusCode == 200) {
       currencies = jsonDecode(response.body)['data'];
       curcode = 0;
+      currency_id = currencies[curcode]['id'];
       result = 'success';
     } else {
       debugPrint(response.body);
@@ -249,7 +250,7 @@ getCurrencyCode() async {
   return result;
 }
 
-showToast(String title, Color color,BuildContext context) {
+showToast(String title, Color color, BuildContext context) {
   // Fluttertoast.showToast(
   //     msg: title,
   //     toastLength: Toast.LENGTH_SHORT,
@@ -259,7 +260,7 @@ showToast(String title, Color color,BuildContext context) {
   //     textColor: Colors.white,
   //     fontSize: 16.0);
   ScaffoldMessenger.of(context).showSnackBar(
-     SnackBar(
+    SnackBar(
       content: Text(title),
       backgroundColor: color,
     ),
