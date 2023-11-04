@@ -152,7 +152,7 @@ getLocalData() async {
         var responce = await getUserDetails(token);
         if (responce == true) {
           result = true;
-        } else if (responce == false) {
+        } else {
           result = false;
         }
       } else {
@@ -178,19 +178,20 @@ getUserDetails(token) async {
       Uri.parse('${api}user'),
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
         'Authorization': 'Bearer ${token}'
       },
     );
     if (response.statusCode == 200) {
-      user = Map<String, dynamic>.from(jsonDecode(response.body)['user']);
+      user = Map<String, dynamic>.from(jsonDecode(response.body));
       result = true;
-    } else if (response.statusCode == 401) {
-      result = 'logout';
     } else {
       debugPrint(response.body);
+
       result = false;
     }
   } catch (e) {
+    result = false;
     if (e is SocketException) {
       internet = false;
     }
@@ -201,7 +202,9 @@ getUserDetails(token) async {
 getCountryCode() async {
   dynamic result;
   try {
-    final response = await http.post(Uri.parse('${api}country/list'));
+    await getCurrencyCode();
+
+    final response = await http.post(Uri.parse('${api}country'));
 
     if (response.statusCode == 200) {
       countries = jsonDecode(response.body)['data'];
@@ -209,6 +212,29 @@ getCountryCode() async {
           (countries.where((element) => element['default'] == true).isNotEmpty)
               ? countries.indexWhere((element) => element['default'] == true)
               : 0;
+      country_id = currencies[phcode]['id'];
+      result = 'success';
+    } else {
+      debugPrint(response.body);
+      result = 'error';
+    }
+  } catch (e) {
+    if (e is SocketException) {
+      internet = false;
+      result = 'no internet';
+    }
+  }
+  return result;
+}
+
+getCurrencyCode() async {
+  dynamic result;
+  try {
+    final response = await http.post(Uri.parse('${api}currency'));
+
+    if (response.statusCode == 200) {
+      currencies = jsonDecode(response.body)['data'];
+      curcode = 0;
       result = 'success';
     } else {
       debugPrint(response.body);

@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 dynamic pref;
 dynamic token;
 dynamic phcode;
+
+dynamic curcode;
 dynamic country_id;
+dynamic currency_id;
 List countries = [];
+List currencies = [];
 Map<String, dynamic> company = {
-  "currency": {"symbol": "FCFA", "is_double": false},
-  "customers": 60,
-  "suppliers": 20
+  // "currency": {"symbol": "FCFA", "is_double": false},
+  // "customers": 60,
+  // "suppliers": 20
 };
 
 Map<String, dynamic> user = {

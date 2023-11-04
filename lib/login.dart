@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/create_store.dart';
@@ -23,12 +24,17 @@ class _LogInState extends State<LogIn> {
   dynamic error;
   @override
   Widget build(BuildContext context) {
+    dynamic media = MediaQuery.of(context).size;
+
     return TwoColumnPage(
       loading: loading,
       block: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SizedBox(
+            height: 50,
+          ),
           Padding(
             padding: EdgeInsets.all(16.0),
             child: Text('Login',
@@ -37,6 +43,19 @@ class _LogInState extends State<LogIn> {
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFFFFFFFF))),
+          ),
+          Container(
+              margin: EdgeInsets.symmetric(vertical: media.height / 40),
+              padding: EdgeInsets.all(5),
+              width: media.width / 10,
+              height: media.width / 10,
+              decoration: BoxDecoration(
+                  color: backgroundColor,
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  image: DecorationImage(
+                      image: AssetImage(logo), fit: BoxFit.contain))),
+          SizedBox(
+            height: 100,
           ),
           Container(
             width: 250,
@@ -142,8 +161,7 @@ class _LogInState extends State<LogIn> {
                         if (result == true) {
                           Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyApp()),
+                              MaterialPageRoute(builder: (context) => MyApp()),
                               (route) => false);
                         } else if (result == false) {
                           error = "echec";

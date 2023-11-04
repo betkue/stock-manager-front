@@ -27,42 +27,51 @@ class _LoadingPageState extends State<LoadingPage> {
   initialiseApp() async {
     await getDetailsOfDevice();
     if (internet == true) {
+      await getCountryCode();
       var val = await getLocalData();
 
       //if user is login
       if (val == true) {
         //if user have store
-        var haveStore = await true;
+        var haveStore = await false;
         //if user have store
         if (haveStore) {
           var storeAvtive = await true;
           //if user  store activated
           if (storeAvtive) {
-            Future.delayed(const Duration(seconds: 2), () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => Home()));
-            });
+            if (internet) {
+              Future.delayed(const Duration(seconds: 2), () {
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => Home()));
+              });
+            }
           } else {
             //if user  store not activated
-            Future.delayed(const Duration(seconds: 2), () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => Home()));
-            });
+            if (internet) {
+              Future.delayed(const Duration(seconds: 2), () {
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => Home()));
+              });
+            }
           }
         } else {
           //if user don't have store
-          Future.delayed(const Duration(seconds: 2), () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => CreateStore()));
-          });
+          if (internet) {
+            Future.delayed(const Duration(seconds: 2), () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => CreateStore()));
+            });
+          }
         }
       }
       //if user is not login in this device
       else {
-        Future.delayed(const Duration(seconds: 2), () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => const Signin()));
-        });
+        if (internet) {
+          Future.delayed(const Duration(seconds: 2), () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const Signin()));
+          });
+        }
       }
     } else {
       setState(() {});

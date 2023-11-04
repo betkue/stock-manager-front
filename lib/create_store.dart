@@ -5,8 +5,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
+import 'package:stock_manager/functions/function.dart';
+import 'package:stock_manager/widgets/circular_button.dart';
 import 'package:stock_manager/widgets/input_form.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'info_page.dart';
@@ -22,6 +24,19 @@ class _CreateStoreState extends State<CreateStore> {
   final _formKey = GlobalKey<FormState>();
   dynamic imageFile;
   dynamic error;
+  TextEditingController currencyController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController urlController = TextEditingController();
+  List<TextEditingController> emails = [TextEditingController()];
+  List<TextEditingController> contacts = [TextEditingController()];
+  List<TextEditingController> faxs = [TextEditingController()];
+  TextEditingController townController = TextEditingController();
+  TextEditingController nrcController = TextEditingController();
+  TextEditingController nCOntController = TextEditingController();
+  TextEditingController tvaController = TextEditingController();
+  TextEditingController zipController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   ImagePicker picker = ImagePicker();
 
@@ -41,6 +56,13 @@ class _CreateStoreState extends State<CreateStore> {
         imageFile = pickedFile.path;
       }
     });
+  }
+
+  @override
+  void initState() {
+    countryController.text = countries[phcode]['name'];
+    currencyController.text = currencies[curcode]['symbol'];
+    super.initState();
   }
 
   @override
@@ -267,6 +289,22 @@ class _CreateStoreState extends State<CreateStore> {
                                   inputContain(width, 'Store URL'),
                                   const SizedBox(height: 20),
                                   label('Contacts informations'),
+                                  const SizedBox(height: 20),
+                                  label(' Fax'),
+                                  Wrap(
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    children: [
+                                      inputContain(width, 'Fax'),
+                                      InkWell(
+                                          child: Icon(
+                                        Icons.add_circle_rounded,
+                                        size: 30,
+                                        color: primaryColor,
+                                      ))
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
                                   Wrap(
                                     crossAxisAlignment:
                                         WrapCrossAlignment.center,
@@ -295,20 +333,494 @@ class _CreateStoreState extends State<CreateStore> {
                                     ],
                                   ),
                                   const SizedBox(height: 20),
-                                  label('Store location'),
-                                  inputContain(width, 'Country'),
+                                  label('Country'),
+                                  InkWell(
+                                    onTap: () async {
+                                      if (countries.isNotEmpty) {
+                                        //dialod box for select country for dial code
+                                        await showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              var searchVal = '';
+                                              return AlertDialog(
+                                                insetPadding:
+                                                    const EdgeInsets.all(10),
+                                                content: StatefulBuilder(
+                                                    builder:
+                                                        (context, setState) {
+                                                  return Container(
+                                                    width: media.width * 0.9,
+                                                    color: Colors.white,
+                                                    child: Column(
+                                                      children: [
+                                                        SingleChildScrollView(
+                                                          scrollDirection:
+                                                              Axis.horizontal,
+                                                          child: Row(
+                                                            children: [
+                                                              Container(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            20),
+                                                                height: 40,
+                                                                width: media
+                                                                        .width *
+                                                                    0.7,
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            20),
+                                                                    border: Border.all(
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        width:
+                                                                            1.5)),
+                                                                child:
+                                                                    TextField(
+                                                                  decoration: InputDecoration(
+                                                                      border: InputBorder
+                                                                          .none,
+                                                                      hintText:
+                                                                          "Search",
+                                                                      hintStyle:
+                                                                          TextStyle(
+                                                                              fontSize: media.width / 70)),
+                                                                  onChanged:
+                                                                      (val) {
+                                                                    setState(
+                                                                        () {
+                                                                      searchVal =
+                                                                          val;
+                                                                    });
+                                                                  },
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 20,
+                                                              ),
+                                                              Container(
+                                                                child:
+                                                                    CirularButton(
+                                                                        onClick:
+                                                                            () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                }),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        Expanded(
+                                                          child:
+                                                              SingleChildScrollView(
+                                                            child: Column(
+                                                              children:
+                                                                  countries
+                                                                      .asMap()
+                                                                      .map((i,
+                                                                          value) {
+                                                                        return MapEntry(
+                                                                            i,
+                                                                            SizedBox(
+                                                                              width: media.width * 0.9,
+                                                                              child: (searchVal == '' && countries[i]['flag'] != null)
+                                                                                  ? InkWell(
+                                                                                      onTap: () {
+                                                                                        setState(() {
+                                                                                          phcode = i;
+                                                                                          country_id = countries[i]['id'];
+
+                                                                                          countryController.text = countries[i]['name'];
+                                                                                        });
+                                                                                        Navigator.pop(context);
+                                                                                      },
+                                                                                      child: Container(
+                                                                                        padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                                                                        color: Colors.white,
+                                                                                        child: SingleChildScrollView(
+                                                                                            scrollDirection: Axis.horizontal,
+                                                                                            child: Row(
+                                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                              children: [
+                                                                                                Row(
+                                                                                                  children: [
+                                                                                                    SizedBox(width: media.width * 0.4, child: Text(countries[i]['code'], style: TextStyle(fontSize: media.width / 70))),
+                                                                                                    SizedBox(
+                                                                                                      width: media.width * 0.02,
+                                                                                                    ),
+                                                                                                    SizedBox(
+                                                                                                        width: media.width * 0.4,
+                                                                                                        child: Text(
+                                                                                                          countries[i]['name'],
+                                                                                                          style: TextStyle(fontSize: media.width / 70),
+                                                                                                        )),
+                                                                                                  ],
+                                                                                                ),
+                                                                                                Text(
+                                                                                                  countries[i]['dial_code'],
+                                                                                                  style: TextStyle(fontSize: media.width / 70),
+                                                                                                )
+                                                                                              ],
+                                                                                            )),
+                                                                                      ))
+                                                                                  : (countries[i]['flag'] != null && countries[i]['name'].toLowerCase().contains(searchVal.toLowerCase()))
+                                                                                      ? InkWell(
+                                                                                          onTap: () {
+                                                                                            setState(() {
+                                                                                              phcode = i;
+                                                                                              country_id = countries[i]['id'];
+                                                                                              countryController.text = countries[i]['name'];
+                                                                                            });
+                                                                                            Navigator.pop(context);
+                                                                                          },
+                                                                                          child: Container(
+                                                                                            padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                                                                            color: Colors.white,
+                                                                                            child: Row(
+                                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                              children: [
+                                                                                                Row(
+                                                                                                  children: [
+                                                                                                    SizedBox(
+                                                                                                        width: media.width * 0.4,
+                                                                                                        child: Text(
+                                                                                                          countries[i]['code'],
+                                                                                                          style: TextStyle(fontSize: media.width / 70),
+                                                                                                        )),
+                                                                                                    SizedBox(
+                                                                                                      width: media.width * 0.02,
+                                                                                                    ),
+                                                                                                    SizedBox(
+                                                                                                        width: media.width * 0.4,
+                                                                                                        child: Text(
+                                                                                                          countries[i]['name'],
+                                                                                                          style: TextStyle(fontSize: media.width / 70),
+                                                                                                        )),
+                                                                                                  ],
+                                                                                                ),
+                                                                                                Text(
+                                                                                                  countries[i]['dial_code'],
+                                                                                                  style: TextStyle(fontSize: media.width / 70),
+                                                                                                )
+                                                                                              ],
+                                                                                            ),
+                                                                                          ))
+                                                                                      : Container(),
+                                                                            ));
+                                                                      })
+                                                                      .values
+                                                                      .toList(),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                }),
+                                              );
+                                            });
+                                      } else {
+                                        getCountryCode();
+                                      }
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.only(left: 5),
+                                      width: width / 4.5,
+                                      height: 47,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: gray,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.2),
+                                            spreadRadius: 2,
+                                            blurRadius: 4,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 15),
+                                        child: Text(
+                                          countryController.text,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                   const SizedBox(height: 20),
+                                  label('Town'),
                                   inputContain(width, 'Town'),
                                   const SizedBox(height: 20),
-                                  label(' Trade register number'),
-                                  inputContain(width, ' Trade register number'),
+                                  label('Currency'),
+                                  Container(
+                                    width: width / 4.5,
+                                    height: 37,
+                                    margin: EdgeInsets.only(right: 10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: gray,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.2),
+                                          spreadRadius: 2,
+                                          blurRadius: 4,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            height: 50,
+                                            alignment: Alignment.center,
+                                            width: media.width * 0.5,
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 5, vertical: 4),
+                                              child: Text(
+                                                "Currency",
+                                                style: TextStyle(
+                                                    // fontSize: 20,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 1,
+                                          height: media.width * 0.0693,
+                                          color: black,
+                                        ),
+                                        const SizedBox(width: 10),
+                                        InkWell(
+                                          onTap: () async {
+                                            if (currencies.isNotEmpty) {
+                                              // dialod box for select country for dial code
+                                              await showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    var searchVal = '';
+                                                    return AlertDialog(
+                                                      insetPadding:
+                                                          const EdgeInsets.all(
+                                                              10),
+                                                      content: StatefulBuilder(
+                                                          builder: (context,
+                                                              setState) {
+                                                        return Container(
+                                                          width:
+                                                              media.width * 0.9,
+                                                          color: Colors.white,
+                                                          child: Column(
+                                                            children: [
+                                                              SingleChildScrollView(
+                                                                scrollDirection:
+                                                                    Axis.horizontal,
+                                                                child: Row(
+                                                                  children: [
+                                                                    Container(
+                                                                      padding: const EdgeInsets
+                                                                              .only(
+                                                                          left:
+                                                                              20),
+                                                                      height:
+                                                                          40,
+                                                                      width: media
+                                                                              .width *
+                                                                          0.7,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              20),
+                                                                          border: Border.all(
+                                                                              color: Colors.grey,
+                                                                              width: 1.5)),
+                                                                      child:
+                                                                          TextField(
+                                                                        decoration: InputDecoration(
+                                                                            border: InputBorder
+                                                                                .none,
+                                                                            hintText:
+                                                                                "Search",
+                                                                            hintStyle:
+                                                                                TextStyle(fontSize: media.width / 70)),
+                                                                        onChanged:
+                                                                            (val) {
+                                                                          setState(
+                                                                              () {
+                                                                            searchVal =
+                                                                                val;
+                                                                          });
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width: 20,
+                                                                    ),
+                                                                    Container(
+                                                                      child: CirularButton(
+                                                                          onClick:
+                                                                              () {
+                                                                        Navigator.pop(
+                                                                            context);
+                                                                      }),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                  height: 20),
+                                                              Expanded(
+                                                                child:
+                                                                    SingleChildScrollView(
+                                                                  child: Column(
+                                                                    children: currencies
+                                                                        .asMap()
+                                                                        .map((i, value) {
+                                                                          return MapEntry(
+                                                                              i,
+                                                                              SizedBox(
+                                                                                width: media.width * 0.9,
+                                                                                child: (searchVal == '' && currencies[i]['symbol'] != null)
+                                                                                    ? InkWell(
+                                                                                        onTap: () {
+                                                                                          setState(() {
+                                                                                            curcode = i;
+                                                                                            currency_id = currencies[i]['id'];
+                                                                                          });
+                                                                                          Navigator.pop(context);
+                                                                                        },
+                                                                                        child: Container(
+                                                                                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                                                                          color: Colors.white,
+                                                                                          child: SingleChildScrollView(
+                                                                                              scrollDirection: Axis.horizontal,
+                                                                                              child: Row(
+                                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                                children: [
+                                                                                                  Row(
+                                                                                                    children: [
+                                                                                                      SizedBox(width: media.width * 0.4, child: Text(currencies[i]['code'], style: TextStyle(fontSize: media.width / 70))),
+                                                                                                      SizedBox(
+                                                                                                        width: media.width * 0.02,
+                                                                                                      ),
+                                                                                                      SizedBox(
+                                                                                                          width: media.width * 0.4,
+                                                                                                          child: Text(
+                                                                                                            currencies[i]['symbol'],
+                                                                                                            style: TextStyle(fontSize: media.width / 70),
+                                                                                                          )),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  // Text(
+                                                                                                  //   currencies[i]['dial_code'],
+                                                                                                  //   style: TextStyle(fontSize: media.width / 70),
+                                                                                                  // )
+                                                                                                ],
+                                                                                              )),
+                                                                                        ))
+                                                                                    : (currencies[i]['code'] != null && currencies[i]['symbol'].toLowerCase().contains(searchVal.toLowerCase()))
+                                                                                        ? InkWell(
+                                                                                            onTap: () {
+                                                                                              setState(() {
+                                                                                                phcode = i;
+                                                                                                currency_id = currencies[i]['id'];
+                                                                                              });
+                                                                                              Navigator.pop(context);
+                                                                                            },
+                                                                                            child: Container(
+                                                                                              padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                                                                              color: Colors.white,
+                                                                                              child: Row(
+                                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                                children: [
+                                                                                                  Row(
+                                                                                                    children: [
+                                                                                                      SizedBox(
+                                                                                                          width: media.width * 0.4,
+                                                                                                          child: Text(
+                                                                                                            currencies[i]['code'],
+                                                                                                            style: TextStyle(fontSize: media.width / 70),
+                                                                                                          )),
+                                                                                                      SizedBox(
+                                                                                                        width: media.width * 0.02,
+                                                                                                      ),
+                                                                                                      SizedBox(
+                                                                                                          width: media.width * 0.4,
+                                                                                                          child: Text(
+                                                                                                            currencies[i]['symbol'],
+                                                                                                            style: TextStyle(fontSize: media.width / 70),
+                                                                                                          )),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  // Text(
+                                                                                                  //   currencies[i]['dial_code'],
+                                                                                                  //   style: TextStyle(fontSize: media.width / 70),
+                                                                                                  // )
+                                                                                                ],
+                                                                                              ),
+                                                                                            ))
+                                                                                        : Container(),
+                                                                              ));
+                                                                        })
+                                                                        .values
+                                                                        .toList(),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      }),
+                                                    );
+                                                  });
+                                            } else {
+                                              getCurrencyCode();
+                                            }
+                                            setState(() {});
+                                          },
+                                          //input field
+                                          child: Container(
+                                            height: 50,
+                                            alignment: Alignment.center,
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  currencies[curcode]['symbol']
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: textColor),
+                                                ),
+                                                const SizedBox(
+                                                  width: 2,
+                                                ),
+                                                const Icon(
+                                                    Icons.keyboard_arrow_down)
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 4),
+                                      ],
+                                    ),
+                                  ),
                                   const SizedBox(height: 20),
-                                  label(' Taxpayer identification number'),
-                                  inputContain(
-                                      width, ' Taxpayer identification number'),
+                                  label(' N RC'),
+                                  inputContain(width, ' NRC'),
                                   const SizedBox(height: 20),
-                                  label(' Fax'),
-                                  inputContain(width, ' Fax'),
+                                  label(' N Cont'),
+                                  inputContain(width, ' Ncont'),
+                                  const SizedBox(height: 20),
+                                  label(' TVA'),
+                                  inputContain(width, ' 0.99'),
                                   const SizedBox(height: 20),
                                   label(' Zip code'),
                                   inputContain(width, ' Zip code'),
