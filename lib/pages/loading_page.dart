@@ -3,6 +3,7 @@ import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/create_store.dart';
 import 'package:stock_manager/functions/function.dart';
+import 'package:stock_manager/functions/store_function.dart';
 import 'package:stock_manager/home.dart';
 import 'package:stock_manager/pages/loading.dart';
 import 'package:stock_manager/pages/no_internet.dart';
@@ -33,7 +34,7 @@ class _LoadingPageState extends State<LoadingPage> {
       //if user is login
       if (val == true) {
         //if user have store
-        var haveStore = await false;
+        var haveStore = await getStore();
         //if user have store
         if (haveStore) {
           var storeAvtive = await true;

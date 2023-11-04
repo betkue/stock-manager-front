@@ -29,10 +29,8 @@ class Signin extends StatefulWidget {
 class _SigninState extends State<Signin> {
   bool loading = true;
 
-
   dynamic imageFile;
   dynamic error;
-
 
   ImagePicker picker = ImagePicker();
 
@@ -51,7 +49,6 @@ class _SigninState extends State<Signin> {
       if (pickedFile != null) {
         imageFile = pickedFile.path;
       }
-
     });
   }
 
@@ -640,7 +637,8 @@ class _SigninState extends State<Signin> {
                                     emailController.text,
                                     passwordController.text,
                                     phoneController.text,
-                                    imageFile);
+                                    imageFile,
+                                    context);
 
                                 if (result == true) {
                                   Navigator.pushAndRemoveUntil(

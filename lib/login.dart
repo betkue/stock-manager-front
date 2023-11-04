@@ -155,7 +155,7 @@ class _LogInState extends State<LogIn> {
                         });
                         var result = await login(
                           emailController.text,
-                          passwordController.text,
+                          passwordController.text,context
                         );
 
                         if (result == true) {

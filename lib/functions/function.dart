@@ -249,13 +249,19 @@ getCurrencyCode() async {
   return result;
 }
 
-showToast(String title, Color color) {
-  Fluttertoast.showToast(
-      msg: title,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
+showToast(String title, Color color,BuildContext context) {
+  // Fluttertoast.showToast(
+  //     msg: title,
+  //     toastLength: Toast.LENGTH_SHORT,
+  //     gravity: ToastGravity.CENTER,
+  //     timeInSecForIosWeb: 1,
+  //     backgroundColor: color,
+  //     textColor: Colors.white,
+  //     fontSize: 16.0);
+  ScaffoldMessenger.of(context).showSnackBar(
+     SnackBar(
+      content: Text(title),
       backgroundColor: color,
-      textColor: Colors.white,
-      fontSize: 16.0);
+    ),
+  );
 }

@@ -12,7 +12,7 @@ import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/functions/function.dart';
 
 registerUser(String name, String email, String password, String phone,
-    dynamic imageFile) async {
+    dynamic imageFile,BuildContext context) async {
   dynamic result;
   try {
     // List<int> imageBytes = imageFile.readAsBytesSync();
@@ -58,16 +58,16 @@ registerUser(String name, String email, String password, String phone,
         result = true;
         break;
       case 401:
-        showToast(jsonVal['special'], red);
+        showToast(jsonVal['special'],red, context);
         result = "INput Error"; //jsonDecode(response.body)['message'];
         break;
       case 404:
-        showToast(jsonVal['special'], red);
+        showToast(jsonVal['special'],red, context);
         result = "Not Found";
         break;
       default:
         // debugPrint(response.body);
-        showToast("Server Error", red);
+        showToast("Server Error", red,context);
         result = "Server errr";
     }
   } catch (e) {
@@ -81,7 +81,7 @@ registerUser(String name, String email, String password, String phone,
   return result;
 }
 
-login(String email, String password) async {
+login(String email, String password,BuildContext context) async {
   dynamic result;
   try {
     var response = await http.post(
@@ -102,15 +102,15 @@ login(String email, String password) async {
         break;
       case 401:
         result = "INput Error"; //jsonDecode(response.body)['message'];
-        showToast(jsonVal['special'], red);
+        showToast(jsonVal['special'],red, context);
         break;
       case 404:
         result = "Not Found";
-        showToast(jsonVal['special'], red);
+        showToast(jsonVal['special'], red,context);
         break;
       default:
         debugPrint(response.body);
-        showToast("Server Error", red);
+        showToast("Server Error", red,context);
         result = "Server errr";
     }
   } catch (e) {
