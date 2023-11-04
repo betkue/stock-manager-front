@@ -73,3 +73,33 @@ createStore(Map<String, Object> data, imageFile) async {
   }
   return false;
 }
+
+getDashboard() async {
+  dynamic result;
+  try {
+    var response = await http.post(
+      Uri.parse('${api}store/dashboard'),
+      body: jsonEncode({"store_id": "${company['id']}"}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${token}'
+      },
+    );
+    if (response.statusCode == 200) {
+      dashboard = Map<String, dynamic>.from(jsonDecode(response.body));
+      result = true;
+    } else {
+      debugPrint(response.body);
+
+      result = false;
+    }
+  } catch (e) {
+    result = false;
+    if (e is SocketException) {
+      internet = false;
+    }
+    debugPrint(e.toString());
+  }
+  return result;
+}

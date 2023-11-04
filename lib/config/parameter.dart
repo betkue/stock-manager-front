@@ -70,27 +70,27 @@ String? id_supplier;
 String? id_salle;
 String? id_purshase;
 Map<String, dynamic> dashboard = {
-  "time": DateTime.now(),
-  "count_of_all_product": 20000,
-  "product_out_of_stock": 20,
-  "product_overstocked": 2,
-  "quantity_in_hand": 400,
-  "quantity_to_be_received": 50,
-  "quantity_to_be_delivered": 40,
-  "purchases": {
-    "quantity_ordered": 2000,
-    "price_ordered": 45000,
-    "amount_paid": 200,
-    "price": 30000
-  },
-  "sales": {
-    "quantity_sold": 2000,
-    "price_sold": 45000,
-    "amount_paid": 200,
-    "price": 30000
-  },
-  "winning_percentage": -90,
-  "benefit": -1000000,
+  // "time": DateTime.now(),
+  // "count_of_all_product": 20000,
+  // "product_out_of_stock": 20,
+  // "product_overstocked": 2,
+  // "quantity_in_hand": 400,
+  // "quantity_to_be_received": 50,
+  // "quantity_to_be_delivered": 40,
+  // "purchases": {
+  //   "quantity_ordered": 2000,
+  //   "price_ordered": 45000,
+  //   "amount_paid": 200,
+  //   "price": 30000
+  // },
+  // "sales": {
+  //   "quantity_sold": 2000,
+  //   "price_sold": 45000,
+  //   "amount_paid": 200,
+  //   "price": 30000
+  // },
+  // "winning_percentage": -90,
+  // "benefit": -1000000,
 };
 
 List<Map<String, dynamic>> productsAll = [
