@@ -79,7 +79,7 @@ class _MenuState extends State<Menu> {
                   width: 100,
                   decoration: BoxDecoration(
                     image: DecorationImage(image: NetworkImage(user['image'])),
-                    color: primaryColor,
+                    // color: primaryColor,
                     borderRadius: BorderRadius.circular(
                         MediaQuery.of(context).size.height),
                     // color: widget.color ?? orange,
