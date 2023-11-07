@@ -43,6 +43,7 @@ class _CreateStoreState extends State<CreateStore> {
   TextEditingController tvaController = TextEditingController();
   TextEditingController zipController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  TextEditingController sigleController = TextEditingController();
 
   ImagePicker picker = ImagePicker();
 
@@ -260,6 +261,11 @@ class _CreateStoreState extends State<CreateStore> {
                                   label('Store name', required: true),
                                   inputContain(
                                       width, 'Store name', nameController,
+                                      required: true),
+                                  const SizedBox(height: 20),
+                                  label('Sigle', required: true),
+                                  inputContain(
+                                      width, 'Store URL', sigleController,
                                       required: true),
                                   const SizedBox(height: 20),
                                   label('Store URL'),
@@ -904,6 +910,7 @@ class _CreateStoreState extends State<CreateStore> {
                                                 'zip_code': zipController.text,
                                                 'emails': mails,
                                                 'fax': fax,
+                                                'sigle': sigleController.text,
                                                 'phones': phones,
                                                 'town': townController.text,
                                                 'description':
