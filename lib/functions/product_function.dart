@@ -10,6 +10,10 @@ import 'package:stock_manager/functions/function.dart';
 
 getProducts(int state) async {
   dynamic result;
+  productsAll = [];
+  productsAvailable = [];
+  productsUnavalaible = [];
+
   try {
     var response = await http.get(
       Uri.parse('${api}product?state=${state - 1}'),
@@ -20,6 +24,7 @@ getProducts(int state) async {
       },
     );
     if (response.statusCode == 200) {
+      await clearCache();
       debugPrint(state.toString());
       switch (state) {
         case 0:
@@ -109,12 +114,14 @@ createProduct(
 
     switch (respon.statusCode) {
       case 200:
+        await clearCache();
+
         result = true;
         break;
       default:
         // debugPrint(response.body);
         showToast("Server Error", red, context);
-        
+
         result = false;
     }
   } catch (e) {
@@ -126,5 +133,89 @@ createProduct(
     // debugPrint(e.toString());
   }
 
+  return result;
+}
+
+updateProduct(
+    Map<String, String> product, imageFile, BuildContext context) async {
+  dynamic result;
+
+  try {
+    // debugPrint(product.toString());
+    // List<int> imageBytes = imageFile.readAsBytesSync();
+    // String base64Image = base64Encode(imageBytes);
+    // debugPrint(product.toString());
+
+    final response =
+        http.MultipartRequest('POST', Uri.parse('${api}product/update'));
+    response.headers.addAll({
+      // 'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${token}'
+    });
+    if (imageFile != null) {
+      response.files.add(await http.MultipartFile.fromPath('image', imageFile));
+    }
+    response.fields.addAll(product);
+
+    var request = await response.send();
+    var respon = await http.Response.fromStream(request);
+    var jsonVal = jsonDecode(respon.body);
+    debugPrint(respon.body);
+
+    switch (respon.statusCode) {
+      case 200:
+        await clearCache();
+
+        result = true;
+        break;
+      default:
+        // debugPrint(response.body);
+        showToast("Server Error", red, context);
+
+        result = false;
+    }
+  } catch (e) {
+    result = false;
+    if (e is SocketException) {
+      internet = false;
+    }
+
+    // debugPrint(e.toString());
+  }
+
+  return result;
+}
+
+getProduct() async {
+  dynamic result;
+  try {
+    var response = await http.get(
+      Uri.parse('${api}product/single?product_id=${id_product}'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${token}'
+      },
+    );
+    if (response.statusCode == 200) {
+      await clearCache();
+
+      product_single = Map<String, dynamic>.from(jsonDecode(response.body));
+
+      debugPrint(product_single.toString());
+      result = true;
+    } else {
+      debugPrint(response.body);
+
+      result = false;
+    }
+  } catch (e) {
+    result = false;
+    if (e is SocketException) {
+      internet = false;
+    }
+  }
   return result;
 }

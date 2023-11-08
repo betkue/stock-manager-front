@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_manager/config/constant.dart';
@@ -183,6 +184,8 @@ getUserDetails(token) async {
       },
     );
     if (response.statusCode == 200) {
+      await clearCache();
+
       user = Map<String, dynamic>.from(jsonDecode(response.body));
       result = true;
     } else {
@@ -266,3 +269,31 @@ showToast(String title, Color color, BuildContext context) {
     ),
   );
 }
+
+clearCache() async {
+  // CacheManager.;
+  // await DefaultCacheManager().emptyCache();
+  // await DefaultCacheManager().getImageFile(url)
+}
+// String getParameterString(Map<String, String> data) {
+//   final params = <String, String>{};
+//   String url = "?";
+//   for (final entry in data.entries) {
+//     // if (entry.value != null) {
+//     //   params[entry.key] = '${entry.value}';
+//     // }
+
+//     url = url + entry.key + "=" + entry.value + "&";
+//   }
+//   return url;
+// }
+
+// String getParameterString(Map<String, dynamic> data) {
+//   final params = <String, String>{};
+//   for (final entry in data.entries) {
+//     if (entry.value != null) {
+//       params[entry.key] = '${entry.value}';
+//     }
+//   }
+//   return Uri.encodeComponent(jsonEncode(params));
+// }

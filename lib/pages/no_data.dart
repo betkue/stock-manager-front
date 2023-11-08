@@ -49,7 +49,7 @@ class _NoDataState extends State<NoData> {
                   style: TextStyle(
                       fontSize: media.width * eighteen,
                       fontWeight: FontWeight.w600,
-                      color: textColor),
+                      color: white),
                 ),
                 SizedBox(
                   height: media.width * 0.05,

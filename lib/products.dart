@@ -44,6 +44,7 @@ class _ProductPageState extends State<ProductPage> {
       load = true;
     });
 
+
     await getProducts(i);
 
     setState(() {

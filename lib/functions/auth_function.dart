@@ -12,7 +12,7 @@ import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/functions/function.dart';
 
 registerUser(String name, String email, String password, String phone,
-    dynamic imageFile,BuildContext context) async {
+    dynamic imageFile, BuildContext context) async {
   dynamic result;
   try {
     // List<int> imageBytes = imageFile.readAsBytesSync();
@@ -51,6 +51,8 @@ registerUser(String name, String email, String password, String phone,
     var jsonVal = jsonDecode(respon.body);
     switch (respon.statusCode) {
       case 200:
+        await clearCache();
+
         user = Map<String, dynamic>.from(jsonVal);
         token = jsonVal['access_token'];
 
@@ -58,16 +60,16 @@ registerUser(String name, String email, String password, String phone,
         result = true;
         break;
       case 401:
-        showToast(jsonVal['special'],red, context);
+        showToast(jsonVal['special'], red, context);
         result = "INput Error"; //jsonDecode(response.body)['message'];
         break;
       case 404:
-        showToast(jsonVal['special'],red, context);
+        showToast(jsonVal['special'], red, context);
         result = "Not Found";
         break;
       default:
         // debugPrint(response.body);
-        showToast("Server Error", red,context);
+        showToast("Server Error", red, context);
         result = "Server errr";
     }
   } catch (e) {
@@ -81,7 +83,7 @@ registerUser(String name, String email, String password, String phone,
   return result;
 }
 
-login(String email, String password,BuildContext context) async {
+login(String email, String password, BuildContext context) async {
   dynamic result;
   try {
     var response = await http.post(
@@ -95,6 +97,8 @@ login(String email, String password,BuildContext context) async {
     var jsonVal = jsonDecode(response.body);
     switch (response.statusCode) {
       case 200:
+        await clearCache();
+
         user = Map<String, dynamic>.from(jsonVal);
         token = jsonVal['access_token'];
         setToken(token);
@@ -102,15 +106,15 @@ login(String email, String password,BuildContext context) async {
         break;
       case 401:
         result = "INput Error"; //jsonDecode(response.body)['message'];
-        showToast(jsonVal['special'],red, context);
+        showToast(jsonVal['special'], red, context);
         break;
       case 404:
         result = "Not Found";
-        showToast(jsonVal['special'], red,context);
+        showToast(jsonVal['special'], red, context);
         break;
       default:
         debugPrint(response.body);
-        showToast("Server Error", red,context);
+        showToast("Server Error", red, context);
         result = "Server errr";
     }
   } catch (e) {

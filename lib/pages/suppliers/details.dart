@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -208,16 +209,21 @@ class _DetailSupplierState extends State<DetailSupplier> {
                                                   vertical: media.height / 40),
                                               width: media.width / 5,
                                               height: media.width / 5,
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    supplier_single['image'],
+                                                fit: BoxFit.contain,
+                                              ),
                                               decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(12)),
-                                                  image: DecorationImage(
-                                                      image: NetworkImage(
-                                                        supplier_single[
-                                                            'image'],
-                                                      ),
-                                                      fit: BoxFit.cover)))
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(12)),
+                                                // image: DecorationImage(
+                                                //     image: NetworkImage(
+                                                //       supplier_single[
+                                                //           'image'],
+                                                //     ),
+                                                //     fit: BoxFit.cover)
+                                              ))
                                           : (imageFile == null)
                                               ? Container(
                                                   margin: EdgeInsets.symmetric(
@@ -292,8 +298,10 @@ class _DetailSupplierState extends State<DetailSupplier> {
                                                   width: media.width / 5,
                                                   height: media.width / 5,
                                                   decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.all(
-                                                          Radius.circular(12)),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  12)),
                                                       image: DecorationImage(
                                                           image: FileImage(
                                                               File(imageFile)),

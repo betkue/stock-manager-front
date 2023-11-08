@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
@@ -27,11 +28,17 @@ Widget purchase(String imagePath, String productName, String price, int state,
       children: [
         Stack(
           children: [
-            Image.network(
+            // Image.network(
+            //   height: 160,
+            //   width: double.infinity,
+            //   imagePath,
+            //   fit: BoxFit.cover,
+            // ),
+            CachedNetworkImage(
               height: 160,
               width: double.infinity,
-              imagePath,
-              fit: BoxFit.cover,
+              imageUrl: imagePath,
+              fit: BoxFit.contain,
             ),
             Positioned(
               child: Container(

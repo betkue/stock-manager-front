@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
@@ -32,8 +33,12 @@ Widget supplier(String id, String name, String quantity, String location,
           Container(
             height: 100,
             width: 100,
+            child: CachedNetworkImage(
+              imageUrl: image,
+              fit: BoxFit.contain,
+            ),
             decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(image)),
+              // image: DecorationImage(image: NetworkImage(image)),
               color: primaryColor,
               borderRadius:
                   BorderRadius.circular(MediaQuery.of(context).size.height),

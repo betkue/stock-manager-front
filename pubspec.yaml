@@ -43,6 +43,8 @@ dependencies:
   d_chart: ^2.3.0
   image_picker: ^1.0.4
   permission_handler: ^11.0.0
+  flutter_cache_manager: ^3.3.1
+  cached_network_image: ^3.3.0
   window_size:
     git:
       url: https://github.com/google/flutter-desktop-embedding.git

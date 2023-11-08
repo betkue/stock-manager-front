@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
@@ -28,11 +29,17 @@ Widget products(String imagePath, String productName, String price, int state,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Image.network(
+        // Image.network(
+        //   height: 160,
+        //   width: double.infinity,
+        //   imagePath,
+        //   fit: BoxFit.contain,
+        // ),
+        CachedNetworkImage(
           height: 160,
           width: double.infinity,
-          imagePath,
-          fit: BoxFit.cover,
+          imageUrl: imagePath,
+          fit: BoxFit.contain,
         ),
         Text(
           productName,
@@ -58,8 +65,8 @@ Widget products(String imagePath, String productName, String price, int state,
                 id_product = id;
                 setParent();
               },
-              child:
-                  Icon(Icons.edit_outlined, color: state == 1 ? primaryColor : black),
+              child: Icon(Icons.edit_outlined,
+                  color: state == 1 ? primaryColor : black),
             ),
             SizedBox(width: 10),
           ],

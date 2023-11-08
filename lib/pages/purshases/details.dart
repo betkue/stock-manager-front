@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -208,9 +209,7 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                   pickImageFromGallery();
                                                 });
                                               },
-                                              child: (purshase_single['supplier']
-                                                              ['image'] !=
-                                                          null &&
+                                              child: (purshase_single['supplier']['image'] != null &&
                                                       imageFile == null)
                                                   ? Container(
                                                       margin: EdgeInsets.symmetric(
@@ -218,23 +217,31 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                               40),
                                                       width: 60,
                                                       height: 60,
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            purshase_single[
+                                                                'image'],
+                                                        fit: BoxFit.contain,
+                                                      ),
                                                       decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      100)),
-                                                          color: primaryColor,
-                                                          image:
-                                                              DecorationImage(
-                                                                  image:
-                                                                      NetworkImage(
-                                                                    purshase_single[
-                                                                            'supplier']
-                                                                        [
-                                                                        'image'],
-                                                                  ),
-                                                                  fit: BoxFit
-                                                                      .cover)))
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    100)),
+                                                        color: primaryColor,
+                                                        // image:
+                                                        //     DecorationImage(
+                                                        //         image:
+                                                        //             NetworkImage(
+                                                        //           purshase_single[
+                                                        //                   'supplier']
+                                                        //               [
+                                                        //               'image'],
+                                                        //         ),
+                                                        //         fit: BoxFit
+                                                        //             .cover)
+                                                        //             )
+                                                      ))
                                                   : (imageFile == null)
                                                       ? Container(
                                                           margin: EdgeInsets
@@ -276,10 +283,20 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                       : Container(
                                                           margin: EdgeInsets.symmetric(
                                                               vertical:
-                                                                  media.height / 40),
-                                                          width: media.width / 5,
-                                                          height: media.width / 5,
-                                                          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(12)), image: DecorationImage(image: FileImage(File(imageFile)), fit: BoxFit.cover))),
+                                                                  media.height /
+                                                                      40),
+                                                          width:
+                                                              media.width / 5,
+                                                          height:
+                                                              media.width / 5,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius.all(
+                                                                      Radius.circular(
+                                                                          12)),
+                                                              image: DecorationImage(
+                                                                  image: FileImage(File(imageFile)),
+                                                                  fit: BoxFit.cover))),
                                             ),
                                             Text(
                                               purshase_single['supplier']

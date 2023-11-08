@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/functions/function.dart';
 
 getStore() async {
   dynamic result;
@@ -60,6 +61,8 @@ createStore(Map<String, Object> data, imageFile) async {
     var jsonVal = jsonDecode(respon.body);
     debugPrint(jsonVal.toString());
     if (respon.statusCode == 200) {
+    await  clearCache();
+
       company = jsonVal;
       return true;
     } else {

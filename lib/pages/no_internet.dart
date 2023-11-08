@@ -4,7 +4,6 @@ import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/functions/function.dart';
 import 'package:stock_manager/widgets/button.dart';
 
-
 // ignore: must_be_immutable
 class NoInternet extends StatefulWidget {
   // const NoInternet({ Key? key }) : super(key: key);
@@ -50,7 +49,7 @@ class _NoInternetState extends State<NoInternet> {
                   style: TextStyle(
                       fontSize: media.width * eighteen,
                       fontWeight: FontWeight.w600,
-                      color: textColor),
+                      color: white),
                 ),
                 SizedBox(
                   height: media.width * 0.05,
