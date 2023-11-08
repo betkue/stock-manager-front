@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
+import 'package:stock_manager/functions/product_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/products/details.dart';
 import 'package:stock_manager/widgets/products/products_block.dart';
@@ -21,10 +22,11 @@ class _ProductPageState extends State<ProductPage> {
   int index = 0;
   bool load = true;
   bool details = false;
-  changeState(int i) {
+  changeState(int i) async {
     setState(() {
       index = i;
     });
+    await getData(i);
   }
 
   setStatePage() {
@@ -33,12 +35,20 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   void initState() {
-    Timer(
-        Duration(seconds: timedalay),
-        () => setState(() {
-              load = false;
-            }));
+    getData(0);
     super.initState();
+  }
+
+  getData(int i) async {
+    setState(() {
+      load = true;
+    });
+
+    await getProducts(i);
+
+    setState(() {
+      load = false;
+    });
   }
 
   @override
@@ -138,8 +148,8 @@ class _ProductPageState extends State<ProductPage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       ElevatedButton(
-                                        onPressed: () {
-                                          changeState(0);
+                                        onPressed: () async {
+                                          await changeState(0);
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:
@@ -161,31 +171,8 @@ class _ProductPageState extends State<ProductPage> {
                                       ),
                                       const SizedBox(width: 80),
                                       ElevatedButton(
-                                        onPressed: () {
-                                          changeState(1);
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              index == 1 ? primaryColor : white,
-                                          shadowColor: primaryColor,
-                                          surfaceTintColor: primaryColor,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20,
-                                              vertical:
-                                                  10), // Set the button's padding
-                                        ),
-                                        child: Text(
-                                          "Available",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              color: index == 1 ? white : black,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 80),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          changeState(2);
+                                        onPressed: () async {
+                                          await changeState(2);
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:
@@ -198,10 +185,33 @@ class _ProductPageState extends State<ProductPage> {
                                                   10), // Set the button's padding
                                         ),
                                         child: Text(
-                                          "Unavailable",
+                                          "Available",
                                           style: TextStyle(
                                               fontSize: 16,
                                               color: index == 2 ? white : black,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 80),
+                                      ElevatedButton(
+                                        onPressed: () async {
+                                          await changeState(1);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              index == 1 ? primaryColor : white,
+                                          shadowColor: primaryColor,
+                                          surfaceTintColor: primaryColor,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20,
+                                              vertical:
+                                                  10), // Set the button's padding
+                                        ),
+                                        child: Text(
+                                          "Unavailable",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              color: index == 1 ? white : black,
                                               fontWeight: FontWeight.w400),
                                         ),
                                       ),
@@ -225,7 +235,7 @@ class _ProductPageState extends State<ProductPage> {
           setStatePage();
         },
       );
-    } else if (index == 1) {
+    } else if (index == 2) {
       return Availableproduct(
         setParent: () {
           details = true;

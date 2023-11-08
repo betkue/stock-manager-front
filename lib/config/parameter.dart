@@ -93,38 +93,11 @@ Map<String, dynamic> dashboard = {
   // "benefit": -1000000,
 };
 
-List<Map<String, dynamic>> productsAll = [
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "available": true,
-    "price": 1000,
-  },
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "available": false,
-    "price": 1000,
-  }
-];
+List<Map<String, dynamic>> productsAll = [];
 
-List<Map<String, dynamic>> productsAvailable = [
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "available": true,
-    "price": 1000,
-  }
-];
+List<Map<String, dynamic>> productsAvailable = [];
 
-List<Map<String, dynamic>> productsUnavalaible = [
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "available": false,
-    "price": 1000,
-  }
-];
+List<Map<String, dynamic>> productsUnavalaible = [];
 
 List<Map<String, dynamic>> customers = [
   {
