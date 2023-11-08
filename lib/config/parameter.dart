@@ -236,15 +236,17 @@ List<Map<String, dynamic>> salesComplete = [
     "paiement_state": 0
   },
 ];
+  List<Map<String, dynamic>> locations = [];
 
+  List<Map<String, dynamic>> locationsLoad = [];
 Map<String, dynamic> product_single = {
-  "name": "Product Name",
-  "reference": "Product Name",
-  "quantity": "56",
-  "price": "1344",
-  "location": "Product Name",
-  "description": "Description",
-  "image": "https://picsum.photos/250?image=9",
+  // "name": "Product Name",
+  // "reference": "Product Name",
+  // "quantity": "56",
+  // "price": "1344",
+  // "location": "Product Name",
+  // "description": "Description",
+  // "image": "https://picsum.photos/250?image=9",
 };
 Map<String, dynamic> customer_single = {
   "name": "Product Name",

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/style.dart';
 
@@ -16,13 +17,15 @@ Padding label(String label) => Padding(
     );
 
 Container inputContain(
-        double width,
-        String hintText,
-        TextEditingController controller,
-        dynamic onchange,
-        bool obscure,
-        bool enable,
-        {TextInputType textInputType = TextInputType.text}) =>
+  double width,
+  String hintText,
+  TextEditingController controller,
+  dynamic onchange,
+  bool obscure,
+  bool enable, {
+  TextInputType textInputType = TextInputType.text,
+  bool isnumber = false,
+}) =>
     Container(
       width: width / 4.5,
       // height: 37,
@@ -37,6 +40,9 @@ Container inputContain(
           cursorColor: black,
           controller: controller,
           keyboardType: textInputType,
+          inputFormatters: isnumber
+              ? [FilteringTextInputFormatter.allow(RegExp('[0-9.]'))]
+              : [],
           onChanged: (value) {
             onchange(value);
           },

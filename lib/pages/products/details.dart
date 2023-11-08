@@ -5,10 +5,12 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
+import 'package:stock_manager/functions/product_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/widgets/circular_button.dart';
 import 'package:stock_manager/widgets/account/account.dart';
@@ -30,7 +32,9 @@ class _DetailProductState extends State<DetailProduct> {
   TextEditingController nameController = TextEditingController();
   TextEditingController refController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
+  TextEditingController unitController = TextEditingController(text: "Nothing");
   TextEditingController priceController = TextEditingController();
+  TextEditingController price2Controller = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController searchController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -41,6 +45,8 @@ class _DetailProductState extends State<DetailProduct> {
   bool loadList = false;
   bool _pickImage = false;
   String _permission = '';
+  List<double> qteList = [];
+  List<TextEditingController> qteListController = [];
   dynamic imageFile;
   //gallery permission
   getGalleryPermission() async {
@@ -111,15 +117,19 @@ class _DetailProductState extends State<DetailProduct> {
     }
   }
 
-  List<Map<String, dynamic>> listSeach = [];
+  updateQte() {
+    double qte = 0;
 
-  List<Map<String, dynamic>> listLoad = [
-    // {"id": 128, "name": "Patrick", "price": 2000},
-  ];
+    for (var i = 0; i < qteList.length; i++) {
+      qte = i + qteList[i];
+    }
+
+    quantityController.text = qte.toString();
+  }
 
   detrmineContainId(int id) {
-    for (var i = 0; i < listSeach.length; i++) {
-      if (listSeach[i]['id'] == id) {
+    for (var i = 0; i < locations.length; i++) {
+      if (locations[i]['id'] == id) {
         return true;
       }
     }
@@ -129,6 +139,8 @@ class _DetailProductState extends State<DetailProduct> {
 
   @override
   void initState() {
+    locations = [];
+    locationsLoad = [];
     if (widget.id != null) {
       nameController.text = product_single['name'] ?? "";
       refController.text = product_single['reference'] ?? "";
@@ -136,7 +148,7 @@ class _DetailProductState extends State<DetailProduct> {
       priceController.text = product_single['price'] ?? "";
       locationController.text = product_single['location'] ?? "";
       descriptionController.text = product_single['description'] ?? "";
-      listSeach = [
+      locations = [
         {"id": 12, "name": "Patrick", "price": 2000},
         {"id": 12, "name": "Patrick", "price": 2000},
         {"id": 12, "name": "Patrick", "price": 2000},
@@ -389,14 +401,29 @@ class _DetailProductState extends State<DetailProduct> {
                                                       value;
                                                   user_password =
                                                       quantityController.text;
-                                                }, false, false,
+                                                }, false, true,
                                                     textInputType:
-                                                        TextInputType.number),
+                                                        TextInputType.number,
+                                                    isnumber: true),
                                                 const SizedBox(height: 20),
-                                                label(' Unit price'),
+                                                label(' Unit'),
+                                                inputContain(
+                                                  width,
+                                                  'unit quantity',
+                                                  unitController,
+                                                  (String value) {
+                                                    unitController.text = value;
+                                                    user_password =
+                                                        quantityController.text;
+                                                  },
+                                                  false,
+                                                  false,
+                                                ),
+                                                const SizedBox(height: 20),
+                                                label(' Selling price'),
                                                 inputContain(
                                                     width,
-                                                    'unit price',
+                                                    'Selling price',
                                                     priceController,
                                                     (String value) {
                                                   setState(() {
@@ -407,39 +434,43 @@ class _DetailProductState extends State<DetailProduct> {
                                                   });
                                                 }, false, false,
                                                     textInputType:
-                                                        TextInputType.number),
+                                                        TextInputType.number,
+                                                    isnumber: true),
                                                 const SizedBox(height: 20),
-                                                label(' Location'),
+                                                label(' Purchase price'),
                                                 inputContain(
                                                     width,
-                                                    'product location',
-                                                    locationController,
+                                                    'Purchase price',
+                                                    price2Controller,
                                                     (String value) {
                                                   setState(() {
-                                                    locationController.text =
+                                                    price2Controller.text =
                                                         value;
-                                                    user_rule =
-                                                        locationController.text;
                                                   });
-                                                }, false, false),
+                                                }, false, false,
+                                                    textInputType:
+                                                        TextInputType.number,
+                                                    isnumber: true),
                                                 const SizedBox(height: 20),
                                                 Row(
                                                   children: [
                                                     label(
-                                                        ' Supplers (${listSeach.length})'),
+                                                        ' Location (${locations.length})'),
                                                     InkWell(
-                                                      onTap: () {
+                                                      onTap: () async {
                                                         setState(() {
                                                           showList = true;
                                                         });
 
-                                                        Timer(
-                                                            Duration(
-                                                                seconds: 5),
-                                                            () => setState(() {
-                                                                  loadList =
-                                                                      false;
-                                                                }));
+                                                        var result =
+                                                            await getLocations();
+                                                        if (result) {
+                                                          loadList = false;
+                                                          setState(() {});
+                                                        } else {
+                                                          showList = false;
+                                                          setState(() {});
+                                                        }
                                                       },
                                                       child: Container(
                                                         padding: EdgeInsets
@@ -499,14 +530,14 @@ class _DetailProductState extends State<DetailProduct> {
                                                           width: 0.5)),
                                                   child: ListView.builder(
                                                       itemCount:
-                                                          listSeach.length,
+                                                          locations.length,
                                                       itemBuilder:
                                                           (BuildContext context,
                                                               int index) {
                                                         if (searchController
                                                                 .text
                                                                 .isNotEmpty &&
-                                                            !listSeach[index]
+                                                            !locations[index]
                                                                     ['name']
                                                                 .toLowerCase()
                                                                 .contains(
@@ -515,37 +546,115 @@ class _DetailProductState extends State<DetailProduct> {
                                                                         .toLowerCase())) {
                                                           return Container();
                                                         } else {
-                                                          return ListTile(
-                                                              leading: InkWell(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    listSeach
-                                                                        .removeAt(
+                                                          return Column(
+                                                            children: [
+                                                              ListTile(
+                                                                  leading:
+                                                                      InkWell(
+                                                                    onTap: () {
+                                                                      setState(
+                                                                          () {
+                                                                        qteList.removeAt(
                                                                             index);
-                                                                  });
-                                                                },
-                                                                child: Icon(
-                                                                  Icons.remove,
-                                                                  color:
-                                                                      primaryColor,
-                                                                ),
-                                                              ),
-                                                              trailing: Text(
-                                                                '${listSeach[index]['price']} ' +
-                                                                    company['currency']
-                                                                        [
-                                                                        'symbol'],
-                                                                style: TextStyle(
-                                                                    color:
-                                                                        backgroundColor,
-                                                                    fontSize:
-                                                                        15),
-                                                              ),
-                                                              title: Text(
-                                                                  listSeach[
+                                                                        locations
+                                                                            .removeAt(index);
+
+                                                                        updateQte();
+                                                                      });
+                                                                    },
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .remove,
+                                                                      color:
+                                                                          primaryColor,
+                                                                    ),
+                                                                  ),
+                                                                  trailing:
+                                                                      Text(
+                                                                    '${locations[index]['location']} ',
+                                                                    style: TextStyle(
+                                                                        color:
+                                                                            backgroundColor,
+                                                                        fontSize:
+                                                                            15),
+                                                                  ),
+                                                                  title: Text(locations[
                                                                           index]
                                                                       [
-                                                                      'name']));
+                                                                      'name'])),
+                                                              SizedBox(
+                                                                height: 3,
+                                                              ),
+                                                              Container(
+                                                                width:
+                                                                    width / 4.5,
+                                                                // height: 37,
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        right:
+                                                                            10),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                  color: gray,
+                                                                ),
+                                                                child: Center(
+                                                                  child:
+                                                                      TextFormField(
+                                                                    maxLines: 1,
+                                                                    cursorColor:
+                                                                        black,
+                                                                    controller:
+                                                                        TextEditingController(
+                                                                            text:
+                                                                                qteList[index].toString()),
+                                                                    keyboardType:
+                                                                        TextInputType
+                                                                            .number,
+                                                                    inputFormatters: [
+                                                                      FilteringTextInputFormatter
+                                                                          .allow(
+                                                                              RegExp('[0-9.]'))
+                                                                    ],
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      qteList[index] =
+                                                                          double.parse(
+                                                                              value);
+
+                                                                      updateQte();
+                                                                    },
+                                                                    // maxLength: 30,
+                                                                    decoration:
+                                                                        inputDecoration(
+                                                                      "Enter Qte",
+                                                                    ),
+                                                                    validator:
+                                                                        (value) {
+                                                                      // if (value!
+                                                                      //         .isEmpty &&
+                                                                      //     !obscure) {
+                                                                      //   return 'Please enter the $hintText.';
+                                                                      // }
+                                                                      // return null;
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 3,
+                                                              ),
+                                                              Container(
+                                                                width: double
+                                                                    .maxFinite,
+                                                                height: 1,
+                                                                color: gray,
+                                                              )
+                                                            ],
+                                                          );
                                                         }
                                                       }),
                                                 ),
@@ -562,39 +671,87 @@ class _DetailProductState extends State<DetailProduct> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: SizedBox(
-                            width: width / 3,
-                            height: 47,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  // Form is valid, process the data here.
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content:
-                                          Text('Form submitted successfully!'),
+                        (nameController.text.isNotEmpty &&
+                                refController.text.isNotEmpty &&
+                                locations.isNotEmpty &
+                                    priceController.text.isNotEmpty &&
+                                price2Controller.text.isNotEmpty &&
+                                (imageFile != null ||
+                                    product_single['image'] != null))
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: SizedBox(
+                                  width: width / 3,
+                                  height: 47,
+                                  child: ElevatedButton(
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        setState(() {
+                                          load = true;
+                                        });
+
+                                        var ProductLovation = [];
+
+                                        for (var i = 0;
+                                            i < locations.length;
+                                            i++) {
+                                          ProductLovation.add({
+                                            " \"id\"": locations[i]['id'],
+                                            "\"qte\"": qteList[i]
+                                          });
+                                        }
+
+                                        Map<String, String> product = {
+                                          'name': nameController.text,
+                                          'reference': refController.text,
+                                          "quantity": quantityController.text,
+                                          "unit": unitController.text,
+                                          "selling_price": priceController.text,
+                                          "purchase_price":
+                                              price2Controller.text,
+                                          "is_available": (double.parse(
+                                                      quantityController.text) >
+                                                  0)
+                                              .toString(),
+                                          "description":
+                                              descriptionController.text,
+                                          "locations": "$ProductLovation"
+                                        };
+
+                                        var result = await createProduct(
+                                            product, imageFile, context);
+                                        if (result) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'Form submitted successfully!'),
+                                            ),
+                                          );
+                                          widget.back();
+                                          setState(() {
+                                            load = false;
+                                          });
+                                        } else {}
+                                        setState(() {
+                                          load = false;
+                                        });
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      //<-- SEE HERE
+                                      backgroundColor: primaryColor,
                                     ),
-                                  );
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             const TestPage()));
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                //<-- SEE HERE
-                                backgroundColor: primaryColor,
-                              ),
-                              child: Text(
-                                widget.id != null ? 'Modify' : "Add",
-                                style: TextStyle(fontSize: 24, color: white),
-                              ),
-                            ),
-                          ),
-                        ),
+                                    child: Text(
+                                      widget.id != null ? 'Modify' : "Add",
+                                      style:
+                                          TextStyle(fontSize: 24, color: white),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
                       ],
                     ),
                   ),
@@ -647,14 +804,16 @@ class _DetailProductState extends State<DetailProduct> {
                                             ),
                                             Expanded(
                                               child: ListView.builder(
-                                                  itemCount: listLoad.length,
+                                                  itemCount:
+                                                      locationsLoad.length,
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
                                                     if ((searchListController
                                                                 .text
                                                                 .isNotEmpty &&
-                                                            !listLoad[index]
+                                                            !locationsLoad[
+                                                                        index]
                                                                     ['name']
                                                                 .toLowerCase()
                                                                 .contains(
@@ -662,7 +821,7 @@ class _DetailProductState extends State<DetailProduct> {
                                                                         .text
                                                                         .toLowerCase())) ||
                                                         detrmineContainId(
-                                                            listLoad[index]
+                                                            locationsLoad[index]
                                                                 ['id'])) {
                                                       return Container();
                                                     } else {
@@ -670,9 +829,12 @@ class _DetailProductState extends State<DetailProduct> {
                                                           leading: InkWell(
                                                             onTap: () {
                                                               setState(() {
-                                                                listSeach.add(
-                                                                    listLoad[
+                                                                qteList.add(0);
+                                                                locations.add(
+                                                                    locationsLoad[
                                                                         index]);
+
+                                                                updateQte();
                                                               });
                                                             },
                                                             child: Icon(
@@ -681,16 +843,15 @@ class _DetailProductState extends State<DetailProduct> {
                                                                     primaryColor),
                                                           ),
                                                           trailing: Text(
-                                                            '${listLoad[index]['price']} ' +
-                                                                company['currency']
-                                                                    ['symbol'],
+                                                            '${locationsLoad[index]['location']} ',
                                                             style: TextStyle(
                                                                 color:
                                                                     backgroundColor,
                                                                 fontSize: 15),
                                                           ),
                                                           title: Text(
-                                                              listLoad[index]
+                                                              locationsLoad[
+                                                                      index]
                                                                   ['name']));
                                                     }
                                                   }),

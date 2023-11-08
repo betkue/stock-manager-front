@@ -65,10 +65,11 @@ class _ProductPageState extends State<ProductPage> {
                         ? DetailProduct(
                             id: id_product,
                             setParent: setStatePage,
-                            back: () {
+                            back: () async {
                               setState(() {
                                 details = false;
                               });
+                              await getData(index);
                             },
                           )
                         : Scaffold(
