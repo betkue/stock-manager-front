@@ -194,6 +194,41 @@ class _DetailProductState extends State<DetailProduct> {
         : Scaffold(
             // backgroundColor: gray,
             appBar: AppBar(
+              actions: widget.id != null
+                  ? [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            setState(() {
+                              load = true;
+                            });
+
+                            var result = await deleteProduct();
+
+                            setState(() {
+                              load = true;
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: red,
+                            shadowColor: primaryColor,
+                            surfaceTintColor: primaryColor,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 10), // Set the button's padding
+                          ),
+                          child: const Text(
+                            "Delete",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: white,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ),
+                    ]
+                  : [],
               backgroundColor: white,
               elevation: 0,
               leading: InkWell(

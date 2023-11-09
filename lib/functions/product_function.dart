@@ -207,6 +207,43 @@ getProduct() async {
       debugPrint(product_single.toString());
       result = true;
     } else {
+      product_single = {};
+
+      debugPrint(response.body);
+
+      result = false;
+    }
+  } catch (e) {
+    product_single = {};
+
+    result = false;
+    if (e is SocketException) {
+      internet = false;
+    }
+  }
+  return result;
+}
+
+deleteProduct() async {
+  dynamic result;
+  try {
+    var response = await http.delete(
+      Uri.parse('${api}product?product_id=${id_product}'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${token}'
+      },
+    );
+    if (response.statusCode == 200) {
+      await clearCache();
+
+      // product_single = Map<String, dynamic>.from(jsonDecode(response.body));
+
+      debugPrint(product_single.toString());
+      result = true;
+      product_single = {};
+    } else {
       debugPrint(response.body);
 
       result = false;
