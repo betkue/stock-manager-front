@@ -138,13 +138,13 @@ class _SupplierPageState extends State<SupplierPage> {
                               itemCount: suppliers.length,
                               itemBuilder: (context, index) {
                                 return supplier(
-                                  customers[index]['id'].toString(),
-                                  customers[index]['name'],
-                                  customers[index]['sigle']??"",
-                                  customers[index]['location'],
-                                  customers[index]['logo'] ??
+                                  suppliers[index]['id'].toString(),
+                                  suppliers[index]['name'],
+                                  suppliers[index]['sigle'] ?? "",
+                                  suppliers[index]['location'],
+                                  suppliers[index]['logo'] ??
                                       'https://picsum.photos/200/300',
-                                  customers[index]['reference'],
+                                  suppliers[index]['reference'],
                                   context,
                                   () {
                                     details = true;

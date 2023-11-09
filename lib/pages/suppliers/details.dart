@@ -10,6 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
+import 'package:stock_manager/functions/function.dart';
+import 'package:stock_manager/functions/supplier_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/widgets/circular_button.dart';
 import 'package:stock_manager/widgets/account/account.dart';
@@ -35,6 +37,9 @@ class _DetailSupplierState extends State<DetailSupplier> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController searchController = TextEditingController();
   TextEditingController searchListController = TextEditingController();
+  TextEditingController sigleController = TextEditingController();
+  TextEditingController countryController =
+      TextEditingController(text: countries[phcode]['name']);
   ImagePicker picker = ImagePicker();
   bool load = true;
   bool showList = false;
@@ -201,8 +206,7 @@ class _DetailSupplierState extends State<DetailSupplier> {
                                           pickImageFromGallery();
                                         });
                                       },
-                                      child: (supplier_single['image'] !=
-                                                  null &&
+                                      child: (supplier_single['logo'] != null &&
                                               imageFile == null)
                                           ? Container(
                                               margin: EdgeInsets.symmetric(
@@ -211,7 +215,7 @@ class _DetailSupplierState extends State<DetailSupplier> {
                                               height: media.width / 5,
                                               child: CachedNetworkImage(
                                                 imageUrl:
-                                                    supplier_single['image'],
+                                                    supplier_single['logo'],
                                                 fit: BoxFit.contain,
                                               ),
                                               decoration: BoxDecoration(
@@ -381,6 +385,224 @@ class _DetailSupplierState extends State<DetailSupplier> {
                                                   });
                                                 }, false, false),
                                                 const SizedBox(height: 20),
+                                                label(' Sigle'),
+                                                inputContain(
+                                                    width,
+                                                    '  the supplier Sigle',
+                                                    sigleController,
+                                                    (String value) {
+                                                  setState(() {
+                                                    sigleController.text =
+                                                        value;
+                                                    user_rule =
+                                                        sigleController.text;
+                                                  });
+                                                }, false, false),
+                                                const SizedBox(
+                                                  height: 20,
+                                                ),
+                                                label('Country'),
+                                                InkWell(
+                                                  onTap: () async {
+                                                    if (countries.isNotEmpty) {
+                                                      //dialod box for select country for dial code
+                                                      await showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            var searchVal = '';
+                                                            return AlertDialog(
+                                                              insetPadding:
+                                                                  const EdgeInsets
+                                                                      .all(10),
+                                                              content: StatefulBuilder(
+                                                                  builder: (context,
+                                                                      setState) {
+                                                                return Container(
+                                                                  width: media
+                                                                          .width *
+                                                                      0.9,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  child: Column(
+                                                                    children: [
+                                                                      SingleChildScrollView(
+                                                                        scrollDirection:
+                                                                            Axis.horizontal,
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            Container(
+                                                                              padding: const EdgeInsets.only(left: 20),
+                                                                              height: 40,
+                                                                              width: media.width * 0.7,
+                                                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.grey, width: 1.5)),
+                                                                              child: TextField(
+                                                                                decoration: InputDecoration(border: InputBorder.none, hintText: "Search", hintStyle: TextStyle(fontSize: media.width / 70)),
+                                                                                onChanged: (val) {
+                                                                                  setState(() {
+                                                                                    searchVal = val;
+                                                                                  });
+                                                                                },
+                                                                              ),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: 20,
+                                                                            ),
+                                                                            Container(
+                                                                              child: CirularButton(onClick: () {
+                                                                                Navigator.pop(context);
+                                                                              }),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(
+                                                                          height:
+                                                                              20),
+                                                                      Expanded(
+                                                                        child:
+                                                                            SingleChildScrollView(
+                                                                          child:
+                                                                              Column(
+                                                                            children: countries
+                                                                                .asMap()
+                                                                                .map((i, value) {
+                                                                                  return MapEntry(
+                                                                                      i,
+                                                                                      SizedBox(
+                                                                                        width: media.width * 0.9,
+                                                                                        child: (searchVal == '' && countries[i]['flag'] != null)
+                                                                                            ? InkWell(
+                                                                                                onTap: () {
+                                                                                                  setState(() {
+                                                                                                    phcode = i;
+                                                                                                    country_id = countries[i]['id'];
+
+                                                                                                    countryController.text = countries[i]['name'];
+                                                                                                  });
+                                                                                                  Navigator.pop(context);
+                                                                                                },
+                                                                                                child: Container(
+                                                                                                  padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                                                                                  color: Colors.white,
+                                                                                                  child: SingleChildScrollView(
+                                                                                                      scrollDirection: Axis.horizontal,
+                                                                                                      child: Row(
+                                                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                                        children: [
+                                                                                                          Row(
+                                                                                                            children: [
+                                                                                                              SizedBox(width: media.width * 0.4, child: Text(countries[i]['code'], style: TextStyle(fontSize: media.width / 70))),
+                                                                                                              SizedBox(
+                                                                                                                width: media.width * 0.02,
+                                                                                                              ),
+                                                                                                              SizedBox(
+                                                                                                                  width: media.width * 0.4,
+                                                                                                                  child: Text(
+                                                                                                                    countries[i]['name'],
+                                                                                                                    style: TextStyle(fontSize: media.width / 70),
+                                                                                                                  )),
+                                                                                                            ],
+                                                                                                          ),
+                                                                                                          Text(
+                                                                                                            countries[i]['dial_code'],
+                                                                                                            style: TextStyle(fontSize: media.width / 70),
+                                                                                                          )
+                                                                                                        ],
+                                                                                                      )),
+                                                                                                ))
+                                                                                            : (countries[i]['flag'] != null && countries[i]['name'].toLowerCase().contains(searchVal.toLowerCase()))
+                                                                                                ? InkWell(
+                                                                                                    onTap: () {
+                                                                                                      setState(() {
+                                                                                                        phcode = i;
+                                                                                                        country_id = countries[i]['id'];
+                                                                                                        countryController.text = countries[i]['name'];
+                                                                                                      });
+                                                                                                      Navigator.pop(context);
+                                                                                                    },
+                                                                                                    child: Container(
+                                                                                                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                                                                                      color: Colors.white,
+                                                                                                      child: Row(
+                                                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                                        children: [
+                                                                                                          Row(
+                                                                                                            children: [
+                                                                                                              SizedBox(
+                                                                                                                  width: media.width * 0.4,
+                                                                                                                  child: Text(
+                                                                                                                    countries[i]['code'],
+                                                                                                                    style: TextStyle(fontSize: media.width / 70),
+                                                                                                                  )),
+                                                                                                              SizedBox(
+                                                                                                                width: media.width * 0.02,
+                                                                                                              ),
+                                                                                                              SizedBox(
+                                                                                                                  width: media.width * 0.4,
+                                                                                                                  child: Text(
+                                                                                                                    countries[i]['name'],
+                                                                                                                    style: TextStyle(fontSize: media.width / 70),
+                                                                                                                  )),
+                                                                                                            ],
+                                                                                                          ),
+                                                                                                          Text(
+                                                                                                            countries[i]['dial_code'],
+                                                                                                            style: TextStyle(fontSize: media.width / 70),
+                                                                                                          )
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ))
+                                                                                                : Container(),
+                                                                                      ));
+                                                                                })
+                                                                                .values
+                                                                                .toList(),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              }),
+                                                            );
+                                                          });
+                                                    } else {
+                                                      getCountryCode();
+                                                    }
+                                                    setState(() {});
+                                                  },
+                                                  child: Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 5),
+                                                    width: width / 4.5,
+                                                    height: 47,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: gray,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey
+                                                              .withOpacity(0.2),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 4,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 15),
+                                                      child: Text(
+                                                        countryController.text,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 20),
                                                 label(' Location'),
                                                 inputContain(
                                                     width,
@@ -395,133 +617,134 @@ class _DetailSupplierState extends State<DetailSupplier> {
                                                   });
                                                 }, false, false),
                                                 const SizedBox(height: 20),
-                                                Row(
-                                                  children: [
-                                                    label(
-                                                        ' products (${listSeach.length})'),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        setState(() {
-                                                          showList = true;
-                                                        });
 
-                                                        Timer(
-                                                            Duration(
-                                                                seconds: 5),
-                                                            () => setState(() {
-                                                                  loadList =
-                                                                      false;
-                                                                }));
-                                                      },
-                                                      child: Container(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                vertical: 5,
-                                                                horizontal: 20),
-                                                        margin: EdgeInsets.only(
-                                                            left: 10),
-                                                        decoration: BoxDecoration(
-                                                            color: primaryColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            10))),
-                                                        child: Text(
-                                                          "ADD",
-                                                          style: TextStyle(
-                                                              color: white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Container(
-                                                  margin:
-                                                      EdgeInsets.only(top: 10),
-                                                  width: width,
-                                                  child: TextField(
-                                                    controller:
-                                                        searchController,
-                                                    decoration: InputDecoration(
-                                                      hintText: "Search",
-                                                      prefixIcon:
-                                                          Icon(Icons.search),
-                                                      border:
-                                                          OutlineInputBorder(),
-                                                    ),
-                                                    onChanged: (value) {
-                                                      setState(() {
-                                                        // searchsupplier Controller.text = value;
-                                                      });
-                                                    },
-                                                  ),
-                                                ),
-                                                Container(
-                                                  margin:
-                                                      EdgeInsets.only(top: 10),
-                                                  width: width,
-                                                  height: width / 5,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: white,
-                                                          width: 0.5)),
-                                                  child: ListView.builder(
-                                                      itemCount:
-                                                          listSeach.length,
-                                                      itemBuilder:
-                                                          (BuildContext context,
-                                                              int index) {
-                                                        if (searchController
-                                                                .text
-                                                                .isNotEmpty &&
-                                                            !listSeach[index]
-                                                                    ['name']
-                                                                .toLowerCase()
-                                                                .contains(
-                                                                    searchController
-                                                                        .text
-                                                                        .toLowerCase())) {
-                                                          return Container();
-                                                        } else {
-                                                          return ListTile(
-                                                              leading: InkWell(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    listSeach
-                                                                        .removeAt(
-                                                                            index);
-                                                                  });
-                                                                },
-                                                                child: Icon(
-                                                                  Icons.remove,
-                                                                  color:
-                                                                      primaryColor,
-                                                                ),
-                                                              ),
-                                                              trailing: Text(
-                                                                '${listSeach[index]['price']} ' +
-                                                                    company['currency']
-                                                                        [
-                                                                        'symbol'],
-                                                                style: TextStyle(
-                                                                    color:
-                                                                        backgroundColor,
-                                                                    fontSize:
-                                                                        15),
-                                                              ),
-                                                              title: Text(
-                                                                  listSeach[
-                                                                          index]
-                                                                      [
-                                                                      'name']));
-                                                        }
-                                                      }),
-                                                ),
-                                                const SizedBox(height: 20),
+                                                // Row(
+                                                //   children: [
+                                                //     label(
+                                                //         ' products (${listSeach.length})'),
+                                                //     InkWell(
+                                                //       onTap: () {
+                                                //         setState(() {
+                                                //           showList = true;
+                                                //         });
+
+                                                //         Timer(
+                                                //             Duration(
+                                                //                 seconds: 5),
+                                                //             () => setState(() {
+                                                //                   loadList =
+                                                //                       false;
+                                                //                 }));
+                                                //       },
+                                                //       child: Container(
+                                                //         padding: EdgeInsets
+                                                //             .symmetric(
+                                                //                 vertical: 5,
+                                                //                 horizontal: 20),
+                                                //         margin: EdgeInsets.only(
+                                                //             left: 10),
+                                                //         decoration: BoxDecoration(
+                                                //             color: primaryColor,
+                                                //             borderRadius:
+                                                //                 BorderRadius
+                                                //                     .all(Radius
+                                                //                         .circular(
+                                                //                             10))),
+                                                //         child: Text(
+                                                //           "ADD",
+                                                //           style: TextStyle(
+                                                //               color: white,
+                                                //               fontWeight:
+                                                //                   FontWeight
+                                                //                       .bold),
+                                                //         ),
+                                                //       ),
+                                                //     )
+                                                //   ],
+                                                // ),
+                                                // Container(
+                                                //   margin:
+                                                //       EdgeInsets.only(top: 10),
+                                                //   width: width,
+                                                //   child: TextField(
+                                                //     controller:
+                                                //         searchController,
+                                                //     decoration: InputDecoration(
+                                                //       hintText: "Search",
+                                                //       prefixIcon:
+                                                //           Icon(Icons.search),
+                                                //       border:
+                                                //           OutlineInputBorder(),
+                                                //     ),
+                                                //     onChanged: (value) {
+                                                //       setState(() {
+                                                //         // searchsupplier Controller.text = value;
+                                                //       });
+                                                //     },
+                                                //   ),
+                                                // ),
+                                                // Container(
+                                                //   margin:
+                                                //       EdgeInsets.only(top: 10),
+                                                //   width: width,
+                                                //   height: width / 5,
+                                                //   decoration: BoxDecoration(
+                                                //       border: Border.all(
+                                                //           color: white,
+                                                //           width: 0.5)),
+                                                //   child: ListView.builder(
+                                                //       itemCount:
+                                                //           listSeach.length,
+                                                //       itemBuilder:
+                                                //           (BuildContext context,
+                                                //               int index) {
+                                                //         if (searchController
+                                                //                 .text
+                                                //                 .isNotEmpty &&
+                                                //             !listSeach[index]
+                                                //                     ['name']
+                                                //                 .toLowerCase()
+                                                //                 .contains(
+                                                //                     searchController
+                                                //                         .text
+                                                //                         .toLowerCase())) {
+                                                //           return Container();
+                                                //         } else {
+                                                //           return ListTile(
+                                                //               leading: InkWell(
+                                                //                 onTap: () {
+                                                //                   setState(() {
+                                                //                     listSeach
+                                                //                         .removeAt(
+                                                //                             index);
+                                                //                   });
+                                                //                 },
+                                                //                 child: Icon(
+                                                //                   Icons.remove,
+                                                //                   color:
+                                                //                       primaryColor,
+                                                //                 ),
+                                                //               ),
+                                                //               trailing: Text(
+                                                //                 '${listSeach[index]['price']} ' +
+                                                //                     company['currency']
+                                                //                         [
+                                                //                         'symbol'],
+                                                //                 style: TextStyle(
+                                                //                     color:
+                                                //                         backgroundColor,
+                                                //                     fontSize:
+                                                //                         15),
+                                                //               ),
+                                                //               title: Text(
+                                                //                   listSeach[
+                                                //                           index]
+                                                //                       [
+                                                //                       'name']));
+                                                //         }
+                                                //       }),
+                                                // ),
+                                                // const SizedBox(height: 20),
                                               ],
                                             ),
                                           ),
@@ -534,39 +757,77 @@ class _DetailSupplierState extends State<DetailSupplier> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: SizedBox(
-                            width: width / 3,
-                            height: 47,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  // Form is valid, process the data here.
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content:
-                                          Text('Form submitted successfully!'),
+                        (nameController.text.isNotEmpty &&
+                                (imageFile != null ||
+                                    supplier_single['logo'] != null) &&
+                                refController.text.isNotEmpty &&
+                                sigleController.text.isNotEmpty &&
+                                locationController.text.isNotEmpty &&
+                                countryController.text.isNotEmpty &&
+                                currency_id != null)
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: SizedBox(
+                                  width: width / 3,
+                                  height: 47,
+                                  child: ElevatedButton(
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        setState(() {
+                                          load = true;
+                                        });
+
+                                        Map<String, String> supplier = {
+                                          'name': nameController.text,
+                                          'reference': refController.text,
+                                          'sigle': sigleController.text,
+                                          "description":
+                                              descriptionController.text,
+                                          "location": locationController.text,
+                                          "product_id": id_supplier.toString(),
+                                          "currency_id": currency_id.toString(),
+                                          "country_id": country_id.toString()
+                                        };
+
+                                        debugPrint(widget.id.toString());
+                                        var result = widget.id == null
+                                            ? await createSupplier(
+                                                supplier, imageFile, context)
+                                            : await updateSupplier(
+                                                supplier, imageFile, context);
+
+                                        if (result) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'Form submitted successfully!'),
+                                            ),
+                                          );
+                                          widget.back();
+                                          setState(() {
+                                            load = false;
+                                          });
+                                        } else {}
+                                        setState(() {
+                                          load = false;
+                                        });
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      //<-- SEE HERE
+                                      backgroundColor: primaryColor,
                                     ),
-                                  );
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             const TestPage()));
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                //<-- SEE HERE
-                                backgroundColor: primaryColor,
-                              ),
-                              child: Text(
-                                widget.id != null ? 'Modify' : "Add",
-                                style: TextStyle(fontSize: 24, color: white),
-                              ),
-                            ),
-                          ),
-                        ),
+                                    child: Text(
+                                      widget.id != null ? 'Modify' : "Add",
+                                      style:
+                                          TextStyle(fontSize: 24, color: white),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
                       ],
                     ),
                   ),

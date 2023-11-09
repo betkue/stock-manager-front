@@ -203,8 +203,7 @@ class _DetailSalleState extends State<DetailSalle> {
                                           pickImageFromGallery();
                                         });
                                       },
-                                      child: (customer_single['image'] !=
-                                                  null &&
+                                      child: (customer_single['logo'] != null &&
                                               imageFile == null)
                                           ? Container(
                                               margin: EdgeInsets.symmetric(
