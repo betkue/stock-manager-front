@@ -205,10 +205,12 @@ class _DetailProductState extends State<DetailProduct> {
                             });
 
                             var result = await deleteProduct();
-
                             setState(() {
-                              load = true;
+                              load = false;
                             });
+                            if (result) {
+                              widget.back();
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: red,
@@ -285,6 +287,12 @@ class _DetailProductState extends State<DetailProduct> {
                                                     child: CachedNetworkImage(
                                                       imageUrl: product_single[
                                                           'image'],
+                                                      placeholder: (context,
+                                                              url) =>
+                                                          CircularProgressIndicator(),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          Icon(Icons.error),
                                                       fit: BoxFit.contain,
                                                     ),
                                                     decoration: BoxDecoration(
