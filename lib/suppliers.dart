@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
+import 'package:stock_manager/functions/supplier_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/suppliers/details.dart';
 import 'package:stock_manager/widgets/supplier/supplier.dart';
@@ -18,20 +19,30 @@ class SupplierPage extends StatefulWidget {
 }
 
 class _SupplierPageState extends State<SupplierPage> {
-  bool details = false;
   bool load = true;
+
+  bool details = false;
+
   setStatePage() {
     setState(() {});
   }
 
   @override
   void initState() {
-    Timer(
-        Duration(seconds: timedalay),
-        () => setState(() {
-              load = false;
-            }));
+    getData();
     super.initState();
+  }
+
+  getData() async {
+    setState(() {
+      load = true;
+    });
+
+    await getSuppliers();
+
+    setState(() {
+      load = false;
+    });
   }
 
   @override
@@ -49,10 +60,11 @@ class _SupplierPageState extends State<SupplierPage> {
                         ? DetailSupplier(
                             id: id_supplier,
                             setParent: setStatePage,
-                            back: () {
+                            back: () async {
                               setState(() {
                                 details = false;
                               });
+                              await getData();
                             },
                           )
                         : Scaffold(
@@ -128,10 +140,10 @@ class _SupplierPageState extends State<SupplierPage> {
                                 return supplier(
                                   customers[index]['id'].toString(),
                                   customers[index]['name'],
-                                  customers[index]['product_quantity']
-                                      .toString(),
+                                  customers[index]['sigle']??"",
                                   customers[index]['location'],
-                                  customers[index]['image'],
+                                  customers[index]['logo'] ??
+                                      'https://picsum.photos/200/300',
                                   customers[index]['reference'],
                                   context,
                                   () {

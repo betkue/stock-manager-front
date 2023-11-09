@@ -4,7 +4,7 @@ import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
 
-Widget customer(String id, String name, String quantity, String location,
+Widget customer(String id, String name, String sigle, String location,
     String image, String ref, BuildContext context, Function setParent) {
   if (searchCustomersController.text.isNotEmpty &&
       !name
@@ -30,29 +30,36 @@ Widget customer(String id, String name, String quantity, String location,
       ),
       child: Row(
         children: [
-          Container(
-            height: 100,
-            width: 100,
-            child: CachedNetworkImage(
-              imageUrl: image,
-              fit: BoxFit.contain,
+          ClipRRect(
+            borderRadius:
+                BorderRadius.circular(MediaQuery.of(context).size.height / 30),
+            child: Container(
+              height: 100,
+              width: 100,
+              child: CachedNetworkImage(
+                imageUrl: image,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
+
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+                // color: widget.color ?? orange,
+              ),
+              // child: Image.network(
+              //  ,
+              //   // fit: BoxFit.cover,
+              // )
             ),
-            decoration: BoxDecoration(
-              // image: DecorationImage(image: NetworkImage(image)),
-              color: primaryColor,
-              borderRadius:
-                  BorderRadius.circular(MediaQuery.of(context).size.height),
-              // color: widget.color ?? orange,
-            ),
-            // child: Image.network(
-            //  ,
-            //   // fit: BoxFit.cover,
-            // )
           ),
           const SizedBox(width: 30),
           Expanded(child: Text(name)),
+          Expanded(child: Text("${sigle}")),
           Expanded(child: Text(ref)),
-          Expanded(child: Text("Quantity : $quantity")),
           Expanded(child: Text("Location : $location")),
           Expanded(
             child: IconButton(

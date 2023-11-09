@@ -99,39 +99,9 @@ List<Map<String, dynamic>> productsAvailable = [];
 
 List<Map<String, dynamic>> productsUnavalaible = [];
 
-List<Map<String, dynamic>> customers = [
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "reference": "#poijkj454664",
-    "product_quantity": 1000,
-    "location": "Pk 19"
-  },
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "reference": "#poijkj454664",
-    "product_quantity": 1000,
-    "location": "Pk 19"
-  }
-];
+List<Map<String, dynamic>> customers = [];
 
-List<Map<String, dynamic>> suppliers = [
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "reference": "#poijkj454664",
-    "product_quantity": 1000,
-    "location": "Pk 19"
-  },
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "reference": "#poijkj454664",
-    "product_quantity": 1000,
-    "location": "Pk 19"
-  }
-];
+List<Map<String, dynamic>> suppliers = [];
 
 List<Map<String, dynamic>> purchasesAll = [
   {
@@ -236,9 +206,9 @@ List<Map<String, dynamic>> salesComplete = [
     "paiement_state": 0
   },
 ];
-  List<Map<String, dynamic>> locations = [];
+List<Map<String, dynamic>> locations = [];
 
-  List<Map<String, dynamic>> locationsLoad = [];
+List<Map<String, dynamic>> locationsLoad = [];
 Map<String, dynamic> product_single = {
   // "name": "Product Name",
   // "reference": "Product Name",
