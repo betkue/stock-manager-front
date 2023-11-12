@@ -67,6 +67,7 @@ String? id_product;
 String? id_customer;
 String? id_supplier;
 
+String? id_location;
 String? id_salle;
 String? id_purshase;
 Map<String, dynamic> dashboard = {
@@ -356,6 +357,7 @@ TextEditingController searchProductsController = TextEditingController();
 TextEditingController searchPurchasesController = TextEditingController();
 TextEditingController searchSalesController = TextEditingController();
 TextEditingController searchSuppliersController = TextEditingController();
+TextEditingController searchLocationsController = TextEditingController();
 TextEditingController searchCustomersController = TextEditingController();
 
 TextEditingController nameController = TextEditingController();

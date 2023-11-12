@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/dashboard.dart';
+import 'package:stock_manager/locations.dart';
 import 'package:stock_manager/menu.dart';
 import 'package:stock_manager/widgets/profile.dart';
 import 'package:stock_manager/products.dart';
@@ -23,6 +24,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<Widget> contian = [
     DashBoard(),
+    LocationPage(),
     ProductPage(),
     CustomerPage(),
     SupplierPage(),
