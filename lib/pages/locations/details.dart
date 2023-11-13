@@ -154,16 +154,17 @@ class _DetailLocationState extends State<DetailLocation> {
       load = true;
     });
 
-    var result = await getProduct();
+    var result = await getLocation();
 
     if (result == true) {
       nameController.text = location_single['name'] ?? "";
+      locationController.text = location_single['location'] ?? "";
       quantityController.text = location_single['quantity'].toString();
       // productsList = ['productsList'];
 
-      for (var i = 0; i < location_single['productsList'].length; i++) {
-        qteList.add(location_single['productsList'][i]['quantity'].toDouble());
-        productsList.add(location_single['productsList'][i]['location']);
+      for (var i = 0; i < location_single['products'].length; i++) {
+        qteList.add(location_single['products'][i]['quantity'].toDouble());
+        productsList.add(location_single['products'][i]['product']);
       }
     }
 
@@ -493,11 +494,11 @@ class _DetailLocationState extends State<DetailLocation> {
                                                           nameController,
                                                           (String value) {
                                                         setState(() {
-                                                          nameController.text =
-                                                              value;
-                                                          user_name =
-                                                              nameController
-                                                                  .text;
+                                                          // nameController.text =
+                                                          //     value;
+                                                          // user_name =
+                                                          //     nameController
+                                                          //         .text;
                                                         });
                                                       }, false, false),
                                                       const SizedBox(
@@ -509,11 +510,11 @@ class _DetailLocationState extends State<DetailLocation> {
                                                           locationController,
                                                           (String value) {
                                                         setState(() {
-                                                          locationController
-                                                              .text = value;
-                                                          user_name =
-                                                              nameController
-                                                                  .text;
+                                                          // locationController
+                                                          //     .text = value;
+                                                          // user_name =
+                                                          //     nameController
+                                                          //         .text;
                                                         });
                                                       }, false, false),
                                                       const SizedBox(
@@ -599,11 +600,11 @@ class _DetailLocationState extends State<DetailLocation> {
                                                     locationController.text,
                                                 // "code": codeController.text,
                                                 "products": "$ProductLovation",
-                                                "product_id":
+                                                "location_id":
                                                     id_location.toString()
                                               };
 
-                                              debugPrint(widget.id.toString());
+                                              debugPrint(location.toString());
                                               var result = widget.id == null
                                                   ? await createLocation(
                                                       location,

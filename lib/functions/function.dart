@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher_string.dart';
 
 convertDate(
   DateTime tm,
@@ -297,3 +298,45 @@ clearCache() async {
 //   }
 //   return Uri.encodeComponent(jsonEncode(params));
 // }
+getVersion(token) async {
+  dynamic result;
+  try {
+    var response = await http.get(
+      Uri.parse('${api}user/version'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${token}'
+      },
+    );
+    if (response.statusCode == 200) {
+      await clearCache();
+
+      Map<String, dynamic> jsonVal =
+          Map<String, dynamic>.from(jsonDecode(response.body));
+
+      version_app = jsonVal['version'];
+      url_version = jsonVal['url'];
+
+      result = true;
+    } else {
+      debugPrint(response.body);
+
+      result = false;
+    }
+  } catch (e) {
+    result = false;
+    if (e is SocketException) {
+      internet = false;
+    }
+  }
+  return result;
+}
+
+openBrowser(browseUrl) async {
+  if (await canLaunchUrlString(browseUrl)) {
+    await launchUrlString(browseUrl);
+  } else {
+    throw 'Could not launch $browseUrl';
+  }
+}

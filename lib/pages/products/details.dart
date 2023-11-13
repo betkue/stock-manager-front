@@ -467,11 +467,11 @@ class _DetailProductState extends State<DetailProduct> {
                                                           nameController,
                                                           (String value) {
                                                         setState(() {
-                                                          nameController.text =
-                                                              value;
-                                                          user_name =
-                                                              nameController
-                                                                  .text;
+                                                          // nameController.text =
+                                                          //     value;
+                                                          // user_name =
+                                                          //     nameController
+                                                          //         .text;
                                                         });
                                                       }, false, false),
                                                       const SizedBox(
@@ -483,11 +483,11 @@ class _DetailProductState extends State<DetailProduct> {
                                                           refController,
                                                           (String value) {
                                                         setState(() {
-                                                          refController.text =
-                                                              value;
-                                                          user_email =
-                                                              refController
-                                                                  .text;
+                                                          // refController.text =
+                                                          //     value;
+                                                          // user_email =
+                                                          //     refController
+                                                          //         .text;
                                                         });
                                                       }, false, false),
                                                       const SizedBox(
@@ -498,11 +498,11 @@ class _DetailProductState extends State<DetailProduct> {
                                                           'product quantity',
                                                           quantityController,
                                                           (String value) {
-                                                        quantityController
-                                                            .text = value;
-                                                        user_password =
-                                                            quantityController
-                                                                .text;
+                                                        // quantityController
+                                                        //     .text = value;
+                                                        // user_password =
+                                                        //     quantityController
+                                                        //         .text;
                                                       }, false, true,
                                                           textInputType:
                                                               TextInputType
@@ -516,11 +516,11 @@ class _DetailProductState extends State<DetailProduct> {
                                                         'unit quantity',
                                                         unitController,
                                                         (String value) {
-                                                          unitController.text =
-                                                              value;
-                                                          user_password =
-                                                              quantityController
-                                                                  .text;
+                                                          // unitController.text =
+                                                          //     value;
+                                                          // user_password =
+                                                          //     quantityController
+                                                          //         .text;
                                                         },
                                                         false,
                                                         false,
@@ -534,11 +534,11 @@ class _DetailProductState extends State<DetailProduct> {
                                                           priceController,
                                                           (String value) {
                                                         setState(() {
-                                                          priceController.text =
-                                                              value;
-                                                          user_phone =
-                                                              priceController
-                                                                  .text;
+                                                          // priceController.text =
+                                                          //     value;
+                                                          // user_phone =
+                                                          //     priceController
+                                                          //         .text;
                                                         });
                                                       }, false, false,
                                                           textInputType:
@@ -554,8 +554,8 @@ class _DetailProductState extends State<DetailProduct> {
                                                           price2Controller,
                                                           (String value) {
                                                         setState(() {
-                                                          price2Controller
-                                                              .text = value;
+                                                          // price2Controller
+                                                          //     .text = value;
                                                         });
                                                       }, false, false,
                                                           textInputType:
@@ -736,7 +736,7 @@ class _DetailProductState extends State<DetailProduct> {
                                                                               (value) {
                                                                             if (value.isNotEmpty) {
                                                                               qteList[index] = double.parse(value);
-                                                                            }else{
+                                                                            } else {
                                                                               qteList[index] = 0;
                                                                             }
 

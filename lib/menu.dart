@@ -28,15 +28,15 @@ class _MenuState extends State<Menu> {
   // _MenuState(this.child, this.color, this.padding);
 
   List<MenuModel> menu = [
-    MenuModel(icon: Icons.dashboard_outlined, title: "Dashboard"),
+    // MenuModel(icon: Icons.dashboard_outlined, title: "Dashboard"),
     MenuModel(icon: Icons.local_offer, title: "Location"),
     MenuModel(icon: Icons.sell_sharp, title: "Product"),
     MenuModel(icon: Icons.people, title: "Customer"),
     MenuModel(icon: Icons.emoji_people, title: "Supplier"),
-    MenuModel(icon: Icons.card_travel, title: "Purchase"),
+    // MenuModel(icon: Icons.card_travel, title: "Purchase"),
     // MenuModel(icon: Icons.stacked_bar_chart_outlined, title: "Stock"),
-    MenuModel(icon: Icons.sell, title: "Sales"),
-    MenuModel(icon: Icons.account_box, title: "Account"),
+    // MenuModel(icon: Icons.sell, title: "Sales"),
+    // MenuModel(icon: Icons.account_box, title: "Account"),
   ];
 
   // int selected = 0;

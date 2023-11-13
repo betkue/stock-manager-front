@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 dynamic pref;
 dynamic token;
 dynamic phcode;
+dynamic version_app;
+dynamic url_version;
+
+var updateAvailable = false;
 
 dynamic curcode;
 dynamic country_id;

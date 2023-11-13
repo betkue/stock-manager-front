@@ -307,7 +307,7 @@ createLocation(
 }
 
 updateLocation(
-    Map<String, String> product, imageFile, BuildContext context) async {
+    Map<String, String> location, imageFile, BuildContext context) async {
   dynamic result;
 
   try {
@@ -327,7 +327,7 @@ updateLocation(
     if (imageFile != null) {
       response.files.add(await http.MultipartFile.fromPath('image', imageFile));
     }
-    response.fields.addAll(product);
+    response.fields.addAll(location);
 
     var request = await response.send();
     var respon = await http.Response.fromStream(request);
@@ -383,6 +383,42 @@ deleteLocation() async {
       result = false;
     }
   } catch (e) {
+    result = false;
+    if (e is SocketException) {
+      internet = false;
+    }
+  }
+  return result;
+}
+
+getLocation() async {
+  dynamic result;
+  try {
+    var response = await http.get(
+      Uri.parse('${api}location/single?location_id=${id_location}'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${token}'
+      },
+    );
+    if (response.statusCode == 200) {
+      await clearCache();
+
+      location_single = Map<String, dynamic>.from(jsonDecode(response.body));
+
+      debugPrint(product_single.toString());
+      result = true;
+    } else {
+      product_single = {};
+
+      debugPrint(response.body);
+
+      result = false;
+    }
+  } catch (e) {
+    product_single = {};
+
     result = false;
     if (e is SocketException) {
       internet = false;

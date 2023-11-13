@@ -461,11 +461,11 @@ class _DetailSupplierState extends State<DetailSupplier> {
                                                           nameController,
                                                           (String value) {
                                                         setState(() {
-                                                          nameController.text =
-                                                              value;
-                                                          user_name =
-                                                              nameController
-                                                                  .text;
+                                                          // nameController.text =
+                                                          //     value;
+                                                          // user_name =
+                                                          //     nameController
+                                                          //         .text;
                                                         });
                                                       }, false, false),
                                                       const SizedBox(
@@ -477,11 +477,11 @@ class _DetailSupplierState extends State<DetailSupplier> {
                                                           refController,
                                                           (String value) {
                                                         setState(() {
-                                                          refController.text =
-                                                              value;
-                                                          user_email =
-                                                              refController
-                                                                  .text;
+                                                          // refController.text =
+                                                          //     value;
+                                                          // user_email =
+                                                          //     refController
+                                                          //         .text;
                                                         });
                                                       }, false, false),
                                                       const SizedBox(
@@ -493,11 +493,11 @@ class _DetailSupplierState extends State<DetailSupplier> {
                                                           sigleController,
                                                           (String value) {
                                                         setState(() {
-                                                          sigleController.text =
-                                                              value;
-                                                          user_rule =
-                                                              sigleController
-                                                                  .text;
+                                                          // sigleController.text =
+                                                          //     value;
+                                                          // user_rule =
+                                                          //     sigleController
+                                                          //         .text;
                                                         });
                                                       }, false, false),
                                                       const SizedBox(
@@ -720,11 +720,11 @@ class _DetailSupplierState extends State<DetailSupplier> {
                                                           locationController,
                                                           (String value) {
                                                         setState(() {
-                                                          locationController
-                                                              .text = value;
-                                                          user_rule =
-                                                              locationController
-                                                                  .text;
+                                                          // locationController
+                                                          //     .text = value;
+                                                          // user_rule =
+                                                          //     locationController
+                                                          //         .text;
                                                         });
                                                       }, false, false),
                                                       const SizedBox(

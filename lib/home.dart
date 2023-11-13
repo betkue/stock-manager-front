@@ -23,7 +23,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Widget> contian = [
-    DashBoard(),
+    // DashBoard(),
     LocationPage(),
     ProductPage(),
     CustomerPage(),
