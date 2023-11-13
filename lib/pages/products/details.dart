@@ -775,7 +775,7 @@ class _DetailProductState extends State<DetailProduct> {
                                                             }),
                                                       ),
                                                       const SizedBox(
-                                                          height: 20),
+                                                          height: 100),
                                                     ],
                                                   ),
                                                 ),
