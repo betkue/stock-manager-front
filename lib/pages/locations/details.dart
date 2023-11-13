@@ -194,7 +194,7 @@ class _DetailLocationState extends State<DetailLocation> {
                               load = true;
                             });
 
-                            var result = await deleteProduct();
+                            var result = await deleteLocation();
                             setState(() {
                               load = false;
                             });
@@ -534,23 +534,23 @@ class _DetailLocationState extends State<DetailLocation> {
                                                       //         TextInputType
                                                       //             .number,
                                                       //     isnumber: true),
-                                                      const SizedBox(
-                                                          height: 20),
-                                                      label(' Code'),
-                                                      inputContain(
-                                                        width,
-                                                        'unit quantity',
-                                                        codeController,
-                                                        (String value) {
-                                                          codeController.text =
-                                                              value;
-                                                          user_password =
-                                                              quantityController
-                                                                  .text;
-                                                        },
-                                                        false,
-                                                        false,
-                                                      ),
+                                                      // const SizedBox(
+                                                      //     height: 20),
+                                                      // label(' Code'),
+                                                      // inputContain(
+                                                      //   width,
+                                                      //   'unit quantity',
+                                                      //   codeController,
+                                                      //   (String value) {
+                                                      //     codeController.text =
+                                                      //         value;
+                                                      //     user_password =
+                                                      //         quantityController
+                                                      //             .text;
+                                                      //   },
+                                                      //   false,
+                                                      //   false,
+                                                      // ),
                                                       const SizedBox(
                                                           height: 20),
                                                     ],
@@ -597,20 +597,19 @@ class _DetailLocationState extends State<DetailLocation> {
                                                 'name': nameController.text,
                                                 'location':
                                                     locationController.text,
-                                                "code": codeController.text,
-                                                "productsList":
-                                                    "$ProductLovation",
+                                                // "code": codeController.text,
+                                                "products": "$ProductLovation",
                                                 "product_id":
-                                                    id_product.toString()
+                                                    id_location.toString()
                                               };
 
                                               debugPrint(widget.id.toString());
                                               var result = widget.id == null
-                                                  ? await createProduct(
+                                                  ? await createLocation(
                                                       location,
                                                       imageFile,
                                                       context)
-                                                  : await updateProduct(
+                                                  : await updateLocation(
                                                       location,
                                                       imageFile,
                                                       context);
