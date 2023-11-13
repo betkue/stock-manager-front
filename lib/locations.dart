@@ -7,6 +7,7 @@ import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/functions/product_function.dart';
 import 'package:stock_manager/load_page.dart';
+import 'package:stock_manager/pages/locations/details.dart';
 import 'package:stock_manager/pages/suppliers/details.dart';
 import 'package:stock_manager/widgets/location/location.dart';
 
@@ -56,7 +57,7 @@ class _LocationPageState extends State<LocationPage> {
                 Expanded(
                     flex: 8,
                     child: details
-                        ? DetailSupplier(
+                        ? DetailLocation(
                             id: id_location,
                             setParent: setStatePage,
                             back: () async {

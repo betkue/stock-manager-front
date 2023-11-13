@@ -737,7 +737,8 @@ class _DetailSupplierState extends State<DetailSupplier> {
                                                       //     InkWell(
                                                       //       onTap: () {
                                                       //         setState(() {
-                                                      //           showList = true;
+                                                      //          showList = true;
+                                                      // loadList = true;
                                                       //         });
 
                                                       //         Timer(

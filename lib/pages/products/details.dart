@@ -122,7 +122,7 @@ class _DetailProductState extends State<DetailProduct> {
     double qte = 0;
 
     for (var i = 0; i < qteList.length; i++) {
-      qte = i + qteList[i];
+      qte = qte + qteList[i];
     }
 
     quantityController.text = qte.toString();
@@ -147,7 +147,7 @@ class _DetailProductState extends State<DetailProduct> {
       getData();
     } else {
       setState(() {
-        load = true;
+        load = false;
       });
     }
 
@@ -572,6 +572,8 @@ class _DetailProductState extends State<DetailProduct> {
                                                             onTap: () async {
                                                               setState(() {
                                                                 showList = true;
+                                                                loadList = true;
+                                                                ;
                                                               });
 
                                                               var result =
@@ -732,8 +734,11 @@ class _DetailProductState extends State<DetailProduct> {
                                                                           ],
                                                                           onChanged:
                                                                               (value) {
-                                                                            qteList[index] =
-                                                                                double.parse(value);
+                                                                            if (value.isNotEmpty) {
+                                                                              qteList[index] = double.parse(value);
+                                                                            }else{
+                                                                              qteList[index] = 0;
+                                                                            }
 
                                                                             updateQte();
                                                                           },

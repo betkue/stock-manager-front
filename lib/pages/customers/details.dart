@@ -736,7 +736,8 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                                       //     InkWell(
                                                       //       onTap: () {
                                                       //         setState(() {
-                                                      //           showList = true;
+                                                      //          showList = true;
+                                                                // loadList = true;
                                                       //         });
 
                                                       //         Timer(
