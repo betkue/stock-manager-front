@@ -5,8 +5,8 @@ import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
 
 Widget location(String id, String name, String location, String qte,
- BuildContext context, Function setParent) {
-  if (searchSuppliersController.text.isNotEmpty &&
+    BuildContext context, Function setParent) {
+  if (searchLocationsController.text.isNotEmpty &&
       !name
           .toLowerCase()
           .contains(searchSuppliersController.text.toLowerCase())) {
@@ -30,7 +30,7 @@ Widget location(String id, String name, String location, String qte,
       ),
       child: Row(
         children: [
-         const SizedBox(width: 30),
+          const SizedBox(width: 30),
           Expanded(child: Text(name)),
           Expanded(child: Text("Location : $location")),
           Expanded(child: Text("Products : $qte")),

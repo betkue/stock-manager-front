@@ -69,6 +69,7 @@ dynamic user_password;
 
 String? id_product;
 String? id_customer;
+String? id_movement;
 String? id_supplier;
 
 String? id_location;
@@ -103,6 +104,12 @@ List<Map<String, dynamic>> productsAll = [];
 List<Map<String, dynamic>> productsAvailable = [];
 
 List<Map<String, dynamic>> productsUnavalaible = [];
+
+List<Map<String, dynamic>> mouvementsAll = [];
+
+List<Map<String, dynamic>> mouvementsEntry = [];
+
+List<Map<String, dynamic>> mouvementsExit = [];
 
 List<Map<String, dynamic>> customers = [];
 
@@ -373,6 +380,7 @@ TextEditingController searchSalesController = TextEditingController();
 TextEditingController searchSuppliersController = TextEditingController();
 TextEditingController searchLocationsController = TextEditingController();
 TextEditingController searchCustomersController = TextEditingController();
+TextEditingController searchMovementController = TextEditingController();
 
 TextEditingController nameController = TextEditingController();
 TextEditingController emailController = TextEditingController();

@@ -31,6 +31,7 @@ class _MenuState extends State<Menu> {
     // MenuModel(icon: Icons.dashboard_outlined, title: "Dashboard"),
     MenuModel(icon: Icons.local_offer, title: "Location"),
     MenuModel(icon: Icons.sell_sharp, title: "Product"),
+    MenuModel(icon: Icons.transform_outlined, title: "Movements"),
     MenuModel(icon: Icons.people, title: "Customer"),
     MenuModel(icon: Icons.emoji_people, title: "Supplier"),
     // MenuModel(icon: Icons.card_travel, title: "Purchase"),

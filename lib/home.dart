@@ -6,6 +6,7 @@ import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/dashboard.dart';
 import 'package:stock_manager/locations.dart';
 import 'package:stock_manager/menu.dart';
+import 'package:stock_manager/movements.dart';
 import 'package:stock_manager/widgets/profile.dart';
 import 'package:stock_manager/products.dart';
 import 'package:stock_manager/customers.dart';
@@ -26,6 +27,7 @@ class _HomeState extends State<Home> {
     // DashBoard(),
     LocationPage(),
     ProductPage(),
+    Movements(),
     CustomerPage(),
     SupplierPage(),
     PurchasePage(),
