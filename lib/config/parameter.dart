@@ -105,11 +105,11 @@ List<Map<String, dynamic>> productsAvailable = [];
 
 List<Map<String, dynamic>> productsUnavalaible = [];
 
-List<Map<String, dynamic>> mouvementsAll = [];
+List<Map<String, dynamic>> movementsAll = [];
 
-List<Map<String, dynamic>> mouvementsEntry = [];
+List<Map<String, dynamic>> movementsEntry = [];
 
-List<Map<String, dynamic>> mouvementsExit = [];
+List<Map<String, dynamic>> movementsExit = [];
 
 List<Map<String, dynamic>> customers = [];
 

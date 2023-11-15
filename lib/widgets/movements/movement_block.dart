@@ -20,18 +20,18 @@ class _AllmovementState extends State<Allmovement> {
       primary: false,
       padding: const EdgeInsets.all(20),
       children: <Widget>[
-        for (var i = 0; i < mouvementsAll.length; i++)
+        for (var i = 0; i < movementsAll.length; i++)
           movement(
-              mouvementsAll[i]['id'].toString(),
-              mouvementsAll[i]['product_location']['product']['name'],
-              mouvementsAll[i]['new_qte'].toString(),
-              mouvementsAll[i]['is_entry'],
-              mouvementsAll[i]['last_qte'].toString(),
-              convertDate(DateTime.parse(mouvementsAll[i]['created_at'])),
-              mouvementsAll[i]['product_location']['location']['name'],
-              mouvementsAll[i]['product_location']['product']['image'],
+              movementsAll[i]['id'].toString(),
+              movementsAll[i]['product_location']['product']['name'],
+              movementsAll[i]['new_qte'].toString(),
+              movementsAll[i]['is_entry'],
+              movementsAll[i]['last_qte'].toString(),
+              convertDate(DateTime.parse(movementsAll[i]['created_at'])),
+              movementsAll[i]['product_location']['location']['name'],
+              movementsAll[i]['product_location']['product']['image'],
               context,
-              widget.setParent),
+              widget.setParent,i == movementsAll.length-1),
       ],
     );
   }
@@ -52,18 +52,18 @@ class _EntryMovementState extends State<EntryMovement> {
       primary: false,
       padding: const EdgeInsets.all(20),
       children: <Widget>[
-        for (var i = 0; i < productsAvailable.length; i++)
+        for (var i = 0; i < movementsEntry.length; i++)
           movement(
-              mouvementsEntry[i]['id'].toString(),
-              mouvementsEntry[i]['product_location']['product']['name'],
-              mouvementsEntry[i]['new_qte'].toString(),
-              mouvementsEntry[i]['is_entry'],
-              mouvementsEntry[i]['last_qte'].toString(),
-              convertDate(DateTime.parse(mouvementsEntry[i]['created_at'])),
-              mouvementsEntry[i]['product_location']['location']['name'],
-              mouvementsEntry[i]['product_location']['product']['image'],
+              movementsEntry[i]['id'].toString(),
+              movementsEntry[i]['product_location']['product']['name'],
+              movementsEntry[i]['new_qte'].toString(),
+              movementsEntry[i]['is_entry'],
+              movementsEntry[i]['last_qte'].toString(),
+              convertDate(DateTime.parse(movementsEntry[i]['created_at'])),
+              movementsEntry[i]['product_location']['location']['name'],
+              movementsEntry[i]['product_location']['product']['image'],
               context,
-              widget.setParent),
+              widget.setParent,i == movementsEntry.length-1),
       ],
     );
   }
@@ -84,18 +84,18 @@ class _ExitMovementState extends State<ExitMovement> {
       primary: false,
       padding: const EdgeInsets.all(20),
       children: <Widget>[
-        for (var i = 0; i < productsUnavalaible.length; i++)
+        for (var i = 0; i < movementsExit.length; i++)
           movement(
-              mouvementsExit[i]['id'].toString(),
-              mouvementsExit[i]['product_location']['product']['name'],
-              mouvementsExit[i]['new_qte'].toString(),
-              mouvementsExit[i]['is_entry'],
-              mouvementsExit[i]['last_qte'].toString(),
-              convertDate(DateTime.parse(mouvementsExit[i]['created_at'])),
-              mouvementsExit[i]['product_location']['location']['name'],
-              mouvementsExit[i]['product_location']['product']['image'],
+              movementsExit[i]['id'].toString(),
+              movementsExit[i]['product_location']['product']['name'],
+              movementsExit[i]['new_qte'].toString(),
+              movementsExit[i]['is_entry'],
+              movementsExit[i]['last_qte'].toString(),
+              convertDate(DateTime.parse(movementsExit[i]['created_at'])),
+              movementsExit[i]['product_location']['location']['name'],
+              movementsExit[i]['product_location']['product']['image'],
               context,
-              widget.setParent),
+              widget.setParent,i == movementsExit.length-1),
       ],
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
+import 'package:stock_manager/functions/product_function.dart';
 
 Widget movement(
     String id,
@@ -14,7 +15,8 @@ Widget movement(
     String location,
     String image,
     BuildContext context,
-    Function setParent) {
+    Function setParent,
+    bool deletable) {
   if (searchMovementController.text.isNotEmpty &&
       !name
           .toLowerCase()
@@ -72,18 +74,22 @@ Widget movement(
           Expanded(child: Text("Last Qte : $last_qte")),
           Expanded(child: Text("New Qte : $new_qte")),
           Expanded(child: Text("Location : $location")),
-          Expanded(
-            child: IconButton(
-              onPressed: () {
-                id_movement = id;
-                setParent();
-              },
-              icon: const Icon(
-                Icons.delete,
-                color: Colors.orange,
-              ),
-            ),
-          ),
+          deletable
+              ? Expanded(
+                  child: IconButton(
+                    onPressed: () async {
+                      setParent();
+                      id_movement = id;
+                      await deleteMovement();
+                      setParent();
+                    },
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.orange,
+                    ),
+                  ),
+                )
+              : Container(),
         ],
       ),
     ),

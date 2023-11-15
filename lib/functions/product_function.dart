@@ -429,9 +429,9 @@ getLocation() async {
 
 getMovements(bool? state) async {
   dynamic result;
-  mouvementsAll = [];
-  mouvementsEntry = [];
-  mouvementsExit = [];
+  movementsAll = [];
+  movementsEntry = [];
+  movementsExit = [];
 
   try {
     var response = await http.get(
@@ -447,19 +447,19 @@ getMovements(bool? state) async {
       debugPrint(state.toString());
       switch (state) {
         case null:
-          mouvementsAll =
+          movementsAll =
               List<Map<String, dynamic>>.from(jsonDecode(response.body));
           break;
         case true:
-          mouvementsEntry =
+          movementsEntry =
               List<Map<String, dynamic>>.from(jsonDecode(response.body));
           break;
         case false:
-          mouvementsExit =
+          movementsExit =
               List<Map<String, dynamic>>.from(jsonDecode(response.body));
           break;
         default:
-          mouvementsAll =
+          movementsAll =
               List<Map<String, dynamic>>.from(jsonDecode(response.body));
       }
       result = true;

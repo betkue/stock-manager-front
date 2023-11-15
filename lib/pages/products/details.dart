@@ -33,6 +33,7 @@ class _DetailProductState extends State<DetailProduct> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController refController = TextEditingController();
+  TextEditingController clothingController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
   TextEditingController unitController = TextEditingController(text: "Nothing");
   TextEditingController priceController = TextEditingController();
@@ -169,6 +170,7 @@ class _DetailProductState extends State<DetailProduct> {
       priceController.text = product_single['price'].toString();
       price2Controller.text = product_single['purchase_price'].toString();
       descriptionController.text = product_single['description'] ?? "";
+      clothingController.text = product_single['clothing'] ?? "No Clothing";
       // locations = ['locations'];
 
       for (var i = 0; i < product_single['locations'].length; i++) {
@@ -476,6 +478,22 @@ class _DetailProductState extends State<DetailProduct> {
                                                       }, false, false),
                                                       const SizedBox(
                                                           height: 20),
+                                                      label('Clothing'),
+                                                      inputContain(
+                                                          width,
+                                                          'product clothing',
+                                                          clothingController,
+                                                          (String value) {
+                                                        setState(() {
+                                                          // refController.text =
+                                                          //     value;
+                                                          // user_email =
+                                                          //     refController
+                                                          //         .text;
+                                                        });
+                                                      }, false, false),
+                                                      const SizedBox(
+                                                          height: 20),
                                                       label('Reference'),
                                                       inputContain(
                                                           width,
@@ -568,54 +586,54 @@ class _DetailProductState extends State<DetailProduct> {
                                                         children: [
                                                           label(
                                                               ' Location (${locations.length})'),
-                                                          InkWell(
-                                                            onTap: () async {
-                                                              setState(() {
-                                                                showList = true;
-                                                                loadList = true;
-                                                                ;
-                                                              });
+                                                          // InkWell(
+                                                          //   onTap: () async {
+                                                          //     setState(() {
+                                                          //       showList = true;
+                                                          //       loadList = true;
+                                                          //       ;
+                                                          //     });
 
-                                                              var result =
-                                                                  await getLocations();
-                                                              if (result) {
-                                                                loadList =
-                                                                    false;
-                                                                setState(() {});
-                                                              } else {
-                                                                showList =
-                                                                    false;
-                                                                setState(() {});
-                                                              }
-                                                            },
-                                                            child: Container(
-                                                              padding: EdgeInsets
-                                                                  .symmetric(
-                                                                      vertical:
-                                                                          5,
-                                                                      horizontal:
-                                                                          20),
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      left: 10),
-                                                              decoration: BoxDecoration(
-                                                                  color:
-                                                                      primaryColor,
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              10))),
-                                                              child: Text(
-                                                                "ADD",
-                                                                style: TextStyle(
-                                                                    color:
-                                                                        white,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                            ),
-                                                          )
+                                                          //     var result =
+                                                          //         await getLocations();
+                                                          //     if (result) {
+                                                          //       loadList =
+                                                          //           false;
+                                                          //       setState(() {});
+                                                          //     } else {
+                                                          //       showList =
+                                                          //           false;
+                                                          //       setState(() {});
+                                                          //     }
+                                                          //   },
+                                                          //   child: Container(
+                                                          //     padding: EdgeInsets
+                                                          //         .symmetric(
+                                                          //             vertical:
+                                                          //                 5,
+                                                          //             horizontal:
+                                                          //                 20),
+                                                          //     margin: EdgeInsets
+                                                          //         .only(
+                                                          //             left: 10),
+                                                          //     decoration: BoxDecoration(
+                                                          //         color:
+                                                          //             primaryColor,
+                                                          //         borderRadius:
+                                                          //             BorderRadius.all(
+                                                          //                 Radius.circular(
+                                                          //                     10))),
+                                                          //     child: Text(
+                                                          //       "ADD",
+                                                          //       style: TextStyle(
+                                                          //           color:
+                                                          //               white,
+                                                          //           fontWeight:
+                                                          //               FontWeight
+                                                          //                   .bold),
+                                                          //     ),
+                                                          //   ),
+                                                          // )
                                                         ],
                                                       ),
                                                       Container(
@@ -675,12 +693,12 @@ class _DetailProductState extends State<DetailProduct> {
                                                                             InkWell(
                                                                           onTap:
                                                                               () {
-                                                                            setState(() {
-                                                                              qteList.removeAt(index);
-                                                                              locations.removeAt(index);
+                                                                            // setState(() {
+                                                                            //   qteList.removeAt(index);
+                                                                            //   locations.removeAt(index);
 
-                                                                              updateQte();
-                                                                            });
+                                                                            //   updateQte();
+                                                                            // });
                                                                           },
                                                                           child:
                                                                               Icon(
@@ -828,6 +846,8 @@ class _DetailProductState extends State<DetailProduct> {
                                                 "unit": unitController.text,
                                                 "selling_price":
                                                     priceController.text,
+                                                "clothing":
+                                                    clothingController.text,
                                                 "purchase_price":
                                                     price2Controller.text,
                                                 "is_available": (double.parse(

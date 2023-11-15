@@ -159,8 +159,9 @@ class _MovementsState extends State<Movements> {
                                           await changeState(null);
                                         },
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              index == 0 ? primaryColor : white,
+                                          backgroundColor: index == null
+                                              ? primaryColor
+                                              : white,
                                           shadowColor: primaryColor,
                                           surfaceTintColor: primaryColor,
                                           padding: const EdgeInsets.symmetric(
@@ -197,7 +198,9 @@ class _MovementsState extends State<Movements> {
                                           "Exit",
                                           style: TextStyle(
                                               fontSize: 16,
-                                              color: index == 2 ? white : black,
+                                              color: index == false
+                                                  ? white
+                                                  : black,
                                               fontWeight: FontWeight.w400),
                                         ),
                                       ),
@@ -207,8 +210,9 @@ class _MovementsState extends State<Movements> {
                                           await changeState(true);
                                         },
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              index == 1 ? primaryColor : white,
+                                          backgroundColor: index == true
+                                              ? primaryColor
+                                              : white,
                                           shadowColor: primaryColor,
                                           surfaceTintColor: primaryColor,
                                           padding: const EdgeInsets.symmetric(
@@ -241,21 +245,21 @@ class _MovementsState extends State<Movements> {
     if (index == null) {
       return Allmovement(
         setParent: () {
-          details = true;
+          // details = true;
           setStatePage();
         },
       );
     } else if (index == true) {
       return EntryMovement(
         setParent: () {
-          details = true;
+          // details = true;
           setStatePage();
         },
       );
     } else {
       return ExitMovement(
         setParent: () {
-          details = true;
+          // details = true;
           setStatePage();
         },
       );
