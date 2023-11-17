@@ -264,47 +264,53 @@ class _DetailLocationState extends State<DetailLocation> {
                                             children: [
                                               label(
                                                   ' Products (${productsList.length})'),
-                                              // InkWell(
-                                              //   onTap: () async {
-                                              //     debugPrint("load");
-                                              //     setState(() {
-                                              //       showList = true;
-                                              //       loadList = true;
-                                              //     });
+                                              widget.id != null
+                                                  ? Container()
+                                                  : InkWell(
+                                                      onTap: () async {
+                                                        debugPrint("load");
+                                                        setState(() {
+                                                          showList = true;
+                                                          loadList = true;
+                                                        });
 
-                                              //     var result =
-                                              //         await getProducts(0);
-                                              //     if (result) {
-                                              //       loadList = false;
-                                              //       setState(() {});
-                                              //     } else {
-                                              //       showList = false;
-                                              //       setState(() {});
-                                              //     }
-                                              //     debugPrint(
-                                              //         productsAll.toString());
-                                              //   },
-                                              //   child: Container(
-                                              //     padding: EdgeInsets.symmetric(
-                                              //         vertical: 5,
-                                              //         horizontal: 20),
-                                              //     margin:
-                                              //         EdgeInsets.only(left: 10),
-                                              //     decoration: BoxDecoration(
-                                              //         color: primaryColor,
-                                              //         borderRadius:
-                                              //             BorderRadius.all(
-                                              //                 Radius.circular(
-                                              //                     10))),
-                                              //     child: Text(
-                                              //       "ADD",
-                                              //       style: TextStyle(
-                                              //           color: white,
-                                              //           fontWeight:
-                                              //               FontWeight.bold),
-                                              //     ),
-                                              //   ),
-                                              // )
+                                                        var result =
+                                                            await getProducts(
+                                                                0);
+                                                        if (result) {
+                                                          loadList = false;
+                                                          setState(() {});
+                                                        } else {
+                                                          showList = false;
+                                                          setState(() {});
+                                                        }
+                                                        debugPrint(productsAll
+                                                            .toString());
+                                                      },
+                                                      child: Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 5,
+                                                                horizontal: 20),
+                                                        margin: EdgeInsets.only(
+                                                            left: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: primaryColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10))),
+                                                        child: Text(
+                                                          "ADD",
+                                                          style: TextStyle(
+                                                              color: white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    )
                                             ],
                                           ),
                                           Container(
@@ -352,24 +358,31 @@ class _DetailLocationState extends State<DetailLocation> {
                                                       return Column(
                                                         children: [
                                                           ListTile(
-                                                              leading: InkWell(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    qteList.removeAt(
-                                                                        index);
-                                                                    productsList
-                                                                        .removeAt(
-                                                                            index);
+                                                              leading: widget
+                                                                          .id !=
+                                                                      null
+                                                                  ? Container()
+                                                                  : InkWell(
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          qteList
+                                                                              .removeAt(index);
+                                                                          productsList
+                                                                              .removeAt(index);
 
-                                                                    updateQte();
-                                                                  });
-                                                                },
-                                                                child: Icon(
-                                                                  Icons.remove,
-                                                                  color:
-                                                                      primaryColor,
-                                                                ),
-                                                              ),
+                                                                          updateQte();
+                                                                        });
+                                                                      },
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .remove,
+                                                                        color:
+                                                                            primaryColor,
+                                                                      ),
+                                                                    ),
                                                               trailing: Text(
                                                                 '${productsList[index]['reference'] ?? ""} ',
                                                                 style: TextStyle(

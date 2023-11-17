@@ -8,6 +8,7 @@ import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/functions/product_function.dart';
 import 'package:stock_manager/load_page.dart';
+import 'package:stock_manager/pages/movement/details.dart';
 import 'package:stock_manager/pages/products/details.dart';
 import 'package:stock_manager/widgets/movements/movement_block.dart';
 import 'package:stock_manager/widgets/products/products_block.dart';
@@ -68,7 +69,7 @@ class _MovementsState extends State<Movements> {
                 Expanded(
                     flex: 8,
                     child: details
-                        ? DetailProduct(
+                        ? DetailMovement(
                             id: id_product,
                             setParent: setStatePage,
                             back: () async {
