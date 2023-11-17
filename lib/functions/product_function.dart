@@ -362,7 +362,7 @@ deleteLocation() async {
   dynamic result;
   try {
     var response = await http.delete(
-      Uri.parse('${api}location?location_id=${id_product}'),
+      Uri.parse('${api}location?location_id=${id_location}'),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
