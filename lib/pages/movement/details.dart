@@ -28,12 +28,9 @@ class DetailMovement extends StatefulWidget {
 
 class _DetailMovementState extends State<DetailMovement> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
-  TextEditingController quantityController = TextEditingController();
-  TextEditingController codeController = TextEditingController(text: "Nothing");
   TextEditingController searchController = TextEditingController();
   TextEditingController searchListController = TextEditingController();
+  TextEditingController searchListProductController = TextEditingController();
   TextEditingController searchListLocationController = TextEditingController();
   List<TextEditingController> listQteCOntrollers = [];
   ImagePicker picker = ImagePicker();
@@ -41,96 +38,48 @@ class _DetailMovementState extends State<DetailMovement> {
   bool load = true;
   bool showList = false;
   bool loadList = false;
-  bool _pickImage = false;
-  String _permission = '';
   List<double> qteList = [];
   List<double> qteList2 = [];
   List<TextEditingController> qteListController = [];
   dynamic imageFile;
-  //gallery permission
-  getGalleryPermission() async {
-    var status = await Permission.photos.status;
-    if (status != PermissionStatus.granted) {
-      status = await Permission.photos.request();
-    }
-    return status;
-  }
+  bool show_buttom = false;
 
-//camera permission
-  getCameraPermission() async {
-    var status = await Permission.camera.status;
-    if (status != PermissionStatus.granted) {
-      status = await Permission.camera.request();
-    }
-    return status;
-  }
-
-//pick image from gallery
-  pickImageFromGallery() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  removeProduct() {
     setState(() {
-      if (pickedFile != null) {
-        imageFile = pickedFile.path;
-        _pickImage = false;
+      product_single = {};
+      locations = [];
+      qteList2 = [];
+      for (var i = 0; i < qteList.length; i++) {
+        qteList2.add(0);
+        qteListController.add(TextEditingController(text: "0"));
       }
-
-      _pickImage = false;
     });
-    // var permission;
-    // if (Platform.isMacOS) {
-    //   permission = PermissionStatus.granted;
-    // } else {
-    //   permission = await getCameraPermission();
-    // }
-    // if (permission == PermissionStatus.granted) {
-    //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    //   setState(() {
-    //     imageFile = pickedFile?.path;
-    //     _pickImage = false;
-    //   });
-    // } else {
-    //   setState(() {
-    //     _permission = 'noPhotos';
-    //   });
-    // }
-  }
-
-//pick image from camera
-  pickImageFromCamera() async {
-    var permission;
-    if (Platform.isMacOS) {
-      permission = PermissionStatus.granted;
-    } else {
-      permission = await getCameraPermission();
-    }
-    if (permission == PermissionStatus.granted) {
-      final pickedFile = await picker.pickImage(source: ImageSource.camera);
-      setState(() {
-        imageFile = pickedFile?.path;
-        _pickImage = false;
-      });
-    } else {
-      setState(() {
-        _permission = 'noCamera';
-      });
-    }
+    updateQte();
   }
 
   updateQte() {
-    // double qte = 0;
+    bool edit = false;
 
-    // for (var i = 0; i < qteList.length; i++) {
-    //   qte = qte + qteList[i];
-    // }
+    for (var i = 0; i < locations.length; i++) {
+      if (qteList2[i] > 0) {
+        edit = true;
+      }
+    }
 
-    // quantityController.text = qte.toString();
-    // debugPrint(qteList.toString());
-    // debugPrint(productsAll.toString());
+    setState(() {
+      show_buttom = edit;
+    });
+
+    debugPrint("location" + locations.toString());
+    debugPrint(qteList.toString());
+    debugPrint(qteList2.toString());
+    debugPrint(listQteCOntrollers.toString());
+    debugPrint(qteListController.toString());
   }
 
   detrmineContainId(int id) {
-    for (var i = 0; i < productsAll.length; i++) {
-      if (productsAll[i]['id'] == id) {
+    for (var i = 0; i < locations.length; i++) {
+      if (locations[i]['id'] == id) {
         return true;
       }
     }
@@ -143,15 +92,9 @@ class _DetailMovementState extends State<DetailMovement> {
     productsAll = [];
     locationsLoad = [];
     product_single = {};
+    locations = [];
+    locationsLoad = [];
     getData();
-
-    // if (widget.id == null) {
-    //   getData();
-    // } else {
-    //   setState(() {
-    //     load = false;
-    //   });
-    // }
 
     super.initState();
   }
@@ -164,11 +107,6 @@ class _DetailMovementState extends State<DetailMovement> {
     // var result =
     await getLocations();
     await getProducts(0);
-    // if (result == true) {
-    //   nameController.text = location_single['name'] ?? "";
-    //   locationController.text = location_single['location'] ?? "";
-    //   quantityController.text = location_single['quantity'].toString();
-    //   // productsAll = ['productsAll'];
     setState(() {
       updateQte();
       load = false;
@@ -189,6 +127,8 @@ class _DetailMovementState extends State<DetailMovement> {
       for (var i = 0; i < product_single['locations'].length; i++) {
         qteList.add(product_single['locations'][i]['quantity'].toDouble());
         qteList2.add(0);
+        qteListController
+            .add(TextEditingController(text: qteList[i].toString()));
         listQteCOntrollers
             .add(TextEditingController(text: qteList2[i].toString()));
         locations.add(product_single['locations'][i]['location']);
@@ -297,8 +237,7 @@ class _DetailMovementState extends State<DetailMovement> {
                                               ? CirularButton(
                                                   onClick: () {
                                                     setState(() {
-                                                      product_single = {};
-                                                      locations = [];
+                                                      removeProduct();
                                                     });
                                                   },
                                                 )
@@ -655,243 +594,228 @@ class _DetailMovementState extends State<DetailMovement> {
                                               },
                                             ),
                                           ),
-                                          Expanded(
-                                            child: Container(
-                                              margin: EdgeInsets.only(top: 10),
-                                              width: width,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: white,
-                                                      width: 0.5)),
-                                              child: ListView.builder(
-                                                  itemCount: locations.length,
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                          int index) {
-                                                    if (searchController
-                                                            .text.isNotEmpty &&
-                                                        !locations[index]
-                                                                ['name']
-                                                            .toLowerCase()
-                                                            .contains(
-                                                                searchController
-                                                                    .text
-                                                                    .toLowerCase())) {
-                                                      return Container();
-                                                    } else {
-                                                      return Column(
-                                                        children: [
-                                                          ListTile(
-                                                              leading: InkWell(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    qteList2
-                                                                        .removeAt(
-                                                                            index);
-                                                                    locations
-                                                                        .removeAt(
-                                                                            index);
+                                          product_single.isEmpty
+                                              ? Container()
+                                              : Expanded(
+                                                  child: Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: 10),
+                                                    width: width,
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: white,
+                                                            width: 0.5)),
+                                                    child: ListView.builder(
+                                                        itemCount:
+                                                            locations.length,
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          if (searchController
+                                                                  .text
+                                                                  .isNotEmpty &&
+                                                              !locations[index]
+                                                                      ['name']
+                                                                  .toLowerCase()
+                                                                  .contains(
+                                                                      searchController
+                                                                          .text
+                                                                          .toLowerCase())) {
+                                                            return Container();
+                                                          } else {
+                                                            return Column(
+                                                              children: [
+                                                                ListTile(
+                                                                    leading: (qteList.length >
+                                                                            index -
+                                                                                1)
+                                                                        ? null
+                                                                        : InkWell(
+                                                                            onTap:
+                                                                                () {
+                                                                              setState(() {
+                                                                                qteList2.removeAt(index);
+                                                                                locations.removeAt(index);
 
-                                                                    updateQte();
-                                                                  });
-                                                                },
-                                                                child: Icon(
-                                                                  Icons.remove,
-                                                                  color:
-                                                                      primaryColor,
-                                                                ),
-                                                              ),
-                                                              trailing: Text(
-                                                                '${locations[index]['location']} ',
-                                                                style: TextStyle(
-                                                                    color:
-                                                                        backgroundColor,
-                                                                    fontSize:
-                                                                        15),
-                                                              ),
-                                                              title: Text(
-                                                                  locations[
-                                                                          index]
-                                                                      [
-                                                                      'name'])),
-                                                          SizedBox(
-                                                            height: 3,
-                                                          ),
-                                                          Row(
-                                                            children: [
-                                                              Expanded(
-                                                                child:
-                                                                    Container(
-                                                                  width: width /
-                                                                      4.5,
-                                                                  // height: 37,
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          right:
-                                                                              10),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                    color: gray,
-                                                                  ),
-                                                                  child: Center(
-                                                                    child:
-                                                                        TextFormField(
-                                                                      maxLines:
-                                                                          1,
-                                                                      cursorColor:
-                                                                          black,
-                                                                      controller:
-                                                                          TextEditingController(
-                                                                              text: qteList[index].toString()),
-                                                                      keyboardType:
-                                                                          TextInputType
-                                                                              .number,
-                                                                      enabled:
-                                                                          false,
-                                                                      inputFormatters: [
-                                                                        FilteringTextInputFormatter.allow(
-                                                                            RegExp('[0-9.]'))
-                                                                      ],
-                                                                      onChanged:
-                                                                          (value) {
-                                                                        if (value
-                                                                            .isNotEmpty) {
-                                                                          qteList[index] =
-                                                                              double.parse(value);
-                                                                        } else {
-                                                                          qteList[index] =
-                                                                              0;
-                                                                        }
-
-                                                                        updateQte();
-                                                                      },
-                                                                      // maxLength: 30,
-                                                                      decoration:
-                                                                          inputDecoration(
-                                                                        "Enter Qte",
-                                                                      ),
-                                                                      validator:
-                                                                          (value) {
-                                                                        // if (value!
-                                                                        //         .isEmpty &&
-                                                                        //     !obscure) {
-                                                                        //   return 'Please enter the $hintText.';
-                                                                        // }
-                                                                        // return null;
-                                                                      },
+                                                                                updateQte();
+                                                                              });
+                                                                            },
+                                                                            child:
+                                                                                Icon(
+                                                                              Icons.remove,
+                                                                              color: primaryColor,
+                                                                            ),
+                                                                          ),
+                                                                    trailing:
+                                                                        Text(
+                                                                      '${locations[index]['location']} ',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              backgroundColor,
+                                                                          fontSize:
+                                                                              15),
                                                                     ),
-                                                                  ),
+                                                                    title: Text(
+                                                                        locations[index]
+                                                                            [
+                                                                            'name'])),
+                                                                SizedBox(
+                                                                  height: 3,
                                                                 ),
-                                                              ),
-                                                              Spacer(),
-                                                              Center(
-                                                                child: Text(is_enrty
-                                                                    ? "Add"
-                                                                    : "Remove"),
-                                                              ),
-                                                              Spacer(),
-                                                              Expanded(
-                                                                child:
-                                                                    Container(
-                                                                  width: width /
-                                                                      4.5,
-                                                                  // height: 37,
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          right:
-                                                                              10),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                    color: gray,
-                                                                  ),
-                                                                  child: Center(
-                                                                    child:
-                                                                        TextFormField(
-                                                                      maxLines:
-                                                                          1,
-                                                                      cursorColor:
-                                                                          black,
-                                                                      controller:
-                                                                          listQteCOntrollers[
-                                                                              index],
-                                                                      keyboardType:
-                                                                          TextInputType
-                                                                              .number,
-                                                                      inputFormatters: [
-                                                                        FilteringTextInputFormatter.allow(
-                                                                            RegExp('[0-9.]'))
-                                                                      ],
-                                                                      onChanged:
-                                                                          (value) {
-                                                                        if (value
-                                                                            .isNotEmpty) {
-                                                                          if (is_enrty) {
-                                                                            setState(() {
-                                                                              qteList2[index] = double.parse(value);
-                                                                            });
-                                                                          } else if (double.parse(value) >
-                                                                              qteList[index]) {
-                                                                            debugPrint((double.parse(value) > qteList[index]).toString());
-                                                                            setState(() {
-                                                                              qteList2[index] = 0;
-                                                                              listQteCOntrollers[index].text = "0";
-                                                                            });
-                                                                          } else {
-                                                                            setState(() {
-                                                                              qteList2[index] = double.parse(value);
-                                                                            });
-                                                                          }
-                                                                        } else {
-                                                                          setState(
-                                                                              () {
-                                                                            qteList2[index] =
-                                                                                0;
-                                                                          });
-                                                                        }
+                                                                Row(
+                                                                  children: [
+                                                                    (qteList.length -
+                                                                                1 <
+                                                                            index)
+                                                                        ? Container()
+                                                                        : Expanded(
+                                                                            child:
+                                                                                Container(
+                                                                              width: width / 4.5,
+                                                                              // height: 37,
+                                                                              margin: EdgeInsets.only(right: 10),
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(5),
+                                                                                color: gray,
+                                                                              ),
+                                                                              child: Center(
+                                                                                child: TextFormField(
+                                                                                  maxLines: 1,
+                                                                                  cursorColor: black,
+                                                                                  controller: qteListController[index],
+                                                                                  keyboardType: TextInputType.number,
+                                                                                  enabled: false,
+                                                                                  inputFormatters: [
+                                                                                    FilteringTextInputFormatter.allow(RegExp('[0-9.]'))
+                                                                                  ],
+                                                                                  onChanged: (value) {
+                                                                                    // if (value.isNotEmpty) {
+                                                                                    //   qteList[index] = double.parse(value);
+                                                                                    // } else {
+                                                                                    //   qteList[index] = 0;
+                                                                                    // }
 
-                                                                        updateQte();
-                                                                      },
-                                                                      // maxLength: 30,
-                                                                      decoration:
-                                                                          inputDecoration(
-                                                                        "Enter Qte",
-                                                                      ),
-                                                                      validator:
-                                                                          (value) {
-                                                                        // if (value!
-                                                                        //         .isEmpty &&
-                                                                        //     !obscure) {
-                                                                        //   return 'Please enter the $hintText.';
-                                                                        // }
-                                                                        // return null;
-                                                                      },
+                                                                                    // updateQte();
+                                                                                  },
+                                                                                  // maxLength: 30,
+                                                                                  decoration: inputDecoration(
+                                                                                    "Enter Qte",
+                                                                                  ),
+                                                                                  validator: (value) {
+                                                                                    // if (value!
+                                                                                    //         .isEmpty &&
+                                                                                    //     !obscure) {
+                                                                                    //   return 'Please enter the $hintText.';
+                                                                                    // }
+                                                                                    // return null;
+                                                                                  },
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                    (qteList.length -
+                                                                                1 <
+                                                                            index)
+                                                                        ? Container()
+                                                                        : Spacer(),
+                                                                    Center(
+                                                                      child: Text(is_enrty
+                                                                          ? "Add"
+                                                                          : "Remove"),
                                                                     ),
-                                                                  ),
+                                                                    Spacer(),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Container(
+                                                                        width: width /
+                                                                            4.5,
+                                                                        // height: 37,
+                                                                        margin: EdgeInsets.only(
+                                                                            right:
+                                                                                10),
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(5),
+                                                                          color:
+                                                                              gray,
+                                                                        ),
+                                                                        child:
+                                                                            Center(
+                                                                          child:
+                                                                              TextFormField(
+                                                                            maxLines:
+                                                                                1,
+                                                                            cursorColor:
+                                                                                black,
+                                                                            controller:
+                                                                                listQteCOntrollers[index],
+                                                                            keyboardType:
+                                                                                TextInputType.number,
+                                                                            inputFormatters: [
+                                                                              FilteringTextInputFormatter.allow(RegExp('[0-9.]'))
+                                                                            ],
+                                                                            onChanged:
+                                                                                (value) {
+                                                                              if (value.isNotEmpty) {
+                                                                                if (is_enrty) {
+                                                                                  setState(() {
+                                                                                    qteList2[index] = double.parse(value);
+                                                                                  });
+                                                                                } else if (double.parse(value) > qteList[index]) {
+                                                                                  setState(() {
+                                                                                    qteList2[index] = 0;
+                                                                                    listQteCOntrollers[index].text = "0";
+                                                                                  });
+                                                                                } else {
+                                                                                  setState(() {
+                                                                                    qteList2[index] = double.parse(value);
+                                                                                  });
+                                                                                }
+                                                                              } else {
+                                                                                setState(() {
+                                                                                  qteList2[index] = 0;
+                                                                                });
+                                                                              }
+
+                                                                              updateQte();
+                                                                            },
+                                                                            // maxLength: 30,
+                                                                            decoration:
+                                                                                inputDecoration(
+                                                                              "Enter Qte",
+                                                                            ),
+                                                                            validator:
+                                                                                (value) {
+                                                                              // if (value!
+                                                                              //         .isEmpty &&
+                                                                              //     !obscure) {
+                                                                              //   return 'Please enter the $hintText.';
+                                                                              // }
+                                                                              // return null;
+                                                                            },
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    )
+                                                                  ],
                                                                 ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            height: 3,
-                                                          ),
-                                                          Container(
-                                                            width: double
-                                                                .maxFinite,
-                                                            height: 1,
-                                                            color: gray,
-                                                          )
-                                                        ],
-                                                      );
-                                                    }
-                                                  }),
-                                            ),
-                                          ),
+                                                                SizedBox(
+                                                                  height: 3,
+                                                                ),
+                                                                Container(
+                                                                  width: double
+                                                                      .maxFinite,
+                                                                  height: 1,
+                                                                  color: gray,
+                                                                )
+                                                              ],
+                                                            );
+                                                          }
+                                                        }),
+                                                  ),
+                                                ),
                                           const SizedBox(height: 100),
                                         ],
                                       ),
@@ -899,8 +823,7 @@ class _DetailMovementState extends State<DetailMovement> {
                                   ],
                                 ),
                               ),
-                              (nameController.text.isNotEmpty &&
-                                      locationController.text.isNotEmpty)
+                              (show_buttom)
                                   ? Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 4),
@@ -928,10 +851,10 @@ class _DetailMovementState extends State<DetailMovement> {
                                               }
 
                                               Map<String, String> location = {
-                                                'name': nameController.text,
-                                                'location':
-                                                    locationController.text,
-                                                // "code": codeController.text,
+                                                // 'name': nameController.text,
+                                                // 'location':
+                                                //     locationController.text,
+                                                // // "code": codeController.text,
                                                 "products": "$ProductLovation",
                                                 "location_id":
                                                     id_location.toString()
@@ -971,9 +894,10 @@ class _DetailMovementState extends State<DetailMovement> {
                                             backgroundColor: primaryColor,
                                           ),
                                           child: Text(
-                                            widget.id != null
-                                                ? 'Modify'
-                                                : "Add",
+                                            // widget.id != null
+                                            //     ? 'Modify'
+                                            //     :
+                                            "Add",
                                             style: TextStyle(
                                                 fontSize: 24, color: white),
                                           ),
@@ -1016,7 +940,7 @@ class _DetailMovementState extends State<DetailMovement> {
                                               width: width,
                                               child: TextField(
                                                 controller:
-                                                    searchListController,
+                                                    searchListProductController,
                                                 decoration: InputDecoration(
                                                   hintText: "Search",
                                                   prefixIcon:
@@ -1032,22 +956,24 @@ class _DetailMovementState extends State<DetailMovement> {
                                             ),
                                             Expanded(
                                               child: ListView.builder(
-                                                  itemCount: productsAll.length,
+                                                  itemCount:
+                                                      locationsLoad.length,
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
-                                                    if ((searchListController
+                                                    if ((searchListProductController
                                                                 .text
                                                                 .isNotEmpty &&
-                                                            !productsAll[index]
+                                                            !locationsLoad[
+                                                                        index]
                                                                     ['name']
                                                                 .toLowerCase()
                                                                 .contains(
-                                                                    searchListController
+                                                                    searchListProductController
                                                                         .text
                                                                         .toLowerCase())) ||
                                                         detrmineContainId(
-                                                            productsAll[index]
+                                                            locationsLoad[index]
                                                                 ['id'])) {
                                                       return Container();
                                                     } else {
@@ -1056,8 +982,13 @@ class _DetailMovementState extends State<DetailMovement> {
                                                             onTap: () {
                                                               setState(() {
                                                                 qteList2.add(0);
-                                                                productsAll.add(
-                                                                    productsAll[
+
+                                                                listQteCOntrollers.add(
+                                                                    TextEditingController(
+                                                                        text:
+                                                                            "0"));
+                                                                locations.add(
+                                                                    locationsLoad[
                                                                         index]);
 
                                                                 updateQte();
@@ -1069,14 +1000,15 @@ class _DetailMovementState extends State<DetailMovement> {
                                                                     primaryColor),
                                                           ),
                                                           trailing: Text(
-                                                            '${productsAll[index]['reference']} ',
+                                                            '${locationsLoad[index]['location']} ',
                                                             style: TextStyle(
                                                                 color:
                                                                     backgroundColor,
                                                                 fontSize: 15),
                                                           ),
                                                           title: Text(
-                                                              productsAll[index]
+                                                              locationsLoad[
+                                                                      index]
                                                                   ['name']));
                                                     }
                                                   }),
