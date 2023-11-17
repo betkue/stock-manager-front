@@ -14,6 +14,7 @@ Widget movement(
     String date,
     String location,
     String image,
+    String? coment,
     BuildContext context,
     Function setParent,
     bool deletable) {
@@ -39,57 +40,104 @@ Widget movement(
           ),
         ],
       ),
-      child: Row(
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius:
-                BorderRadius.circular(MediaQuery.of(context).size.height / 30),
-            child: Container(
-              height: 100,
-              width: 100,
-              child: CachedNetworkImage(
-                imageUrl: image,
-                fit: BoxFit.cover,
-                placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
-
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Text(
+                  date,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(color: gray, fontStyle: FontStyle.italic),
                 ),
-                // color: widget.color ?? orange,
-              ),
-              // child: Image.network(
-              //  ,
-              //   // fit: BoxFit.cover,
-              // )
-            ),
-          ),
-          const SizedBox(width: 30),
-          Expanded(child: Text(name)),
-          Expanded(child: Text("${is_entry ? "Entry" : "Exit"}")),
-          Expanded(child: Text("$last_qte")),
-          Expanded(child: Text("Last Qte : $last_qte")),
-          Expanded(child: Text("New Qte : $new_qte")),
-          Expanded(child: Text("Location : $location")),
-          deletable
-              ? Expanded(
-                  child: IconButton(
-                    onPressed: () async {
-                      setParent();
-                      id_movement = id;
-                      await deleteMovement();
-                      setParent();
-                    },
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.orange,
+                SizedBox(
+                  width: 20,
+                ),
+                Container(
+                  padding: EdgeInsets.all(8),
+                  width: 100,
+                  decoration: BoxDecoration(
+                      color: is_entry ? green : red,
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Center(
+                    child: Text(
+                      is_entry ? "Entry" : "Exit",
+                      style: TextStyle(color: white),
                     ),
                   ),
-                )
-              : Container(),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  coment == null ? "" : " : $coment",
+                  textAlign: TextAlign.start,
+                  maxLines: 1,
+                  style: TextStyle(color: gray, fontStyle: FontStyle.italic),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(
+                    MediaQuery.of(context).size.height / 30),
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  child: CachedNetworkImage(
+                    imageUrl: image,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    ),
+                    // color: widget.color ?? orange,
+                  ),
+                  // child: Image.network(
+                  //  ,
+                  //   // fit: BoxFit.cover,
+                  // )
+                ),
+              ),
+              const SizedBox(width: 30),
+              Expanded(child: Text(name)),
+              Expanded(child: Text("${is_entry ? "Entry" : "Exit"}")),
+              Expanded(child: Text("$last_qte")),
+              Expanded(child: Text("Last Qte : $last_qte")),
+              Expanded(child: Text("New Qte : $new_qte")),
+              Expanded(child: Text("Location : $location")),
+              deletable
+                  ? Expanded(
+                      child: IconButton(
+                        onPressed: () async {
+                          setParent();
+                          id_movement = id;
+                          await deleteMovement();
+                          setParent();
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.orange,
+                        ),
+                      ),
+                    )
+                  : Container(),
+            ],
+          ),
         ],
       ),
     ),

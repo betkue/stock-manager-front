@@ -30,8 +30,10 @@ class _AllmovementState extends State<Allmovement> {
               convertDate(DateTime.parse(movementsAll[i]['created_at'])),
               movementsAll[i]['product_location']['location']['name'],
               movementsAll[i]['product_location']['product']['image'],
+              movementsAll[i]['comment'],
               context,
-              widget.setParent,i == movementsAll.length-1),
+              widget.setParent,
+              i == movementsAll.length - 1),
       ],
     );
   }
@@ -62,8 +64,10 @@ class _EntryMovementState extends State<EntryMovement> {
               convertDate(DateTime.parse(movementsEntry[i]['created_at'])),
               movementsEntry[i]['product_location']['location']['name'],
               movementsEntry[i]['product_location']['product']['image'],
+              movementsEntry[i]['comment'],
               context,
-              widget.setParent,i == movementsEntry.length-1),
+              widget.setParent,
+              i == movementsEntry.length - 1),
       ],
     );
   }
@@ -94,8 +98,10 @@ class _ExitMovementState extends State<ExitMovement> {
               convertDate(DateTime.parse(movementsExit[i]['created_at'])),
               movementsExit[i]['product_location']['location']['name'],
               movementsExit[i]['product_location']['product']['image'],
+              movementsExit[i]['comment'],
               context,
-              widget.setParent,i == movementsExit.length-1),
+              widget.setParent,
+              i == movementsExit.length - 1),
       ],
     );
   }

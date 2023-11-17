@@ -509,3 +509,104 @@ deleteMovement() async {
   }
   return result;
 }
+
+createMovement(
+    Map<String, String> product, imageFile, BuildContext context) async {
+  dynamic result;
+
+  try {
+    // debugPrint(product.toString());
+    // List<int> imageBytes = imageFile.readAsBytesSync();
+    // String base64Image = base64Encode(imageBytes);
+
+    final response = http.MultipartRequest('POST', Uri.parse('${api}movement'));
+    response.headers.addAll({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${token}'
+    });
+    if (imageFile != null) {
+      response.files.add(await http.MultipartFile.fromPath('image', imageFile));
+    }
+    response.fields.addAll(product);
+
+    var request = await response.send();
+    var respon = await http.Response.fromStream(request);
+    var jsonVal = jsonDecode(respon.body);
+    debugPrint(respon.body);
+
+    switch (respon.statusCode) {
+      case 200:
+        await clearCache();
+
+        result = true;
+        break;
+      default:
+        // debugPrint(response.body);
+        showToast("Server Error", red, context);
+
+        result = false;
+    }
+  } catch (e) {
+    result = false;
+    if (e is SocketException) {
+      internet = false;
+    }
+
+    // debugPrint(e.toString());
+  }
+
+  return result;
+}
+
+updateMovement(
+    Map<String, String> product, imageFile, BuildContext context) async {
+  dynamic result;
+
+  try {
+    // debugPrint(product.toString());
+    // List<int> imageBytes = imageFile.readAsBytesSync();
+    // String base64Image = base64Encode(imageBytes);
+    // debugPrint(product.toString());
+
+    final response =
+        http.MultipartRequest('POST', Uri.parse('${api}movement/update'));
+    response.headers.addAll({
+      // 'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${token}'
+    });
+    if (imageFile != null) {
+      response.files.add(await http.MultipartFile.fromPath('image', imageFile));
+    }
+    response.fields.addAll(product);
+
+    var request = await response.send();
+    var respon = await http.Response.fromStream(request);
+    var jsonVal = jsonDecode(respon.body);
+    debugPrint(respon.body);
+
+    switch (respon.statusCode) {
+      case 200:
+        await clearCache();
+
+        result = true;
+        break;
+      default:
+        // debugPrint(response.body);
+        showToast("Server Error", red, context);
+
+        result = false;
+    }
+  } catch (e) {
+    result = false;
+    if (e is SocketException) {
+      internet = false;
+    }
+
+    // debugPrint(e.toString());
+  }
+
+  return result;
+}

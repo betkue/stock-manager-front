@@ -144,6 +144,7 @@ class _DetailProductState extends State<DetailProduct> {
   void initState() {
     locations = [];
     locationsLoad = [];
+    product_single = {};
 
     if (widget.id != null) {
       getData();
@@ -715,7 +716,7 @@ class _DetailProductState extends State<DetailProduct> {
                                                                     ListTile(
                                                                         leading: widget.id !=
                                                                                 null
-                                                                            ? Container()
+                                                                            ? null
                                                                             : InkWell(
                                                                                 onTap: () {
                                                                                   setState(() {
@@ -764,6 +765,8 @@ class _DetailProductState extends State<DetailProduct> {
                                                                             TextFormField(
                                                                           maxLines:
                                                                               1,
+                                                                          enabled:
+                                                                              widget.id == null,
                                                                           cursorColor:
                                                                               black,
                                                                           controller:

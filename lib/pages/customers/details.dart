@@ -134,6 +134,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
   void initState() {
     locations = [];
     locationsLoad = [];
+    customer_single ={};
 
     if (widget.id != null) {
       getData();

@@ -10,6 +10,7 @@ const Color gray = Color.fromARGB(255, 185, 185, 185); // Color(0xFFD9D9D9);
 // const Color logo = Color(0xFF066565);
 const Color dark = Color(0xFF3a3737);
 const Color red = Colors.red;
+const Color green = Color(0xFF007272);
 const Color textColor = Colors.black;
 
 const Color colorTestTab = Colors.grey;

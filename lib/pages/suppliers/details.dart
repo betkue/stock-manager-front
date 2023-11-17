@@ -135,6 +135,7 @@ class _DetailSupplierState extends State<DetailSupplier> {
   void initState() {
     locations = [];
     locationsLoad = [];
+    supplier_single = {};
 
     if (widget.id != null) {
       getData();

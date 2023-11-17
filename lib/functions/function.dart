@@ -160,6 +160,7 @@ getLocalData() async {
       } else {
         result = false;
       }
+      debugPrint("no token");
     } else {
       result = false;
     }
@@ -190,7 +191,8 @@ getUserDetails(token) async {
       user = Map<String, dynamic>.from(jsonDecode(response.body));
       result = true;
     } else {
-      debugPrint(response.body);
+      debugPrint("hum" + response.body);
+      pref.remove('token');
 
       result = false;
     }

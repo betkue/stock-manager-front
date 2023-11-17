@@ -358,31 +358,27 @@ class _DetailLocationState extends State<DetailLocation> {
                                                       return Column(
                                                         children: [
                                                           ListTile(
-                                                              leading: widget
-                                                                          .id !=
-                                                                      null
-                                                                  ? Container()
-                                                                  : InkWell(
-                                                                      onTap:
-                                                                          () {
-                                                                        setState(
-                                                                            () {
-                                                                          qteList
-                                                                              .removeAt(index);
-                                                                          productsList
-                                                                              .removeAt(index);
+                                                              leading:
+                                                                  widget.id !=
+                                                                          null
+                                                                      ? null
+                                                                      : InkWell(
+                                                                          onTap:
+                                                                              () {
+                                                                            setState(() {
+                                                                              qteList.removeAt(index);
+                                                                              productsList.removeAt(index);
 
-                                                                          updateQte();
-                                                                        });
-                                                                      },
-                                                                      child:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .remove,
-                                                                        color:
-                                                                            primaryColor,
-                                                                      ),
-                                                                    ),
+                                                                              updateQte();
+                                                                            });
+                                                                          },
+                                                                          child:
+                                                                              Icon(
+                                                                            Icons.remove,
+                                                                            color:
+                                                                                primaryColor,
+                                                                          ),
+                                                                        ),
                                                               trailing: Text(
                                                                 '${productsList[index]['reference'] ?? ""} ',
                                                                 style: TextStyle(
@@ -417,6 +413,9 @@ class _DetailLocationState extends State<DetailLocation> {
                                                               child:
                                                                   TextFormField(
                                                                 maxLines: 1,
+                                                                enabled:
+                                                                    widget.id ==
+                                                                        null,
                                                                 cursorColor:
                                                                     black,
                                                                 controller: TextEditingController(

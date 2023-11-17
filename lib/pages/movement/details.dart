@@ -43,27 +43,30 @@ class _DetailMovementState extends State<DetailMovement> {
   List<TextEditingController> qteListController = [];
   dynamic imageFile;
   bool show_buttom = false;
+  double qte = 0;
 
   removeProduct() {
     setState(() {
       product_single = {};
       locations = [];
       qteList2 = [];
-      for (var i = 0; i < qteList.length; i++) {
-        qteList2.add(0);
-        qteListController.add(TextEditingController(text: "0"));
-      }
+      qteList = [];
+      qteListController = [];
+      listQteCOntrollers = [];
     });
     updateQte();
   }
 
   updateQte() {
     bool edit = false;
+    qte = 0;
 
     for (var i = 0; i < locations.length; i++) {
       if (qteList2[i] > 0) {
         edit = true;
       }
+
+      qte = qte + qteList2[i];
     }
 
     setState(() {
@@ -72,9 +75,9 @@ class _DetailMovementState extends State<DetailMovement> {
 
     debugPrint("location" + locations.toString());
     debugPrint(qteList.toString());
+
+    debugPrint("qte" + qte.toString());
     debugPrint(qteList2.toString());
-    debugPrint(listQteCOntrollers.toString());
-    debugPrint(qteListController.toString());
   }
 
   detrmineContainId(int id) {
@@ -115,6 +118,8 @@ class _DetailMovementState extends State<DetailMovement> {
 
   getSingleProduct(product) async {
     id_product = product['id'].toString();
+    qteList2 = [];
+    qteList = [];
 
     setState(() {
       load = true;
@@ -612,14 +617,14 @@ class _DetailMovementState extends State<DetailMovement> {
                                                             (BuildContext
                                                                     context,
                                                                 int index) {
-                                                          if (searchController
+                                                          if (searchListLocationController
                                                                   .text
                                                                   .isNotEmpty &&
                                                               !locations[index]
                                                                       ['name']
                                                                   .toLowerCase()
                                                                   .contains(
-                                                                      searchController
+                                                                      searchListLocationController
                                                                           .text
                                                                           .toLowerCase())) {
                                                             return Container();
@@ -832,62 +837,59 @@ class _DetailMovementState extends State<DetailMovement> {
                                         height: 47,
                                         child: ElevatedButton(
                                           onPressed: () async {
-                                            if (_formKey.currentState!
-                                                .validate()) {
-                                              setState(() {
-                                                load = true;
-                                              });
+                                            setState(() {
+                                              load = true;
+                                            });
 
-                                              var ProductLovation = [];
+                                            var ProductLovation = [];
 
-                                              for (var i = 0;
-                                                  i < productsAll.length;
-                                                  i++) {
+                                            for (var i = 0;
+                                                i < locations.length;
+                                                i++) {
+                                              if (qteList2[i] > 0) {
                                                 ProductLovation.add({
-                                                  " \"id\"": productsAll[i]
-                                                      ['id'],
+                                                  " \"id\"": locations[i]['id'],
                                                   "\"qte\"": qteList2[i]
                                                 });
                                               }
+                                            }
 
-                                              Map<String, String> location = {
-                                                // 'name': nameController.text,
-                                                // 'location':
-                                                //     locationController.text,
-                                                // // "code": codeController.text,
-                                                "products": "$ProductLovation",
-                                                "location_id":
-                                                    id_location.toString()
-                                              };
+                                            Map<String, String> location = {
+                                              // 'name': nameController.text,
+                                              // 'location':
+                                              //     locationController.text,
+                                              // // "code": codeController.text,
+                                              "is_entry": "$is_enrty",
+                                              "quantity": "$qte",
+                                              "locations": "$ProductLovation",
+                                              "product_id": product_single['id']
+                                                  .toString()
+                                            };
 
-                                              debugPrint(location.toString());
-                                              var result = widget.id == null
-                                                  ? await createLocation(
-                                                      location,
-                                                      imageFile,
-                                                      context)
-                                                  : await updateLocation(
-                                                      location,
-                                                      imageFile,
-                                                      context);
+                                            debugPrint(location.toString());
+                                            var result = widget.id == null
+                                                ? await createMovement(location,
+                                                    imageFile, context)
+                                                : await updateMovement(location,
+                                                    imageFile, context);
 
-                                              if (result) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  const SnackBar(
-                                                    content: Text(
-                                                        'Form submitted successfully!'),
-                                                  ),
-                                                );
-                                                widget.back();
-                                                setState(() {
-                                                  load = false;
-                                                });
-                                              } else {}
+                                            if (result) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                      'Form submitted successfully!'),
+                                                ),
+                                              );
+                                              removeProduct();
+
                                               setState(() {
                                                 load = false;
                                               });
-                                            }
+                                            } else {}
+                                            setState(() {
+                                              load = false;
+                                            });
                                           },
                                           style: ElevatedButton.styleFrom(
                                             //<-- SEE HERE
