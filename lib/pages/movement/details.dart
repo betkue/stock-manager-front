@@ -73,12 +73,6 @@ class _DetailMovementState extends State<DetailMovement> {
     setState(() {
       show_buttom = edit;
     });
-
-    debugPrint("location" + locations.toString());
-    debugPrint(qteList.toString());
-
-    debugPrint("qte" + qte.toString());
-    debugPrint(qteList2.toString());
   }
 
   detrmineContainId(int id) {
@@ -140,8 +134,8 @@ class _DetailMovementState extends State<DetailMovement> {
         locations.add(product_single['locations'][i]['location']);
       }
       comentController.text = product_single['coment'] ?? "";
-      debugPrint(product_single.toString());
-      debugPrint(locations.toString());
+      debugPrint("qts list" + qteList.toString());
+      debugPrint("qte lis 2" + qteList2.toString());
 
       setState(() {
         load = false;
@@ -397,15 +391,15 @@ class _DetailMovementState extends State<DetailMovement> {
                                                   : ListView(
                                                       children: [
                                                         Container(
-                                                            margin: EdgeInsets
-                                                                .symmetric(
-                                                                    vertical:
-                                                                        media.height /
-                                                                            40),
-                                                            width:
-                                                                media.width / 5,
+                                                            margin: EdgeInsets.symmetric(
+                                                                vertical: media
+                                                                        .height /
+                                                                    40),
+                                                            width: media.width /
+                                                                20,
                                                             height:
-                                                                media.width / 5,
+                                                                media.width /
+                                                                    20,
                                                             child:
                                                                 CachedNetworkImage(
                                                               imageUrl:
@@ -475,102 +469,139 @@ class _DetailMovementState extends State<DetailMovement> {
                                                         }, false, true),
                                                         const SizedBox(
                                                             height: 20),
+                                                        label(
+                                                            'Product quantity'),
+                                                        inputContain(
+                                                            width,
+                                                            'product quantity',
+                                                            TextEditingController(
+                                                                text: product_single[
+                                                                        'quantity']
+                                                                    .toString()),
+                                                            (String value) {
+                                                          setState(() {
+                                                            // nameController.text =
+                                                            //     value;
+                                                            // user_name =
+                                                            //     nameController
+                                                            //         .text;
+                                                          });
+                                                        }, false, true),
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        product_single.isEmpty
+                                                            ? Container()
+                                                            : Column(
+                                                                children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      Column(
+                                                                        children: [
+                                                                          label(
+                                                                              "Entry"),
+                                                                          Checkbox(
+                                                                            tristate:
+                                                                                true,
+                                                                            value:
+                                                                                is_enrty,
+                                                                            onChanged:
+                                                                                (bool? value) {
+                                                                              setState(() {
+                                                                                is_enrty = value!;
+                                                                              });
+                                                                            },
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              20),
+                                                                      Column(
+                                                                        children: [
+                                                                          label(
+                                                                              "Exit"),
+                                                                          Checkbox(
+                                                                            isError:
+                                                                                true,
+                                                                            tristate:
+                                                                                true,
+                                                                            value:
+                                                                                !is_enrty,
+                                                                            onChanged:
+                                                                                (bool? value) {
+                                                                              setState(() {
+                                                                                is_enrty = !value!;
+                                                                              });
+                                                                            },
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        product_single.isEmpty
+                                                            ? Container()
+                                                            : Column(
+                                                                children: [
+                                                                  Container(
+                                                                    width: media
+                                                                        .width,
+                                                                    child: Text(
+                                                                      "Coment",
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .left,
+                                                                      textScaleFactor:
+                                                                          1.4,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color:
+                                                                            gray,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  Container(
+                                                                    margin: EdgeInsets.symmetric(
+                                                                        vertical:
+                                                                            media.height /
+                                                                                40,
+                                                                        horizontal:
+                                                                            10),
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            10),
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                            color:
+                                                                                gray.withOpacity(0.5)),
+                                                                    width: media
+                                                                            .width /
+                                                                        3,
+                                                                    height:
+                                                                        media.width /
+                                                                            4,
+                                                                    child:
+                                                                        TextField(
+                                                                      maxLines:
+                                                                          null, // Set this
+                                                                      expands:
+                                                                          true, // and this
+                                                                      controller:
+                                                                          comentController,
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .multiline,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
                                                       ],
                                                     ),
                                             ),
                                           ),
-                                          const SizedBox(height: 20),
-                                          product_single.isEmpty
-                                              ? Container()
-                                              : Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Column(
-                                                          children: [
-                                                            label("Entry"),
-                                                            Checkbox(
-                                                              tristate: true,
-                                                              value: is_enrty,
-                                                              onChanged: (bool?
-                                                                  value) {
-                                                                setState(() {
-                                                                  is_enrty =
-                                                                      value!;
-                                                                });
-                                                              },
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        const SizedBox(
-                                                            width: 20),
-                                                        Column(
-                                                          children: [
-                                                            label("Exit"),
-                                                            Checkbox(
-                                                              isError: true,
-                                                              tristate: true,
-                                                              value: !is_enrty,
-                                                              onChanged: (bool?
-                                                                  value) {
-                                                                setState(() {
-                                                                  is_enrty =
-                                                                      !value!;
-                                                                });
-                                                              },
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                          const SizedBox(height: 20),
-                                          product_single.isEmpty
-                                              ? Container()
-                                              : Column(
-                                                  children: [
-                                                    Container(
-                                                      width: media.width,
-                                                      child: Text(
-                                                        "Coment",
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        textScaleFactor: 1.4,
-                                                        style: TextStyle(
-                                                          color: gray,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      margin:
-                                                          EdgeInsets.symmetric(
-                                                              vertical:
-                                                                  media.height /
-                                                                      40,
-                                                              horizontal: 10),
-                                                      padding:
-                                                          EdgeInsets.all(10),
-                                                      decoration: BoxDecoration(
-                                                          color:
-                                                              gray.withOpacity(
-                                                                  0.5)),
-                                                      width: media.width / 3,
-                                                      height: media.width / 4,
-                                                      child: TextField(
-                                                        maxLines:
-                                                            null, // Set this
-                                                        expands:
-                                                            true, // and this
-                                                        controller:
-                                                            comentController,
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .multiline,
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
                                         ],
                                       ),
                                     )),
@@ -682,6 +713,14 @@ class _DetailMovementState extends State<DetailMovement> {
                                                                       (BuildContext
                                                                               context,
                                                                           int index) {
+                                                                    debugPrint(
+                                                                        "qts list" +
+                                                                            qteList.toString());
+                                                                    debugPrint("qte lis 2" +
+                                                                        qteList2
+                                                                            .toString());
+                                                                    debugPrint(
+                                                                        "contain : $index = ${(qteList.length - 1) >= index}");
                                                                     if (searchListLocationController
                                                                             .text
                                                                             .isNotEmpty &&
@@ -693,7 +732,7 @@ class _DetailMovementState extends State<DetailMovement> {
                                                                       return Column(
                                                                         children: [
                                                                           ListTile(
-                                                                              leading: (qteList.length > index - 1)
+                                                                              leading: ((qteList.length - 1) >= index)
                                                                                   ? null
                                                                                   : InkWell(
                                                                                       onTap: () {
@@ -720,7 +759,7 @@ class _DetailMovementState extends State<DetailMovement> {
                                                                           ),
                                                                           Row(
                                                                             children: [
-                                                                              (qteList.length - 1 < index)
+                                                                              !((qteList.length - 1) >= index)
                                                                                   ? Container()
                                                                                   : Expanded(
                                                                                       child: Container(
@@ -766,7 +805,7 @@ class _DetailMovementState extends State<DetailMovement> {
                                                                                         ),
                                                                                       ),
                                                                                     ),
-                                                                              (qteList.length - 1 < index) ? Container() : Spacer(),
+                                                                              !((qteList.length - 1) >= index) ? Container() : Spacer(),
                                                                               Center(
                                                                                 child: Text(is_enrty ? "Add" : "Remove"),
                                                                               ),

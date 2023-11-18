@@ -116,7 +116,9 @@ Widget movement(
               const SizedBox(width: 30),
               Expanded(child: Text(name)),
               Expanded(child: Text("${is_entry ? "Entry" : "Exit"}")),
-              Expanded(child: Text("$last_qte")),
+              Expanded(
+                  child: Text(
+                      "${is_entry ? (double.parse(new_qte) - double.parse(last_qte)) : double.parse(last_qte) - double.parse(new_qte)}")),
               Expanded(child: Text("Last Qte : $last_qte")),
               Expanded(child: Text("New Qte : $new_qte")),
               Expanded(child: Text("Location : $location")),
