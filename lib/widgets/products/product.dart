@@ -8,8 +8,16 @@ import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
 
-Widget products(String imagePath, String productName, String price, int state,
-    BuildContext context, String id, Function setParent) {
+Widget products(
+    String imagePath,
+    String productName,
+    String? clothing,
+    String? weight,
+    String price,
+    int state,
+    BuildContext context,
+    String id,
+    Function setParent) {
   if (searchProductsController.text.isNotEmpty &&
       !productName
           .toLowerCase()
@@ -40,12 +48,29 @@ Widget products(String imagePath, String productName, String price, int state,
           width: double.infinity,
           imageUrl: imagePath,
           fit: BoxFit.contain,
+          placeholder: (context, url) => CircularProgressIndicator(),
+          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
         Text(
           productName,
           maxLines: 2,
+          overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.center,
         ),
+        clothing == null || clothing == "No Clothing" || clothing == ""
+            ? Container()
+            : Text(
+                "$clothing",
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
+        weight == null || weight == "Nothing" || weight == ""
+            ? Container()
+            : Text(
+                "$weight Kg",
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,

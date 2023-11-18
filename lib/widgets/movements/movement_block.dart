@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/functions/function.dart';
+import 'package:stock_manager/widgets/error_buil.dart';
 import 'package:stock_manager/widgets/movements/movement.dart';
 import 'package:stock_manager/widgets/products/product.dart';
 
@@ -16,26 +18,30 @@ class Allmovement extends StatefulWidget {
 class _AllmovementState extends State<Allmovement> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      primary: false,
-      padding: const EdgeInsets.all(20),
-      children: <Widget>[
-        for (var i = 0; i < movementsAll.length; i++)
-          movement(
-              movementsAll[i]['id'].toString(),
-              movementsAll[i]['product_location']['product']['name'],
-              movementsAll[i]['new_qte'].toString(),
-              movementsAll[i]['is_entry'],
-              movementsAll[i]['last_qte'].toString(),
-              convertDate(DateTime.parse(movementsAll[i]['created_at'])),
-              movementsAll[i]['product_location']['location']['name'],
-              movementsAll[i]['product_location']['product']['image'],
-              movementsAll[i]['comment'],
-              context,
-              widget.setParent,
-              i == movementsAll.length - 1),
-      ],
-    );
+    try {
+      return ListView(
+        primary: false,
+        padding: const EdgeInsets.all(20),
+        children: <Widget>[
+          for (var i = 0; i < movementsAll.length; i++)
+            movement(
+                movementsAll[i]['id'].toString(),
+                movementsAll[i]['product_location']['product']['name'],
+                movementsAll[i]['new_qte'].toString(),
+                movementsAll[i]['is_entry'],
+                movementsAll[i]['last_qte'].toString(),
+                convertDate(DateTime.parse(movementsAll[i]['created_at'])),
+                movementsAll[i]['product_location']['location']['name'],
+                movementsAll[i]['product_location']['product']['image'],
+                movementsAll[i]['comment'],
+                context,
+                widget.setParent,
+                i == movementsAll.length - 1),
+        ],
+      );
+    } catch (e) {
+      return ErrorBuild();
+    }
   }
 }
 

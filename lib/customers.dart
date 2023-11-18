@@ -10,6 +10,7 @@ import 'package:stock_manager/functions/customer_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/customers/details.dart';
 import 'package:stock_manager/widgets/customer/customer.dart';
+import 'package:stock_manager/widgets/help_button.dart';
 
 class CustomerPage extends StatefulWidget {
   const CustomerPage({super.key});
@@ -74,12 +75,7 @@ class _CustomerPageState extends State<CustomerPage> {
                               elevation: 0,
                               automaticallyImplyLeading: false,
                               actions: const [
-                                InkWell(
-                                  child: Icon(
-                                    Icons.help,
-                                    color: Colors.black,
-                                  ),
-                                ),
+                               HelpButton(),
                                 SizedBox(
                                   width: 20,
                                 )

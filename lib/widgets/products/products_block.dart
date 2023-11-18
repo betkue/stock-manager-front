@@ -25,6 +25,8 @@ class _AllproductState extends State<Allproduct> {
           products(
               productsAll[i]['image'],
               productsAll[i]['name'],
+              productsAll[i]['clothing'],
+              productsAll[i]['weight'],
               "${productsAll[i]['price']} ${company['currency']['symbol']}",
               productsAll[i]['available'] ? 1 : 0,
               context,
@@ -57,6 +59,8 @@ class _AvailableproductState extends State<Availableproduct> {
           products(
               productsAvailable[i]['image'],
               productsAvailable[i]['name'],
+              productsAvailable[i]['clothing'],
+              productsAvailable[i]['weight'],
               "${productsAvailable[i]['price']} ${company['currency']['symbol']}",
               productsAvailable[i]['available'] ? 1 : 0,
               context,
@@ -89,6 +93,8 @@ class _UnavailableproductState extends State<Unavailableproduct> {
           products(
               productsUnavalaible[i]['image'],
               productsUnavalaible[i]['name'],
+              productsUnavalaible[i]['clothing'],
+              productsUnavalaible[i]['weight'],
               "${productsUnavalaible[i]['price']} ${company['currency']['symbol']}",
               productsUnavalaible[i]['available'] ? 1 : 0,
               context,

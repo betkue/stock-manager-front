@@ -11,6 +11,7 @@ import 'package:stock_manager/functions/store_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/no_data.dart';
 import 'package:stock_manager/pages/no_internet.dart';
+import 'package:stock_manager/widgets/help_button.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
@@ -58,12 +59,7 @@ class _DashBoardState extends State<DashBoard> {
                         elevation: 0,
                         automaticallyImplyLeading: false,
                         actions: const [
-                          InkWell(
-                            child: Icon(
-                              Icons.help,
-                              color: black,
-                            ),
-                          ),
+                          HelpButton(),
                           SizedBox(
                             width: 20,
                           )

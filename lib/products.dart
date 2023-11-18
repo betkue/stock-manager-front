@@ -9,6 +9,7 @@ import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/functions/product_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/products/details.dart';
+import 'package:stock_manager/widgets/help_button.dart';
 import 'package:stock_manager/widgets/products/products_block.dart';
 
 class ProductPage extends StatefulWidget {
@@ -80,12 +81,7 @@ class _ProductPageState extends State<ProductPage> {
                               elevation: 0,
                               automaticallyImplyLeading: false,
                               actions: const [
-                                InkWell(
-                                  child: Icon(
-                                    Icons.help,
-                                    color: Colors.black,
-                                  ),
-                                ),
+                                HelpButton(),
                                 SizedBox(
                                   width: 20,
                                 )

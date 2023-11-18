@@ -5,6 +5,7 @@ dynamic token;
 dynamic phcode;
 dynamic version_app;
 dynamic url_version;
+dynamic url_help;
 
 var updateAvailable = false;
 

@@ -9,6 +9,7 @@ import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/functions/supplier_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/suppliers/details.dart';
+import 'package:stock_manager/widgets/help_button.dart';
 import 'package:stock_manager/widgets/supplier/supplier.dart';
 
 class SupplierPage extends StatefulWidget {
@@ -74,12 +75,7 @@ class _SupplierPageState extends State<SupplierPage> {
                               elevation: 0,
                               automaticallyImplyLeading: false,
                               actions: const [
-                                InkWell(
-                                  child: Icon(
-                                    Icons.help,
-                                    color: black,
-                                  ),
-                                ),
+                               HelpButton(),
                                 SizedBox(
                                   width: 20,
                                 )

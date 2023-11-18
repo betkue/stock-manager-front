@@ -8,6 +8,7 @@ import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/purshases/details.dart';
+import 'package:stock_manager/widgets/help_button.dart';
 import 'package:stock_manager/widgets/purchase/purchase_block.dart';
 
 class PurchasePage extends StatefulWidget {
@@ -69,12 +70,7 @@ class _PurchasePageState extends State<PurchasePage> {
                               elevation: 0,
                               automaticallyImplyLeading: false,
                               actions: const [
-                                InkWell(
-                                  child: Icon(
-                                    Icons.help,
-                                    color: black,
-                                  ),
-                                ),
+                               HelpButton(),
                                 SizedBox(
                                   width: 20,
                                 )

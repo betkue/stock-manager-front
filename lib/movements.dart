@@ -10,6 +10,7 @@ import 'package:stock_manager/functions/product_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/movement/details.dart';
 import 'package:stock_manager/pages/products/details.dart';
+import 'package:stock_manager/widgets/help_button.dart';
 import 'package:stock_manager/widgets/movements/movement_block.dart';
 import 'package:stock_manager/widgets/products/products_block.dart';
 
@@ -86,12 +87,7 @@ class _MovementsState extends State<Movements> {
                               elevation: 0,
                               automaticallyImplyLeading: false,
                               actions: const [
-                                InkWell(
-                                  child: Icon(
-                                    Icons.help,
-                                    color: Colors.black,
-                                  ),
-                                ),
+                               HelpButton(),
                                 SizedBox(
                                   width: 20,
                                 )

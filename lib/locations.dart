@@ -9,6 +9,7 @@ import 'package:stock_manager/functions/product_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/locations/details.dart';
 import 'package:stock_manager/pages/suppliers/details.dart';
+import 'package:stock_manager/widgets/help_button.dart';
 import 'package:stock_manager/widgets/location/location.dart';
 
 class LocationPage extends StatefulWidget {
@@ -74,12 +75,7 @@ class _LocationPageState extends State<LocationPage> {
                               elevation: 0,
                               automaticallyImplyLeading: false,
                               actions: const [
-                                InkWell(
-                                  child: Icon(
-                                    Icons.help,
-                                    color: black,
-                                  ),
-                                ),
+                                HelpButton(),
                                 SizedBox(
                                   width: 20,
                                 )

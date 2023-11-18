@@ -319,6 +319,7 @@ getVersion(token) async {
 
       version_app = jsonVal['version'];
       url_version = jsonVal['url'];
+      url_help = jsonVal['url_help'];
 
       result = true;
     } else {

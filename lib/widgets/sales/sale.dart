@@ -39,6 +39,8 @@ Widget sales(String imagePath, String productName, String price, int state,
               width: double.infinity,
               imageUrl: imagePath,
               fit: BoxFit.contain,
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
             Positioned(
               child: Container(
