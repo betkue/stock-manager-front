@@ -275,7 +275,6 @@ class _DetailLocationState extends State<DetailLocation> {
                                                     //             showList = true;
                                                     //             loadList = true;
                                                     //           });
-
                                                     //           var result =
                                                     //               await getProducts(
                                                     //                   0);
@@ -317,7 +316,7 @@ class _DetailLocationState extends State<DetailLocation> {
                                                 ),
                                                 Container(
                                                   margin:
-                                                      EdgeInsets.only(top: 10),
+                                                      EdgeInsets.only(top: 60),
                                                   width: width,
                                                   child: TextField(
                                                     controller:
@@ -337,152 +336,150 @@ class _DetailLocationState extends State<DetailLocation> {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  child: SingleChildScrollView(
-                                                    child: Container(
-                                                      margin: EdgeInsets.only(
-                                                          top: 10),
-                                                      width: width,
-                                                      decoration: BoxDecoration(
-                                                          border: Border.all(
-                                                              color: white,
-                                                              width: 0.5)),
-                                                      child: ListView.builder(
-                                                          itemCount:
-                                                              productsList.length,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  int index) {
-                                                            if (searchController
-                                                                    .text
-                                                                    .isNotEmpty &&
-                                                                !productsList[
-                                                                            index]
-                                                                        ['name']
-                                                                    .toLowerCase()
-                                                                    .contains(
-                                                                        searchController
-                                                                            .text
-                                                                            .toLowerCase())) {
-                                                              return Container();
-                                                            } else {
-                                                              return Column(
-                                                                children: [
-                                                                  ListTile(
-                                                                      leading: widget.id !=
-                                                                              null
-                                                                          ? null
-                                                                          : InkWell(
-                                                                              onTap:
-                                                                                  () {
-                                                                                setState(() {
-                                                                                  qteList.removeAt(index);
-                                                                                  productsList.removeAt(index);
-                                                    
-                                                                                  updateQte();
-                                                                                });
-                                                                              },
-                                                                              child:
-                                                                                  Icon(
-                                                                                Icons.remove,
-                                                                                color: primaryColor,
-                                                                              ),
+                                                  child: Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: 10),
+                                                    width: width,
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: white,
+                                                            width: 0.5)),
+                                                    child: ListView.builder(
+                                                        itemCount:
+                                                            productsList.length,
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          if (searchController
+                                                                  .text
+                                                                  .isNotEmpty &&
+                                                              !productsList[
+                                                                          index]
+                                                                      ['name']
+                                                                  .toLowerCase()
+                                                                  .contains(
+                                                                      searchController
+                                                                          .text
+                                                                          .toLowerCase())) {
+                                                            return Container();
+                                                          } else {
+                                                            return Column(
+                                                              children: [
+                                                                ListTile(
+                                                                    leading: widget.id !=
+                                                                            null
+                                                                        ? null
+                                                                        : InkWell(
+                                                                            onTap:
+                                                                                () {
+                                                                              setState(() {
+                                                                                qteList.removeAt(index);
+                                                                                productsList.removeAt(index);
+
+                                                                                updateQte();
+                                                                              });
+                                                                            },
+                                                                            child:
+                                                                                Icon(
+                                                                              Icons.remove,
+                                                                              color: primaryColor,
                                                                             ),
-                                                                      trailing:
-                                                                          Text(
-                                                                        '${productsList[index]['reference'] ?? ""} ',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                backgroundColor,
-                                                                            fontSize:
-                                                                                15),
-                                                                      ),
-                                                                      title: Text(
-                                                                          productsList[index]
-                                                                              [
-                                                                              'name'])),
-                                                                  SizedBox(
-                                                                    height: 3,
-                                                                  ),
-                                                                  Container(
-                                                                    width: width /
-                                                                        4.5,
-                                                                    // height: 37,
-                                                                    margin: EdgeInsets
-                                                                        .only(
-                                                                            right:
-                                                                                10),
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(5),
-                                                                      color: gray,
+                                                                          ),
+                                                                    trailing:
+                                                                        Text(
+                                                                      '${productsList[index]['reference'] ?? ""} ',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              backgroundColor,
+                                                                          fontSize:
+                                                                              15),
                                                                     ),
-                                                                    child: Center(
-                                                                      child:
-                                                                          TextFormField(
-                                                                        maxLines:
-                                                                            1,
-                                                                        enabled:
-                                                                            widget.id ==
-                                                                                null,
-                                                                        cursorColor:
-                                                                            black,
-                                                                        controller:
-                                                                            TextEditingController(
-                                                                                text: qteList[index].toString()),
-                                                                        keyboardType:
-                                                                            TextInputType
-                                                                                .number,
-                                                                        inputFormatters: [
-                                                                          FilteringTextInputFormatter.allow(
-                                                                              RegExp('[0-9.]'))
-                                                                        ],
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          if (value
-                                                                              .isNotEmpty) {
-                                                                            qteList[index] =
-                                                                                double.parse(value);
-                                                                          } else {
-                                                                            qteList[index] =
-                                                                                0;
-                                                                          }
-                                                    
-                                                                          updateQte();
-                                                                        },
-                                                                        // maxLength: 30,
-                                                                        decoration:
-                                                                            inputDecoration(
-                                                                          "Enter Qte",
-                                                                        ),
-                                                                        validator:
-                                                                            (value) {
-                                                                          // if (value!
-                                                                          //         .isEmpty &&
-                                                                          //     !obscure) {
-                                                                          //   return 'Please enter the $hintText.';
-                                                                          // }
-                                                                          // return null;
-                                                                        },
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: 3,
-                                                                  ),
-                                                                  Container(
-                                                                    width: double
-                                                                        .maxFinite,
-                                                                    height: 1,
+                                                                    title: Text(
+                                                                        productsList[index]
+                                                                            [
+                                                                            'name'])),
+                                                                SizedBox(
+                                                                  height: 3,
+                                                                ),
+                                                                Container(
+                                                                  width: width /
+                                                                      4.5,
+                                                                  // height: 37,
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          right:
+                                                                              10),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
                                                                     color: gray,
-                                                                  )
-                                                                ],
-                                                              );
-                                                            }
-                                                          }),
-                                                    ),
+                                                                  ),
+                                                                  child: Center(
+                                                                    child:
+                                                                        TextFormField(
+                                                                      maxLines:
+                                                                          1,
+                                                                      enabled:
+                                                                          widget.id ==
+                                                                              null,
+                                                                      cursorColor:
+                                                                          black,
+                                                                      controller:
+                                                                          TextEditingController(
+                                                                              text: qteList[index].toString()),
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .number,
+                                                                      inputFormatters: [
+                                                                        FilteringTextInputFormatter.allow(
+                                                                            RegExp('[0-9.]'))
+                                                                      ],
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        if (value
+                                                                            .isNotEmpty) {
+                                                                          qteList[index] =
+                                                                              double.parse(value);
+                                                                        } else {
+                                                                          qteList[index] =
+                                                                              0;
+                                                                        }
+
+                                                                        updateQte();
+                                                                      },
+                                                                      // maxLength: 30,
+                                                                      decoration:
+                                                                          inputDecoration(
+                                                                        "Enter Qte",
+                                                                      ),
+                                                                      validator:
+                                                                          (value) {
+                                                                        // if (value!
+                                                                        //         .isEmpty &&
+                                                                        //     !obscure) {
+                                                                        //   return 'Please enter the $hintText.';
+                                                                        // }
+                                                                        // return null;
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 3,
+                                                                ),
+                                                                Container(
+                                                                  width: double
+                                                                      .maxFinite,
+                                                                  height: 1,
+                                                                  color: gray,
+                                                                )
+                                                              ],
+                                                            );
+                                                          }
+                                                        }),
                                                   ),
                                                 ),
                                                 const SizedBox(height: 20),
@@ -636,7 +633,7 @@ class _DetailLocationState extends State<DetailLocation> {
                                                       imageFile,
                                                       context);
 
-                                              if (result) {
+                                              if (result == true) {
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                   const SnackBar(
@@ -644,14 +641,15 @@ class _DetailLocationState extends State<DetailLocation> {
                                                         'Form submitted successfully!'),
                                                   ),
                                                 );
-                                                widget.back();
                                                 setState(() {
                                                   load = false;
                                                 });
-                                              } else {}
-                                              setState(() {
-                                                load = false;
-                                              });
+                                                widget.back();
+                                              } else {
+                                                setState(() {
+                                                  load = false;
+                                                });
+                                              }
                                             }
                                           },
                                           style: ElevatedButton.styleFrom(

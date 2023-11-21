@@ -21,11 +21,11 @@ Map<String, dynamic> company = {
 };
 
 Map<String, dynamic> user = {
-  "name": "Michelle",
-  "email": "betkuetjh@gmail.com",
-  "image": "https://picsum.photos/250?image=9",
-  "rule": "Admin",
-  "phone": "+237655203146"
+  // "name": "Michelle",
+  // "email": "betkuetjh@gmail.com",
+  // "image": "https://picsum.photos/250?image=9",
+  // "rule": "Admin",
+  // "phone": "+237655203146"
 };
 List<Map<String, dynamic>> users = [
   {

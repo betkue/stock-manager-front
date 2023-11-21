@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
@@ -44,6 +45,7 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(user['image'].toString());
     return Container(
       height: MediaQuery.of(context).size.height,
       decoration: const BoxDecoration(
@@ -80,11 +82,19 @@ class _MenuState extends State<Menu> {
                   height: 100,
                   width: 100,
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(user['image'])),
+                    // image: DecorationImage(image: NetworkImage(user['image'])),
                     // color: primaryColor,
                     borderRadius: BorderRadius.circular(
                         MediaQuery.of(context).size.height),
                     // color: widget.color ?? orange,
+                  ),
+                  child: CachedNetworkImage(
+                    height: 160,
+                    width: double.infinity,
+                    imageUrl: user['image'],
+                    fit: BoxFit.contain,
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                   // child: Image.network(
                   //  ,

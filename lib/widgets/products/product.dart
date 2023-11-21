@@ -17,6 +17,7 @@ Widget products(
     int state,
     BuildContext context,
     String id,
+    String qte,
     Function setParent) {
   if (searchProductsController.text.isNotEmpty &&
       !productName
@@ -96,6 +97,14 @@ Widget products(
             SizedBox(width: 10),
           ],
         ),
+
+        state != 1
+            ? Container()
+            : Text(
+                "$qte",
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
         Container(
           width: MediaQuery.of(context).size.width / 8,
           // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),

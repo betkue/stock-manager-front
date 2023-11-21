@@ -162,7 +162,7 @@ class _CreateStoreState extends State<CreateStore> {
                                             child: SizedBox(
                                               height: media.width / 5,
                                               width: media.width / 5,
-                      
+
                                               child: Center(
                                                 child: DottedBorder(
                                                   borderType: BorderType.RRect,
@@ -173,7 +173,8 @@ class _CreateStoreState extends State<CreateStore> {
                                                   child: ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.all(
-                                                            Radius.circular(12)),
+                                                            Radius.circular(
+                                                                12)),
                                                     child: SizedBox(
                                                       height: media.width / 10,
                                                       width: media.width / 10,
@@ -202,10 +203,11 @@ class _CreateStoreState extends State<CreateStore> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(12)),
                                             image: DecorationImage(
-                                                image: FileImage(File(imageFile)),
+                                                image:
+                                                    FileImage(File(imageFile)),
                                                 fit: BoxFit.cover))),
                               ),
-                      
+
                               const SizedBox(height: 100),
                               const Padding(
                                 padding: EdgeInsets.symmetric(vertical: 4),
@@ -957,7 +959,8 @@ class _CreateStoreState extends State<CreateStore> {
                                         ),
                                         child: const Text(
                                           'Submit',
-                                          style: TextStyle(fontSize: 24,color: white),
+                                          style: TextStyle(
+                                              fontSize: 24, color: white),
                                         ),
                                       ),
                                     ),
@@ -988,7 +991,7 @@ class _CreateStoreState extends State<CreateStore> {
                     //try again
                     setState(() {
                       internetTrue();
-                      loading = true;
+                      // loading = true;
                     });
                   },
                 ))

@@ -36,7 +36,6 @@ class _LoadingPageState extends State<LoadingPage> {
       var val = await getLocalData();
 
       var package = await PackageInfo.fromPlatform();
-
       //if user is login
       if (val == true) {
         var result = await getVersion(token);

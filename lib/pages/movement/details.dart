@@ -314,294 +314,292 @@ class _DetailMovementState extends State<DetailMovement> {
                                                   ),
                                                 ),
                                           Expanded(
-                                            child: SingleChildScrollView(
-                                              child: Container(
-                                                margin: EdgeInsets.only(top: 10),
-                                                width: width,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: white,
-                                                        width: 0.5)),
-                                                child: product_single.isEmpty
-                                                    ? ListView.builder(
-                                                        itemCount:
-                                                            productsAll.length,
-                                                        itemBuilder:
-                                                            (BuildContext context,
-                                                                int index) {
-                                                          if (searchController
-                                                                  .text
-                                                                  .isNotEmpty &&
-                                                              !productsAll[index]
-                                                                      ['name']
-                                                                  .toLowerCase()
-                                                                  .contains(
-                                                                      searchController
-                                                                          .text
-                                                                          .toLowerCase())) {
-                                                            return Container();
-                                                          } else {
-                                                            return InkWell(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  getSingleProduct(
-                                                                      productsAll[
-                                                                          index]);
-                                                                });
-                                                              },
-                                                              child: Column(
+                                            child: Container(
+                                              margin: EdgeInsets.only(top: 10),
+                                              width: width,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: white,
+                                                      width: 0.5)),
+                                              child: product_single.isEmpty
+                                                  ? ListView.builder(
+                                                      itemCount:
+                                                          productsAll.length,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        if (searchController
+                                                                .text
+                                                                .isNotEmpty &&
+                                                            !productsAll[index]
+                                                                    ['name']
+                                                                .toLowerCase()
+                                                                .contains(
+                                                                    searchController
+                                                                        .text
+                                                                        .toLowerCase())) {
+                                                          return Container();
+                                                        } else {
+                                                          return InkWell(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                getSingleProduct(
+                                                                    productsAll[
+                                                                        index]);
+                                                              });
+                                                            },
+                                                            child: Column(
+                                                              children: [
+                                                                ListTile(
+                                                                    leading:
+                                                                        Icon(
+                                                                      Icons
+                                                                          .remove,
+                                                                      color:
+                                                                          primaryColor,
+                                                                    ),
+                                                                    trailing:
+                                                                        Text(
+                                                                      '${productsAll[index]['reference'] ?? ""} ',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              backgroundColor,
+                                                                          fontSize:
+                                                                              15),
+                                                                    ),
+                                                                    title: Text(
+                                                                        productsAll[index]
+                                                                            [
+                                                                            'name'])),
+                                                                SizedBox(
+                                                                  height: 3,
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 3,
+                                                                ),
+                                                                Container(
+                                                                  width: double
+                                                                      .maxFinite,
+                                                                  height: 1,
+                                                                  color: gray,
+                                                                )
+                                                              ],
+                                                            ),
+                                                          );
+                                                        }
+                                                      })
+                                                  : ListView(
+                                                      children: [
+                                                        Container(
+                                                            margin: EdgeInsets.symmetric(
+                                                                vertical: media
+                                                                        .height /
+                                                                    40),
+                                                            width: media.width /
+                                                                20,
+                                                            height:
+                                                                media.width /
+                                                                    20,
+                                                            child:
+                                                                CachedNetworkImage(
+                                                              imageUrl:
+                                                                  product_single[
+                                                                      'image'],
+                                                              placeholder: (context,
+                                                                      url) =>
+                                                                  CircularProgressIndicator(),
+                                                              errorWidget: (context,
+                                                                      url,
+                                                                      error) =>
+                                                                  Icon(Icons
+                                                                      .error),
+                                                              fit: BoxFit
+                                                                  .contain,
+                                                            ),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          12)),
+                                                              // image: DecorationImage(
+                                                              //     image: NetworkImage(
+                                                              //       product_single[
+                                                              //           'image'],
+                                                              //     ),
+                                                              //     fit: BoxFit.cover)
+                                                            )),
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        label('Product name'),
+                                                        inputContain(
+                                                            width,
+                                                            'product name',
+                                                            TextEditingController(
+                                                                text:
+                                                                    product_single[
+                                                                        'name']),
+                                                            (String value) {
+                                                          setState(() {
+                                                            // nameController.text =
+                                                            //     value;
+                                                            // user_name =
+                                                            //     nameController
+                                                            //         .text;
+                                                          });
+                                                        }, false, true),
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        label(
+                                                            'Product reference'),
+                                                        inputContain(
+                                                            width,
+                                                            'product reference',
+                                                            TextEditingController(
+                                                                text: product_single[
+                                                                    'reference']),
+                                                            (String value) {
+                                                          setState(() {
+                                                            // nameController.text =
+                                                            //     value;
+                                                            // user_name =
+                                                            //     nameController
+                                                            //         .text;
+                                                          });
+                                                        }, false, true),
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        label(
+                                                            'Product quantity'),
+                                                        inputContain(
+                                                            width,
+                                                            'product quantity',
+                                                            TextEditingController(
+                                                                text: product_single[
+                                                                        'quantity']
+                                                                    .toString()),
+                                                            (String value) {
+                                                          setState(() {
+                                                            // nameController.text =
+                                                            //     value;
+                                                            // user_name =
+                                                            //     nameController
+                                                            //         .text;
+                                                          });
+                                                        }, false, true),
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        product_single.isEmpty
+                                                            ? Container()
+                                                            : Column(
                                                                 children: [
-                                                                  ListTile(
-                                                                      leading:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .remove,
-                                                                        color:
-                                                                            primaryColor,
+                                                                  Row(
+                                                                    children: [
+                                                                      Column(
+                                                                        children: [
+                                                                          label(
+                                                                              "Entry"),
+                                                                          Checkbox(
+                                                                            tristate:
+                                                                                true,
+                                                                            value:
+                                                                                is_enrty,
+                                                                            onChanged:
+                                                                                (bool? value) {
+                                                                              setState(() {
+                                                                                is_enrty = value!;
+                                                                              });
+                                                                            },
+                                                                          ),
+                                                                        ],
                                                                       ),
-                                                                      trailing:
-                                                                          Text(
-                                                                        '${productsAll[index]['reference'] ?? ""} ',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                backgroundColor,
-                                                                            fontSize:
-                                                                                15),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              20),
+                                                                      Column(
+                                                                        children: [
+                                                                          label(
+                                                                              "Exit"),
+                                                                          Checkbox(
+                                                                            isError:
+                                                                                true,
+                                                                            tristate:
+                                                                                true,
+                                                                            value:
+                                                                                !is_enrty,
+                                                                            onChanged:
+                                                                                (bool? value) {
+                                                                              setState(() {
+                                                                                is_enrty = !value!;
+                                                                              });
+                                                                            },
+                                                                          ),
+                                                                        ],
                                                                       ),
-                                                                      title: Text(
-                                                                          productsAll[index]
-                                                                              [
-                                                                              'name'])),
-                                                                  SizedBox(
-                                                                    height: 3,
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: 3,
-                                                                  ),
-                                                                  Container(
-                                                                    width: double
-                                                                        .maxFinite,
-                                                                    height: 1,
-                                                                    color: gray,
+                                                                    ],
                                                                   )
                                                                 ],
                                                               ),
-                                                            );
-                                                          }
-                                                        })
-                                                    : ListView(
-                                                        children: [
-                                                          Container(
-                                                              margin: EdgeInsets.symmetric(
-                                                                  vertical: media
-                                                                          .height /
-                                                                      40),
-                                                              width: media.width /
-                                                                  20,
-                                                              height:
-                                                                  media.width /
-                                                                      20,
-                                                              child:
-                                                                  CachedNetworkImage(
-                                                                imageUrl:
-                                                                    product_single[
-                                                                        'image'],
-                                                                placeholder: (context,
-                                                                        url) =>
-                                                                    CircularProgressIndicator(),
-                                                                errorWidget: (context,
-                                                                        url,
-                                                                        error) =>
-                                                                    Icon(Icons
-                                                                        .error),
-                                                                fit: BoxFit
-                                                                    .contain,
-                                                              ),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius: BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            12)),
-                                                                // image: DecorationImage(
-                                                                //     image: NetworkImage(
-                                                                //       product_single[
-                                                                //           'image'],
-                                                                //     ),
-                                                                //     fit: BoxFit.cover)
-                                                              )),
-                                                          const SizedBox(
-                                                              height: 20),
-                                                          label('Product name'),
-                                                          inputContain(
-                                                              width,
-                                                              'product name',
-                                                              TextEditingController(
-                                                                  text:
-                                                                      product_single[
-                                                                          'name']),
-                                                              (String value) {
-                                                            setState(() {
-                                                              // nameController.text =
-                                                              //     value;
-                                                              // user_name =
-                                                              //     nameController
-                                                              //         .text;
-                                                            });
-                                                          }, false, true),
-                                                          const SizedBox(
-                                                              height: 20),
-                                                          label(
-                                                              'Product reference'),
-                                                          inputContain(
-                                                              width,
-                                                              'product reference',
-                                                              TextEditingController(
-                                                                  text: product_single[
-                                                                      'reference']),
-                                                              (String value) {
-                                                            setState(() {
-                                                              // nameController.text =
-                                                              //     value;
-                                                              // user_name =
-                                                              //     nameController
-                                                              //         .text;
-                                                            });
-                                                          }, false, true),
-                                                          const SizedBox(
-                                                              height: 20),
-                                                          label(
-                                                              'Product quantity'),
-                                                          inputContain(
-                                                              width,
-                                                              'product quantity',
-                                                              TextEditingController(
-                                                                  text: product_single[
-                                                                          'quantity']
-                                                                      .toString()),
-                                                              (String value) {
-                                                            setState(() {
-                                                              // nameController.text =
-                                                              //     value;
-                                                              // user_name =
-                                                              //     nameController
-                                                              //         .text;
-                                                            });
-                                                          }, false, true),
-                                                          const SizedBox(
-                                                              height: 20),
-                                                          product_single.isEmpty
-                                                              ? Container()
-                                                              : Column(
-                                                                  children: [
-                                                                    Row(
-                                                                      children: [
-                                                                        Column(
-                                                                          children: [
-                                                                            label(
-                                                                                "Entry"),
-                                                                            Checkbox(
-                                                                              tristate:
-                                                                                  true,
-                                                                              value:
-                                                                                  is_enrty,
-                                                                              onChanged:
-                                                                                  (bool? value) {
-                                                                                setState(() {
-                                                                                  is_enrty = value!;
-                                                                                });
-                                                                              },
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                        const SizedBox(
-                                                                            width:
-                                                                                20),
-                                                                        Column(
-                                                                          children: [
-                                                                            label(
-                                                                                "Exit"),
-                                                                            Checkbox(
-                                                                              isError:
-                                                                                  true,
-                                                                              tristate:
-                                                                                  true,
-                                                                              value:
-                                                                                  !is_enrty,
-                                                                              onChanged:
-                                                                                  (bool? value) {
-                                                                                setState(() {
-                                                                                  is_enrty = !value!;
-                                                                                });
-                                                                              },
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                          const SizedBox(
-                                                              height: 20),
-                                                          product_single.isEmpty
-                                                              ? Container()
-                                                              : Column(
-                                                                  children: [
-                                                                    Container(
-                                                                      width: media
-                                                                          .width,
-                                                                      child: Text(
-                                                                        "Coment",
-                                                                        textAlign:
-                                                                            TextAlign
-                                                                                .left,
-                                                                        textScaleFactor:
-                                                                            1.4,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              gray,
-                                                                        ),
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        product_single.isEmpty
+                                                            ? Container()
+                                                            : Column(
+                                                                children: [
+                                                                  Container(
+                                                                    width: media
+                                                                        .width,
+                                                                    child: Text(
+                                                                      "Coment",
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .left,
+                                                                      textScaleFactor:
+                                                                          1.4,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color:
+                                                                            gray,
                                                                       ),
                                                                     ),
-                                                                    Container(
-                                                                      margin: EdgeInsets.symmetric(
-                                                                          vertical:
-                                                                              media.height /
-                                                                                  40,
-                                                                          horizontal:
-                                                                              10),
-                                                                      padding:
-                                                                          EdgeInsets.all(
-                                                                              10),
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                              color:
-                                                                                  gray.withOpacity(0.5)),
-                                                                      width: media
-                                                                              .width /
-                                                                          3,
-                                                                      height:
-                                                                          media.width /
-                                                                              4,
-                                                                      child:
-                                                                          TextField(
-                                                                        maxLines:
-                                                                            null, // Set this
-                                                                        expands:
-                                                                            true, // and this
-                                                                        controller:
-                                                                            comentController,
-                                                                        keyboardType:
-                                                                            TextInputType
-                                                                                .multiline,
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                        ],
-                                                      ),
-                                              ),
+                                                                  ),
+                                                                  Container(
+                                                                    margin: EdgeInsets.symmetric(
+                                                                        vertical:
+                                                                            media.height /
+                                                                                40,
+                                                                        horizontal:
+                                                                            10),
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            10),
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                            color:
+                                                                                gray.withOpacity(0.5)),
+                                                                    width: media
+                                                                            .width /
+                                                                        3,
+                                                                    height:
+                                                                        media.width /
+                                                                            4,
+                                                                    child:
+                                                                        TextField(
+                                                                      maxLines:
+                                                                          null, // Set this
+                                                                      expands:
+                                                                          true, // and this
+                                                                      controller:
+                                                                          comentController,
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .multiline,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                      ],
+                                                    ),
                                             ),
                                           ),
                                         ],
@@ -943,7 +941,7 @@ class _DetailMovementState extends State<DetailMovement> {
                                                 : await updateMovement(location,
                                                     imageFile, context);
 
-                                            if (result) {
+                                            if (result == true) {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 const SnackBar(
@@ -951,15 +949,16 @@ class _DetailMovementState extends State<DetailMovement> {
                                                       'Form submitted successfully!'),
                                                 ),
                                               );
-                                              removeProduct();
 
                                               setState(() {
                                                 load = false;
                                               });
-                                            } else {}
-                                            setState(() {
-                                              load = false;
-                                            });
+                                              removeProduct();
+                                            } else {
+                                              setState(() {
+                                                load = false;
+                                              });
+                                            }
                                           },
                                           style: ElevatedButton.styleFrom(
                                             //<-- SEE HERE

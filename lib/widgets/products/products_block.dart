@@ -31,6 +31,7 @@ class _AllproductState extends State<Allproduct> {
               productsAll[i]['available'] ? 1 : 0,
               context,
               productsAll[i]['id'].toString(),
+              productsAll[i]['quantity'].toString(),
               widget.setParent),
       ],
     );
@@ -65,6 +66,7 @@ class _AvailableproductState extends State<Availableproduct> {
               productsAvailable[i]['available'] ? 1 : 0,
               context,
               productsAvailable[i]['id'].toString(),
+              productsAvailable[i]['quantity'].toString(),
               widget.setParent),
       ],
     );
@@ -99,6 +101,7 @@ class _UnavailableproductState extends State<Unavailableproduct> {
               productsUnavalaible[i]['available'] ? 1 : 0,
               context,
               productsUnavalaible[i]['image'].toString(),
+              productsUnavalaible[i]['quantity'].toString(),
               widget.setParent),
       ],
     );

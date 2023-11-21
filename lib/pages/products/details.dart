@@ -34,7 +34,8 @@ class _DetailProductState extends State<DetailProduct> {
   TextEditingController nameController = TextEditingController();
   TextEditingController refController = TextEditingController();
   TextEditingController clothingController = TextEditingController();
-  TextEditingController weightController = TextEditingController(text: "Nothing");
+  TextEditingController weightController =
+      TextEditingController(text: "Nothing");
   TextEditingController quantityController = TextEditingController(text: "0");
   TextEditingController unitController = TextEditingController(text: "Nothing");
   TextEditingController priceController = TextEditingController();
@@ -902,7 +903,7 @@ class _DetailProductState extends State<DetailProduct> {
                                                   : await updateProduct(product,
                                                       imageFile, context);
 
-                                              if (result) {
+                                              if (result == true) {
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                   const SnackBar(
@@ -910,14 +911,16 @@ class _DetailProductState extends State<DetailProduct> {
                                                         'Form submitted successfully!'),
                                                   ),
                                                 );
+                                                  setState(() {
+                                                  load = false;
+                                                });
                                                 widget.back();
+                                              
+                                              } else {
                                                 setState(() {
                                                   load = false;
                                                 });
-                                              } else {}
-                                              setState(() {
-                                                load = false;
-                                              });
+                                              }
                                             }
                                           },
                                           style: ElevatedButton.styleFrom(

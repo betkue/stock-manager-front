@@ -280,17 +280,18 @@ createLocation(
     var request = await response.send();
     var respon = await http.Response.fromStream(request);
     var jsonVal = jsonDecode(respon.body);
-    debugPrint(respon.body);
+    // debugPrint(respon.body);
 
     switch (respon.statusCode) {
       case 200:
         await clearCache();
+        showToast("create", green, context);
 
         result = true;
         break;
       default:
-        // debugPrint(response.body);
-        showToast("Server Error", red, context);
+        debugPrint(respon.body);
+        showToast("Server Error ${respon.statusCode} ", red, context);
 
         result = false;
     }
@@ -337,6 +338,7 @@ updateLocation(
     switch (respon.statusCode) {
       case 200:
         await clearCache();
+        showToast("Update", green, context);
 
         result = true;
         break;
