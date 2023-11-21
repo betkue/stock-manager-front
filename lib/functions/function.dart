@@ -171,6 +171,8 @@ getLocalData() async {
     }
   }
 
+  debugPrint("token : $result");
+
   return result;
 }
 
