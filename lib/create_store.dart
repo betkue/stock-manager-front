@@ -121,128 +121,130 @@ class _CreateStoreState extends State<CreateStore> {
                 children: [
                   // First column (logo and description)
                   Expanded(
-                    child: Center(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // Store logo
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 4),
-                              child: Text(
-                                'Store logo',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: white,
+                    child: SingleChildScrollView(
+                      child: Center(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              // Store logo
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 4),
+                                child: Text(
+                                  'Store logo',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: white,
+                                  ),
                                 ),
                               ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                setState(() {
-                                  pickImageFromGallery();
-                                });
-                              },
-                              child: (imageFile == null)
-                                  ? Container(
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: media.height / 40),
-                                      width: media.width / 5,
-                                      height: media.width / 5,
-                                      child: DottedBorder(
-                                        borderType: BorderType.RRect,
-                                        color: white,
-                                        borderPadding: EdgeInsets.all(6),
-                                        dashPattern: [8, 8],
-                                        radius: Radius.circular(12),
-                                        padding: EdgeInsets.all(6),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12)),
-                                          child: SizedBox(
-                                            height: media.width / 5,
-                                            width: media.width / 5,
-
-                                            child: Center(
-                                              child: DottedBorder(
-                                                borderType: BorderType.RRect,
-                                                radius: Radius.circular(12),
-                                                padding: EdgeInsets.all(6),
-                                                dashPattern: [8, 8],
-                                                color: white,
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(12)),
-                                                  child: SizedBox(
-                                                    height: media.width / 10,
-                                                    width: media.width / 10,
-                                                    child: Center(
-                                                      child: Icon(
-                                                        Icons.add,
-                                                        color: white,
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    pickImageFromGallery();
+                                  });
+                                },
+                                child: (imageFile == null)
+                                    ? Container(
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: media.height / 40),
+                                        width: media.width / 5,
+                                        height: media.width / 5,
+                                        child: DottedBorder(
+                                          borderType: BorderType.RRect,
+                                          color: white,
+                                          borderPadding: EdgeInsets.all(6),
+                                          dashPattern: [8, 8],
+                                          radius: Radius.circular(12),
+                                          padding: EdgeInsets.all(6),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(12)),
+                                            child: SizedBox(
+                                              height: media.width / 5,
+                                              width: media.width / 5,
+                      
+                                              child: Center(
+                                                child: DottedBorder(
+                                                  borderType: BorderType.RRect,
+                                                  radius: Radius.circular(12),
+                                                  padding: EdgeInsets.all(6),
+                                                  dashPattern: [8, 8],
+                                                  color: white,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(12)),
+                                                    child: SizedBox(
+                                                      height: media.width / 10,
+                                                      width: media.width / 10,
+                                                      child: Center(
+                                                        child: Icon(
+                                                          Icons.add,
+                                                          color: white,
+                                                        ),
                                                       ),
+                                                      // color: Colors.amber,
                                                     ),
-                                                    // color: Colors.amber,
                                                   ),
                                                 ),
                                               ),
+                                              // color: Colors.amber,
                                             ),
-                                            // color: Colors.amber,
                                           ),
                                         ),
-                                      ),
-                                    )
-                                  : Container(
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: media.height / 40),
-                                      width: media.width / 5,
-                                      height: media.width / 5,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12)),
-                                          image: DecorationImage(
-                                              image: FileImage(File(imageFile)),
-                                              fit: BoxFit.cover))),
-                            ),
-
-                            const SizedBox(height: 100),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 4),
-                              child: Text(
-                                'Description',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: white,
-                                ),
+                                      )
+                                    : Container(
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: media.height / 40),
+                                        width: media.width / 5,
+                                        height: media.width / 5,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(12)),
+                                            image: DecorationImage(
+                                                image: FileImage(File(imageFile)),
+                                                fit: BoxFit.cover))),
                               ),
-                            ),
-                            Container(
-                              width: width / 4,
-                              height: 250,
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 2,
-                                    blurRadius: 2,
-                                    offset: const Offset(0, 2),
+                      
+                              const SizedBox(height: 100),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 4),
+                                child: Text(
+                                  'Description',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: white,
                                   ),
-                                ],
-                              ),
-                              child: TextField(
-                                maxLines: null,
-                                controller: descriptionController,
-                                keyboardType: TextInputType.multiline,
-                                decoration: InputDecoration(
-                                  hintText: 'Enter your message',
-                                  border: InputBorder.none,
                                 ),
                               ),
-                            ),
-                          ]),
+                              Container(
+                                width: width / 4,
+                                height: 250,
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      blurRadius: 2,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: TextField(
+                                  maxLines: null,
+                                  controller: descriptionController,
+                                  keyboardType: TextInputType.multiline,
+                                  decoration: InputDecoration(
+                                    hintText: 'Enter your message',
+                                    border: InputBorder.none,
+                                  ),
+                                ),
+                              ),
+                            ]),
+                      ),
                     ),
                   ),
                   // second column
@@ -955,7 +957,7 @@ class _CreateStoreState extends State<CreateStore> {
                                         ),
                                         child: const Text(
                                           'Submit',
-                                          style: TextStyle(fontSize: 24),
+                                          style: TextStyle(fontSize: 24,color: white),
                                         ),
                                       ),
                                     ),

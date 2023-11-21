@@ -74,7 +74,7 @@ class _TwoColumnPageState extends State<TwoColumnPage> {
                 Container(
                     padding: const EdgeInsets.all(20),
                     width: width / 5,
-                    height: height / 1.2,
+                    height: height *0.9,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       gradient: const LinearGradient(
