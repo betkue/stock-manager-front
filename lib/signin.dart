@@ -662,7 +662,7 @@ class _SigninState extends State<Signin> {
                                 backgroundColor: backgroundColor,
                               ),
                               child: Text('SignIn',
-                                  style: TextStyle(fontSize: 24)),
+                                  style: TextStyle(fontSize: 24,color: white)),
                             ),
                           ),
                         )

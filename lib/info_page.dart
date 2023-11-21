@@ -8,6 +8,7 @@ import 'package:stock_manager/home.dart';
 import 'package:stock_manager/pages/loading.dart';
 import 'package:stock_manager/pages/no_internet.dart';
 import 'package:stock_manager/widgets/button.dart';
+import 'package:stock_manager/widgets/help_button.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -50,13 +51,20 @@ class _InfoPageState extends State<InfoPage> {
       backgroundColor: backgroundColor,
       body: Stack(
         children: [
+          
+        
+        Positioned(child: HelpButton(),
+
+        right: 30,
+        top: 30,
+        ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Thank you for providing us with the necessary information to create your online store\n for stock management. We appreciate your interest in our application.\n We kindly ask you to patiently wait for the validation of your store. Our team will review the\n details you've provided to ensure everything is set up correctly. Once the validation process\n is complete, we will send a confirmation message to your registered email address.",
+                  "Thank you for providing us with the necessary information to create your online store\n for stock management. We appreciate your interest in our application.\n We kindly ask you to patiently wait for the validation of your store. Our team will review the\n details you've provided to ensure everything is set up correctly. Once the validation process\n is complete, we will send a confirmation message to your registered email address with the information about the paiement process.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: white,

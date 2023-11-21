@@ -23,8 +23,8 @@ class _NoInternetState extends State<NoInternet> {
       height: media.height * 1,
       width: media.width * 1,
       color: Colors.transparent.withOpacity(0.6),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: ListView(
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             padding: EdgeInsets.all(media.width * 0.05),
@@ -52,7 +52,7 @@ class _NoInternetState extends State<NoInternet> {
                       color: white),
                 ),
                 SizedBox(
-                  height: media.width * 0.05,
+                  height: 20,
                 ),
                 Text(
                   'Please check your Internet connection, try enabling wifi or tey again later',
@@ -60,7 +60,7 @@ class _NoInternetState extends State<NoInternet> {
                       fontSize: media.width * fourteen, color: hintColor),
                 ),
                 SizedBox(
-                  height: media.width * 0.05,
+                  height: 20,
                 ),
                 Button(
                     onTap: () {
