@@ -38,7 +38,7 @@ class _MenuState extends State<Menu> {
     // MenuModel(icon: Icons.card_travel, title: "Purchase"),
     // MenuModel(icon: Icons.stacked_bar_chart_outlined, title: "Stock"),
     // MenuModel(icon: Icons.sell, title: "Sales"),
-    // MenuModel(icon: Icons.account_box, title: "Account"),
+    MenuModel(icon: Icons.account_box, title: "Account"),
   ];
 
   // int selected = 0;

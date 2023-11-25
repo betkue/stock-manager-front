@@ -16,6 +16,7 @@ import 'package:stock_manager/functions/function.dart';
 import 'package:stock_manager/login.dart';
 import 'package:stock_manager/main.dart';
 import 'package:stock_manager/pages/no_internet.dart';
+import 'package:stock_manager/widgets/account/account.dart';
 import 'package:stock_manager/widgets/circular_button.dart';
 import 'package:stock_manager/widgets/two_column.dart';
 
@@ -70,6 +71,7 @@ class _SigninState extends State<Signin> {
   @override
   Widget build(BuildContext context) {
     dynamic media = MediaQuery.of(context).size;
+    double width = media.width;
     return countries.isEmpty
         ? Scaffold(
             backgroundColor: backgroundColor,
@@ -169,35 +171,44 @@ class _SigninState extends State<Signin> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    width: 250,
-                    height: 47,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 4,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: TextField(
-                      controller: nameController,
-                      cursorColor: black,
-                      onChanged: (value) {
-                        setState(() {});
-                      },
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(color: black),
-                        labelText: 'Name',
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.person),
-                      ),
-                    ),
-                  ),
+                  const SizedBox(height: 20),
+                  inputContain(width, ' Name', nameController, (String value) {
+                    setState(() {
+                      // price2Controller
+                      //     .text = value;
+                    });
+                  }, false, false),
+
+                  // Container(
+                  //   width: 250,
+                  //   height: 47,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(5),
+                  //     color: Colors.white,
+                  //     boxShadow: [
+                  //       BoxShadow(
+                  //         color: Colors.grey.withOpacity(0.2),
+                  //         spreadRadius: 2,
+                  //         blurRadius: 4,
+                  //         offset: Offset(0, 2),
+                  //       ),
+                  //     ],
+                  //   ),
+                  //   child: TextField(
+                  //     controller: nameController,
+                  //     cursorColor: black,
+                  //     onChanged: (value) {
+                  //       setState(() {});
+                  //     },
+                  //     decoration: InputDecoration(
+                  //       labelStyle: TextStyle(color: black),
+                  //       labelText: 'Name',
+                  //       border: InputBorder.none,
+                  //       prefixIcon: Icon(Icons.person),
+                  //     ),
+                  //   ),
+                  // ),
+
                   const SizedBox(
                     height: 20,
                   ),
@@ -238,7 +249,7 @@ class _SigninState extends State<Signin> {
                     height: 47,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      color: Colors.white,
+                      color: gray,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.2),
@@ -495,101 +506,33 @@ class _SigninState extends State<Signin> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
 
                   const SizedBox(height: 20),
-                  Container(
-                    width: 250,
-                    height: 47,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 4,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: TextField(
-                      controller: emailController,
-                      cursorColor: black,
-                      keyboardType: TextInputType.emailAddress,
-                      onChanged: (value) {
-                        setState(() {});
-                      },
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(color: black),
-                        labelText: 'Email',
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.email),
-                      ),
-                    ),
-                  ),
+
+                  inputContain(width, ' Email', emailController,
+                      (String value) {
+                    setState(() {
+                      // price2Controller
+                      //     .text = value;
+                    });
+                  }, false, false),
                   const SizedBox(height: 20),
-                  Container(
-                    width: 250,
-                    height: 47,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 4,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: TextField(
-                      controller: passwordController,
-                      cursorColor: black,
-                      onChanged: (value) {
-                        setState(() {});
-                      },
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(color: black),
-                        labelText: 'Password',
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.key),
-                      ),
-                    ),
-                  ),
+                  inputContain(width, ' Password', passwordController,
+                      (String value) {
+                    setState(() {
+                      // price2Controller
+                      //     .text = value;
+                    });
+                  }, true, false),
                   const SizedBox(height: 20),
-                  Container(
-                    width: 250,
-                    height: 47,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 4,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: TextField(
-                      controller: confirmPasswordController,
-                      cursorColor: black,
-                      obscureText: true,
-                      onChanged: (value) {
-                        setState(() {});
-                      },
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(color: black),
-                        labelText: 'Confirm Password',
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.key),
-                      ),
-                    ),
-                  ),
+                  inputContain(
+                      width, ' Confirm Password', confirmPasswordController,
+                      (String value) {
+                    setState(() {
+                      // price2Controller
+                      //     .text = value;
+                    });
+                  }, true, false),
                   Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Wrap(
@@ -662,7 +605,7 @@ class _SigninState extends State<Signin> {
                                 backgroundColor: backgroundColor,
                               ),
                               child: Text('SignIn',
-                                  style: TextStyle(fontSize: 24,color: white)),
+                                  style: TextStyle(fontSize: 24, color: white)),
                             ),
                           ),
                         )

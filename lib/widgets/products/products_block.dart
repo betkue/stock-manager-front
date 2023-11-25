@@ -20,20 +20,7 @@ class _AllproductState extends State<Allproduct> {
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       crossAxisCount: 4,
-      children: <Widget>[
-        for (var i = 0; i < productsAll.length; i++)
-          products(
-              productsAll[i]['image'],
-              productsAll[i]['name'],
-              productsAll[i]['clothing'],
-              productsAll[i]['weight'],
-              "${productsAll[i]['price']} ${company['currency']['symbol']}",
-              productsAll[i]['available'] ? 1 : 0,
-              context,
-              productsAll[i]['id'].toString(),
-              productsAll[i]['quantity'].toString(),
-              widget.setParent),
-      ],
+      children: removeWidget(productsAll, context, widget.setParent),
     );
   }
 }
@@ -55,20 +42,7 @@ class _AvailableproductState extends State<Availableproduct> {
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       crossAxisCount: 4,
-      children: <Widget>[
-        for (var i = 0; i < productsAvailable.length; i++)
-          products(
-              productsAvailable[i]['image'],
-              productsAvailable[i]['name'],
-              productsAvailable[i]['clothing'],
-              productsAvailable[i]['weight'],
-              "${productsAvailable[i]['price']} ${company['currency']['symbol']}",
-              productsAvailable[i]['available'] ? 1 : 0,
-              context,
-              productsAvailable[i]['id'].toString(),
-              productsAvailable[i]['quantity'].toString(),
-              widget.setParent),
-      ],
+      children: removeWidget(productsAvailable, context, widget.setParent),
     );
   }
 }
@@ -90,20 +64,48 @@ class _UnavailableproductState extends State<Unavailableproduct> {
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       crossAxisCount: 4,
-      children: <Widget>[
-        for (var i = 0; i < productsUnavalaible.length; i++)
-          products(
-              productsUnavalaible[i]['image'],
-              productsUnavalaible[i]['name'],
-              productsUnavalaible[i]['clothing'],
-              productsUnavalaible[i]['weight'],
-              "${productsUnavalaible[i]['price']} ${company['currency']['symbol']}",
-              productsUnavalaible[i]['available'] ? 1 : 0,
-              context,
-              productsUnavalaible[i]['image'].toString(),
-              productsUnavalaible[i]['quantity'].toString(),
-              widget.setParent),
-      ],
+      children: removeWidget(productsUnavalaible, context, widget.setParent),
     );
   }
 }
+
+removeWidget(List<Map<String, dynamic>> productsList, BuildContext context,
+    Function setParent) {
+  List<Widget> results = [];
+  for (var i = 0; i < productsList.length; i++) {
+    Widget product = products(
+        productsList[i]['image'],
+        productsList[i]['name'],
+        productsList[i]['features'] ?? "",
+        productsList[i]['reference'],
+        productsList[i]['clothing'],
+        productsList[i]['weight'],
+        "${productsList[i]['price']} ${company['currency']['symbol']}",
+        productsList[i]['available'] ? 1 : 0,
+        context,
+        productsList[i]['image'].toString(),
+        productsList[i]['quantity'].toString(),
+        setParent);
+
+    if (((product).toString() == Container().toString())) {
+    } else {
+      results.add(product);
+    }
+  }
+  return results;
+}
+
+
+// products(
+//               productsUnavalaible[i]['image'],
+//               productsUnavalaible[i]['name'],
+//               productsUnavalaible[i]['features'] ?? "",
+//               productsUnavalaible[i]['reference'],
+//               productsUnavalaible[i]['clothing'],
+//               productsUnavalaible[i]['weight'],
+//               "${productsUnavalaible[i]['price']} ${company['currency']['symbol']}",
+//               productsUnavalaible[i]['available'] ? 1 : 0,
+//               context,
+//               productsUnavalaible[i]['image'].toString(),
+//               productsUnavalaible[i]['quantity'].toString(),
+//               widget.setParent)

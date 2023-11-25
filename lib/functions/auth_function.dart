@@ -52,8 +52,7 @@ registerUser(String name, String email, String password, String phone,
     switch (respon.statusCode) {
       case 200:
         await clearCache();
-
-        user = Map<String, dynamic>.from(jsonVal);
+        user = Map<String, dynamic>.from(jsonVal['user']);
         token = jsonVal['access_token'];
 
         setToken(token);
@@ -155,4 +154,76 @@ upload(File imageFile) async {
   response.stream.transform(utf8.decoder).listen((value) {
     print(value);
   });
+}
+
+UpdateUser(String name, String email, String password, String phone,
+    dynamic imageFile, BuildContext context) async {
+  dynamic result;
+  try {
+    // List<int> imageBytes = imageFile.readAsBytesSync();
+    // String base64Image = base64Encode(imageBytes);
+
+    final response =
+        http.MultipartRequest('POST', Uri.parse('${api}auth/update'));
+    response.headers.addAll({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${token}'
+    });
+    if (imageFile != null) {
+      response.files.add(await http.MultipartFile.fromPath('image', imageFile));
+    }
+    if (password.isNotEmpty) {
+      response.fields.addAll({
+        "email": email,
+        "password": password,
+        "name": name,
+        "country_id": "$country_id",
+        "phone": phone,
+      });
+    } else {
+      response.fields.addAll({
+        "email": email,
+        // "password": password,
+        "name": name,
+        "country_id": "$country_id",
+        "phone": phone,
+      });
+    }
+
+    var request = await response.send();
+    var respon = await http.Response.fromStream(request);
+    var jsonVal = jsonDecode(respon.body);
+    switch (respon.statusCode) {
+      case 200:
+        await clearCache();
+
+        user = Map<String, dynamic>.from(jsonVal['user']);
+        // token = jsonVal['access_token'];
+
+        // setToken(token);
+        result = true;
+        break;
+      // case 401:
+      //   showToast(jsonVal['special'], red, context);
+      //   result = "INput Error"; //jsonDecode(response.body)['message'];
+      //   break;
+      // case 404:
+      //   showToast(jsonVal['special'], red, context);
+      //   result = "Not Found";
+      //   break;
+      default:
+        // debugPrint(response.body);
+        showToast("Server Error", red, context);
+        result = "Server errr";
+    }
+  } catch (e) {
+    result = "Server errr";
+    if (e is SocketException) {
+      internet = false;
+    }
+
+    debugPrint("Error = " + e.toString());
+  }
+  return result;
 }

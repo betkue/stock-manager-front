@@ -23,10 +23,11 @@ class _AllmovementState extends State<Allmovement> {
         primary: false,
         padding: const EdgeInsets.all(20),
         children: <Widget>[
-          for (var i = 0; i < movementsAll.length; i++)
+          for (var i = movementsAll.length - 1; i >= 0; i--)
             movement(
                 movementsAll[i]['id'].toString(),
                 movementsAll[i]['product_location']['product']['name'],
+                movementsAll[i]['product_location']['product']['reference'],
                 movementsAll[i]['new_qte'].toString(),
                 movementsAll[i]['is_entry'],
                 movementsAll[i]['last_qte'].toString(),
@@ -60,10 +61,11 @@ class _EntryMovementState extends State<EntryMovement> {
       primary: false,
       padding: const EdgeInsets.all(20),
       children: <Widget>[
-        for (var i = 0; i < movementsEntry.length; i++)
+        for (var i = movementsEntry.length - 1; i >= 0; i--)
           movement(
               movementsEntry[i]['id'].toString(),
               movementsEntry[i]['product_location']['product']['name'],
+              movementsEntry[i]['product_location']['product']['reference'],
               movementsEntry[i]['new_qte'].toString(),
               movementsEntry[i]['is_entry'],
               movementsEntry[i]['last_qte'].toString(),
@@ -94,10 +96,11 @@ class _ExitMovementState extends State<ExitMovement> {
       primary: false,
       padding: const EdgeInsets.all(20),
       children: <Widget>[
-        for (var i = 0; i < movementsExit.length; i++)
+        for (var i = movementsExit.length - 1; i >= 0; i--)
           movement(
               movementsExit[i]['id'].toString(),
               movementsExit[i]['product_location']['product']['name'],
+              movementsExit[i]['product_location']['product']['reference'],
               movementsExit[i]['new_qte'].toString(),
               movementsExit[i]['is_entry'],
               movementsExit[i]['last_qte'].toString(),

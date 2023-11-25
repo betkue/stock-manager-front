@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:http/http.dart' as http;
+import 'package:stock_manager/main.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 convertDate(
@@ -344,4 +345,10 @@ openBrowser(browseUrl) async {
   } else {
     throw 'Could not launch $browseUrl';
   }
+}
+
+logout(BuildContext context) {
+  setToken('');
+  Navigator.pushAndRemoveUntil(context,
+      MaterialPageRoute(builder: (context) => MyApp()), (route) => false);
 }

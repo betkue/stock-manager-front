@@ -7,7 +7,8 @@ import 'package:stock_manager/functions/product_function.dart';
 
 Widget movement(
     String id,
-    name,
+    String name,
+    String ref,
     String new_qte,
     bool is_entry,
     String last_qte,
@@ -19,9 +20,12 @@ Widget movement(
     Function setParent,
     bool deletable) {
   if (searchMovementController.text.isNotEmpty &&
-      !name
-          .toLowerCase()
-          .contains(searchCustomersController.text.toLowerCase())) {
+      (!ref
+              .toLowerCase()
+              .contains(searchMovementController.text.toLowerCase()) &&
+          !name
+              .toLowerCase()
+              .contains(searchMovementController.text.toLowerCase()))) {
     return Container();
   }
   return Container(
@@ -114,7 +118,19 @@ Widget movement(
                 ),
               ),
               const SizedBox(width: 30),
-              Expanded(child: Text(name)),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(name),
+                    Text(
+                      ref,
+                      style: TextStyle(color: gray),
+                    )
+                  ],
+                ),
+              ),
               Expanded(child: Text("${is_entry ? "Entry" : "Exit"}")),
               Expanded(
                   child: Text(

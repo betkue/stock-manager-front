@@ -87,7 +87,7 @@ class _MovementsState extends State<Movements> {
                               elevation: 0,
                               automaticallyImplyLeading: false,
                               actions: const [
-                               HelpButton(),
+                                HelpButton(),
                                 SizedBox(
                                   width: 20,
                                 )
@@ -100,7 +100,7 @@ class _MovementsState extends State<Movements> {
                                       height: 40,
                                       width: 50,
                                       child: TextField(
-                                        controller: searchProductsController,
+                                        controller: searchMovementController,
                                         decoration: InputDecoration(
                                           hintText: "Search",
                                           prefixIcon: Icon(Icons.search),

@@ -42,6 +42,7 @@ class _DetailProductState extends State<DetailProduct> {
   TextEditingController price2Controller = TextEditingController();
   TextEditingController searchController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  TextEditingController featuresController = TextEditingController();
   TextEditingController searchListController = TextEditingController();
   ImagePicker picker = ImagePicker();
   bool load = true;
@@ -171,6 +172,7 @@ class _DetailProductState extends State<DetailProduct> {
       quantityController.text = product_single['quantity'].toString();
       unitController.text = product_single['unit'] ?? "";
       priceController.text = product_single['price'].toString();
+      featuresController.text = product_single['features'] ?? "";
       price2Controller.text = product_single['purchase_price'].toString();
       descriptionController.text = product_single['description'] ?? "";
       clothingController.text = product_single['clothing'] ?? "No Clothing";
@@ -194,6 +196,7 @@ class _DetailProductState extends State<DetailProduct> {
     dynamic media = MediaQuery.of(context).size;
     double width = media.width;
     double height = media.height;
+    double widthImage = media.width / 8;
 
     return load
         ? LoadPage()
@@ -282,14 +285,15 @@ class _DetailProductState extends State<DetailProduct> {
                                                 pickImageFromGallery();
                                               });
                                             },
-                                            child: (product_single['image'] != null &&
+                                            child: (product_single['image'] !=
+                                                        null &&
                                                     imageFile == null)
                                                 ? Container(
                                                     margin: EdgeInsets.symmetric(
                                                         vertical:
                                                             media.height / 40),
-                                                    width: media.width / 5,
-                                                    height: media.width / 5,
+                                                    width: widthImage,
+                                                    height: widthImage,
                                                     child: CachedNetworkImage(
                                                       imageUrl: product_single[
                                                           'image'],
@@ -320,8 +324,8 @@ class _DetailProductState extends State<DetailProduct> {
                                                                 vertical: media
                                                                         .height /
                                                                     40),
-                                                        width: media.width / 5,
-                                                        height: media.width / 5,
+                                                        width: widthImage,
+                                                        height: widthImage,
                                                         child: DottedBorder(
                                                           borderType:
                                                               BorderType.RRect,
@@ -404,18 +408,46 @@ class _DetailProductState extends State<DetailProduct> {
                                                             vertical:
                                                                 media.height /
                                                                     40),
-                                                        width: media.width / 5,
-                                                        height: media.width / 5,
+                                                        width: widthImage,
+                                                        height: widthImage,
                                                         decoration: BoxDecoration(
                                                             borderRadius:
                                                                 BorderRadius.all(
                                                                     Radius.circular(
                                                                         12)),
                                                             image: DecorationImage(
-                                                                image: FileImage(
-                                                                    File(imageFile)),
+                                                                image:
+                                                                    FileImage(File(imageFile)),
                                                                 fit: BoxFit.cover))),
                                           )),
+                                          Container(
+                                            width: media.width,
+                                            child: Text(
+                                              "Features",
+                                              textAlign: TextAlign.left,
+                                              textScaleFactor: 1.4,
+                                              style: TextStyle(
+                                                color: gray,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: media.height / 40,
+                                                horizontal: 10),
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                                color: gray.withOpacity(0.5)),
+                                            width: media.width / 3,
+                                            height: widthImage,
+                                            child: TextField(
+                                              maxLines: null, // Set this
+                                              expands: true, // and this
+                                              controller: featuresController,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                            ),
+                                          ),
                                           Container(
                                             width: media.width,
                                             child: Text(
@@ -435,7 +467,7 @@ class _DetailProductState extends State<DetailProduct> {
                                             decoration: BoxDecoration(
                                                 color: gray.withOpacity(0.5)),
                                             width: media.width / 3,
-                                            height: media.width / 4,
+                                            height: widthImage,
                                             child: TextField(
                                               maxLines: null, // Set this
                                               expands: true, // and this
@@ -880,6 +912,8 @@ class _DetailProductState extends State<DetailProduct> {
                                                 "weight": weightController.text,
                                                 "selling_price":
                                                     priceController.text,
+                                                "features":
+                                                    featuresController.text,
                                                 "clothing":
                                                     clothingController.text,
                                                 "purchase_price":
@@ -911,11 +945,10 @@ class _DetailProductState extends State<DetailProduct> {
                                                         'Form submitted successfully!'),
                                                   ),
                                                 );
-                                                  setState(() {
+                                                setState(() {
                                                   load = false;
                                                 });
                                                 widget.back();
-                                              
                                               } else {
                                                 setState(() {
                                                   load = false;

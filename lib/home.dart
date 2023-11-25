@@ -28,11 +28,11 @@ class _HomeState extends State<Home> {
     LocationPage(),
     ProductPage(),
     Movements(),
-    CustomerPage(),
-    SupplierPage(),
-    PurchasePage(),
+    // CustomerPage(),
+    // SupplierPage(),
+    // PurchasePage(),
     // Container(),
-    SalesPage(),
+    // SalesPage(),
     AccountPage(),
   ];
 
