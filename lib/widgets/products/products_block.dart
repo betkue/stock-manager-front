@@ -74,7 +74,7 @@ removeWidget(List<Map<String, dynamic>> productsList, BuildContext context,
   List<Widget> results = [];
   for (var i = 0; i < productsList.length; i++) {
     Widget product = products(
-        productsList[i]['image'],
+        productsList[i]['image'] ?? "",
         productsList[i]['name'],
         productsList[i]['features'] ?? "",
         productsList[i]['reference'],
