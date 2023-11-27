@@ -83,7 +83,7 @@ removeWidget(List<Map<String, dynamic>> productsList, BuildContext context,
         "${productsList[i]['price']} ${company['currency']['symbol']}",
         productsList[i]['available'] ? 1 : 0,
         context,
-        productsList[i]['image'].toString(),
+        productsList[i]['id'].toString(),
         productsList[i]['quantity'].toString(),
         setParent);
 
