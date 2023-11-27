@@ -337,7 +337,17 @@ class _DetailMovementState extends State<DetailMovement> {
                                                                 .contains(
                                                                     searchController
                                                                         .text
-                                                                        .toLowerCase())) {
+                                                                        .toLowerCase()) &&
+
+                                                                        !productsAll[index]
+                                                                    ['reference']
+                                                                .toLowerCase()
+                                                                .contains(
+                                                                    searchController
+                                                                        .text
+                                                                        .toLowerCase())
+                                                                        
+                                                                        ) {
                                                           return Container();
                                                         } else {
                                                           return InkWell(
