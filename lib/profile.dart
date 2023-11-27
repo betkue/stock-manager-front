@@ -861,30 +861,39 @@ class _AccountPageState extends State<AccountPage> {
                                                 // if (_formKey.currentState!
                                                 //     .validate()) {
                                                 // Form is valid, process the data here.
-                                                setState(() {
-                                                  load = true;
-                                                });
-                                                var result = await UpdateUser(
-                                                    nameController.text,
-                                                    emailController.text,
-                                                    passwordController.text,
-                                                    phoneController.text,
-                                                    imageFile,
-                                                    context);
+                                                if (passwordController.text ==
+                                                    confirmPasswordController
+                                                        .text) {
+                                                  setState(() {
+                                                    load = true;
+                                                  });
+                                                  var result = await UpdateUser(
+                                                      nameController.text,
+                                                      emailController.text,
+                                                      passwordController.text,
+                                                      phoneController.text,
+                                                      imageFile,
+                                                      context);
 
-                                                if (result == true) {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    const SnackBar(
-                                                      content: Text(
-                                                          'Form submitted successfully!'),
-                                                    ),
-                                                  );
+                                                  if (result == true) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                        content: Text(
+                                                            'Form submitted successfully!'),
+                                                      ),
+                                                    );
+                                                  }
+                                                  setState(() {
+                                                    load = false;
+                                                  });
+                                                } else {
+                                                  showToast(
+                                                      "Put the same password or nothing",
+                                                      red,
+                                                      context);
                                                 }
-                                                setState(() {
-                                                  load = false;
-                                                });
-
                                                 // Navigator.push(
                                                 //     context,
                                                 //     MaterialPageRoute(
