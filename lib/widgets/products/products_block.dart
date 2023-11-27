@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/widgets/error_buil.dart';
 import 'package:stock_manager/widgets/products/product.dart';
 
 class Allproduct extends StatefulWidget {
@@ -72,9 +73,10 @@ class _UnavailableproductState extends State<Unavailableproduct> {
 removeWidget(List<Map<String, dynamic>> productsList, BuildContext context,
     Function setParent) {
   List<Widget> results = [];
-  for (var i = 0; i < productsList.length; i++) {
-    Widget product = products(
-        productsList[i]['image'] ?? "",
+  try {
+      for (var i = 0; i < productsList.length; i++) {
+    var product = products(
+        productsList[i]['image'] ?? "https://actogmbh.com/files/no-product-image.png",
         productsList[i]['name'],
         productsList[i]['features'] ?? "",
         productsList[i]['reference'],
@@ -86,13 +88,20 @@ removeWidget(List<Map<String, dynamic>> productsList, BuildContext context,
         productsList[i]['id'].toString(),
         productsList[i]['quantity'].toString(),
         setParent);
-
-    if (((product).toString() == Container().toString())) {
-    } else {
+// results.add(product);
+    if (product != 404) {
       results.add(product);
+
     }
+    //  else {
+    // }
+    //  results.add(Text("data"));
   }
   return results;
+  } catch (e) {
+     return [ErrorBuild()];
+  }
+
 }
 
 

@@ -8,7 +8,7 @@ import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
 
-Widget products(
+ products(
     String imagePath,
     String productName,
     String productFeature,
@@ -28,10 +28,13 @@ Widget products(
           !productName
               .toLowerCase()
               .contains(searchProductsController.text.toLowerCase()))) {
-    return Container();
+    return 404;
   }
 
+ 
+
   return Container(
+    key: Key(id),
     // color: gray,
     decoration: BoxDecoration(color: white, boxShadow: [
       BoxShadow(
