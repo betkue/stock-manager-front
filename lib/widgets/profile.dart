@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stock_management/menu.dart';
-import 'package:stock_management/constant.dart';
+import 'package:stock_manager/config/style.dart';
+import 'package:stock_manager/menu.dart';
+import 'package:stock_manager/config/constant.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class Profile extends StatelessWidget {
           bottomLeft: Radius.circular(Responsive.isMobile(context) ? 10 : 30.0),
           topLeft: Radius.circular(Responsive.isMobile(context) ? 10 : 30.0),
         ),
-        color: orange,
+        color: primaryColor,
       ),
       child: SingleChildScrollView(
         child: Padding(
@@ -22,7 +23,7 @@ class Profile extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(
-                height:   50,
+                height: 50,
               ),
               Image.asset(
                 "assets/images/avatar.png",
@@ -44,7 +45,6 @@ class Profile extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                 ),
               ),
-            
             ],
           ),
         ),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:stock_management/widgets/products/product.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/widgets/error_buil.dart';
+import 'package:stock_manager/widgets/products/product.dart';
 
 class Allproduct extends StatefulWidget {
-  const Allproduct({super.key});
+  Function setParent;
+  Allproduct({super.key, required this.setParent});
 
   @override
   State<Allproduct> createState() => _AllproductState();
@@ -17,17 +21,14 @@ class _AllproductState extends State<Allproduct> {
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       crossAxisCount: 4,
-      children: <Widget>[
-        for (var i = 0; i < 10; i++)
-          products("images/shoes4.png", "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA", i ~/ 2 == 0 ? 1 : 0, context),
-      ],
+      children: removeWidget(productsAll, context, widget.setParent),
     );
   }
 }
 
 class Availableproduct extends StatefulWidget {
-  const Availableproduct({super.key});
+  Function setParent;
+  Availableproduct({super.key, required this.setParent});
 
   @override
   State<Availableproduct> createState() => _AvailableproductState();
@@ -42,17 +43,14 @@ class _AvailableproductState extends State<Availableproduct> {
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       crossAxisCount: 4,
-      children: <Widget>[
-        for (var i = 0; i < 10; i++)
-          products("images/shoes4.png", "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA", 1, context),
-      ],
+      children: removeWidget(productsAvailable, context, widget.setParent),
     );
   }
 }
 
 class Unavailableproduct extends StatefulWidget {
-  const Unavailableproduct({super.key});
+  Function setParent;
+  Unavailableproduct({super.key, required this.setParent});
 
   @override
   State<Unavailableproduct> createState() => _UnavailableproductState();
@@ -67,11 +65,56 @@ class _UnavailableproductState extends State<Unavailableproduct> {
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       crossAxisCount: 4,
-      children: <Widget>[
-        for (var i = 0; i < 10; i++)
-          products("images/shoes4.png", "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA", 0, context),
-      ],
+      children: removeWidget(productsUnavalaible, context, widget.setParent),
     );
   }
 }
+
+removeWidget(List<Map<String, dynamic>> productsList, BuildContext context,
+    Function setParent) {
+  List<Widget> results = [];
+  try {
+      for (var i = 0; i < productsList.length; i++) {
+    var product = products(
+        productsList[i]['image'] ?? "https://actogmbh.com/files/no-product-image.png",
+        productsList[i]['name'],
+        productsList[i]['features'] ?? "",
+        productsList[i]['reference'],
+        productsList[i]['clothing'],
+        productsList[i]['weight'],
+        "${productsList[i]['price']} ${company['currency']['symbol']}",
+        productsList[i]['available'] ? 1 : 0,
+        context,
+        productsList[i]['id'].toString(),
+        productsList[i]['quantity'].toString(),
+        setParent);
+// results.add(product);
+    if (product != 404) {
+      results.add(product);
+
+    }
+    //  else {
+    // }
+    //  results.add(Text("data"));
+  }
+  return results;
+  } catch (e) {
+     return [ErrorBuild()];
+  }
+
+}
+
+
+// products(
+//               productsUnavalaible[i]['image'],
+//               productsUnavalaible[i]['name'],
+//               productsUnavalaible[i]['features'] ?? "",
+//               productsUnavalaible[i]['reference'],
+//               productsUnavalaible[i]['clothing'],
+//               productsUnavalaible[i]['weight'],
+//               "${productsUnavalaible[i]['price']} ${company['currency']['symbol']}",
+//               productsUnavalaible[i]['available'] ? 1 : 0,
+//               context,
+//               productsUnavalaible[i]['image'].toString(),
+//               productsUnavalaible[i]['quantity'].toString(),
+//               widget.setParent)

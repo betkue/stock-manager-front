@@ -1,4 +1,4 @@
-# stock_management
+# stock_manager
 
 A new Flutter project.
 
