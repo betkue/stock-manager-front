@@ -33,7 +33,8 @@ class _AllmovementState extends State<Allmovement> {
                 movementsAll[i]['last_qte'].toString(),
                 convertDate(DateTime.parse(movementsAll[i]['created_at'])),
                 movementsAll[i]['product_location']['location']['name'],
-                movementsAll[i]['product_location']['product']['image']??"https://actogmbh.com/files/no-product-image.png",
+                movementsAll[i]['product_location']['product']['image'] ??
+                    "https://actogmbh.com/files/no-product-image.png",
                 movementsAll[i]['comment'],
                 context,
                 widget.setParent,
@@ -41,6 +42,7 @@ class _AllmovementState extends State<Allmovement> {
         ],
       );
     } catch (e) {
+      debugPrint(e.toString());
       return ErrorBuild();
     }
   }
