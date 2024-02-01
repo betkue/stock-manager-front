@@ -134,13 +134,13 @@ class _DetailCustomerState extends State<DetailCustomer> {
   void initState() {
     locations = [];
     locationsLoad = [];
-    customer_single ={};
+    customer_single = {};
 
     if (widget.id != null) {
       getData();
     } else {
       setState(() {
-        load = true;
+        load = false;
       });
     }
 
@@ -518,7 +518,8 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                                                       '';
                                                                   return AlertDialog(
                                                                     insetPadding:
-                                                                        const EdgeInsets.all(
+                                                                        const EdgeInsets
+                                                                            .all(
                                                                             10),
                                                                     content: StatefulBuilder(builder:
                                                                         (context,
@@ -701,7 +702,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                                           child: Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .symmetric(
+                                                                    .symmetric(
                                                                     vertical:
                                                                         15),
                                                             child: Text(
@@ -738,7 +739,7 @@ class _DetailCustomerState extends State<DetailCustomer> {
                                                       //       onTap: () {
                                                       //         setState(() {
                                                       //          showList = true;
-                                                                // loadList = true;
+                                                      // loadList = true;
                                                       //         });
 
                                                       //         Timer(

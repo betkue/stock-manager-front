@@ -4,8 +4,10 @@ bool internet = true;
 const String logo = "assets/images/Logo.png";
 const String imageLogin = "assets/images/sign_imgage.png";
 const String nameApp = "Stock Manager";
-const is_test = false;
-const String url = is_test ? "http://192.168.43.60:8000" : "https://stock-manager.smilylab.tech";
+const is_test = true;
+const String url = is_test
+    ? "http://192.168.43.60:8000"
+    : "https://stock-manager.smilylab.tech";
 const String api = url + "/api/v1/";
 const List<String> allowedCharacters = [
   '0',

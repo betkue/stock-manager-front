@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
     LocationPage(),
     ProductPage(),
     Movements(),
-    // CustomerPage(),
+    CustomerPage(),
     // SupplierPage(),
     // PurchasePage(),
     // Container(),
