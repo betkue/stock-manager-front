@@ -373,7 +373,136 @@ Map<String, dynamic> purshase_single = {
     }
   ]
 };
-Map<String, dynamic> salle_single = {};
+
+Map<String, dynamic> salle_single = {
+  "reference": "Product Name",
+  "customer": {
+    "name": "Product Name",
+    "reference": "Product Name",
+    "location": "Product Name",
+    "description": "Description",
+    "image": "https://picsum.photos/250?image=9",
+  },
+  "products": [
+    {
+      "name": "Product Name",
+      "reference": "Pt Name",
+      "quantity": 56,
+      "delivered": 30,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "delivered": 30,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Pr Name",
+      "quantity": 56,
+      "delivered": 30,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "delivered": 30,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "delivered": 30,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "delivered": 30,
+      "price": 1344,
+    },
+    {
+      "name": "Product Name",
+      "reference": "Product Name",
+      "quantity": 56,
+      "delivered": 30,
+      "price": 1344,
+    },
+  ],
+  "movements": [
+    {
+      "return": false,
+      "created_at": DateTime.now(),
+      "total": 123333,
+      "user": {
+        "name": "Michelle",
+        "email": "betkuetjh@gmail.com",
+        "image": "https://picsum.photos/250?image=9",
+        "rule": "Admin",
+        "phone": "+237655203146",
+        "active": false
+      },
+      "products": [
+        {
+          "name": "Product Name",
+          "reference": "Product Name",
+          "quantity": 56,
+          "price": 1344,
+        },
+        {
+          "name": "Product Name",
+          "reference": "Product Name",
+          "quantity": 56,
+          "price": 1344,
+        },
+        {
+          "name": "Product Name",
+          "reference": "Product Name",
+          "quantity": 56,
+          "price": 1344,
+        },
+      ]
+    },
+    {
+      "return": true,
+      "created_at": DateTime.now(),
+      "total": 123333,
+      "user": {
+        "name": "Michelle",
+        "email": "betkuetjh@gmail.com",
+        "image": "https://picsum.photos/250?image=9",
+        "rule": "Admin",
+        "phone": "+237655203146",
+        "active": false
+      },
+      "products": [
+        {
+          "name": "Product Name",
+          "reference": "Product Name",
+          "quantity": 56,
+          "price": 1344,
+        },
+        {
+          "name": "Product Name",
+          "reference": "Product Name",
+          "quantity": 56,
+          "price": 1344,
+        },
+        {
+          "name": "Product Name",
+          "reference": "Product Name",
+          "quantity": 56,
+          "price": 1344,
+        },
+      ]
+    }
+  ]
+};
 
 TextEditingController searchProductsController = TextEditingController();
 TextEditingController searchPurchasesController = TextEditingController();

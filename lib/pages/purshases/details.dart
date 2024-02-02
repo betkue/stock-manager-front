@@ -209,7 +209,9 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                   pickImageFromGallery();
                                                 });
                                               },
-                                              child: (purshase_single['supplier']['image'] != null &&
+                                              child: (purshase_single['supplier']
+                                                              ['image'] !=
+                                                          null &&
                                                       imageFile == null)
                                                   ? Container(
                                                       margin: EdgeInsets.symmetric(
@@ -220,8 +222,15 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                       child: CachedNetworkImage(
                                                         imageUrl:
                                                             purshase_single[
-                                                                'image'],
+                                                                    'image'] ??
+                                                                "",
                                                         fit: BoxFit.contain,
+                                                        placeholder: (context,
+                                                                url) =>
+                                                            CircularProgressIndicator(),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            Icon(Icons.error),
                                                       ),
                                                       decoration: BoxDecoration(
                                                         borderRadius:
@@ -282,18 +291,16 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                         )
                                                       : Container(
                                                           margin: EdgeInsets.symmetric(
-                                                              vertical:
-                                                                  media.height /
-                                                                      40),
+                                                              vertical: media.height /
+                                                                  40),
                                                           width:
                                                               media.width / 5,
                                                           height:
                                                               media.width / 5,
                                                           decoration: BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius.all(
-                                                                      Radius.circular(
-                                                                          12)),
+                                                              borderRadius: BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      12)),
                                                               image: DecorationImage(
                                                                   image: FileImage(File(imageFile)),
                                                                   fit: BoxFit.cover))),
@@ -502,9 +509,9 @@ class _DetailPurshaseState extends State<DetailPurshase> {
                                                       media);
                                                 })
                                             : ListView.builder(
-                                                itemCount:
-                                                    supplier_single['products']
-                                                        .length,
+                                                itemCount: supplier_single[
+                                                        'products'] ??
+                                                    [].length,
                                                 itemBuilder:
                                                     (BuildContext context,
                                                         int index) {

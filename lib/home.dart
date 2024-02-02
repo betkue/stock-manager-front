@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
     // SupplierPage(),
     // PurchasePage(),
     // Container(),
-    // SalesPage(),
+    SalesPage(),
     AccountPage(),
   ];
 
