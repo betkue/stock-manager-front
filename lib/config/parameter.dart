@@ -169,56 +169,68 @@ List<Map<String, dynamic>> purchasesComplete = [
 ];
 
 List<Map<String, dynamic>> salesAll = [
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "reference": "#poijkj454664",
-    "price": 1000,
-    "shipping_state": 0,
-    "paiement_state": 0
-  },
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "reference": "#poijkj454664",
-    "price": 1000,
-    "shipping_state": 2,
-    "paiement_state": 0
-  },
+  // {
+  //   "image": "https://picsum.photos/250?image=9",
+  //   "name": "Image test stock manager",
+  //   "reference": "#poijkj454664",
+  //   "price": 1000,
+  //   "shipping_state": 0,
+  //   "paiement_state": 0
+  // },
+  // {
+  //   "image": "https://picsum.photos/250?image=9",
+  //   "name": "Image test stock manager",
+  //   "reference": "#poijkj454664",
+  //   "price": 1000,
+  //   "shipping_state": 2,
+  //   "paiement_state": 0
+  // },
 ];
 
 List<Map<String, dynamic>> salesPending = [
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "reference": "#poijkj454664",
-    "price": 1000,
-    "shipping_state": 0,
-    "paiement_state": 1
-  },
+  // {
+  //   "image": "https://picsum.photos/250?image=9",
+  //   "name": "Image test stock manager",
+  //   "reference": "#poijkj454664",
+  //   "price": 1000,
+  //   "shipping_state": 0,
+  //   "paiement_state": 1
+  // },
 ];
 
-List<Map<String, dynamic>> salesIncomplete = [
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "reference": "#poijkj454664",
-    "price": 1000,
-    "shipping_state": 1,
-    "paiement_state": 2
-  },
+List<Map<String, dynamic>> salesDelivered = [
+  // {
+  //   "image": "https://picsum.photos/250?image=9",
+  //   "name": "Image test stock manager",
+  //   "reference": "#poijkj454664",
+  //   "price": 1000,
+  //   "shipping_state": 1,
+  //   "paiement_state": 2
+  // },
 ];
 
-List<Map<String, dynamic>> salesComplete = [
-  {
-    "image": "https://picsum.photos/250?image=9",
-    "name": "Image test stock manager",
-    "reference": "#poijkj454664",
-    "price": 1000,
-    "shipping_state": 2,
-    "paiement_state": 0
-  },
-];
+// List<Map<String, dynamic>> salesIncomplete = [
+//   {
+//     "image": "https://picsum.photos/250?image=9",
+//     "name": "Image test stock manager",
+//     "reference": "#poijkj454664",
+//     "price": 1000,
+//     "shipping_state": 1,
+//     "paiement_state": 2
+//   },
+// ];
+
+// List<Map<String, dynamic>> salesComplete = [
+//   {
+//     "image": "https://picsum.photos/250?image=9",
+//     "name": "Image test stock manager",
+//     "reference": "#poijkj454664",
+//     "price": 1000,
+//     "shipping_state": 2,
+//     "paiement_state": 0
+//   },
+// ];
+
 List<Map<String, dynamic>> locations = [];
 List<Map<String, dynamic>> productsList = [];
 List<Map<String, dynamic>> locationsLoad = [];
@@ -375,133 +387,133 @@ Map<String, dynamic> purshase_single = {
 };
 
 Map<String, dynamic> salle_single = {
-  "reference": "Product Name",
-  "customer": {
-    "name": "Product Name",
-    "reference": "Product Name",
-    "location": "Product Name",
-    "description": "Description",
-    "image": "https://picsum.photos/250?image=9",
-  },
-  "products": [
-    {
-      "name": "Product Name",
-      "reference": "Pt Name",
-      "quantity": 56,
-      "delivered": 30,
-      "price": 1344,
-    },
-    {
-      "name": "Product Name",
-      "reference": "Product Name",
-      "quantity": 56,
-      "delivered": 30,
-      "price": 1344,
-    },
-    {
-      "name": "Product Name",
-      "reference": "Pr Name",
-      "quantity": 56,
-      "delivered": 30,
-      "price": 1344,
-    },
-    {
-      "name": "Product Name",
-      "reference": "Product Name",
-      "quantity": 56,
-      "delivered": 30,
-      "price": 1344,
-    },
-    {
-      "name": "Product Name",
-      "reference": "Product Name",
-      "quantity": 56,
-      "delivered": 30,
-      "price": 1344,
-    },
-    {
-      "name": "Product Name",
-      "reference": "Product Name",
-      "quantity": 56,
-      "delivered": 30,
-      "price": 1344,
-    },
-    {
-      "name": "Product Name",
-      "reference": "Product Name",
-      "quantity": 56,
-      "delivered": 30,
-      "price": 1344,
-    },
-  ],
-  "movements": [
-    {
-      "return": false,
-      "created_at": DateTime.now(),
-      "total": 123333,
-      "user": {
-        "name": "Michelle",
-        "email": "betkuetjh@gmail.com",
-        "image": "https://picsum.photos/250?image=9",
-        "rule": "Admin",
-        "phone": "+237655203146",
-        "active": false
-      },
-      "products": [
-        {
-          "name": "Product Name",
-          "reference": "Product Name",
-          "quantity": 56,
-          "price": 1344,
-        },
-        {
-          "name": "Product Name",
-          "reference": "Product Name",
-          "quantity": 56,
-          "price": 1344,
-        },
-        {
-          "name": "Product Name",
-          "reference": "Product Name",
-          "quantity": 56,
-          "price": 1344,
-        },
-      ]
-    },
-    {
-      "return": true,
-      "created_at": DateTime.now(),
-      "total": 123333,
-      "user": {
-        "name": "Michelle",
-        "email": "betkuetjh@gmail.com",
-        "image": "https://picsum.photos/250?image=9",
-        "rule": "Admin",
-        "phone": "+237655203146",
-        "active": false
-      },
-      "products": [
-        {
-          "name": "Product Name",
-          "reference": "Product Name",
-          "quantity": 56,
-          "price": 1344,
-        },
-        {
-          "name": "Product Name",
-          "reference": "Product Name",
-          "quantity": 56,
-          "price": 1344,
-        },
-        {
-          "name": "Product Name",
-          "reference": "Product Name",
-          "quantity": 56,
-          "price": 1344,
-        },
-      ]
-    }
-  ]
+  // "reference": "Product Name",
+  // "customer": {
+  //   "name": "Product Name",
+  //   "reference": "Product Name",
+  //   "location": "Product Name",
+  //   "description": "Description",
+  //   "image": "https://picsum.photos/250?image=9",
+  // },
+  // "products": [
+  //   {
+  //     "name": "Product Name",
+  //     "reference": "Pt Name",
+  //     "quantity": 56,
+  //     "delivered": 30,
+  //     "price": 1344,
+  //   },
+  //   {
+  //     "name": "Product Name",
+  //     "reference": "Product Name",
+  //     "quantity": 56,
+  //     "delivered": 30,
+  //     "price": 1344,
+  //   },
+  //   {
+  //     "name": "Product Name",
+  //     "reference": "Pr Name",
+  //     "quantity": 56,
+  //     "delivered": 30,
+  //     "price": 1344,
+  //   },
+  //   {
+  //     "name": "Product Name",
+  //     "reference": "Product Name",
+  //     "quantity": 56,
+  //     "delivered": 30,
+  //     "price": 1344,
+  //   },
+  //   {
+  //     "name": "Product Name",
+  //     "reference": "Product Name",
+  //     "quantity": 56,
+  //     "delivered": 30,
+  //     "price": 1344,
+  //   },
+  //   {
+  //     "name": "Product Name",
+  //     "reference": "Product Name",
+  //     "quantity": 56,
+  //     "delivered": 30,
+  //     "price": 1344,
+  //   },
+  //   {
+  //     "name": "Product Name",
+  //     "reference": "Product Name",
+  //     "quantity": 56,
+  //     "delivered": 30,
+  //     "price": 1344,
+  //   },
+  // ],
+  // "movements": [
+  //   {
+  //     "return": false,
+  //     "created_at": DateTime.now(),
+  //     "total": 123333,
+  //     "user": {
+  //       "name": "Michelle",
+  //       "email": "betkuetjh@gmail.com",
+  //       "image": "https://picsum.photos/250?image=9",
+  //       "rule": "Admin",
+  //       "phone": "+237655203146",
+  //       "active": false
+  //     },
+  //     "products": [
+  //       {
+  //         "name": "Product Name",
+  //         "reference": "Product Name",
+  //         "quantity": 56,
+  //         "price": 1344,
+  //       },
+  //       {
+  //         "name": "Product Name",
+  //         "reference": "Product Name",
+  //         "quantity": 56,
+  //         "price": 1344,
+  //       },
+  //       {
+  //         "name": "Product Name",
+  //         "reference": "Product Name",
+  //         "quantity": 56,
+  //         "price": 1344,
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     "return": true,
+  //     "created_at": DateTime.now(),
+  //     "total": 123333,
+  //     "user": {
+  //       "name": "Michelle",
+  //       "email": "betkuetjh@gmail.com",
+  //       "image": "https://picsum.photos/250?image=9",
+  //       "rule": "Admin",
+  //       "phone": "+237655203146",
+  //       "active": false
+  //     },
+  //     "products": [
+  //       {
+  //         "name": "Product Name",
+  //         "reference": "Product Name",
+  //         "quantity": 56,
+  //         "price": 1344,
+  //       },
+  //       {
+  //         "name": "Product Name",
+  //         "reference": "Product Name",
+  //         "quantity": 56,
+  //         "price": 1344,
+  //       },
+  //       {
+  //         "name": "Product Name",
+  //         "reference": "Product Name",
+  //         "quantity": 56,
+  //         "price": 1344,
+  //       },
+  //     ]
+  //   }
+  // ]
 };
 
 TextEditingController searchProductsController = TextEditingController();

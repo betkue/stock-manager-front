@@ -9,7 +9,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
+import 'package:stock_manager/functions/customer_function.dart';
 import 'package:stock_manager/functions/function.dart';
+import 'package:stock_manager/functions/order_function.dart';
+import 'package:stock_manager/functions/product_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/widgets/account/account.dart';
 import 'package:stock_manager/widgets/circular_button.dart';
@@ -37,8 +40,12 @@ class _DetailSalesState extends State<DetailSales> {
   String _permission = '';
   bool is_return = false;
   Map<String, dynamic> movementSelected = {};
+  Map<String, dynamic>? customer;
   List<Map<String, dynamic>> listProducts = [];
+  List<Map<String, dynamic>> listProductsAvailable = [];
   TextEditingController searchProductController = TextEditingController();
+  TextEditingController searchCustomerController = TextEditingController();
+
   //gallery permission
   getGalleryPermission() async {
     var status = await Permission.photos.status;
@@ -139,12 +146,28 @@ class _DetailSalesState extends State<DetailSales> {
 
   @override
   void initState() {
-    Timer(
-        Duration(seconds: timedalay),
-        () => setState(() {
-              load = false;
-            }));
+    getData();
     super.initState();
+  }
+
+  getData() async {
+    setState(() {
+      load = true;
+    });
+
+    await getCustomers();
+    await getProducts(2);
+    listProductsAvailable = productsAvailable;
+
+    if (widget.id != null) {
+      id_customer = widget.id;
+      await getCustomer();
+      customer = customer_single;
+    }
+
+    setState(() {
+      load = false;
+    });
   }
 
   @override
@@ -185,455 +208,549 @@ class _DetailSalesState extends State<DetailSales> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    padding: EdgeInsets.only(right: 10),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  pickImageFromGallery();
-                                                });
-                                              },
-                                              child: (salle_single['customer']
-                                                              ['image'] !=
-                                                          null &&
-                                                      imageFile == null)
-                                                  ? Container(
-                                                      margin: EdgeInsets.symmetric(
-                                                          vertical: media.height /
-                                                              40),
-                                                      width: 60,
-                                                      height: 60,
-                                                      child: CachedNetworkImage(
-                                                        imageUrl: salle_single[
-                                                                'image'] ??
-                                                            "",
-                                                        fit: BoxFit.contain,
-                                                        placeholder: (context,
-                                                                url) =>
-                                                            CircularProgressIndicator(),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Icon(Icons.error),
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    100)),
-                                                        color: primaryColor,
-                                                        // image:
-                                                        //     DecorationImage(
-                                                        //         image:
-                                                        //             NetworkImage(
-                                                        //           salle_single[
-                                                        //                   'customer']
-                                                        //               [
-                                                        //               'image'],
-                                                        //         ),
-                                                        //         fit: BoxFit
-                                                        //             .cover)
-                                                        //             )
-                                                      ))
-                                                  : (imageFile == null)
-                                                      ? Container(
-                                                          margin: EdgeInsets
-                                                              .symmetric(
-                                                                  vertical:
-                                                                      media.height /
-                                                                          40),
-                                                          width:
-                                                              media.width / 5,
-                                                          height:
-                                                              media.width / 5,
-                                                          child: SizedBox(
-                                                            height:
-                                                                media.width / 5,
-                                                            width:
-                                                                media.width / 5,
-
-                                                            child: Center(
+                          child: customer == null
+                              ? Expanded(
+                                  child: ListView.builder(
+                                      itemCount: (customers).length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        if ((searchCustomerController
+                                                .text.isNotEmpty &&
+                                            !customers[index]['name']
+                                                .toLowerCase()
+                                                .contains(
+                                                    searchCustomerController
+                                                        .text
+                                                        .toLowerCase()))) {
+                                          return Container();
+                                        } else {
+                                          return
+                                              // Text(
+                                              //     "${detrmineContainRef(salle_single['products'][index]['reference'])}");
+                                              genrateCustomer(
+                                                  customers[index], media);
+                                        }
+                                      }))
+                              : Row(
+                                  children: [
+                                    Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                          padding: EdgeInsets.only(right: 10),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          // pickImageFromGallery();
+                                                        });
+                                                      },
+                                                      child: (customer![
+                                                                  'logo'] !=
+                                                              null)
+                                                          ? Container(
+                                                              margin: EdgeInsets
+                                                                  .symmetric(
+                                                                      vertical:
+                                                                          media.height /
+                                                                              40),
+                                                              width: 60,
+                                                              height: 60,
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                imageUrl: customer![
+                                                                        'logo'] ??
+                                                                    "",
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                                placeholder: (context,
+                                                                        url) =>
+                                                                    CircularProgressIndicator(),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    Icon(Icons
+                                                                        .error),
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            100)),
+                                                                color:
+                                                                    primaryColor,
+                                                                // image:
+                                                                //     DecorationImage(
+                                                                //         image:
+                                                                //             NetworkImage(
+                                                                //           salle_single[
+                                                                //                   'customer']
+                                                                //               [
+                                                                //               'image'],
+                                                                //         ),
+                                                                //         fit: BoxFit
+                                                                //             .cover)
+                                                                //             )
+                                                              ))
+                                                          : Container(
+                                                              margin: EdgeInsets
+                                                                  .symmetric(
+                                                                      vertical:
+                                                                          media.height /
+                                                                              40),
+                                                              width: 20,
+                                                              height: 20,
                                                               child: SizedBox(
-                                                                height: media
-                                                                        .width /
-                                                                    8,
-                                                                width: media
-                                                                        .width /
-                                                                    8,
+                                                                height: 20,
+                                                                width: 20,
+
                                                                 child: Center(
-                                                                  child: Icon(
-                                                                    Icons.add,
-                                                                    color:
-                                                                        primaryColor,
+                                                                  child: Center(
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .not_interested_outlined,
+                                                                      color:
+                                                                          primaryColor,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                                 // color: Colors.amber,
                                                               ),
-                                                            ),
-                                                            // color: Colors.amber,
-                                                          ),
-                                                        )
-                                                      : Container(
-                                                          margin: EdgeInsets.symmetric(
-                                                              vertical: media.height /
-                                                                  40),
-                                                          width:
-                                                              media.width / 5,
-                                                          height:
-                                                              media.width / 5,
-                                                          decoration: BoxDecoration(
-                                                              borderRadius: BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      12)),
-                                                              image: DecorationImage(
-                                                                  image: FileImage(File(imageFile)),
-                                                                  fit: BoxFit.cover))),
-                                            ),
-                                            Text(
-                                              salle_single['customer']['name'],
-                                              textScaleFactor: 1.5,
-                                            ),
-                                          ],
-                                        ),
-                                        generateRowTable(
-                                            titleTable("Product"),
-                                            titleTable("reference"),
-                                            titleTable(
-                                                "price ${company['currency']['symbol']}"),
-                                            titleTable("quantity"),
-                                            titleTable(
-                                                "total ${company['currency']['symbol']}"),
-                                            titleTable("action")),
-                                        // Table(
-                                        //   children: [
-                                        //     TableRow()
-                                        //   ],
-                                        // ),
-                                        Expanded(
-                                            child: widget.id != null
-                                                ? ListView.builder(
-                                                    itemCount: showMovement
-                                                        ? movementSelected[
-                                                                'products']
-                                                            .length
-                                                        : salle_single[
-                                                                'products']
-                                                            .length,
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index) {
-                                                      var product = showMovement
-                                                          ? movementSelected[
-                                                              'products'][index]
-                                                          : salle_single[
-                                                                  'products']
-                                                              [index];
-                                                      return generateRowTable(
-                                                          containTable(
-                                                              product['name']),
-                                                          containTable(product[
-                                                              'reference']),
-                                                          containTable(
-                                                              "${product['price']}"),
-                                                          containTable(
-                                                              "${product['quantity']}"),
-                                                          containTable(
-                                                              "${product['quantity'] * product['price']}  "),
-                                                          containTable(
-                                                              "action"));
-                                                    })
-                                                : ListView.builder(
-                                                    itemCount:
-                                                        listProducts.length,
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index) {
-                                                      var product =
-                                                          listProducts[index];
-                                                      return generateRowTable(
-                                                          containTable(
-                                                              product['name']),
-                                                          containTable(product[
-                                                              'reference']),
-                                                          TextField(
-                                                            controller: product[
-                                                                'price'],
-                                                            decoration:
-                                                                InputDecoration(
-                                                              hintText: "price",
-                                                              border:
-                                                                  OutlineInputBorder(),
-                                                            ),
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                value.isEmpty
-                                                                    ? product[
-                                                                            'price']
-                                                                        .text = "0"
-                                                                    : null;
-                                                                // searchProductsController.text = value;
-                                                              });
-                                                            },
-                                                          )
-                                                          // inputContain(
-                                                          //     width,
-                                                          //     "price",
-                                                          //     product['price'],
-                                                          //     () {},
-                                                          //     false,
-                                                          //     false)
-
-                                                          ,
-                                                          TextField(
-                                                            controller: product[
-                                                                'quantity'],
-                                                            decoration:
-                                                                InputDecoration(
-                                                              hintText:
-                                                                  "quantity",
-                                                              border:
-                                                                  OutlineInputBorder(),
-                                                            ),
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                value.isEmpty
-                                                                    ? product[
-                                                                            'quantity']
-                                                                        .text = "0"
-                                                                    : null;
-                                                              });
-                                                            },
-                                                          )
-
-                                                          // inputContain(
-                                                          //     width,
-                                                          //     "quantity",
-                                                          //     product[
-                                                          //         'quantity'],
-                                                          //     () {},
-                                                          //     false,
-                                                          //     false)
-
-                                                          ,
-                                                          containTable(
-                                                              "${double.parse("${product['quantity'].text ?? "0"}") * double.parse("${product['price'].text ?? "0"}")}"),
-                                                          containTable(
-                                                              "action"));
-                                                    })),
-
-                                        generateRowTable(
-                                            titleTable("Total"),
-                                            titleTable(""),
-                                            titleTable(""),
-                                            titleTable(
-                                                "${calculateTotalQuantity()}"),
-                                            titleTable(
-                                                "${calculateTotalPrice()}"),
-                                            titleTable("action")),
-                                      ],
-                                    ),
-                                  )),
-                              Expanded(
-                                  child: Container(
-                                padding: EdgeInsets.only(left: 10),
-                                decoration: BoxDecoration(
-                                    border: Border(
-                                        left: BorderSide(
-                                            color: backgroundColor,
-                                            style: BorderStyle.solid))),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 16,
-                                    ),
-                                    Text(
-                                      widget.id != null
-                                          ? "Movements"
-                                          : "Products",
-                                      textScaleFactor: 1.5,
-                                    ),
-                                    SizedBox(
-                                      height: media.width * 0.02,
-                                    ),
-                                    widget.id != null
-                                        ? Container()
-                                        : Container(
-                                            margin: EdgeInsets.only(
-                                              bottom: media.width * 0.02,
-                                            ),
-                                            width: width,
-                                            child: TextField(
-                                              controller:
-                                                  searchProductController,
-                                              decoration: InputDecoration(
-                                                hintText: "Search",
-                                                prefixIcon: Icon(Icons.search),
-                                                border: OutlineInputBorder(),
+                                                            )),
+                                                  Text(
+                                                    customer!['name']
+                                                        .toString(),
+                                                    textScaleFactor: 1.5,
+                                                  ),
+                                                ],
                                               ),
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  // searchProductsController.text = value;
-                                                });
-                                              },
-                                            ),
+                                              generateRowTable(
+                                                  titleTable("Product"),
+                                                  titleTable("reference"),
+                                                  titleTable(
+                                                      "price ${company['currency']['symbol']}"),
+                                                  titleTable("quantity"),
+                                                  titleTable(
+                                                      "total ${company['currency']['symbol']}"),
+                                                  titleTable("action")),
+                                              // Table(
+                                              //   children: [
+                                              //     TableRow()
+                                              //   ],
+                                              // ),
+                                              Expanded(
+                                                  child: widget.id != null
+                                                      ? ListView.builder(
+                                                          itemCount: showMovement
+                                                              ? movementSelected[
+                                                                      'products']
+                                                                  .length
+                                                              : salle_single[
+                                                                      'products']
+                                                                  .length,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  int index) {
+                                                            var product = showMovement
+                                                                ? movementSelected[
+                                                                        'products']
+                                                                    [index]
+                                                                : salle_single[
+                                                                        'products']
+                                                                    [index];
+                                                            return generateRowTable(
+                                                                containTable(
+                                                                    product[
+                                                                        'name']),
+                                                                containTable(
+                                                                    product[
+                                                                        'reference']),
+                                                                containTable(
+                                                                    "${product['price']}"),
+                                                                containTable(
+                                                                    "${product['quantity']}"),
+                                                                containTable(
+                                                                    "${product['quantity'] * product['price']}  "),
+                                                                containTable(
+                                                                    "action"));
+                                                          })
+                                                      : ListView.builder(
+                                                          itemCount:
+                                                              listProducts
+                                                                  .length,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  int index) {
+                                                            var product =
+                                                                listProducts[
+                                                                    index];
+                                                            return GestureDetector(
+                                                              onDoubleTap: () {
+                                                                setState(() {
+                                                                  listProducts
+                                                                      .removeAt(
+                                                                          index);
+                                                                });
+                                                              },
+                                                              child: generateRowTable(
+                                                                  containTable(product['name']),
+                                                                  containTable(product['reference']),
+                                                                  TextField(
+                                                                    controller:
+                                                                        product[
+                                                                            'price'],
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                      hintText:
+                                                                          "price",
+                                                                      border:
+                                                                          OutlineInputBorder(),
+                                                                    ),
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      setState(
+                                                                          () {
+                                                                        value.isEmpty
+                                                                            ? product['price'].text =
+                                                                                "0"
+                                                                            : null;
+                                                                        // searchProductsController.text = value;
+                                                                      });
+                                                                    },
+                                                                  )
+                                                                  // inputContain(
+                                                                  //     width,
+                                                                  //     "price",
+                                                                  //     product['price'],
+                                                                  //     () {},
+                                                                  //     false,
+                                                                  //     false)
+
+                                                                  ,
+                                                                  TextField(
+                                                                    controller:
+                                                                        product[
+                                                                            'quantity'],
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                      hintText:
+                                                                          "quantity",
+                                                                      border:
+                                                                          OutlineInputBorder(),
+                                                                    ),
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      setState(
+                                                                          () {
+                                                                        value.isEmpty
+                                                                            ? product['quantity'].text =
+                                                                                "0"
+                                                                            : null;
+                                                                      });
+                                                                    },
+                                                                  )
+
+                                                                  // inputContain(
+                                                                  //     width,
+                                                                  //     "quantity",
+                                                                  //     product[
+                                                                  //         'quantity'],
+                                                                  //     () {},
+                                                                  //     false,
+                                                                  //     false)
+
+                                                                  ,
+                                                                  containTable("${double.parse("${product['quantity'].text ?? "0"}") * double.parse("${product['price'].text ?? "0"}")}"),
+                                                                  containTable("action")),
+                                                            );
+                                                          })),
+
+                                              generateRowTable(
+                                                  titleTable("Total"),
+                                                  titleTable(""),
+                                                  titleTable(""),
+                                                  titleTable(
+                                                      "${calculateTotalQuantity()}"),
+                                                  titleTable(
+                                                      "${calculateTotalPrice()}"),
+                                                  titleTable("action")),
+                                            ],
                                           ),
+                                        )),
                                     Expanded(
-                                        child: widget.id != null
-                                            ? ListView.builder(
-                                                itemCount:
-                                                    salle_single['movements']
-                                                        .length,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return genrateMovement(
-                                                      salle_single['movements']
-                                                          [index],
-                                                      media);
-                                                })
-                                            : ListView.builder(
-                                                itemCount:
-                                                    salle_single['products'] ??
-                                                        [].length,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  if ((searchProductController
-                                                              .text
-                                                              .isNotEmpty &&
-                                                          !salle_single[
-                                                                      'products']
-                                                                  [
-                                                                  index]['name']
-                                                              .toLowerCase()
-                                                              .contains(
-                                                                  searchProductController
-                                                                      .text
-                                                                      .toLowerCase())) ||
-                                                      detrmineContainRef(
-                                                          salle_single[
-                                                                      'products']
-                                                                  [index]
-                                                              ['reference'])) {
-                                                    return Container();
-                                                  } else {
-                                                    return
-                                                        // Text(
-                                                        //     "${detrmineContainRef(salle_single['products'][index]['reference'])}");
-                                                        genrateProduct(
+                                        child: Container(
+                                      padding: EdgeInsets.only(left: 10),
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                              left: BorderSide(
+                                                  color: backgroundColor,
+                                                  style: BorderStyle.solid))),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 16,
+                                          ),
+                                          widget.id != null
+                                              ? Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 4),
+                                                  child: SizedBox(
+                                                    width: width / 6,
+                                                    height: 47,
+                                                    child: ElevatedButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          showSelectAction =
+                                                              true;
+                                                        });
+                                                      },
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        //<-- SEE HERE
+                                                        backgroundColor:
+                                                            primaryColor,
+                                                      ),
+                                                      child: Text(
+                                                        "Mark as delivered",
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: white),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : SizedBox(),
+                                          SizedBox(
+                                            height: 16,
+                                          ),
+                                          Text(
+                                            widget.id != null
+                                                ? "Movements"
+                                                : "Products",
+                                            textScaleFactor: 1.5,
+                                          ),
+                                          SizedBox(
+                                            height: media.width * 0.02,
+                                          ),
+                                          widget.id != null
+                                              ? Container()
+                                              : Container(
+                                                  margin: EdgeInsets.only(
+                                                    bottom: media.width * 0.02,
+                                                  ),
+                                                  width: width,
+                                                  child: TextField(
+                                                    controller:
+                                                        searchProductController,
+                                                    decoration: InputDecoration(
+                                                      hintText: "Search",
+                                                      prefixIcon:
+                                                          Icon(Icons.search),
+                                                      border:
+                                                          OutlineInputBorder(),
+                                                    ),
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        // searchProductsController.text = value;
+                                                      });
+                                                    },
+                                                  ),
+                                                ),
+                                          Expanded(
+                                              child: widget.id != null
+                                                  ? ListView.builder(
+                                                      itemCount: salle_single[
+                                                              'movements']
+                                                          .length,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        return genrateMovement(
                                                             salle_single[
-                                                                    'products']
+                                                                    'movements']
                                                                 [index],
                                                             media);
-                                                  }
-                                                })),
-                                    showMovement
-                                        ? Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 4),
-                                            child: SizedBox(
-                                              width: width / 3,
-                                              height: 47,
-                                              child: ElevatedButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    showMovement = false;
-                                                  });
-                                                },
-                                                style: ElevatedButton.styleFrom(
-                                                  //<-- SEE HERE
-                                                  backgroundColor: primaryColor,
-                                                ),
-                                                child: Text(
-                                                  "Show salle",
-                                                  style: TextStyle(
-                                                      fontSize: 24,
-                                                      color: white),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 4),
-                                            child: SizedBox(
-                                              width: width / 3,
-                                              height: 47,
-                                              child: ElevatedButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    showSelectAction = true;
-                                                  });
-                                                },
-                                                style: ElevatedButton.styleFrom(
-                                                  //<-- SEE HERE
-                                                  backgroundColor: primaryColor,
-                                                ),
-                                                child: Text(
-                                                  widget.id != null
-                                                      ? "Add Movment"
-                                                      : "Add Product",
-                                                  style: TextStyle(
-                                                      fontSize: 24,
-                                                      color: white),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
+                                                      })
+                                                  : ListView.builder(
+                                                      itemCount:
+                                                          listProductsAvailable
+                                                              .length,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        if ((searchProductController
+                                                                    .text
+                                                                    .isNotEmpty &&
+                                                                !listProductsAvailable[
+                                                                            index]
+                                                                        ['name']
+                                                                    .toLowerCase()
+                                                                    .contains(
+                                                                        searchProductController
+                                                                            .text
+                                                                            .toLowerCase())) ||
+                                                            detrmineContainRef(
+                                                                listProductsAvailable[
+                                                                        index][
+                                                                    'reference'])) {
+                                                          return Container();
+                                                        } else {
+                                                          return
+                                                              // Text(
+                                                              //     "${detrmineContainRef(salle_single['products'][index]['reference'])}");
+                                                              genrateProduct(
+                                                                  listProductsAvailable[
+                                                                      index],
+                                                                  media);
+                                                        }
+                                                      })),
+                                          showMovement
+                                              ? Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 4),
+                                                  child: SizedBox(
+                                                    width: width / 3,
+                                                    height: 47,
+                                                    child: ElevatedButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          showMovement = false;
+                                                        });
+                                                      },
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        //<-- SEE HERE
+                                                        backgroundColor:
+                                                            primaryColor,
+                                                      ),
+                                                      child: Text(
+                                                        "Show salle",
+                                                        style: TextStyle(
+                                                            fontSize: 24,
+                                                            color: white),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : widget.id != null
+                                                  ? Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 4),
+                                                      child: SizedBox(
+                                                        width: width / 3,
+                                                        height: 47,
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              showSelectAction =
+                                                                  true;
+                                                            });
+                                                          },
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            //<-- SEE HERE
+                                                            backgroundColor:
+                                                                primaryColor,
+                                                          ),
+                                                          child: Text(
+                                                            "Add Movment",
+                                                            style: TextStyle(
+                                                                fontSize: 24,
+                                                                color: white),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : SizedBox(),
+                                        ],
+                                      ),
+                                    )),
                                   ],
                                 ),
-                              )),
-                            ],
-                          ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: SizedBox(
-                            width: width / 3,
-                            height: 47,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  // Form is valid, process the data here.
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content:
-                                          Text('Form submitted successfully!'),
+                        (customer == null ||
+                                (listProducts.isEmpty && widget.id == null))
+                            ? SizedBox()
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: SizedBox(
+                                  width: width / 3,
+                                  height: 47,
+                                  child: ElevatedButton(
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        setState(() {
+                                          load = true;
+                                        });
+                                        // Form is valid, process the data here.
+                                        Map<String, Object> order = {
+                                          'customer': customer_single,
+                                          'movements': [],
+                                          'paiements': [],
+                                          'products': listProducts,
+                                          'customer_id': customer_single['id'],
+                                          'paiement_state': 0,
+                                          'shipping_state': 0,
+                                          'reference':
+                                              customer_single['id'].toString() +
+                                                  DateTime.now().toString(),
+                                          'is_purshase': true,
+                                          'is_close': false,
+                                          'price': nameController.text,
+                                        };
+                                        debugPrint(widget.id.toString());
+                                        var result = widget.id == null
+                                            ? await createOrder(order, context)
+                                            : null;
+                                        if (result == true) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'Form submitted successfully!'),
+                                            ),
+                                          );
+                                        }
+
+                                        setState(() {
+                                          load = false;
+                                        });
+
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //             const TestPage()));
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      //<-- SEE HERE
+                                      backgroundColor: primaryColor,
                                     ),
-                                  );
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             const TestPage()));
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                //<-- SEE HERE
-                                backgroundColor: primaryColor,
+                                    child: Text(
+                                      widget.id != null ? 'Print' : "Create",
+                                      style:
+                                          TextStyle(fontSize: 24, color: white),
+                                    ),
+                                  ),
+                                ),
                               ),
-                              child: Text(
-                                widget.id != null ? 'Print' : "Create",
-                                style: TextStyle(fontSize: 24, color: white),
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -757,13 +874,77 @@ class _DetailSalesState extends State<DetailSales> {
     );
   }
 
+  Widget genrateCustomer(Map<String, dynamic> product, dynamic media) {
+    return InkWell(
+      onTap: () {
+        // Map<String, dynamic> newProdut = {
+        //   "name": product['name'],
+        //   "reference": product['reference'],
+        //   "quantity": TextEditingController(text: "${product['quantity']}"),
+        //   "price": TextEditingController(text: "${product['price']}"),
+        // };
+
+        setState(() {
+          customer = product;
+        });
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: media.width * 0.012),
+        // width: media.width * 0.9,
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          border: Border.all(color: backgroundColor, width: 0.5),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: SingleChildScrollView(
+            child: Row(children: [
+          Container(
+            height: media.width * 0.03,
+            width: media.width * 0.03,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                image:
+                    DecorationImage(image: NetworkImage(product['logo'] ?? "")),
+                color: backgroundColor),
+          ),
+          SizedBox(
+            width: media.width * 0.0125,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${product['name']}",
+                style: TextStyle(
+                    // fontSize: media.width * 0.8,
+                    color: dark,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: media.width * 0.01,
+              ),
+              Text(
+                "${product['reference']}",
+                style: TextStyle(
+                  // fontSize: media.width * 0.3,
+                  color: gray,
+                ),
+              )
+            ],
+          ),
+        ])),
+      ),
+    );
+  }
+
   Widget genrateProduct(Map<String, dynamic> product, dynamic media) {
     return InkWell(
       onTap: () {
         Map<String, dynamic> newProdut = {
           "name": product['name'],
           "reference": product['reference'],
-          "quantity": TextEditingController(text: "${product['quantity']}"),
+          "quantity": TextEditingController(text: "${1}"),
           "price": TextEditingController(text: "${product['price']}"),
         };
 
@@ -786,7 +967,8 @@ class _DetailSalesState extends State<DetailSales> {
             width: media.width * 0.03,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                image: DecorationImage(image: NetworkImage(product['image'])),
+                image: DecorationImage(
+                    image: NetworkImage(product['image'] ?? "")),
                 color: backgroundColor),
           ),
           SizedBox(

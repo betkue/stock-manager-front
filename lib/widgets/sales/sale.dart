@@ -54,7 +54,7 @@ Widget sales(String imagePath, String productName, String price, int state,
                       ? "Pending"
                       : state == 1
                           ? "Incomplete"
-                          : "Complete",
+                          : "Delivered", //Complete
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
@@ -83,34 +83,36 @@ Widget sales(String imagePath, String productName, String price, int state,
                     color: state == 1 ? black : primaryColor),
               ),
             ),
-            Expanded(
-              child: InkWell(
-                  onTap: () {
-                    id_salle = id;
-                    setParent();
-                  },
-                  child: Icon(Icons.edit_document)),
-            ),
+            state < 1
+                ? Expanded(
+                    child: InkWell(
+                        onTap: () {
+                          id_salle = id;
+                          setParent();
+                        },
+                        child: Icon(Icons.edit_document)),
+                  )
+                : SizedBox(),
             // SizedBox(width: 10),
           ],
         ),
-        Wrap(
-          children: [
-            Text("Paiement State : "),
-            Text(
-              paiement_state == 0
-                  ? "Pending"
-                  : paiement_state == 1
-                      ? "Incomplete"
-                      : "Complete",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: primaryColor,
-              ),
-            )
-          ],
-        ),
+        // Wrap(
+        //   children: [
+        //     Text("Paiement State : "),
+        //     Text(
+        //       paiement_state == 0
+        //           ? "Pending"
+        //           : paiement_state == 1
+        //               ? "Incomplete"
+        //               : "Complete",
+        //       textAlign: TextAlign.center,
+        //       style: TextStyle(
+        //         fontWeight: FontWeight.w500,
+        //         color: primaryColor,
+        //       ),
+        //     )
+        //   ],
+        // ),
         SizedBox(width: 10),
       ],
     ),

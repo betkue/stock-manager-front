@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
 import 'package:stock_manager/config/style.dart';
+import 'package:stock_manager/functions/order_function.dart';
 import 'package:stock_manager/load_page.dart';
 import 'package:stock_manager/pages/purshases/details.dart';
 import 'package:stock_manager/pages/salles/details.dart';
@@ -37,12 +38,20 @@ class _SalesPageState extends State<SalesPage> {
   bool load = true;
   @override
   void initState() {
-    Timer(
-        Duration(seconds: timedalay),
-        () => setState(() {
-              load = false;
-            }));
+    getData(0);
     super.initState();
+  }
+
+  getData(int i) async {
+    setState(() {
+      load = true;
+    });
+
+    await getOrders(i);
+
+    setState(() {
+      load = false;
+    });
   }
 
   @override
@@ -182,29 +191,30 @@ class _SalesPageState extends State<SalesPage> {
                                         ),
                                       ),
                                       const SizedBox(width: 80),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          changeState(2);
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              index == 2 ? primaryColor : white,
-                                          shadowColor: primaryColor,
-                                          surfaceTintColor: primaryColor,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20,
-                                              vertical:
-                                                  10), // Set the button's padding
-                                        ),
-                                        child: Text(
-                                          "Incomplete",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              color: index == 2 ? white : black,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 80),
+                                      // ElevatedButton(
+                                      //   onPressed: () {
+                                      //     changeState(2);
+                                      //   },
+                                      //   style: ElevatedButton.styleFrom(
+                                      //     backgroundColor:
+                                      //         index == 2 ? primaryColor : white,
+                                      //     shadowColor: primaryColor,
+                                      //     surfaceTintColor: primaryColor,
+                                      //     padding: const EdgeInsets.symmetric(
+                                      //         horizontal: 20,
+                                      //         vertical:
+                                      //             10), // Set the button's padding
+                                      //   ),
+                                      //   child: Text(
+                                      //     "Incomplete",
+                                      //     style: TextStyle(
+                                      //         fontSize: 16,
+                                      //         color: index == 2 ? white : black,
+                                      //         fontWeight: FontWeight.w400),
+                                      //   ),
+                                      // ),
+                                      // const SizedBox(width: 80),
+
                                       ElevatedButton(
                                         onPressed: () {
                                           changeState(3);
@@ -220,7 +230,7 @@ class _SalesPageState extends State<SalesPage> {
                                                   10), // Set the button's padding
                                         ),
                                         child: Text(
-                                          "Complete",
+                                          "delivered",
                                           style: TextStyle(
                                               fontSize: 16,
                                               color: index == 3 ? white : black,
@@ -255,14 +265,15 @@ class _SalesPageState extends State<SalesPage> {
         },
       );
     } else if (index == 2) {
-      return IncompleteSales(
+      return DeleveredSales(
         setParent: () {
           details = true;
           setStatePage();
         },
       );
     } else {
-      return CompleteSales(
+      return AllSales(
+        //shipping
         setParent: () {
           details = true;
           setStatePage();
