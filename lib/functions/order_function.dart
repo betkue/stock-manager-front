@@ -63,7 +63,7 @@ createOrder(Map<String, Object> data, BuildContext context) async {
     // debugPrint(product.toString());
     // List<int> imageBytes = imageFile.readAsBytesSync();
     // String base64Image = base64Encode(imageBytes);
-    
+
     String jsonData = jsonEncode(data);
 
     final response = http.MultipartRequest('POST', Uri.parse('${api}order'));

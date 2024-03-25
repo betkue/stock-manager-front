@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, prefer_const_constructors, prefer_interpolation_to_compose_strings, sized_box_for_whitespace, unused_field
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -77,12 +78,13 @@ class _DetailSalesState extends State<DetailSales> {
     List<Map<String, dynamic>> products = showMovement
         ? movementSelected['products']
         : widget.id != null
-            ? salle_single['products']
+            ? List<Map<String, dynamic>>.from(
+                jsonDecode(salle_single['products']))
             : listProducts;
     dynamic qte = 0;
     for (var i = 0; i < products.length; i++) {
       if (widget.id != null) {
-        qte += products[i]['quantity'];
+        qte += double.parse(products[i]['quantity']);
       } else {
         qte += double.parse(products[i]['quantity'].text);
       }
@@ -91,13 +93,15 @@ class _DetailSalesState extends State<DetailSales> {
   }
 
   calculateTotalPrice() {
-    List<Map<String, dynamic>> products =
-        widget.id != null ? salle_single['products'] : listProducts;
+    List<Map<String, dynamic>> products = widget.id != null
+        ? List<Map<String, dynamic>>.from(jsonDecode(salle_single['products']))
+        : listProducts;
     dynamic qte = 0;
 
     for (var i = 0; i < products.length; i++) {
       if (widget.id != null) {
-        qte += (products[i]['quantity'] * products[i]['price']);
+        qte += (double.parse(products[i]['quantity']) *
+            double.parse(products[i]['price']));
       } else {
         qte += (double.parse(products[i]['quantity'].text) *
             double.parse(products[i]['price'].text));
@@ -156,16 +160,20 @@ class _DetailSalesState extends State<DetailSales> {
       load = true;
     });
 
-    await getCustomers();
-    await getProducts(2);
-    listProductsAvailable = productsAvailable;
+    try {
+      await getCustomers();
+      await getProducts(2);
+      listProductsAvailable = productsAvailable;
 //put true customer
-    if (widget.id != null) {
-      salle_single = {};
-      await getOrder();
-      id_customer = salle_single['customer']['id'];
-      await getCustomer();
-      customer = customer_single;
+      if (widget.id != null) {
+        salle_single = {};
+        await getOrder();
+        id_customer = jsonDecode(salle_single['customer'])['id'].toString();
+        await getCustomer();
+        customer = customer_single;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
     }
 
     setState(() {
@@ -360,8 +368,11 @@ class _DetailSalesState extends State<DetailSales> {
                                                               ? movementSelected[
                                                                       'products']
                                                                   .length
-                                                              : salle_single[
-                                                                      'products']
+                                                              : List<
+                                                                      Map<String,
+                                                                          dynamic>>.from(jsonDecode(
+                                                                      salle_single[
+                                                                          'products']))
                                                                   .length,
                                                           itemBuilder:
                                                               (BuildContext
@@ -371,9 +382,11 @@ class _DetailSalesState extends State<DetailSales> {
                                                                 ? movementSelected[
                                                                         'products']
                                                                     [index]
-                                                                : salle_single[
-                                                                        'products']
-                                                                    [index];
+                                                                : List<
+                                                                    Map<String,
+                                                                        dynamic>>.from(jsonDecode(
+                                                                    salle_single[
+                                                                        'products']))[index];
                                                             return generateRowTable(
                                                                 containTable(
                                                                     product[
@@ -386,7 +399,7 @@ class _DetailSalesState extends State<DetailSales> {
                                                                 containTable(
                                                                     "${product['quantity']}"),
                                                                 containTable(
-                                                                    "${product['quantity'] * product['price']}  "),
+                                                                    "${double.parse(product['quantity']) * double.parse(product['price'])}  "),
                                                                 containTable(
                                                                     "action"));
                                                           })
@@ -517,36 +530,36 @@ class _DetailSalesState extends State<DetailSales> {
                                           SizedBox(
                                             height: 16,
                                           ),
-                                          widget.id != null
-                                              ? Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 4),
-                                                  child: SizedBox(
-                                                    width: width / 6,
-                                                    height: 47,
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          showSelectAction =
-                                                              true;
-                                                        });
-                                                      },
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        //<-- SEE HERE
-                                                        backgroundColor:
-                                                            primaryColor,
-                                                      ),
-                                                      child: Text(
-                                                        "Mark as delivered",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            color: white),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                )
-                                              : SizedBox(),
+                                          // widget.id != null
+                                          //     ? Padding(
+                                          //         padding: const EdgeInsets
+                                          //             .symmetric(vertical: 4),
+                                          //         child: SizedBox(
+                                          //           width: width / 6,
+                                          //           height: 47,
+                                          //           child: ElevatedButton(
+                                          //             onPressed: () {
+                                          //               setState(() {
+                                          //                 showSelectAction =
+                                          //                     true;
+                                          //               });
+                                          //             },
+                                          //             style: ElevatedButton
+                                          //                 .styleFrom(
+                                          //               //<-- SEE HERE
+                                          //               backgroundColor:
+                                          //                   primaryColor,
+                                          //             ),
+                                          //             child: Text(
+                                          //               "Mark as delivered",
+                                          //               style: TextStyle(
+                                          //                   fontSize: 18,
+                                          //                   color: white),
+                                          //             ),
+                                          //           ),
+                                          //         ),
+                                          //       )
+                                          //     : SizedBox(),
                                           SizedBox(
                                             height: 16,
                                           ),
@@ -586,16 +599,23 @@ class _DetailSalesState extends State<DetailSales> {
                                           Expanded(
                                               child: widget.id != null
                                                   ? ListView.builder(
-                                                      itemCount: salle_single[
-                                                              'movements']
+                                                      itemCount: List<
+                                                                  Map<String,
+                                                                      dynamic>>.from(
+                                                              jsonDecode(
+                                                                  salle_single[
+                                                                      'movements']))
                                                           .length,
                                                       itemBuilder:
                                                           (BuildContext context,
                                                               int index) {
                                                         return genrateMovement(
-                                                            salle_single[
-                                                                    'movements']
-                                                                [index],
+                                                            List<
+                                                                    Map<String,
+                                                                        dynamic>>.from(
+                                                                jsonDecode(
+                                                                    salle_single[
+                                                                        'movements']))[index],
                                                             media);
                                                       })
                                                   : ListView.builder(
@@ -631,65 +651,65 @@ class _DetailSalesState extends State<DetailSales> {
                                                                   media);
                                                         }
                                                       })),
-                                          showMovement
-                                              ? Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 4),
-                                                  child: SizedBox(
-                                                    width: width / 3,
-                                                    height: 47,
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          showMovement = false;
-                                                        });
-                                                      },
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        //<-- SEE HERE
-                                                        backgroundColor:
-                                                            primaryColor,
-                                                      ),
-                                                      child: Text(
-                                                        "Show salle",
-                                                        style: TextStyle(
-                                                            fontSize: 24,
-                                                            color: white),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                )
-                                              : widget.id != null
-                                                  ? Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          vertical: 4),
-                                                      child: SizedBox(
-                                                        width: width / 3,
-                                                        height: 47,
-                                                        child: ElevatedButton(
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              showSelectAction =
-                                                                  true;
-                                                            });
-                                                          },
-                                                          style: ElevatedButton
-                                                              .styleFrom(
-                                                            //<-- SEE HERE
-                                                            backgroundColor:
-                                                                primaryColor,
-                                                          ),
-                                                          child: Text(
-                                                            "Add Movment",
-                                                            style: TextStyle(
-                                                                fontSize: 24,
-                                                                color: white),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  : SizedBox(),
+                                          // showMovement
+                                          //     ? Padding(
+                                          //         padding: const EdgeInsets
+                                          //             .symmetric(vertical: 4),
+                                          //         child: SizedBox(
+                                          //           width: width / 3,
+                                          //           height: 47,
+                                          //           child: ElevatedButton(
+                                          //             onPressed: () {
+                                          //               setState(() {
+                                          //                 showMovement = false;
+                                          //               });
+                                          //             },
+                                          //             style: ElevatedButton
+                                          //                 .styleFrom(
+                                          //               //<-- SEE HERE
+                                          //               backgroundColor:
+                                          //                   primaryColor,
+                                          //             ),
+                                          //             child: Text(
+                                          //               "Show salle",
+                                          //               style: TextStyle(
+                                          //                   fontSize: 24,
+                                          //                   color: white),
+                                          //             ),
+                                          //           ),
+                                          //         ),
+                                          //       )
+                                          //     : widget.id != null
+                                          //         ? Padding(
+                                          //             padding: const EdgeInsets
+                                          //                 .symmetric(
+                                          //                 vertical: 4),
+                                          //             child: SizedBox(
+                                          //               width: width / 3,
+                                          //               height: 47,
+                                          //               child: ElevatedButton(
+                                          //                 onPressed: () {
+                                          //                   setState(() {
+                                          //                     showSelectAction =
+                                          //                         true;
+                                          //                   });
+                                          //                 },
+                                          //                 style: ElevatedButton
+                                          //                     .styleFrom(
+                                          //                   //<-- SEE HERE
+                                          //                   backgroundColor:
+                                          //                       primaryColor,
+                                          //                 ),
+                                          //                 child: Text(
+                                          //                   "Add Movment",
+                                          //                   style: TextStyle(
+                                          //                       fontSize: 24,
+                                          //                       color: white),
+                                          //                 ),
+                                          //               ),
+                                          //             ),
+                                          //           )
+                                          //         : SizedBox(),
                                         ],
                                       ),
                                     )),
@@ -699,90 +719,101 @@ class _DetailSalesState extends State<DetailSales> {
                         (customer == null ||
                                 (listProducts.isEmpty && widget.id == null))
                             ? SizedBox()
-                            : Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 4),
-                                child: SizedBox(
-                                  width: width / 3,
-                                  height: 47,
-                                  child: ElevatedButton(
-                                    onPressed: () async {
-                                      try {
-                                        // if (_formKey.currentState!.validate()) {
-                                        setState(() {
-                                          load = true;
-                                        });
-                                        var products = listProducts;
-                                        for (var i = 0;
-                                            i < listProducts.length;
-                                            i++) {
-                                          products[i]['quantity'] =
-                                              listProducts[i]['quantity'].toString();
-                                          products[i]['price'] = listProducts[i]
-                                                  ['price']
-                                              .text
-                                              .toString();
-                                        }
+                            : widget.id == null
+                                ? Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 4),
+                                    child: SizedBox(
+                                      width: width / 3,
+                                      height: 47,
+                                      child: ElevatedButton(
+                                        onPressed: () async {
+                                          try {
+                                            // if (_formKey.currentState!.validate()) {
+                                            setState(() {
+                                              load = true;
+                                            });
+                                            var products = [];
+                                            for (var i = 0;
+                                                i < listProducts.length;
+                                                i++) {
+                                              products.add({
+                                                "name": listProducts[i]['name'],
+                                                "reference": listProducts[i]
+                                                    ['reference'],
+                                                "quantity": listProducts[i]
+                                                        ['quantity']
+                                                    .text,
+                                                "price": listProducts[i]
+                                                        ['price']
+                                                    .text,
+                                              });
+                                            }
 
-                                        // Form is valid, process the data here.
-                                        Map<String, Object> order = {
-                                          'customer': customer!,
-                                          'movements': [],
-                                          'paiements': [],
-                                          'products': products,
-                                          'customer_id': customer!['id'],
-                                          'paiement_state': 0,
-                                          'shipping_state': 0,
-                                          'reference':
-                                              customer_single['id'].toString() +
-                                                  DateTime.now().toString(),
-                                          'is_purshases': true,
-                                          'is_close': false,
-                                          'price': calculateTotalPrice(),
-                                        };
-                                        debugPrint(order.toString());
-                                        var result = widget.id == null
-                                            ? await createOrder(order, context)
-                                            : null;
-                                        if (result == true) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                              content: Text(
-                                                  'Form submitted successfully!'),
-                                            ),
-                                          );
-                                        }
+                                            // Form is valid, process the data here.
+                                            Map<String, Object> order = {
+                                              'customer': customer!,
+                                              'movements': [],
+                                              'paiements': [],
+                                              'products': products,
+                                              'customer_id': customer!['id'],
+                                              'paiement_state': 0,
+                                              'shipping_state': 0,
+                                              'reference':
+                                                  "ORDER000${customer!['id'].toString() + DateTime.now().day.toString() + DateTime.now().month.toString() + DateTime.now().year.toString() + DateTime.now().hour.toString() + DateTime.now().minute.toString() + DateTime.now().second.toString()}",
+                                              'is_purshases': true,
+                                              'is_close': false,
+                                              'price': calculateTotalPrice(),
+                                            };
+                                            debugPrint(order.toString());
+                                            var result = widget.id == null
+                                                ? await createOrder(
+                                                    order, context)
+                                                : null;
+                                            if (result == true) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                      'Form submitted successfully!'),
+                                                ),
+                                              );
 
-                                        setState(() {
-                                          load = false;
-                                        });
+                                              widget.back();
+                                            }
 
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //             const TestPage()));
-                                        // }
-                                      } catch (e) {
-                                        debugPrint(e.toString());
-                                        setState(() {
-                                          load = false;
-                                        });
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      //<-- SEE HERE
-                                      backgroundColor: primaryColor,
+                                            setState(() {
+                                              load = false;
+                                            });
+
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             const TestPage()));
+                                            // }
+                                          } catch (e) {
+                                            debugPrint(e.toString());
+                                            setState(() {
+                                              load = false;
+                                            });
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          //<-- SEE HERE
+                                          backgroundColor: primaryColor,
+                                        ),
+                                        child: Text(
+                                          widget.id != null
+                                              ? 'Print'
+                                              : "Create",
+                                          style: TextStyle(
+                                              fontSize: 24, color: white),
+                                        ),
+                                      ),
                                     ),
-                                    child: Text(
-                                      widget.id != null ? 'Print' : "Create",
-                                      style:
-                                          TextStyle(fontSize: 24, color: white),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                  )
+                                : SizedBox(),
                       ],
                     ),
                   ),

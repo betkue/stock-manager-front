@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:stock_manager/config/constant.dart';
 import 'package:stock_manager/config/parameter.dart';
@@ -23,8 +25,8 @@ class _AllSalesState extends State<AllSales> {
       children: <Widget>[
         for (var i = 0; i < salesAll.length; i++)
           sales(
-              salesAll[i]['image'],
-              salesAll[i]['name'],
+              jsonDecode(salesAll[i]['customer'])['logo'],
+              jsonDecode(salesAll[i]['customer'])['name'],
               "${salesAll[i]['price']} ${company['currency']['symbol']}",
               salesAll[i]['shipping_state'],
               salesAll[i]['paiement_state'],
@@ -68,7 +70,6 @@ class _DeliveredStateSales extends State<DeleveredSales> {
     );
   }
 }
-
 
 class PendingSales extends StatefulWidget {
   Function setParent;
