@@ -63,6 +63,8 @@ createOrder(Map<String, Object> data, BuildContext context) async {
     // debugPrint(product.toString());
     // List<int> imageBytes = imageFile.readAsBytesSync();
     // String base64Image = base64Encode(imageBytes);
+    
+    String jsonData = jsonEncode(data);
 
     final response = http.MultipartRequest('POST', Uri.parse('${api}order'));
     response.headers.addAll({
@@ -74,13 +76,13 @@ createOrder(Map<String, Object> data, BuildContext context) async {
     //   response.files.add(await http.MultipartFile.fromPath('image', imageFile));
     // }
     response.fields.addAll({
-      "data": jsonEncode(data),
+      "data": jsonData,
     });
 
     var request = await response.send();
     var respon = await http.Response.fromStream(request);
-    var jsonVal = jsonDecode(respon.body);
-    debugPrint(respon.body);
+    // var jsonVal = jsonDecode(respon.body);
+    // debugPrint(respon.body);
 
     switch (respon.statusCode) {
       case 200:
@@ -100,8 +102,44 @@ createOrder(Map<String, Object> data, BuildContext context) async {
       internet = false;
     }
 
-    // debugPrint(e.toString());
+    debugPrint(e.toString());
   }
 
+  return result;
+}
+
+getOrder() async {
+  dynamic result;
+  try {
+    var response = await http.get(
+      Uri.parse('${api}order/single?order_id=${id_salle}'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${token}'
+      },
+    );
+    if (response.statusCode == 200) {
+      await clearCache();
+
+      salle_single = Map<String, dynamic>.from(jsonDecode(response.body));
+
+      debugPrint(salle_single.toString());
+      result = true;
+    } else {
+      salle_single = {};
+
+      debugPrint(response.body);
+
+      result = false;
+    }
+  } catch (e) {
+    salle_single = {};
+
+    result = false;
+    if (e is SocketException) {
+      internet = false;
+    }
+  }
   return result;
 }

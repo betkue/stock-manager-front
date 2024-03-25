@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stock_manager/config/constant.dart';
@@ -158,9 +159,11 @@ class _DetailSalesState extends State<DetailSales> {
     await getCustomers();
     await getProducts(2);
     listProductsAvailable = productsAvailable;
-
+//put true customer
     if (widget.id != null) {
-      id_customer = widget.id;
+      salle_single = {};
+      await getOrder();
+      id_customer = salle_single['customer']['id'];
       await getCustomer();
       customer = customer_single;
     }
@@ -289,8 +292,8 @@ class _DetailSalesState extends State<DetailSales> {
                                                                     .all(Radius
                                                                         .circular(
                                                                             100)),
-                                                                color:
-                                                                    primaryColor,
+                                                                // color:
+                                                                //     primaryColor,
                                                                 // image:
                                                                 //     DecorationImage(
                                                                 //         image:
@@ -413,6 +416,11 @@ class _DetailSalesState extends State<DetailSales> {
                                                                     controller:
                                                                         product[
                                                                             'price'],
+                                                                    inputFormatters: [
+                                                                      FilteringTextInputFormatter
+                                                                          .allow(
+                                                                              RegExp('[0-9]')),
+                                                                    ],
                                                                     decoration:
                                                                         InputDecoration(
                                                                       hintText:
@@ -445,6 +453,11 @@ class _DetailSalesState extends State<DetailSales> {
                                                                     controller:
                                                                         product[
                                                                             'quantity'],
+                                                                    inputFormatters: [
+                                                                      FilteringTextInputFormatter
+                                                                          .allow(
+                                                                              RegExp('[0-9]')),
+                                                                    ],
                                                                     decoration:
                                                                         InputDecoration(
                                                                       hintText:
@@ -694,27 +707,40 @@ class _DetailSalesState extends State<DetailSales> {
                                   height: 47,
                                   child: ElevatedButton(
                                     onPressed: () async {
-                                      if (_formKey.currentState!.validate()) {
+                                      try {
+                                        // if (_formKey.currentState!.validate()) {
                                         setState(() {
                                           load = true;
                                         });
+                                        var products = listProducts;
+                                        for (var i = 0;
+                                            i < listProducts.length;
+                                            i++) {
+                                          products[i]['quantity'] =
+                                              listProducts[i]['quantity'].toString();
+                                          products[i]['price'] = listProducts[i]
+                                                  ['price']
+                                              .text
+                                              .toString();
+                                        }
+
                                         // Form is valid, process the data here.
                                         Map<String, Object> order = {
-                                          'customer': customer_single,
+                                          'customer': customer!,
                                           'movements': [],
                                           'paiements': [],
-                                          'products': listProducts,
-                                          'customer_id': customer_single['id'],
+                                          'products': products,
+                                          'customer_id': customer!['id'],
                                           'paiement_state': 0,
                                           'shipping_state': 0,
                                           'reference':
                                               customer_single['id'].toString() +
                                                   DateTime.now().toString(),
-                                          'is_purshase': true,
+                                          'is_purshases': true,
                                           'is_close': false,
-                                          'price': nameController.text,
+                                          'price': calculateTotalPrice(),
                                         };
-                                        debugPrint(widget.id.toString());
+                                        debugPrint(order.toString());
                                         var result = widget.id == null
                                             ? await createOrder(order, context)
                                             : null;
@@ -737,6 +763,12 @@ class _DetailSalesState extends State<DetailSales> {
                                         //     MaterialPageRoute(
                                         //         builder: (context) =>
                                         //             const TestPage()));
+                                        // }
+                                      } catch (e) {
+                                        debugPrint(e.toString());
+                                        setState(() {
+                                          load = false;
+                                        });
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(
