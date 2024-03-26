@@ -1,5 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/config/style.dart';
 
 class Menu extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -24,11 +29,13 @@ class _MenuState extends State<Menu> {
   // _MenuState(this.child, this.color, this.padding);
 
   List<MenuModel> menu = [
-    MenuModel(icon: Icons.dashboard_outlined, title: "Dashboard"),
-    MenuModel(icon: Icons.sell_sharp, title: "Product"),
+    // MenuModel(icon: Icons.dashboard_outlined, title: "Dashboard"),
+    MenuModel(icon: Icons.local_offer, title: "Locations"),
+    MenuModel(icon: Icons.sell_sharp, title: "Products"),
+    MenuModel(icon: Icons.transform_outlined, title: "Movements"),
     MenuModel(icon: Icons.people, title: "Customer"),
-    MenuModel(icon: Icons.emoji_people, title: "Supplier"),
-    MenuModel(icon: Icons.card_travel, title: "Purchase"),
+    // MenuModel(icon: Icons.emoji_people, title: "Supplier"),
+    // MenuModel(icon: Icons.card_travel, title: "Purchase"),
     // MenuModel(icon: Icons.stacked_bar_chart_outlined, title: "Stock"),
     MenuModel(icon: Icons.sell, title: "Sales"),
     MenuModel(icon: Icons.account_box, title: "Account"),
@@ -38,6 +45,7 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(user['image'].toString());
     return Container(
       height: MediaQuery.of(context).size.height,
       decoration: const BoxDecoration(
@@ -52,11 +60,11 @@ class _MenuState extends State<Menu> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: home_index == 0 ? logo : logo,
+              color: home_index == 0 ? backgroundColor : backgroundColor,
             ),
             child: Center(
               child: Image.asset(
-                "images/Logo.png",
+                "assets/images/Logo.png",
                 height: 80,
                 fit: BoxFit.cover,
               ),
@@ -71,21 +79,33 @@ class _MenuState extends State<Menu> {
                   height: Responsive.isMobile(context) ? 8 : 10,
                 ),
                 Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(MediaQuery.of(context).size.height),
-                      ),
-                      // color: widget.color ?? orange,
-                    ),
-                    child: Image.asset(
-                      "assets/images/avatar.png",
-                      fit: BoxFit.cover,
-                    )),
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    // image: DecorationImage(image: NetworkImage(user['image'])),
+                    // color: primaryColor,
+                    borderRadius: BorderRadius.circular(
+                        MediaQuery.of(context).size.height),
+                    // color: widget.color ?? orange,
+                  ),
+                  child: CachedNetworkImage(
+                    height: 160,
+                    width: double.infinity,
+                    imageUrl: user['image'],
+                    fit: BoxFit.contain,
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                  // child: Image.network(
+                  //  ,
+                  //   // fit: BoxFit.cover,
+                  // )
+                ),
                 const SizedBox(
                   height: 15,
                 ),
-                const Text(
-                  "Michelle",
+                Text(
+                  user['name'],
                   style: TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w600, color: white),
                 ),
@@ -93,21 +113,21 @@ class _MenuState extends State<Menu> {
                   height: 2,
                 ),
                 Text(
-                  "michelle@gmail.com ",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Theme.of(context).primaryColor,
-                  ),
+                  user['email'],
+                  style: TextStyle(fontSize: 12, color: white),
                 ),
                 SizedBox(
                   height: Responsive.isMobile(context) ? 20 : 40,
                 ),
                 for (var i = 0; i < menu.length; i++)
                   Container(
-                    width: MediaQuery.of(context).size.width / 12,
+                    // color: home_index == i ? orange : backgroundColor,
+                    width: home_index == i
+                        ? MediaQuery.of(context).size.width / 10
+                        : MediaQuery.of(context).size.width / 10,
                     margin: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: const BoxDecoration(
-                      // color: orange,
+                    decoration: BoxDecoration(
+                      color: home_index == i ? primaryColor : backgroundColor,
                       borderRadius: BorderRadius.all(
                         Radius.circular(6.0),
                       ),
@@ -127,17 +147,18 @@ class _MenuState extends State<Menu> {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 13, vertical: 7),
-                              child: Icon(
-                                menu[i].icon,
-                                color: home_index == i ? orange : white,
-                              ),
+                              child: Icon(menu[i].icon,
+                                  color:
+                                      white // home_index == i ? orange : white,
+                                  ),
                               // color: selected == i ? orange : white,
                             ),
                             Text(
                               menu[i].title,
                               style: TextStyle(
                                   fontSize: 16,
-                                  color: home_index == i ? orange : white,
+                                  color:
+                                      white, //home_index == i ? orange : white,
                                   overflow: TextOverflow.ellipsis,
                                   fontWeight: home_index == i
                                       ? FontWeight.w600

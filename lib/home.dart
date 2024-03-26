@@ -1,14 +1,19 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
-import 'package:stock_management/dashboard.dart';
-import 'package:stock_management/menu.dart';
-import 'package:stock_management/widgets/profile.dart';
-import 'package:stock_management/product.dart';
-import 'package:stock_management/customer.dart';
-import 'package:stock_management/supplier.dart';
-import 'package:stock_management/purchase.dart';
-import 'package:stock_management/sales.dart';
-import 'package:stock_management/account.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/style.dart';
+import 'package:stock_manager/dashboard.dart';
+import 'package:stock_manager/locations.dart';
+import 'package:stock_manager/menu.dart';
+import 'package:stock_manager/movements.dart';
+import 'package:stock_manager/widgets/profile.dart';
+import 'package:stock_manager/products.dart';
+import 'package:stock_manager/customers.dart';
+import 'package:stock_manager/suppliers.dart';
+import 'package:stock_manager/purchases.dart';
+import 'package:stock_manager/sales.dart';
+import 'package:stock_manager/profile.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,13 +24,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Widget> contian = [
-    const DashBoard(),
-    const ProductPage(),
-    const CustomerPage(),
-    const SupplierPage(),
-    const PurchasePage(),
+    // DashBoard(),
+    LocationPage(),
+    ProductPage(),
+    Movements(),
+    CustomerPage(),
+    // SupplierPage(),
+    // PurchasePage(),
     // Container(),
-    const SalesPage(),
+    SalesPage(),
     AccountPage(),
   ];
 

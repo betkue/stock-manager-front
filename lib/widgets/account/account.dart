@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:stock_management/constant.dart';
+import 'package:flutter/services.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/style.dart';
 
 Padding label(String label) => Padding(
       padding: EdgeInsets.symmetric(vertical: 4),
@@ -9,30 +11,53 @@ Padding label(String label) => Padding(
         label,
         style: TextStyle(
           fontSize: 20,
-          color: Color(0xFFFFFFFF),
+          color: gray,
         ),
       ),
     );
 
-Container inputContain(double width, String hintText) => Container(
+Container inputContain(
+  double width,
+  String hintText,
+  TextEditingController controller,
+  dynamic onchange,
+  bool obscure,
+  bool enable, {
+  TextInputType textInputType = TextInputType.text,
+  bool isnumber = false,
+}) =>
+    Container(
       width: width / 4.5,
       // height: 37,
       margin: EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        // color: backgroundColor,
+        color: gray,
       ),
-      child: TextFormField(
-        maxLines: 1,
-        cursorColor: black,
-
-        // maxLength: 30,
-        decoration: inputDecoration(hintText),
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'Please enter the $hintText.';
-          }
-          return null;
-        },
+      child: Center(
+        child: TextFormField(
+          maxLines: 1,
+          cursorColor: black,
+          controller: controller,
+          keyboardType: textInputType,
+          inputFormatters: isnumber
+              ? [FilteringTextInputFormatter.allow(RegExp('[0-9.]'))]
+              : [],
+          onChanged: (value) {
+            onchange(value);
+          },
+          obscureText: obscure,
+          readOnly: enable,
+          // maxLength: 30,
+          decoration: inputDecoration(
+            "Enter $hintText",
+          ),
+          validator: (value) {
+            if (value!.isEmpty && !obscure) {
+              return 'Please enter the $hintText.';
+            }
+            return null;
+          },
+        ),
       ),
     );

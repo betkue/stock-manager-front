@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:stock_management/widgets/purchase/purchase.dart';
+import 'package:stock_manager/config/constant.dart';
+import 'package:stock_manager/config/parameter.dart';
+import 'package:stock_manager/widgets/purchase/purchase.dart';
 
 class AllPurchase extends StatefulWidget {
-  const AllPurchase({super.key});
+  Function setParent;
+  AllPurchase({super.key, required this.setParent});
 
   @override
   State<AllPurchase> createState() => _AllPurchaseState();
@@ -18,16 +21,25 @@ class _AllPurchaseState extends State<AllPurchase> {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        for (var i = 0; i < 10; i++)
-          purchase("images/LaMater.png", "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA", i ~/ 2 == 0 ? 1 : 0, context),
+        for (var i = 0; i < purchasesAll.length; i++)
+          purchase(
+              purchasesAll[i]['image'],
+              purchasesAll[i]['name'],
+              "${purchasesAll[i]['price']} ${company['currency']['symbol']}",
+              purchasesAll[i]['shipping_state'],
+              purchasesAll[i]['paiement_state'],
+              context,
+              purchasesAll[i]['id'].toString(),
+              widget.setParent),
       ],
     );
   }
 }
 
 class PendingPurchase extends StatefulWidget {
-  const PendingPurchase({super.key});
+
+  Function setParent;
+   PendingPurchase({super.key, required this.setParent});
 
   @override
   State<PendingPurchase> createState() => _PendingStatePurchase();
@@ -43,16 +55,25 @@ class _PendingStatePurchase extends State<PendingPurchase> {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        for (var i = 0; i < 10; i++)
-          purchase("images/LaMater.png", "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA", 0, context),
+        for (var i = 0; i < purchasesPending.length; i++)
+          purchase(
+              purchasesPending[i]['image'],
+              purchasesPending[i]['name'],
+              "${purchasesPending[i]['price']} ${company['currency']['symbol']}",
+              purchasesPending[i]['shipping_state'],
+              purchasesPending[i]['paiement_state'],
+              context,
+              purchasesPending[i]['id'].toString(),
+              widget.setParent),
       ],
     );
   }
 }
 
 class CompletePurchase extends StatefulWidget {
-  const CompletePurchase({super.key});
+
+  Function setParent;
+   CompletePurchase({super.key, required this.setParent});
 
   @override
   State<CompletePurchase> createState() => _CompletePurchaseState();
@@ -68,16 +89,25 @@ class _CompletePurchaseState extends State<CompletePurchase> {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        for (var i = 0; i < 10; i++)
-          purchase("images/LaMater.png", "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA", 2, context),
+        for (var i = 0; i < purchasesComplete.length; i++)
+          purchase(
+              purchasesComplete[i]['image'],
+              purchasesComplete[i]['name'],
+              "${purchasesComplete[i]['price']} ${company['currency']['symbol']}",
+              purchasesComplete[i]['shipping_state'],
+              purchasesComplete[i]['paiement_state'],
+              context,
+              purchasesComplete[i]['id'].toString(),
+              widget.setParent),
       ],
     );
   }
 }
 
 class IncompletePurchase extends StatefulWidget {
-  const IncompletePurchase({super.key});
+
+  Function setParent;
+   IncompletePurchase({super.key, required this.setParent});
 
   @override
   State<IncompletePurchase> createState() => _IncompletePurchaseState();
@@ -93,9 +123,16 @@ class _IncompletePurchaseState extends State<IncompletePurchase> {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        for (var i = 0; i < 10; i++)
-          purchase("images/LaMater.png", "Women's Air Jordan 1 Low SE Utility",
-              "1000 XFA", 1, context),
+        for (var i = 0; i < purchasesIncomplete.length; i++)
+          purchase(
+              purchasesIncomplete[i]['image'],
+              purchasesIncomplete[i]['name'],
+              "${purchasesIncomplete[i]['price']} ${company['currency']['symbol']}",
+              purchasesIncomplete[i]['shipping_state'],
+              purchasesIncomplete[i]['paiement_state'],
+              context,
+              purchasesIncomplete[i]['id'].toString(),
+              widget.setParent),
       ],
     );
   }
